@@ -1,0 +1,17 @@
+{
+  "name": "safety-edu-helper",
+  "version": "0.3.0",
+  "private": true,
+  "description": "지역아동센터 6대 의무교육(연 44시간) 수업 자료·기록 도우미",
+  "scripts": {
+    "data": "node tools/sync-data.js",
+    "cards": "node tools/make-cards.js",
+    "worksheets": "node tools/build-worksheets.js",
+    "slides": "node tools/build-slides.js",
+    "build": "npm run cards && npm run data && npm run worksheets && npm run slides"
+  },
+  "dependencies": {
+    "playwright-core": "^1.65.0",
+    "pptxgenjs": "^3.12.0"
+  }
+}

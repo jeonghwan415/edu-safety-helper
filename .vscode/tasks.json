@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. 데이터 반영 (npm run data)",
+      "type": "shell",
+      "command": "npm run data",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "2. 그림 카드 만들기 (npm run cards)",
+      "type": "shell",
+      "command": "npm run cards",
+      "problemMatcher": []
+    },
+    {
+      "label": "3. 활동지 만들기 (npm run worksheets)",
+      "type": "shell",
+      "command": "npm run worksheets",
+      "problemMatcher": []
+    },
+    {
+      "label": "4. 선생님용 PPT 만들기 (npm run slides)",
+      "type": "shell",
+      "command": "npm run slides",
+      "problemMatcher": []
+    },
+    {
+      "label": "전부 다시 만들기 (npm run build)",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "처음 준비 (npm install)",
+      "type": "shell",
+      "command": "npm install",
+      "problemMatcher": []
+    }
+  ],
+  "options": {
+    "shell": {
+      "executable": "cmd.exe",
+      "args": [
+        "/d",
+        "/c"
+      ]
+    }
+  }
+}

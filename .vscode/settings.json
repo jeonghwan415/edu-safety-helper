@@ -1,0 +1,10 @@
+{
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.ignoreFiles": [".vscode/**", "docs/**", "**/*.md", "tools/**", "node_modules/**", ".cache/**"],
+  "files.encoding": "utf8",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "files.exclude": { "node_modules": true, ".cache": true },
+  "search.exclude": { "data/areas.js": true, "data/hwpx-template.js": true, "worksheets/*.html": true }
+}

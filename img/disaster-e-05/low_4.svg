@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+<style>.float{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-12px)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<rect width="800" height="600" fill="#F8E1F0"/><circle cx="485" cy="139" r="15" fill="#E381BF" opacity=".45"/><circle cx="338" cy="511" r="17" fill="#E381BF" opacity=".45"/><circle cx="474" cy="516" r="22" fill="#E381BF" opacity=".45"/><circle cx="63" cy="132" r="14" fill="#E381BF" opacity=".45"/><circle cx="759" cy="485" r="12" fill="#E381BF" opacity=".45"/><circle cx="490" cy="85" r="17" fill="#E381BF" opacity=".45"/><circle cx="560" cy="255" r="8" fill="#E381BF" opacity=".45"/><circle cx="335" cy="50" r="10" fill="#E381BF" opacity=".45"/><circle cx="585" cy="514" r="11" fill="#E381BF" opacity=".45"/>
+<circle cx="400" cy="300" r="210" fill="#EEB3D9"/>
+<g class="float"><text x="400" y="300" text-anchor="middle" dominant-baseline="central" font-size="250" font-family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif">🧑</text></g>
+</svg>
