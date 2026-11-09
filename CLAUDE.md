@@ -80,7 +80,7 @@ content.low / content.high (수업 1개):
 ## index.html 구조 (주요 함수)
 
 - 주소(#해시)로 화면 이동: `#home`, `#area-<영역>`, `#area-<영역>-<학년>`, `#pick-<영역>-<주제id>-<학년>`(추가 수업 고르기), `#topic-<영역>-<수업id>-<학년>`,
-  `#write-<영역>-<주제id>-<학년>`(기록하기), `#log-<기록id>`(일지), `#edit-<기록id>`, `#records`(목록)
+  `#write-<영역>-<주제id>-<학년>`(기록하기), `#log-<기록id>`(일지), `#edit-<기록id>`, `#records`(목록), `#plan`(연간 계획표), `#report`(이수 현황표)
   → `parseHash()`, `render()`. 해시는 하이픈만 써요(`#/` 형식 금지: 미리보기 사이트에서 안 됨).
 - 수업 찾기: `lessonTopics(topic)`(기본+추가 수업), `findTopic(영역, 수업id)`, `baseTopicId`(추가 수업 → 별표 6 주제, 진행표·추천에 씀). tools/lib/common.js에도 같은 `lessonTopics`가 있어요.
 - 화면: `viewHome` `viewLevel` `viewTopics` `viewPick` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
@@ -92,6 +92,7 @@ content.low / content.high (수업 1개):
   `draftContent`(진행내용 초안) `draftOpinion` `submitRecord` `exportRecords/importRecords`(JSON)
 - 한글 일지: `buildHwpx` — 빈 양식 section0.xml의 표 칸(colAddr,rowAddr)에 글을 넣고 `zipStore`(무압축 zip, mimetype 맨 앞)로 묶음.
   칸 위치: 프로그램명(1,2) 제목(1,3) 담당자(4,3) 장소(1,4) 작성일자(4,4) 진행자(1,5) 준비물(4,5) 참여자(1,6) 진행내용(1,7) 담당자의견(1,8)
+- 연간 계획표·이수 현황표: `buildPlan`(영역별 횟수 = 연간 시간÷1회 시간, 12달에 고르게) `planTableHTML` `viewPlan` / `reportRows`(시간·횟수·주기 간격 점검) `viewReport`. 복사는 `copyHtml`(HTML 표로 복사 → 한글에 Ctrl+V), 인쇄는 `@media print`
 - AI에게 부탁하기: `viewAiHelp` `aiPrompt` `lessonText` — 부탁 글만 만들고 복사. **API 키·서버 호출 없음**(실시간 AI는 넣지 않아요)
 - `window.NO_FILES = true`: 파일 받기 버튼 숨김(claude.ai 미리보기 사이트용 복사본에서만 씀)
 
@@ -119,5 +120,5 @@ content.low / content.high (수업 1개):
 
 - 현장 선생님 2~3명 사용 테스트 → 고칠 점 반영
 - 72개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 재난·감염병 12개)
-- 2단계: 취학 전(preschool) 31개 항목 수업, 연간 계획표(F6)
+- 2단계: 취학 전(preschool) 31개 항목 수업
 - 배포: GitHub Pages. main 브랜치에 올리면 `.github/workflows/pages.yml`이 자동으로 배포해요

@@ -251,6 +251,32 @@
   .chip { display: inline-flex !important; align-items: center; gap: 10px; min-height: 56px; padding: 0 18px; border: 2px solid var(--line); border-radius: 14px; background: #fff; font-weight: 700; cursor: pointer; }
   .chip input { width: 24px; height: 24px; min-height: 0 !important; margin: 0; accent-color: var(--c); }
   .lesson-switch { margin: 0 0 18px; }
+  /* 연간 계획표 · 이수 현황표 */
+  .home-tools { display: flex; flex-wrap: wrap; gap: 12px; margin: -12px 0 28px; }
+  .home-tools .big-link { margin: 0; }
+  .plan-set { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; margin-bottom: 12px; }
+  .plan-set label { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .plan-set select { font: inherit; min-height: 56px; padding: 0 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; }
+  .plan-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 14px; overflow: hidden; }
+  .plan-table th, .plan-table td { padding: 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .plan-table thead th { background: #EFEBE3; font-size: .95rem; }
+  .plan-table tbody th { white-space: nowrap; width: 90px; }
+  .plan-table .num { white-space: nowrap; text-align: right; width: 90px; }
+  .plan-table .dates { font-size: .95rem; line-height: 1.6; }
+  .plan-items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .plan-item { display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 6px 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; text-align: left; font-size: .95rem; }
+  .plan-item .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); flex: none; }
+  .plan-item.done { border-color: #2DB86E; background: #EAF7EF; }
+  .plan-item .ok { color: #1B7F47; font-weight: 700; }
+  .pill { white-space: nowrap; display: inline-block; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: .95rem; }
+  .pill.ok { background: #E3F4EA; color: #1B7F47; }
+  .pill.no { background: #FFF1D6; color: #8A5A00; }
+  @media print {
+    .topbar, .no-print, .crumbs, .toast { display: none !important; }
+    body { background: #fff; }
+    .plan-table th, .plan-table td { border: 1px solid #555; }
+    .plan-item { border: 0; min-height: 0; padding: 0 8px 0 0; }
+  }
   .backup-box { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .chip.on { border-color: var(--c); background: var(--c); color: #fff; }
   .chip:has(input:checked) { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, #fff); }
@@ -334,7 +360,7 @@
     if (!h || h === "home" || h.startsWith("/")) return [];
     const p = h.split("-");
     if (p[0] === "area") return ["area", p[1], p[2]].filter(Boolean);
-    if (h === "records") return ["records"];
+    if (h === "records" || h === "plan" || h === "report") return [h];
     if ((p[0] === "log" || p[0] === "edit") && p[1]) return [p[0], p.slice(1).join("-")];
     if (p[0] === "write" && p.length >= 4) return ["write", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "topic" || p[0] === "pick") && p.length >= 4) return [p[0], p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
@@ -385,6 +411,10 @@
         <div class="bar" aria-label="올해 진행률"><div style="width:${pct}%"></div></div>
         <div class="meta">${new Date().getFullYear()}년 진행</div>
         <button class="big-link ghost" onclick="go('#records')">📋 교육 기록 ${loadRecords().length}건</button>
+      </div>
+      <div class="home-tools">
+        <button class="big-link ghost" onclick="go('#plan')">📅 연간 계획표</button>
+        <button class="big-link ghost" onclick="go('#report')">📊 이수 현황표</button>
       </div>
       <div class="grid">${cards}</div>
       <p class="footer-note">기준: ${esc(DATA.meta.basis)} · 확인일 ${esc(DATA.meta.checkedAt)}</p>`;
@@ -987,6 +1017,156 @@
     }).catch(() => { const m = document.getElementById("impMsg"); if (m) m.textContent = "이 파일은 불러올 수 없어요. '기록 파일로 내보내기'로 만든 파일인지 확인해 주세요."; });
   }
 
+  /* ================= F6 연간 계획표 · 이수 현황표 ================= */
+  /* 계획 설정(시작 연월, 1회 교육 시간, 대상)은 seh-prefs-v1에 기억해요 */
+  function planSettings() {
+    const P = loadPrefs(), now = new Date();
+    return { year: Number(P.planYear) || now.getFullYear(), start: Number(P.planStart) || 1,
+             minutes: Number(P.planMinutes) || 40, level: P.planLevel || "low" };
+  }
+  function setPlan(key, val) { savePrefs({ [key]: val }); render(); }
+  /* 영역마다 필요한 횟수(연간 시간 ÷ 1회 시간)를 12달에 고르게 나눠요.
+     고르게 나누면 간격이 '12 ÷ 횟수'달이라 주기(2·3·6개월)를 넘지 않아요. 영역마다 시작을 조금씩 밀어 한 달에 몰리지 않게 해요. */
+  function buildPlan(S) {
+    const months = Array.from({ length: 12 }, (_, k) => { const d = new Date(S.year, S.start - 1 + k, 1); return { y: d.getFullYear(), m: d.getMonth() + 1, items: [] }; });
+    DATA.areas.forEach((a, ai) => {
+      const n = Math.ceil(a.requiredHours * 60 / S.minutes);
+      const base = a.topics.elementary, extra = base.flatMap(t => lessonTopics(t).slice(1));
+      const pool = [...base, ...extra];
+      for (let i = 0; i < n; i++) {
+        const k = Math.min(11, Math.floor((i + ai / DATA.areas.length) * 12 / n));
+        months[k].items.push({ a, t: pool[i % pool.length] });
+      }
+    });
+    return months;
+  }
+  function inPlanWindow(dateStr, S) {
+    const d = new Date(dateStr), from = new Date(S.year, S.start - 1, 1), to = new Date(S.year, S.start - 1 + 12, 1);
+    return d >= from && d < to;
+  }
+  function planTableHTML(months, S, forCopy) {
+    /* 기록 1건은 계획 1칸에만 ✔ (같은 수업이 1년에 두 번 있으면 날짜 순서대로 앞 칸부터) */
+    const recs = loadRecords().filter(r => inPlanWindow(r.date, S)).sort((x, y) => x.date.localeCompare(y.date));
+    const used = new Set(), match = new Map();
+    months.forEach(mo => mo.items.forEach(it => {
+      const r = recs.find(r => !used.has(r.id) && r.areaId === it.a.id && r.topicId === it.t.id);
+      if (r) { used.add(r.id); match.set(it, r); }
+    }));
+    const doneOf = (a, t, it) => match.get(it) || null;
+    const B = forCopy ? ' style="border:1px solid #333;padding:6px;vertical-align:top"' : "";
+    const rows = months.map(mo => {
+      const mins = mo.items.length * S.minutes;
+      const cells = mo.items.map(it => {
+        const { a, t } = it, r = doneOf(a, t, it);
+        const name = t.extraId ? `${t.subTitle}` : t.title;
+        return forCopy ? `${a.shortName} – ${name}${r ? " ✔" : ""}`
+          : `<button class="plan-item${r ? " done" : ""}" style="--c:${a.color}" onclick="go('#topic-${a.id}-${t.id}-${S.level}')"><span class="dot"></span><b>${esc(a.shortName)}</b> ${esc(name)}${r ? ` <span class="ok">✔ ${esc(fmtDate(r.date).replace(/^\d+년 /, ""))}</span>` : ""}</button>`;
+      });
+      return forCopy
+        ? `<tr><td${B}>${mo.y}년 ${mo.m}월</td><td${B}>${cells.join("<br>")}</td><td${B}>${mo.items.length}회 · ${fmtHours(mins / 60)}시간</td></tr>`
+        : `<tr><th>${mo.y !== S.year ? mo.y + "년 " : ""}${mo.m}월</th><td><div class="plan-items">${cells.join("")}</div></td><td class="num">${mo.items.length}회<br><small>${fmtHours(mins / 60)}시간</small></td></tr>`;
+    }).join("");
+    return forCopy
+      ? `<table style="border-collapse:collapse"><tr><th${B}>월</th><th${B}>교육 (영역 – 주제)</th><th${B}>횟수·시간</th></tr>${rows}</table>`
+      : `<table class="plan-table"><thead><tr><th>월</th><th>교육 (누르면 수업 화면)</th><th>횟수</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+  function viewPlan() {
+    const S = planSettings(), months = buildPlan(S);
+    const yearOpts = [-1, 0, 1].map(d => new Date().getFullYear() + d);
+    const sel = (key, opts, cur) => `<select onchange="setPlan('${key}', this.value)">${opts.map(([v, l]) => `<option value="${v}"${String(v) === String(cur) ? " selected" : ""}>${l}</option>`).join("")}</select>`;
+    const per = DATA.areas.map(a => `${a.icon} ${esc(a.shortName)} ${Math.ceil(a.requiredHours * 60 / S.minutes)}회`).join(" · ");
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "연간 계획표" }]) + `
+      <h1>📅 연간 계획표</h1>
+      <p class="lead">시작 달과 1회 교육 시간을 고르면, 별표 6의 시간과 주기에 맞춰 12달 계획을 자동으로 짜 줘요. 한 교육을 마치고 기록하면 ✔ 표시가 붙어요.</p>
+      <div class="box plan-set no-print">
+        <label>시작${sel("planYear", yearOpts.map(y => [y, y + "년"]), S.year)}${sel("planStart", Array.from({ length: 12 }, (_, i) => [i + 1, (i + 1) + "월"]), S.start)}</label>
+        <label>1회 교육 시간${sel("planMinutes", [[40, "40분"], [60, "60분"], [80, "80분 (2차시)"]], S.minutes)}</label>
+        <label>주로 하는 대상${sel("planLevel", LEVELS.map(l => [l.id, l.title]), S.level)}</label>
+      </div>
+      <p class="meta">필요한 횟수: ${per} (합계 ${months.reduce((s, m) => s + m.items.length, 0)}회)</p>
+      <div class="table-wrap">${planTableHTML(months, S)}</div>
+      <div class="form-actions no-print" style="margin-top:20px">
+        <button class="play-btn" style="--c:var(--accent)" onclick="copyHtml(this, planTableHTML(buildPlan(planSettings()), planSettings(), true), planPlain())">📋 한글에 붙여 넣기용 복사</button>
+        ${window.NO_FILES ? "" : `<button class="big-link ghost" onclick="window.print()">🖨️ 인쇄하기</button>`}
+        <button class="big-link ghost" onclick="go('#report')">📊 이수 현황표 보기</button>
+      </div>
+      <p class="meta no-print">복사한 뒤 한글에서 <b>Ctrl+V</b> 하면 표로 들어가요. 계획은 예시 순서예요. 센터 일정에 맞게 바꿔서 쓰세요.</p>`;
+  }
+  function planPlain() {
+    const S = planSettings();
+    return buildPlan(S).map(mo => `${mo.y}년 ${mo.m}월\t` + mo.items.map(({ a, t }) => `${a.shortName}–${t.extraId ? t.subTitle : t.title}`).join(", ")).join("\n");
+  }
+
+  /* 이수 현황표: 올해 영역별 시간·횟수·주기 충족 여부와 교육 일자 */
+  let reportYear = new Date().getFullYear();
+  function reportRows(year) {
+    const recs = loadRecords().filter(r => String(r.date || "").startsWith(String(year)));
+    return DATA.areas.map(a => {
+      const rs = recs.filter(r => r.areaId === a.id).sort((x, y) => x.date.localeCompare(y.date));
+      const hours = rs.reduce((s, r) => s + (Number(r.minutes) || 0), 0) / 60;
+      /* 주기 점검: 1월 1일부터 연말(올해면 오늘)까지 교육 사이 간격이 주기를 넘은 적이 있는지 */
+      const end = year === new Date().getFullYear() ? new Date() : new Date(year, 11, 31);
+      let gapOk = true, prev = new Date(year, 0, 1);
+      for (const d of [...rs.map(r => new Date(r.date)), end]) {
+        const gap = (d.getFullYear() - prev.getFullYear()) * 12 + (d.getMonth() - prev.getMonth());
+        if (gap >= a.cycleMonths) gapOk = false;
+        prev = d;
+      }
+      const list = rs.map(r => { const { t } = findTopic(r.areaId, r.topicId); return { date: r.date, title: t ? t.title : "?", minutes: r.minutes, children: r.children }; });
+      return { a, rs, hours, ok: hours >= a.requiredHours, gapOk, list };
+    });
+  }
+  function reportTableHTML(year, forCopy) {
+    const rows = reportRows(year);
+    const B = forCopy ? ' style="border:1px solid #333;padding:6px;vertical-align:top"' : "";
+    const total = rows.reduce((s, x) => s + Math.min(x.hours, x.a.requiredHours), 0);
+    const body = rows.map(x => {
+      const status = x.ok ? (x.gapOk ? "충족" : "시간 충족 · 주기 확인") : `${fmtHours(x.a.requiredHours - x.hours)}시간 부족`;
+      const dates = x.list.map(l => `${fmtDate(l.date).replace(/^\d+년 /, "")} ${l.title} (${l.minutes}분, ${l.children}명)`);
+      return forCopy
+        ? `<tr><td${B}>${x.a.name}</td><td${B}>${x.a.cycleMonths}개월 1회 · ${x.a.requiredHours}시간</td><td${B}>${fmtHours(x.hours)}시간 (${x.rs.length}회)</td><td${B}>${status}</td><td${B}>${dates.join("<br>") || "-"}</td></tr>`
+        : `<tr><th>${x.a.icon} ${esc(x.a.shortName)}</th><td>${x.a.cycleMonths}개월에 1회 이상<br>${x.a.requiredHours}시간 이상</td><td class="num">${fmtHours(x.hours)}시간<br><small>${x.rs.length}회</small></td>
+          <td><span class="pill ${x.ok && x.gapOk ? "ok" : "no"}">${status}</span></td><td class="dates">${dates.map(esc).join("<br>") || `<span class="meta">아직 없어요</span>`}</td></tr>`;
+    }).join("");
+    const foot = `${fmtHours(total)} / ${DATA.meta.totalHours}시간`;
+    return forCopy
+      ? `<table style="border-collapse:collapse"><tr><th${B}>영역</th><th${B}>기준 (별표 6)</th><th${B}>이수</th><th${B}>상태</th><th${B}>교육 일자 · 주제</th></tr>${body}<tr><td${B}>합계</td><td${B}>44시간</td><td${B} colspan="3">${foot}</td></tr></table>`
+      : `<table class="plan-table report"><thead><tr><th>영역</th><th>기준 (별표 6)</th><th>이수</th><th>상태</th><th>교육 일자 · 주제</th></tr></thead><tbody>${body}</tbody>
+          <tfoot><tr><th>합계</th><td>44시간 이상</td><td class="num" colspan="3"><b>${foot}</b></td></tr></tfoot></table>`;
+  }
+  function viewReport() {
+    const y = reportYear;
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "이수 현황표" }]) + `
+      <h1>📊 ${y}년 안전교육 이수 현황표</h1>
+      <p class="lead">교육 기록으로 영역별 이수 시간과 주기를 자동으로 계산해요. 점검이나 보고 때 인쇄하거나 한글에 붙여 넣어 쓰세요.</p>
+      <div class="form-actions no-print" style="margin-bottom:16px">
+        <button class="big-link ghost" onclick="reportYear--;render()">◀ ${y - 1}년</button>
+        ${y < new Date().getFullYear() ? `<button class="big-link ghost" onclick="reportYear++;render()">${y + 1}년 ▶</button>` : ""}
+      </div>
+      <div class="table-wrap">${reportTableHTML(y)}</div>
+      <p class="meta">기준: ${esc(DATA.meta.basis)} · "주기 확인"은 교육 사이 간격이 주기(2·3·6개월)를 넘은 적이 있다는 뜻이에요.</p>
+      <div class="form-actions no-print" style="margin-top:16px">
+        <button class="play-btn" style="--c:var(--accent)" onclick="copyHtml(this, reportTableHTML(${y}, true), reportPlain(${y}))">📋 한글에 붙여 넣기용 복사</button>
+        ${window.NO_FILES ? "" : `<button class="big-link ghost" onclick="window.print()">🖨️ 인쇄하기</button>`}
+        <button class="big-link ghost" onclick="go('#plan')">📅 연간 계획표</button>
+      </div>`;
+  }
+  function reportPlain(y) {
+    return reportRows(y).map(x => `${x.a.name}\t${fmtHours(x.hours)}/${x.a.requiredHours}시간\t${x.rs.length}회\t` + x.list.map(l => `${l.date} ${l.title}`).join(", ")).join("\n");
+  }
+  /* 표를 한글에 붙여 넣을 수 있게 HTML로 복사 (안 되면 글자만 복사) */
+  function copyHtml(btn, html, text) {
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        const o = btn.textContent;
+        navigator.clipboard.write([new ClipboardItem({ "text/html": new Blob([html], { type: "text/html" }), "text/plain": new Blob([text], { type: "text/plain" }) })])
+          .then(() => { btn.textContent = "✔ 복사했어요. 한글에서 Ctrl+V"; setTimeout(() => btn.textContent = o, 2200); }, () => copyText(btn, text));
+        return;
+      }
+    } catch (e) {}
+    copyText(btn, text);
+  }
+
   /* ---------- 한글(.hwpx) 일지 만들기: 빈 양식에 내용을 채워 새 파일로 ---------- */
   function b64ToBytes(b64) { const s = atob(b64), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
   const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
@@ -1088,6 +1268,8 @@
       html = t ? viewPick(a, t, parts[3]) : notFound();
     }
     else if (parts[0] === "records") html = viewRecords();
+    else if (parts[0] === "plan") html = viewPlan();
+    else if (parts[0] === "report") html = viewReport();
     else if (parts[0] === "log") { const r = loadRecords().find(x => x.id === parts[1]); html = r ? viewLog(r) : notFound(); }
     else if (parts[0] === "edit") { const r = loadRecords().find(x => x.id === parts[1]); const ft = r && findTopic(r.areaId, r.topicId); html = ft && ft.t ? viewWrite(ft.a, ft.t, r.level, r) : notFound(); }
     else if (parts[0] === "write" && findArea(parts[1]) && okLevel(parts[3])) {
