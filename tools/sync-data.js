@@ -1,6 +1,6 @@
 // data/areas.json(원본) → data/areas.js(프로그램이 읽는 파일)로 옮기고, 데이터가 맞는지 검사해요.
 // 실행: npm run data
-const { fs, DATA_JSON, DATA_JS, loadData } = require("./lib/common");
+const { fs, DATA_JSON, DATA_JS, loadData, eachLesson } = require("./lib/common");
 
 const data = loadData();
 const problems = [];
@@ -14,17 +14,22 @@ if (total !== 44) warn(`영역별 시간 합계가 44시간이 아니에요 (${t
 // 2) 수업 내용 검사
 const TYPES = ["cover", "question", "promise", "video", "quiz", "activity", "wrap"];
 let lessons = 0, reviewed = 0;
-for (const a of data.areas) {
-  for (const t of a.topics.elementary) {
-    for (const lv of ["low", "high"]) {
-      const L = t.content[lv];
-      if (!L) continue;
+// 추가 수업(extras) id는 주제 안에서 겹치면 안 돼요
+for (const a of data.areas) for (const t of a.topics.elementary) {
+  const ids = (t.extras || []).map(x => x.id);
+  if (new Set(ids).size !== ids.length) warn(`${t.id}: 추가 수업(extras) id가 겹쳐요.`);
+  (t.extras || []).forEach(x => { if (!/^[a-z0-9]+$/.test(x.id)) warn(`${t.id}: 추가 수업 id "${x.id}"는 영어 소문자·숫자만 써요(하이픈 금지).`); });
+}
+{
+  for (const { topic: t, level: lv, L } of eachLesson(data)) {
+    {
       lessons++;
       if (L.status === "검토 완료") reviewed++;
       const where = `${t.id}-${lv}`;
       if (!Array.isArray(L.slides) || !L.slides.length) { warn(`${where}: slides가 비어 있어요.`); continue; }
       L.slides.forEach((s, i) => {
         if (!TYPES.includes(s.type)) warn(`${where} 슬라이드 ${i + 1}: 모르는 type "${s.type}"`);
+        if (s.type === "video" && !/^[\w-]{11}$/.test(s.youtubeId || "")) warn(`${where} 슬라이드 ${i + 1}: 영상 youtubeId가 이상해요.`);
         if (s.type === "quiz") (s.items || []).forEach((q, k) => { if (!["O", "X"].includes(q.a)) warn(`${where} 퀴즈 ${k + 1}: 정답(a)은 "O" 또는 "X"여야 해요.`); });
         if (s.image && !fs.existsSync(require("path").join(__dirname, "..", s.image))) warn(`${where} 슬라이드 ${i + 1}: 그림 파일이 없어요 → ${s.image} (npm run cards)`);
       });

@@ -10,11 +10,20 @@ function loadData() {
   return JSON.parse(fs.readFileSync(DATA_JSON, "utf8"));
 }
 
+// 주제 하나의 수업들: 기본 수업 + 추가 수업(extras, 예: 자연재난 → 지진·폭설…)
+// 추가 수업은 id가 "<주제id>-<추가id>"인 주제처럼 다뤄요. (그림·활동지·PPT 파일 이름에 씀)
+function lessonTopics(topic) {
+  return [topic, ...(topic.extras || []).map(ex => ({
+    ...topic, ...ex, id: `${topic.id}-${ex.id}`, baseId: topic.id, extraId: ex.id,
+    title: `${topic.title} (${ex.title})`, links: [...(ex.links || []), ...(topic.links || [])]
+  }))];
+}
+
 // 모든 수업을 [area, topic, level, lesson] 목록으로
 function eachLesson(data, filter) {
   const out = [];
   for (const area of data.areas) {
-    for (const topic of area.topics.elementary) {
+    for (const topic of area.topics.elementary.flatMap(lessonTopics)) {
       for (const level of ["low", "high"]) {
         const L = topic.content[level];
         if (!L) continue;
@@ -31,7 +40,7 @@ function onlyFilter(argv) {
   const arg = argv.find(a => a.startsWith("--only="));
   if (!arg) return null;
   const want = arg.slice(7).split(",");
-  return (area, topic, level) => want.some(w => w === area.id || w === topic.id || w === `${topic.id}-${level}`);
+  return (area, topic, level) => want.some(w => w === area.id || w === topic.id || w === topic.baseId || w === `${topic.id}-${level}`);
 }
 
 // 브라우저(playwright-core): 센터·집 컴퓨터의 Edge 또는 Chrome을 그대로 씀
@@ -63,4 +72,4 @@ function tint(hex, l) {
   return "#" + to(f(h + 1 / 3)) + to(f(h)) + to(f(h - 1 / 3));
 }
 
-module.exports = { fs, path, ROOT, DATA_JSON, DATA_JS, loadData, eachLesson, onlyFilter, launchBrowser, tint };
+module.exports = { fs, path, ROOT, DATA_JSON, DATA_JS, loadData, lessonTopics, eachLesson, onlyFilter, launchBrowser, tint };

@@ -5089,6 +5089,351 @@ window.SAFETY_DATA = {
                 "url": "https://www.drugfree.or.kr",
                 "checkedAt": "2026-11-09"
               }
+            ],
+            "extras": [
+              {
+                "id": "epidemic",
+                "title": "감염병이 유행할 때",
+                "icon": "🦠",
+                "links": [
+                  {
+                    "org": "질병관리청",
+                    "title": "감염병 예방 수칙 (누리집)",
+                    "url": "https://www.kdca.go.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "감염병이 유행할 때 손 씻기, 기침 예절, 아프면 쉬기로 나와 친구를 지키는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "비누, 휴지"
+                    ],
+                    "safetyNote": "아픈 친구를 놀리거나 피하는 말이 나오지 않게 해요. '아프면 쉬는 건 친구를 지키는 일'로 이야기해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "손 씻기 · 기침 예절 · 아프면 쉬기을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 기침 예절 따라 하기",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "옷소매 기침, 휴지 기침 연습"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "감기·독감이 유행해요",
+                        "text": "나와 친구를 지켜요",
+                        "emoji": "🦠",
+                        "image": "img/health-e-01-epidemic/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "친구가 기침을 해요.\n어떻게 하면 좋을까요?",
+                        "teacher": "기침 예절과 함께, 아픈 친구를 놀리지 않는 마음도 이야기해요.",
+                        "emoji": "🤧",
+                        "image": "img/health-e-01-epidemic/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "손 씻기",
+                        "text": "비누로 30초 동안\n구석구석 씻어요",
+                        "emoji": "🧼",
+                        "teacher": "밥 먹기 전, 화장실 다녀온 뒤, 밖에서 들어오면 씻어요.",
+                        "image": "img/health-e-01-epidemic/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "기침 예절",
+                        "text": "기침할 땐 옷소매나\n휴지로 가려요",
+                        "emoji": "💪",
+                        "teacher": "쓴 휴지는 바로 휴지통에 버리고 손을 씻어요.",
+                        "image": "img/health-e-01-epidemic/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "아프면 쉬기",
+                        "text": "열나고 아프면\n집에서 푹 쉬어요",
+                        "emoji": "🛌",
+                        "teacher": "아픈 건 잘못이 아니에요. 다 나으면 다시 만나요.",
+                        "image": "img/health-e-01-epidemic/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "엄마 까투리와 함께하는 감염병 예방수칙",
+                        "youtubeId": "mYTWSUzlwD0",
+                        "source": "질병관리청 아프지마TV 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "기침할 때는 손바닥으로 가려요.",
+                            "a": "X",
+                            "why": "옷소매나 휴지로 가려요."
+                          },
+                          {
+                            "q": "비누로 30초 동안 손을 씻어요.",
+                            "a": "O",
+                            "why": "세균을 깨끗이 없애요."
+                          },
+                          {
+                            "q": "열이 나도 센터에 꼭 와야 해요.",
+                            "a": "X",
+                            "why": "집에서 쉬어야 빨리 나아요."
+                          },
+                          {
+                            "q": "아픈 친구를 놀리지 않아요.",
+                            "a": "O",
+                            "why": "누구나 아플 수 있어요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "기침 예절 따라 하기",
+                        "text": "옷소매 기침,\n휴지 기침 연습",
+                        "emoji": "💪",
+                        "teacher": "다 같이 '에취!' 하면 옷소매로 가리는 동작, '콜록!' 하면 휴지로 가리고 휴지통에 버리는 동작을 해요. 마지막엔 손 씻기 노래로 마무리해요.",
+                        "image": "img/health-e-01-epidemic/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🧼",
+                            "손씻기"
+                          ],
+                          [
+                            "💪",
+                            "옷소매"
+                          ],
+                          [
+                            "🛌",
+                            "쉬기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/health-e-01-epidemic-low.pdf",
+                    "slidesFile": "slides/health-e-01-epidemic-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "감염병이 퍼지는 길을 알고, 유행할 때 지켜야 할 생활 수칙을 실천할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "반짝이 가루(손 씻기 실험용, 선택)"
+                    ],
+                    "safetyNote": "특정 병이나 나라, 사람을 탓하는 말은 쓰지 않아요. 실험용 가루는 눈에 들어가지 않게 하고, 피부가 약한 아이는 빼 줘요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "손 위생 · 침방울 막기 · 아프면 쉬기을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 세균 이어달리기 실험",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "반짝이로 세균이 퍼지는 길 알아보기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "감염병, 함께 막아요",
+                        "text": "퍼지는 길을 끊어요",
+                        "emoji": "🦠",
+                        "image": "img/health-e-01-epidemic/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "감염병은 어떻게\n사람에게 옮을까요?",
+                        "teacher": "손, 기침·재채기 침방울, 같이 쓰는 물건으로 옮을 수 있다고 정리해요.",
+                        "emoji": "🔎",
+                        "image": "img/health-e-01-epidemic/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "손 위생",
+                        "text": "자주 씻고, 눈·코·입을\n함부로 만지지 않아요",
+                        "emoji": "🧼",
+                        "teacher": "손은 30초 이상, 손톱 밑과 손가락 사이까지 씻어요.",
+                        "image": "img/health-e-01-epidemic/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "침방울 막기",
+                        "text": "기침 예절 지키고\n증상 있으면 마스크",
+                        "emoji": "😷",
+                        "teacher": "사람이 많은 곳에서 기침이 나면 마스크를 써요. 교실은 자주 환기해요.",
+                        "image": "img/health-e-01-epidemic/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "아프면 쉬기",
+                        "text": "열·기침이 있으면\n쉬고 어른께 알려요",
+                        "emoji": "🛌",
+                        "teacher": "컵, 수저, 물병은 같이 쓰지 않아요. 예방접종도 큰 도움이 돼요.",
+                        "image": "img/health-e-01-epidemic/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "기침, 이렇게 하면 감염병을 예방할 수 있다?!",
+                        "youtubeId": "ws3bkVdcpk8",
+                        "source": "질병관리청 아프지마TV 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "물병이나 컵을 친구와 같이 써도 괜찮아요.",
+                            "a": "X",
+                            "why": "침으로 옮을 수 있어요."
+                          },
+                          {
+                            "q": "교실 창문을 자주 열어 환기해요.",
+                            "a": "O",
+                            "why": "공기 속 세균이 줄어요."
+                          },
+                          {
+                            "q": "열이 나면 참고 학원에 가요.",
+                            "a": "X",
+                            "why": "쉬어야 나도 친구도 안전해요."
+                          },
+                          {
+                            "q": "예방접종은 감염병을 막는 데 도움이 돼요.",
+                            "a": "O",
+                            "why": "몸이 미리 싸울 준비를 해요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "세균 이어달리기 실험",
+                        "text": "반짝이로 세균이\n퍼지는 길 알아보기",
+                        "emoji": "✨",
+                        "teacher": "한 사람 손에 반짝이를 묻히고 악수를 이어 가며 몇 명에게 퍼지는지 봐요. 그다음 비누로 30초 씻고 얼마나 없어졌는지 비교해요. (반짝이가 없으면 그림 카드로 대신해요)",
+                        "image": "img/health-e-01-epidemic/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🧼",
+                            "손씻기"
+                          ],
+                          [
+                            "😷",
+                            "기침예절"
+                          ],
+                          [
+                            "🛌",
+                            "쉬기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/health-e-01-epidemic-high.pdf",
+                    "slidesFile": "slides/health-e-01-epidemic-high.pptx"
+                  }
+                }
+              }
             ]
           },
           {
@@ -8447,6 +8792,1729 @@ window.SAFETY_DATA = {
                 "title": "화재 예방·소화기 사용법 (누리집)",
                 "url": "https://www.nfa.go.kr",
                 "checkedAt": "2026-11-09"
+              }
+            ],
+            "extras": [
+              {
+                "id": "quake",
+                "title": "지진",
+                "icon": "🌍",
+                "links": [
+                  {
+                    "org": "행정안전부 국민재난안전포털",
+                    "title": "재난별 국민행동요령 (누리집)",
+                    "url": "https://www.safekorea.go.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "땅이 흔들릴 때 머리를 보호하고, 흔들림이 멈추면 안전하게 대피하는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "방석 또는 책(머리 보호용)"
+                    ],
+                    "safetyNote": "무너지는 장면이나 큰 소리 같은 무서운 영상·소리는 쓰지 않아요. 놀이할 때 책상 모서리에 머리를 부딪히지 않게 천천히 움직여요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "숙여요 · 기다려요 · 계단으로을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 지진 대피 훈련",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "'지진이다!' 소리에 책상 밑 → 운동장"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "흔들흔들 지진이 나면",
+                        "text": "머리를 지켜요",
+                        "emoji": "🌍",
+                        "image": "img/disaster-e-06-quake/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "교실이 흔들흔들!\n어디로 숨을까요?",
+                        "teacher": "아이들이 떠올린 곳을 칭찬하고, 머리를 지키는 게 가장 중요하다고 이야기해요.",
+                        "emoji": "🏫",
+                        "image": "img/disaster-e-06-quake/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "숙여요",
+                        "text": "책상 밑으로 들어가\n머리를 지켜요",
+                        "emoji": "🪑",
+                        "teacher": "책상 다리를 꼭 잡아요. 책상이 없으면 가방이나 방석으로 머리를 가려요.",
+                        "image": "img/disaster-e-06-quake/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "기다려요",
+                        "text": "흔들림이 멈출 때까지\n움직이지 않아요",
+                        "emoji": "✋",
+                        "teacher": "흔들릴 때 밖으로 뛰어나가면 떨어지는 물건에 다칠 수 있어요.",
+                        "image": "img/disaster-e-06-quake/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "계단으로",
+                        "text": "멈추면 계단으로\n넓은 곳에 가요",
+                        "emoji": "🏃",
+                        "teacher": "엘리베이터는 타지 않아요. 선생님을 따라 운동장처럼 넓은 곳으로 가요.",
+                        "image": "img/disaster-e-06-quake/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "국민이&안전이와 지진 안전수칙",
+                        "youtubeId": "mWSkhBTdS8M",
+                        "source": "행정안전부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "땅이 흔들리면 책상 밑에서 머리를 지켜요.",
+                            "a": "O",
+                            "why": "떨어지는 물건에서 머리를 지켜요."
+                          },
+                          {
+                            "q": "흔들릴 때 바로 밖으로 뛰어나가요.",
+                            "a": "X",
+                            "why": "흔들림이 멈출 때까지 기다려요."
+                          },
+                          {
+                            "q": "대피할 때는 엘리베이터를 타요.",
+                            "a": "X",
+                            "why": "멈출 수 있어서 계단을 이용해요."
+                          },
+                          {
+                            "q": "밖에서는 건물에서 떨어진 넓은 곳으로 가요.",
+                            "a": "O",
+                            "why": "유리나 간판이 떨어질 수 있어요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "지진 대피 훈련",
+                        "text": "'지진이다!' 소리에\n책상 밑 → 운동장",
+                        "emoji": "🔔",
+                        "teacher": "선생님이 종을 치면 책상 밑에서 머리 보호, 다시 치면 줄 서서 계단으로 나가는 연습을 2번 해요. 뛰지 않고 걷는 게 약속이에요.",
+                        "image": "img/disaster-e-06-quake/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🪑",
+                            "숙여요"
+                          ],
+                          [
+                            "✋",
+                            "기다려"
+                          ],
+                          [
+                            "🏃",
+                            "계단"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-quake-low.pdf",
+                    "slidesFile": "slides/disaster-e-06-quake-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "지진이 났을 때 장소별로 몸을 지키는 방법과 대피 순서를 알고 설명할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "우리 센터 대피 경로 그림(빈 종이)"
+                    ],
+                    "safetyNote": "실제 피해 사진·영상은 쓰지 않아요. 지진 경험으로 불안해하는 아이가 있으면 '미리 알면 안전하다'는 점을 강조해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "실내에서 · 대피할 때 · 밖에서을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 우리 센터 대피 지도",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "센터에서 넓은 곳까지 가는 길 그리기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "지진, 장소별로 대비해요",
+                        "text": "집 · 센터 · 밖에서",
+                        "emoji": "🌍",
+                        "image": "img/disaster-e-06-quake/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "마트나 길에 있을 때\n지진이 나면?",
+                        "teacher": "장소에 따라 몸을 지키는 방법이 다르다는 걸 이끌어 내요.",
+                        "emoji": "🏬",
+                        "image": "img/disaster-e-06-quake/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "실내에서",
+                        "text": "탁자 밑에서 머리 보호,\n멈추면 문을 열어요",
+                        "emoji": "🪑",
+                        "teacher": "흔들림이 멈추면 전기·가스를 끄고 문을 열어 나갈 길을 만들어요(어른과 함께).",
+                        "image": "img/disaster-e-06-quake/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "대피할 때",
+                        "text": "계단으로 내려가\n넓은 공터로 가요",
+                        "emoji": "🏃",
+                        "teacher": "엘리베이터 안에 있으면 모든 층 버튼을 눌러 가장 먼저 멈춘 층에서 내려요.",
+                        "image": "img/disaster-e-06-quake/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "밖에서",
+                        "text": "건물·전봇대에서\n떨어져 머리 보호",
+                        "emoji": "🏢",
+                        "teacher": "유리창, 간판, 담장 옆은 위험해요. 가방으로 머리를 가리고 넓은 곳으로 가요.",
+                        "image": "img/disaster-e-06-quake/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "흔들리는 순간, 이 동작만 기억하세요",
+                        "youtubeId": "DDHW5JpEYDA",
+                        "source": "국립재난안전연구원 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "흔들림이 멈추면 문을 열어 나갈 길을 만들어요.",
+                            "a": "O",
+                            "why": "문이 비틀려 안 열릴 수 있어요."
+                          },
+                          {
+                            "q": "엘리베이터에 있으면 모든 층 버튼을 눌러요.",
+                            "a": "O",
+                            "why": "가장 먼저 멈춘 층에서 내려요."
+                          },
+                          {
+                            "q": "밖에서는 건물 벽에 바짝 붙어 있어요.",
+                            "a": "X",
+                            "why": "유리·간판이 떨어질 수 있어요."
+                          },
+                          {
+                            "q": "대피한 뒤에는 라디오·재난문자로 소식을 들어요.",
+                            "a": "O",
+                            "why": "정확한 안내를 따라요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "우리 센터 대피 지도",
+                        "text": "센터에서 넓은 곳까지\n가는 길 그리기",
+                        "emoji": "🗺️",
+                        "teacher": "모둠별로 센터 출구, 계단, 모일 장소를 그리고 위험한 곳(유리창, 높은 선반)에 표시해요. 발표 후 실제로 걸어 봐요.",
+                        "image": "img/disaster-e-06-quake/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🪑",
+                            "머리보호"
+                          ],
+                          [
+                            "🚪",
+                            "문열기"
+                          ],
+                          [
+                            "🏃",
+                            "계단"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-quake-high.pdf",
+                    "slidesFile": "slides/disaster-e-06-quake-high.pptx"
+                  }
+                }
+              },
+              {
+                "id": "snow",
+                "title": "폭설·한파",
+                "icon": "❄️",
+                "links": [
+                  {
+                    "org": "행정안전부 국민재난안전포털",
+                    "title": "재난별 국민행동요령 (누리집)",
+                    "url": "https://www.safekorea.go.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "눈이 많이 오거나 아주 추운 날 미끄러지지 않고 따뜻하게 지내는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "목도리·장갑·모자(실물 또는 그림)"
+                    ],
+                    "safetyNote": "미끄러지는 흉내를 낼 때 실제로 넘어지지 않게 제자리에서만 해요. 동상이 의심되면 문지르지 말고 어른에게 알리게 해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "펭귄 걸음 · 꽁꽁 싸매요 · 알려요을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 펭귄 걸음 놀이",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "펭귄처럼 작은 걸음으로 눈길 건너기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "눈 오는 날, 추운 날",
+                        "text": "안전하고 따뜻하게",
+                        "emoji": "❄️",
+                        "image": "img/disaster-e-06-snow/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "눈길에서 주머니에\n손 넣고 걸으면?",
+                        "teacher": "넘어질 때 손으로 짚을 수 없어 더 크게 다칠 수 있다는 걸 이야기해요.",
+                        "emoji": "🧤",
+                        "image": "img/disaster-e-06-snow/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "펭귄 걸음",
+                        "text": "눈길은 작은 걸음으로\n천천히 걸어요",
+                        "emoji": "🐧",
+                        "teacher": "주머니에서 손을 빼고, 미끄러운 계단은 난간을 잡아요.",
+                        "image": "img/disaster-e-06-snow/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "꽁꽁 싸매요",
+                        "text": "모자·목도리·장갑으로\n따뜻하게 입어요",
+                        "emoji": "🧣",
+                        "teacher": "얇은 옷을 여러 겹 입으면 더 따뜻해요.",
+                        "image": "img/disaster-e-06-snow/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "알려요",
+                        "text": "손발이 아프고 빨개지면\n어른께 알려요",
+                        "emoji": "🙋",
+                        "teacher": "꽁꽁 언 손발은 문지르지 말고 따뜻한 곳으로 가요.",
+                        "image": "img/disaster-e-06-snow/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "대설 국민행동요령",
+                        "youtubeId": "V2OrcdTwPH0",
+                        "source": "행정안전부 안전한TV 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "눈길에서는 주머니에 손을 넣고 걸어요.",
+                            "a": "X",
+                            "why": "넘어질 때 손을 짚을 수 있게 빼요."
+                          },
+                          {
+                            "q": "추운 날엔 모자와 장갑을 써요.",
+                            "a": "O",
+                            "why": "몸의 열이 빠져나가지 않아요."
+                          },
+                          {
+                            "q": "얼어붙은 개울 위에서 놀아요.",
+                            "a": "X",
+                            "why": "얼음이 깨질 수 있어요."
+                          },
+                          {
+                            "q": "손이 꽁꽁 얼면 세게 문질러요.",
+                            "a": "X",
+                            "why": "피부가 다칠 수 있어요. 어른께 알려요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "펭귄 걸음 놀이",
+                        "text": "펭귄처럼 작은 걸음으로\n눈길 건너기",
+                        "emoji": "🐧",
+                        "teacher": "바닥에 '눈길' 테이프 길을 만들고, 손을 옆으로 벌린 채 작은 걸음으로 건너요. 다 건너면 '따뜻하게 입기' 순서(모자→목도리→장갑)를 몸짓으로 해요.",
+                        "image": "img/disaster-e-06-snow/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🐧",
+                            "펭귄"
+                          ],
+                          [
+                            "🧣",
+                            "따뜻"
+                          ],
+                          [
+                            "🙋",
+                            "알려요"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-snow-low.pdf",
+                    "slidesFile": "slides/disaster-e-06-snow-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "폭설·한파 때의 위험(미끄럼, 동상, 저체온)을 알고 예방과 대처를 할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "옷 그림 카드"
+                    ],
+                    "safetyNote": "동상 응급처치는 '어른에게 알리고 따뜻한 곳으로'까지만 다뤄요. 겨울옷이 부족한 아이가 있을 수 있으니 옷차림을 지적하지 않아요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "미끄럼 조심 · 겹쳐 입기 · 동상 신호을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 한파 대비 옷 입히기",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "옷 카드로 한파 날 옷차림 꾸미기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "폭설·한파 대비하기",
+                        "text": "미끄럼 · 동상 · 저체온",
+                        "emoji": "🌨️",
+                        "image": "img/disaster-e-06-snow/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "한파 특보가 내리면\n무엇을 준비할까요?",
+                        "teacher": "날씨 예보와 재난문자를 확인하는 습관을 이야기해요.",
+                        "emoji": "📲",
+                        "image": "img/disaster-e-06-snow/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "미끄럼 조심",
+                        "text": "보폭은 작게, 손은 빼고\n그늘진 길은 피해요",
+                        "emoji": "🧊",
+                        "teacher": "건물 그늘, 다리 위, 횡단보도 흰 선은 더 미끄러워요.",
+                        "image": "img/disaster-e-06-snow/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "겹쳐 입기",
+                        "text": "얇은 옷 여러 겹,\n모자·장갑을 챙겨요",
+                        "emoji": "🧥",
+                        "teacher": "젖은 옷과 양말은 빨리 갈아입어요.",
+                        "image": "img/disaster-e-06-snow/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "동상 신호",
+                        "text": "하얗게 굳고 감각이 없으면\n어른께 알려요",
+                        "emoji": "🖐️",
+                        "teacher": "문지르거나 뜨거운 물에 바로 넣지 않아요. 따뜻한 실내로 가요.",
+                        "image": "img/disaster-e-06-snow/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "'한파' 이렇게 대비하세요",
+                        "youtubeId": "KQ9VfVJI6KE",
+                        "source": "행정안전부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "횡단보도 흰 선은 눈 올 때 더 미끄러워요.",
+                            "a": "O",
+                            "why": "페인트 위가 미끄러워요."
+                          },
+                          {
+                            "q": "두꺼운 옷 한 벌이 얇은 옷 여러 겹보다 따뜻해요.",
+                            "a": "X",
+                            "why": "여러 겹 사이 공기가 몸을 지켜요."
+                          },
+                          {
+                            "q": "동상이 생기면 눈으로 문질러요.",
+                            "a": "X",
+                            "why": "피부가 더 다쳐요. 따뜻한 곳으로 가요."
+                          },
+                          {
+                            "q": "폭설 예보가 있으면 외출을 줄여요.",
+                            "a": "O",
+                            "why": "꼭 나갈 때는 어른과 함께해요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "한파 대비 옷 입히기",
+                        "text": "옷 카드로 한파 날\n옷차림 꾸미기",
+                        "emoji": "🧥",
+                        "teacher": "모둠별로 옷 카드(내복, 얇은 옷, 패딩, 모자, 목도리, 장갑, 방수 신발)를 골라 순서대로 붙이고 이유를 발표해요.",
+                        "image": "img/disaster-e-06-snow/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🧊",
+                            "작은걸음"
+                          ],
+                          [
+                            "🧥",
+                            "겹쳐입기"
+                          ],
+                          [
+                            "🖐️",
+                            "알리기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-snow-high.pdf",
+                    "slidesFile": "slides/disaster-e-06-snow-high.pptx"
+                  }
+                }
+              },
+              {
+                "id": "storm",
+                "title": "태풍·호우",
+                "icon": "🌀",
+                "links": [
+                  {
+                    "org": "행정안전부 국민재난안전포털",
+                    "title": "재난별 국민행동요령 (누리집)",
+                    "url": "https://www.safekorea.go.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "태풍이나 큰비가 올 때 실내에 머물고 물가·위험한 곳에 가지 않는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "우산·장화 그림 카드"
+                    ],
+                    "safetyNote": "홍수 피해 장면은 보여 주지 않아요. 비 오는 날을 무서워하지 않도록 '집 안에 있으면 안전하다'를 강조해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "실내에 · 물가 금지 · 지하 금지을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 안전한 곳 찾기",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "그림 카드 중 안전한 곳에 동그라미"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "태풍·큰비가 오면",
+                        "text": "안전한 곳에 있어요",
+                        "emoji": "🌀",
+                        "image": "img/disaster-e-06-storm/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "비가 아주 많이 오면\n개울에 가도 될까요?",
+                        "teacher": "물이 갑자기 불어나 빠르게 흐를 수 있다는 걸 이야기해요.",
+                        "emoji": "🌧️",
+                        "image": "img/disaster-e-06-storm/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "실내에",
+                        "text": "태풍이 오면\n밖에 나가지 않아요",
+                        "emoji": "🏠",
+                        "teacher": "창문에서 떨어져 있어요. 바람에 물건이 날아올 수 있어요.",
+                        "image": "img/disaster-e-06-storm/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "물가 금지",
+                        "text": "개울·계곡·바다에\n가지 않아요",
+                        "emoji": "🚫",
+                        "teacher": "물이 무릎까지 와도 넘어지고 떠내려갈 수 있어요.",
+                        "image": "img/disaster-e-06-storm/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "지하 금지",
+                        "text": "지하주차장·지하도에\n들어가지 않아요",
+                        "emoji": "⬇️",
+                        "teacher": "큰비가 오면 물이 지하로 빨리 차요.",
+                        "image": "img/disaster-e-06-storm/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "태풍, 호우 발생했다면?",
+                        "youtubeId": "hsgJ7ZnqVDc",
+                        "source": "행정안전부 안전한TV 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "태풍이 오면 창문 가까이에서 구경해요.",
+                            "a": "X",
+                            "why": "유리가 깨질 수 있어 떨어져 있어요."
+                          },
+                          {
+                            "q": "큰비가 오면 개울에 가지 않아요.",
+                            "a": "O",
+                            "why": "물이 갑자기 불어나요."
+                          },
+                          {
+                            "q": "물이 고인 길은 첨벙첨벙 건너요.",
+                            "a": "X",
+                            "why": "깊이를 몰라 위험해요."
+                          },
+                          {
+                            "q": "비바람이 세면 집이나 센터 안에 있어요.",
+                            "a": "O",
+                            "why": "실내가 가장 안전해요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "안전한 곳 찾기",
+                        "text": "그림 카드 중\n안전한 곳에 동그라미",
+                        "emoji": "🔎",
+                        "teacher": "집, 개울, 지하주차장, 센터, 바닷가, 학교 교실 그림 카드를 보여 주고 태풍 때 안전한 곳이면 O, 위험하면 X 몸짓을 해요.",
+                        "image": "img/disaster-e-06-storm/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "🏠",
+                            "실내로"
+                          ],
+                          [
+                            "🚫",
+                            "물가안돼"
+                          ],
+                          [
+                            "⬇️",
+                            "지하안돼"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-storm-low.pdf",
+                    "slidesFile": "slides/disaster-e-06-storm-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "태풍·호우 특보의 뜻을 알고, 침수·강풍 위험을 피해 안전하게 행동할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "우리 동네 지도(인쇄 또는 화면)"
+                    ],
+                    "safetyNote": "실제 사고 사례는 이름이나 장면 없이 '이런 일이 있을 수 있어요' 정도로만 말해요. 수해를 겪은 아이가 있는지 미리 살펴요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "특보 확인 · 침수 피하기 · 강풍·감전을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 우리 동네 위험 지도",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "동네 지도에 큰비 때 위험한 곳 표시하기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "태풍·호우 대비하기",
+                        "text": "특보 · 침수 · 강풍",
+                        "emoji": "🌀",
+                        "image": "img/disaster-e-06-storm/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "'호우경보'가 왔어요.\n하교할 때 어떻게 할까요?",
+                        "teacher": "보호자에게 연락하고 위험한 길을 피하는 방법을 이야기하게 해요.",
+                        "emoji": "📲",
+                        "image": "img/disaster-e-06-storm/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "특보 확인",
+                        "text": "날씨 예보·재난문자를\n꼭 확인해요",
+                        "emoji": "📲",
+                        "teacher": "주의보보다 경보가 더 위험한 단계예요. 경보 때는 외출하지 않아요.",
+                        "image": "img/disaster-e-06-storm/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "침수 피하기",
+                        "text": "하천·지하차도·\n물 고인 길은 피해요",
+                        "emoji": "🌊",
+                        "teacher": "흐르는 물은 무릎 높이만 돼도 사람을 넘어뜨려요. 맨홀이 열려 있을 수도 있어요.",
+                        "image": "img/disaster-e-06-storm/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "강풍·감전",
+                        "text": "간판 아래, 전봇대·\n가로등 옆은 피해요",
+                        "emoji": "⚡",
+                        "teacher": "끊어진 전깃줄이나 물에 잠긴 전기 시설에는 절대 가까이 가지 않아요.",
+                        "image": "img/disaster-e-06-storm/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "몰아치는 태풍호우에 미리 대비하는 행동요령",
+                        "youtubeId": "uHI5xJaql0I",
+                        "source": "행정안전부 안전한TV 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "호우경보는 호우주의보보다 더 위험한 단계예요.",
+                            "a": "O",
+                            "why": "경보 때는 외출하지 않아요."
+                          },
+                          {
+                            "q": "지하차도에 물이 조금 차면 빨리 지나가요.",
+                            "a": "X",
+                            "why": "물이 금방 차올라요. 돌아가요."
+                          },
+                          {
+                            "q": "끊어진 전깃줄은 막대기로 치워요.",
+                            "a": "X",
+                            "why": "감전될 수 있어요. 119에 알려요."
+                          },
+                          {
+                            "q": "태풍 전에 베란다 물건을 안으로 들여요.",
+                            "a": "O",
+                            "why": "바람에 날아가 다칠 수 있어요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "우리 동네 위험 지도",
+                        "text": "동네 지도에 큰비 때\n위험한 곳 표시하기",
+                        "emoji": "🗺️",
+                        "teacher": "모둠별로 동네 지도에 하천, 지하차도, 지하주차장, 공사장을 표시하고 '큰비 오는 날 하굣길'을 안전한 길로 다시 그려 발표해요.",
+                        "image": "img/disaster-e-06-storm/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "📲",
+                            "특보확인"
+                          ],
+                          [
+                            "🌊",
+                            "물피하기"
+                          ],
+                          [
+                            "⚡",
+                            "전기조심"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-storm-high.pdf",
+                    "slidesFile": "slides/disaster-e-06-storm-high.pptx"
+                  }
+                }
+              },
+              {
+                "id": "heat",
+                "title": "폭염",
+                "icon": "☀️",
+                "links": [
+                  {
+                    "org": "행정안전부 국민재난안전포털",
+                    "title": "재난별 국민행동요령 (누리집)",
+                    "url": "https://www.safekorea.go.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "아주 더운 날 물을 자주 마시고 그늘에서 쉬며 몸을 지키는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "물병(각자)"
+                    ],
+                    "safetyNote": "활동 중에도 물 마시는 시간을 줘요. 실제로 어지럽거나 더위를 먹은 아이가 있으면 바로 시원한 곳에서 쉬게 해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "물 마셔요 · 그늘에서 · 알려요을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 시원한 여름 짝꿍",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "더운 날 챙길 물건 그림 카드 고르기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "햇볕 쨍쨍 더운 날",
+                        "text": "몸을 지켜요",
+                        "emoji": "☀️",
+                        "image": "img/disaster-e-06-heat/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "아주 더운 날 한낮에\n운동장에서 놀면?",
+                        "teacher": "땀이 많이 나고 어지러울 수 있다는 걸 이야기해요.",
+                        "emoji": "🥵",
+                        "image": "img/disaster-e-06-heat/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "물 마셔요",
+                        "text": "목마르지 않아도\n물을 자주 마셔요",
+                        "emoji": "💧",
+                        "teacher": "음료수보다 물이 좋아요. 조금씩 자주 마셔요.",
+                        "image": "img/disaster-e-06-heat/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "그늘에서",
+                        "text": "한낮에는 그늘이나\n시원한 실내에서",
+                        "emoji": "🌳",
+                        "teacher": "밖에 나갈 때는 모자를 써요. 가장 더운 낮 12시~5시에는 바깥 놀이를 줄여요.",
+                        "image": "img/disaster-e-06-heat/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "알려요",
+                        "text": "어지럽고 힘들면\n바로 어른께 알려요",
+                        "emoji": "🙋",
+                        "teacher": "시원한 곳에서 쉬고 물을 마셔요.",
+                        "image": "img/disaster-e-06-heat/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "다행이·부리부리가 알려주는 폭염 대비",
+                        "youtubeId": "d9CA4wc6zXw",
+                        "source": "행정안전부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "목이 마를 때만 물을 마셔요.",
+                            "a": "X",
+                            "why": "목마르기 전에 자주 마셔요."
+                          },
+                          {
+                            "q": "더운 날 밖에서는 모자를 써요.",
+                            "a": "O",
+                            "why": "햇볕에서 머리를 지켜요."
+                          },
+                          {
+                            "q": "한낮 햇볕 아래에서 오래 뛰어놀아요.",
+                            "a": "X",
+                            "why": "더위를 먹을 수 있어요."
+                          },
+                          {
+                            "q": "주차된 차 안에 혼자 있으면 안 돼요.",
+                            "a": "O",
+                            "why": "차 안은 금방 뜨거워져요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "시원한 여름 짝꿍",
+                        "text": "더운 날 챙길 물건\n그림 카드 고르기",
+                        "emoji": "🧢",
+                        "teacher": "물병, 모자, 부채, 양산, 두꺼운 패딩, 뜨거운 국 카드를 섞어 보여 주고 '여름 짝꿍'을 골라 가방에 넣는 몸짓을 해요.",
+                        "image": "img/disaster-e-06-heat/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "💧",
+                            "물마셔"
+                          ],
+                          [
+                            "🌳",
+                            "그늘로"
+                          ],
+                          [
+                            "🙋",
+                            "알려요"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-heat-low.pdf",
+                    "slidesFile": "slides/disaster-e-06-heat-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "폭염 특보의 뜻과 온열질환 신호를 알고, 예방과 친구 돕기를 할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "온열질환 신호 카드"
+                    ],
+                    "safetyNote": "온열질환 대처는 '시원한 곳으로 옮기고 어른·119에 알리기'까지 다뤄요. 의식이 흐린 사람에게 물을 억지로 먹이지 않는다는 점을 알려 줘요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "특보 확인 · 물·옷차림 · 신호 알기을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 폭염 돕기 역할극",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "어지러운 친구를 돕는 순서 연습"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "폭염도 재난이에요",
+                        "text": "온열질환 알고 대비해요",
+                        "emoji": "🌡️",
+                        "image": "img/disaster-e-06-heat/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "친구가 운동 중\n어지럽다고 하면?",
+                        "teacher": "바로 쉬게 하고 어른에게 알리는 게 먼저라는 걸 이끌어 내요.",
+                        "emoji": "🤒",
+                        "image": "img/disaster-e-06-heat/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "특보 확인",
+                        "text": "폭염 특보 때는\n한낮 야외활동을 줄여요",
+                        "emoji": "📲",
+                        "teacher": "가장 더운 시간은 낮 12시~오후 5시예요.",
+                        "image": "img/disaster-e-06-heat/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "물·옷차림",
+                        "text": "물을 자주 마시고\n헐렁하고 밝은 옷",
+                        "emoji": "👕",
+                        "teacher": "카페인이 많은 음료나 탄산음료는 물을 대신하지 못해요.",
+                        "image": "img/disaster-e-06-heat/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "신호 알기",
+                        "text": "어지럼·두통·메스꺼움,\n바로 쉬고 알려요",
+                        "emoji": "🌡️",
+                        "teacher": "시원한 곳으로 옮기고 옷을 느슨하게 해요. 의식이 흐리면 119에 신고해요.",
+                        "image": "img/disaster-e-06-heat/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "우리의 안전한 여름을 위한 폭염 행동요령",
+                        "youtubeId": "-zfBICWajMw",
+                        "source": "행정안전부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "폭염 특보 때는 한낮 운동을 줄여요.",
+                            "a": "O",
+                            "why": "온열질환을 막을 수 있어요."
+                          },
+                          {
+                            "q": "탄산음료를 마시면 물은 안 마셔도 돼요.",
+                            "a": "X",
+                            "why": "물을 따로 자주 마셔요."
+                          },
+                          {
+                            "q": "어지러운 친구는 시원한 곳에서 쉬게 해요.",
+                            "a": "O",
+                            "why": "그리고 어른께 바로 알려요."
+                          },
+                          {
+                            "q": "정신이 흐린 친구에게 물을 억지로 먹여요.",
+                            "a": "X",
+                            "why": "숨이 막힐 수 있어요. 119에 알려요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "폭염 돕기 역할극",
+                        "text": "어지러운 친구를\n돕는 순서 연습",
+                        "emoji": "🤝",
+                        "teacher": "3명이 한 모둠(아픈 친구, 돕는 친구, 어른 역)이 되어 '시원한 곳으로 → 옷 느슨하게 → 어른께 알리기(필요하면 119)' 순서로 짧은 역할극을 해요.",
+                        "image": "img/disaster-e-06-heat/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "📲",
+                            "특보확인"
+                          ],
+                          [
+                            "💧",
+                            "물자주"
+                          ],
+                          [
+                            "🌡️",
+                            "신호알기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-heat-high.pdf",
+                    "slidesFile": "slides/disaster-e-06-heat-high.pptx"
+                  }
+                }
+              },
+              {
+                "id": "dust",
+                "title": "미세먼지·황사",
+                "icon": "😷",
+                "links": [
+                  {
+                    "org": "행정안전부 국민재난안전포털",
+                    "title": "재난별 국민행동요령 (누리집)",
+                    "url": "https://www.safekorea.go.kr",
+                    "checkedAt": "2026-11-09"
+                  },
+                  {
+                    "org": "한국환경공단 에어코리아",
+                    "title": "우리 동네 실시간 미세먼지 (누리집)",
+                    "url": "https://www.airkorea.or.kr",
+                    "checkedAt": "2026-11-09"
+                  }
+                ],
+                "content": {
+                  "low": {
+                    "status": "검토 필요",
+                    "goal": "미세먼지가 나쁜 날을 알아보고 마스크 쓰기, 손 씻기로 몸을 지키는 법을 안다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "보건용 마스크(보여 주기용)"
+                    ],
+                    "safetyNote": "마스크를 쓰고 숨쉬기 힘들어하는 아이는 바로 벗고 쉬게 해요. 천식 등 호흡기 질환이 있는 아이는 미세먼지 나쁜 날 특히 살펴요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "확인해요 · 마스크 · 씻어요을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 오늘의 하늘 신호등",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "미세먼지 단계 카드로 할 일 몸짓 하기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "뿌연 하늘 미세먼지",
+                        "text": "몸을 지켜요",
+                        "emoji": "😷",
+                        "image": "img/disaster-e-06-dust/low_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "하늘이 뿌옇게 보이면\n밖에서 놀아도 될까요?",
+                        "teacher": "눈에 잘 안 보이는 아주 작은 먼지가 몸에 들어갈 수 있다고 이야기해요.",
+                        "emoji": "🌫️",
+                        "image": "img/disaster-e-06-dust/low_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "확인해요",
+                        "text": "미세먼지 '나쁨'인지\n어른과 확인해요",
+                        "emoji": "📱",
+                        "teacher": "좋음·보통·나쁨·매우나쁨 4단계가 있어요. '나쁨' 이상이면 바깥 놀이를 줄여요.",
+                        "image": "img/disaster-e-06-dust/low_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "마스크",
+                        "text": "밖에 나갈 땐\n마스크를 꼭 써요",
+                        "emoji": "😷",
+                        "teacher": "코와 입을 모두 덮어요. 숨쉬기 힘들면 벗고 어른께 알려요.",
+                        "image": "img/disaster-e-06-dust/low_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "씻어요",
+                        "text": "들어오면 손·얼굴을\n깨끗이 씻어요",
+                        "emoji": "🧼",
+                        "teacher": "물도 자주 마시면 좋아요.",
+                        "image": "img/disaster-e-06-dust/low_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "미세먼지 예방 7가지 행동 수칙 노래",
+                        "youtubeId": "3ENifYzsWHM",
+                        "source": "기후에너지환경부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "미세먼지 '나쁨'인 날은 바깥 놀이를 줄여요.",
+                            "a": "O",
+                            "why": "실내에서 놀아요."
+                          },
+                          {
+                            "q": "마스크는 입만 가리면 돼요.",
+                            "a": "X",
+                            "why": "코와 입을 모두 덮어요."
+                          },
+                          {
+                            "q": "밖에서 들어오면 손과 얼굴을 씻어요.",
+                            "a": "O",
+                            "why": "먼지를 씻어 내요."
+                          },
+                          {
+                            "q": "황사가 오면 창문을 활짝 열어 둬요.",
+                            "a": "X",
+                            "why": "먼지가 들어와요. 창문을 닫아요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "오늘의 하늘 신호등",
+                        "text": "미세먼지 단계 카드로\n할 일 몸짓 하기",
+                        "emoji": "🚦",
+                        "teacher": "'좋음' 하면 신나게 뛰는 몸짓, '나쁨' 하면 마스크 쓰는 몸짓, '매우나쁨' 하면 실내로 들어가 앉는 몸짓을 해요. 오늘 실제 미세먼지도 함께 확인해요.",
+                        "image": "img/disaster-e-06-dust/low_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "📱",
+                            "확인"
+                          ],
+                          [
+                            "😷",
+                            "마스크"
+                          ],
+                          [
+                            "🧼",
+                            "씻기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-dust-low.pdf",
+                    "slidesFile": "slides/disaster-e-06-dust-low.pptx"
+                  },
+                  "high": {
+                    "status": "검토 필요",
+                    "goal": "미세먼지·황사 예보를 스스로 확인하고 단계에 맞게 행동할 수 있다.",
+                    "minutes": 40,
+                    "materials": [
+                      "TV 또는 빔프로젝터",
+                      "활동지(인원수만큼)",
+                      "색연필",
+                      "미세먼지 예보 화면(에어코리아 등)"
+                    ],
+                    "safetyNote": "미세먼지 원인을 이야기할 때 특정 나라나 사람을 탓하는 말은 쓰지 않아요. 호흡기 질환이 있는 아이를 배려해요.",
+                    "lessonFlow": [
+                      {
+                        "step": "도입",
+                        "minutes": 5,
+                        "slides": [
+                          1,
+                          2
+                        ],
+                        "do": "표지를 보여 주고 질문으로 생각 열기"
+                      },
+                      {
+                        "step": "전개 1 – 핵심 약속",
+                        "minutes": 10,
+                        "slides": [
+                          3,
+                          4,
+                          5,
+                          6
+                        ],
+                        "do": "예보 보기 · 단계별 행동 · 실내 관리을 그림으로 알아보고 공식 영상으로 한 번 더 확인하기"
+                      },
+                      {
+                        "step": "전개 2 – O X 퀴즈",
+                        "minutes": 10,
+                        "slides": [
+                          7
+                        ],
+                        "do": "팔로 O X를 만들어 답하고 이유 말하기"
+                      },
+                      {
+                        "step": "활동 – 미세먼지 예보관",
+                        "minutes": 10,
+                        "slides": [
+                          8
+                        ],
+                        "do": "오늘 예보를 보고 센터 일정 정하기"
+                      },
+                      {
+                        "step": "정리",
+                        "minutes": 5,
+                        "slides": [
+                          9
+                        ],
+                        "do": "오늘의 약속 다 같이 외치고 활동지 나눠 주기"
+                      }
+                    ],
+                    "slides": [
+                      {
+                        "type": "cover",
+                        "title": "미세먼지·황사 대비하기",
+                        "text": "예보 보고 행동해요",
+                        "emoji": "🌫️",
+                        "image": "img/disaster-e-06-dust/high_1.svg"
+                      },
+                      {
+                        "type": "question",
+                        "title": "생각해 볼까요?",
+                        "text": "미세먼지 예보는\n어디서 볼 수 있을까요?",
+                        "teacher": "일기예보, 에어코리아 누리집, '우리동네 대기정보' 앱 등을 소개해요.",
+                        "emoji": "📱",
+                        "image": "img/disaster-e-06-dust/high_2.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 1,
+                        "title": "예보 보기",
+                        "text": "아침마다 미세먼지\n예보를 확인해요",
+                        "emoji": "📱",
+                        "teacher": "에어코리아(한국환경공단)에서 우리 동네 농도를 볼 수 있어요.",
+                        "image": "img/disaster-e-06-dust/high_3.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 2,
+                        "title": "단계별 행동",
+                        "text": "나쁨 이상이면\n바깥 활동을 줄여요",
+                        "emoji": "🚦",
+                        "teacher": "꼭 나가야 하면 보건용 마스크(KF 표시)를 바르게 써요.",
+                        "image": "img/disaster-e-06-dust/high_4.svg"
+                      },
+                      {
+                        "type": "promise",
+                        "no": 3,
+                        "title": "실내 관리",
+                        "text": "들어오면 씻고,\n물을 자주 마셔요",
+                        "emoji": "🏠",
+                        "teacher": "황사 때는 창문을 닫아요. 미세먼지가 걷히면 짧게 환기해요.",
+                        "image": "img/disaster-e-06-dust/high_5.svg"
+                      },
+                      {
+                        "type": "video",
+                        "title": "영상으로 다시 봐요",
+                        "text": "어린이·청소년 고농도 미세먼지 대응법",
+                        "youtubeId": "k-pvdkwL6yw",
+                        "source": "기후에너지환경부 공식 유튜브",
+                        "teacher": "영상이 끝나면 화면이 자동으로 가려져요. 다른 추천 영상이 아이들에게 보이지 않게 하기 위해서예요. 인터넷이 안 되면 이 장은 건너뛰세요."
+                      },
+                      {
+                        "type": "quiz",
+                        "title": "O X 퀴즈",
+                        "items": [
+                          {
+                            "q": "보건용 마스크에는 'KF' 표시가 있어요.",
+                            "a": "O",
+                            "why": "먼지를 걸러 주는 마스크예요."
+                          },
+                          {
+                            "q": "미세먼지는 눈에 잘 보이는 큰 먼지예요.",
+                            "a": "X",
+                            "why": "아주 작아서 잘 안 보여요."
+                          },
+                          {
+                            "q": "'매우나쁨'인 날은 실내에서 지내요.",
+                            "a": "O",
+                            "why": "바깥 활동을 쉬어요."
+                          },
+                          {
+                            "q": "황사가 오면 창문을 열어 환기해요.",
+                            "a": "X",
+                            "why": "창문을 닫고 걷힌 뒤 환기해요."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "activity",
+                        "title": "미세먼지 예보관",
+                        "text": "오늘 예보를 보고\n센터 일정 정하기",
+                        "emoji": "📋",
+                        "teacher": "모둠별로 오늘(또는 예시) 미세먼지 예보를 보고 '바깥 놀이 할까? 말까?'를 정한 뒤, 이유와 지켜야 할 행동 2가지를 발표해요.",
+                        "image": "img/disaster-e-06-dust/high_8.svg"
+                      },
+                      {
+                        "type": "wrap",
+                        "title": "오늘의 약속",
+                        "words": [
+                          [
+                            "📱",
+                            "예보보기"
+                          ],
+                          [
+                            "😷",
+                            "마스크"
+                          ],
+                          [
+                            "🧼",
+                            "씻기"
+                          ]
+                        ]
+                      }
+                    ],
+                    "worksheet": "worksheets/disaster-e-06-dust-high.pdf",
+                    "slidesFile": "slides/disaster-e-06-dust-high.pptx"
+                  }
+                }
               }
             ]
           }

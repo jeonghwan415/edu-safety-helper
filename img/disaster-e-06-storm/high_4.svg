@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+<style>.float{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-12px)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<rect width="800" height="600" fill="#F9E2F0"/><circle cx="759" cy="395" r="9" fill="#E481C0" opacity=".45"/><circle cx="541" cy="124" r="13" fill="#E481C0" opacity=".45"/><circle cx="149" cy="292" r="10" fill="#E481C0" opacity=".45"/><circle cx="678" cy="323" r="14" fill="#E481C0" opacity=".45"/><circle cx="571" cy="402" r="14" fill="#E481C0" opacity=".45"/><circle cx="226" cy="491" r="9" fill="#E481C0" opacity=".45"/><circle cx="262" cy="413" r="11" fill="#E481C0" opacity=".45"/><circle cx="200" cy="368" r="14" fill="#E481C0" opacity=".45"/><circle cx="343" cy="228" r="15" fill="#E481C0" opacity=".45"/>
+<circle cx="400" cy="300" r="210" fill="#EFB3D9"/>
+<g class="float"><text x="400" y="300" text-anchor="middle" dominant-baseline="central" font-size="250" font-family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif">🌊</text></g>
+</svg>

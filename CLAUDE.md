@@ -54,7 +54,11 @@ docs/                   별표 6 이미지, 프로그램일지 빈 양식·예�
 meta: { title, basis, checkedAt, totalHours: 44, levels, notes }
 areas[]: { id, name, shortName, cycleMonths, requiredHours, color, icon, sourceOrgs[],
            topics: { elementary[], preschool[] } }
-topic: { id: "<영역id>-e-<번호>", no, title(별표 6 원문), content: { low, high }, links[] }
+topic: { id: "<영역id>-e-<번호>", no, title(별표 6 원문), content: { low, high }, links[], extras?[] }
+extras[] (추가 수업, 별표 6 주제는 그대로 두고 그 아래에 수업만 더함):
+  { id(영어 소문자·숫자, 하이픈 금지), title, icon, links[], content: { low, high } }
+  → 수업 id는 "<주제id>-<추가id>" (예: disaster-e-06-quake). 그림 img/<수업id>/, 활동지·PPT 파일 이름도 이 id를 써요.
+  → 지금 있는 것: disaster-e-06(자연재난) 아래 quake·snow·storm·heat·dust, health-e-01(개인위생) 아래 epidemic
 links[]: { org, title, url, checkedAt }
 content.low / content.high (수업 1개):
   status: "검토 필요" | "검토 완료"
@@ -75,13 +79,16 @@ content.low / content.high (수업 1개):
 
 ## index.html 구조 (주요 함수)
 
-- 주소(#해시)로 화면 이동: `#home`, `#area-<영역>`, `#area-<영역>-<학년>`, `#topic-<영역>-<주제id>-<학년>`,
+- 주소(#해시)로 화면 이동: `#home`, `#area-<영역>`, `#area-<영역>-<학년>`, `#pick-<영역>-<주제id>-<학년>`(추가 수업 고르기), `#topic-<영역>-<수업id>-<학년>`,
   `#write-<영역>-<주제id>-<학년>`(기록하기), `#log-<기록id>`(일지), `#edit-<기록id>`, `#records`(목록)
   → `parseHash()`, `render()`. 해시는 하이픈만 써요(`#/` 형식 금지: 미리보기 사이트에서 안 됨).
-- 화면: `viewHome` `viewLevel` `viewTopics` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
+- 수업 찾기: `lessonTopics(topic)`(기본+추가 수업), `findTopic(영역, 수업id)`, `baseTopicId`(추가 수업 → 별표 6 주제, 진행표·추천에 씀). tools/lib/common.js에도 같은 `lessonTopics`가 있어요.
+- 화면: `viewHome` `viewLevel` `viewTopics` `viewPick` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
 - 발표 모드: `buildSteps`(퀴즈는 문제→정답 2단계) `slideHTML`(1600×900 기준) `fitSlide`(글 넘치면 축소) `startShow/move/endShow`
 - 영상: `playVideo` — youtube-nocookie, rel=0, 자동재생 다음 영상 없음, 끝나면 `showEnd`로 화면 가림. file:// 이나 `window.NO_EMBED`면 유튜브 링크로.
-- 기록: localStorage `seh-records-v1`(기록 목록), `seh-prefs-v1`(장소·진행자·담당자 기억)
+- 기록: localStorage `seh-records-v1`(기록 목록, topicId에는 수업id가 들어가요), `seh-prefs-v1`(장소·진행자·담당자, lastBackupAt)
+  주기 알림은 지난해 기록까지 봐요(`areaStats.last`). 기록 3건 이상 + 30일 넘게 내보내기 안 하면 백업 알림(`backupBox`).
+  기록하기 화면의 "저장하고 한글 파일 받기" = `submitRecord(..., true)`
   `draftContent`(진행내용 초안) `draftOpinion` `submitRecord` `exportRecords/importRecords`(JSON)
 - 한글 일지: `buildHwpx` — 빈 양식 section0.xml의 표 칸(colAddr,rowAddr)에 글을 넣고 `zipStore`(무압축 zip, mimetype 맨 앞)로 묶음.
   칸 위치: 프로그램명(1,2) 제목(1,3) 담당자(4,3) 장소(1,4) 작성일자(4,4) 진행자(1,5) 준비물(4,5) 참여자(1,6) 진행내용(1,7) 담당자의견(1,8)
@@ -111,6 +118,6 @@ content.low / content.high (수업 1개):
 ## 다음 할 일 (PRD 6주차~)
 
 - 현장 선생님 2~3명 사용 테스트 → 고칠 점 반영
-- 60개 수업 사람 검토 (특히 성폭력·아동학대)
+- 72개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 재난·감염병 12개)
 - 2단계: 취학 전(preschool) 31개 항목 수업, 연간 계획표(F6)
 - 배포: GitHub Pages. main 브랜치에 올리면 `.github/workflows/pages.yml`이 자동으로 배포해요
