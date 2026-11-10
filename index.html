@@ -321,6 +321,10 @@
     { id: "mix",  icon: "🤝", title: "함께",   desc: "저학년과 고학년이 같이 들어요" }
   ];
   const STORE_KEY = "seh-records-v1";
+  /* 진행 계산: 교육 기록 1건 = 수업 1회 = 1시간(1차시) 인정. 별표 6의 'N시간 이상'은 'N회 이상'으로 보여 줘요.
+     (별표 6 원문 시간은 data/areas.json에 그대로 두고, 세는 방법만 정한 거예요) */
+  const SESSION_HOURS = 1;
+  const SESSION_NOTE = "수업 1회를 1시간(1차시)으로 세요";
 
   /* 교육 기록 (기록 기능은 5주차에 만들 예정. 지금은 읽기만) */
   function loadRecords() {
@@ -333,7 +337,7 @@
   }
   function areaStats(area, records) {
     const rs = thisYear(records).filter(r => r.areaId === area.id);
-    const hours = rs.reduce((s, r) => s + (Number(r.minutes) || 0), 0) / 60;
+    const hours = rs.length * SESSION_HOURS;   /* 수업 1회 = 1시간(1차시)으로 셈. 분은 계산에 쓰지 않아요 */
     const doneTopics = new Set(rs.map(r => baseTopicId(r.areaId, r.topicId)));
     const doneLessons = new Set(rs.map(r => r.topicId));
     /* 주기는 해가 바뀌어도 이어져요: 지난해 12월에 했으면 1월에도 '주기 지키는 중' */
@@ -396,7 +400,7 @@
         <button class="card" style="--c:${a.color}" onclick="go('#area-${a.id}')">
           <span class="icon">${a.icon}</span>
           <span class="title">${esc(a.shortName)}</span>
-          <span class="meta">${a.cycleMonths}개월마다 · 올해 ${fmtHours(st.hours)} / ${a.requiredHours}시간</span>
+          <span class="meta">${a.cycleMonths}개월마다 · 올해 ${fmtHours(st.hours)} / ${a.requiredHours}회</span>
           <span class="mini-bar"><div style="width:${pct}%"></div></span>
           ${notice}
         </button>`;
@@ -407,9 +411,9 @@
       <p class="lead">교육할 영역을 눌러 주세요.</p>
       ${backupBox()}
       <div class="progress-box">
-        <div class="progress-num">${fmtHours(doneHours)} <span>/ ${total}시간</span></div>
+        <div class="progress-num">${fmtHours(doneHours)} <span>/ ${total}회</span></div>
         <div class="bar" aria-label="올해 진행률"><div style="width:${pct}%"></div></div>
-        <div class="meta">${new Date().getFullYear()}년 진행</div>
+        <div class="meta">${new Date().getFullYear()}년 진행<br><small>${SESSION_NOTE}</small></div>
         <button class="big-link ghost" onclick="go('#records')">📋 교육 기록 ${loadRecords().length}건</button>
       </div>
       <div class="home-tools">
@@ -467,7 +471,7 @@
       const L = contentFor(t, level).data;
       const icon = t.extraId ? t.icon : "📘";
       const name = t.extraId ? t.subTitle : "기본 수업";
-      const sub = L ? (L.slides[0].title + (t.extraId ? "" : " · 여러 재난을 한 번에")) : "";
+      const sub = L ? L.slides[0].title : "";
       return `
         <button class="card topic" style="--c:${area.color}" onclick="go('#topic-${area.id}-${t.id}-${level}')">
           ${st.doneLessons.has(t.id) ? `<span class="badge done">✔ 올해 했어요</span>` : ""}
@@ -479,7 +483,7 @@
     return crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName, hash: `#area-${area.id}` },
                    { label: lv.title, hash: `#area-${area.id}-${level}` }, { label: topic.title }]) + `
       <h1>${area.icon} ${esc(topic.title)}</h1>
-      <p class="lead">어떤 수업을 할까요? 모두 운영지침(별표 6)의 이 주제로 기록되고, 이수 시간도 ${esc(area.shortName)}에 쌓여요.</p>
+      <p class="lead">어떤 수업을 할까요? 모두 운영지침(별표 6)의 이 주제로 기록되고, 이수 횟수도 ${esc(area.shortName)}에 쌓여요.</p>
       <div class="grid">${cards}</div>`;
   }
 
@@ -843,7 +847,7 @@
       if (quiz && f.slides.some(n => L.slides[n - 1] && L.slides[n - 1].type === "quiz"))
         lines.push(`   O X 퀴즈 ${quiz.items.length}문항으로 이해 정도를 확인함`);
     });
-    lines.push("", `※ 「아동복지법」 시행령 별표 6 ${area.name} – ${topic.title} (${levelName(level)}, ${minutes}분)`);
+    lines.push("", `※ 「아동복지법」 시행령 별표 6 ${area.name} – ${topic.title} (${levelName(level)}, 1회)`);
     lines.push(`※ 마무리 구호: ${words}`);
     return lines.join("\n");
   }
@@ -872,7 +876,7 @@
       <form id="recForm" class="rec-form" style="--c:${area.color}" onsubmit="event.preventDefault();submitRecord('${area.id}','${topic.id}','${level}','${rec ? rec.id : ""}')">
         <div class="row3">
           <label>교육한 날<input type="date" name="date" value="${esc(r.date)}" required></label>
-          <label>교육 시간(분)<input type="number" name="minutes" min="10" max="240" step="5" value="${esc(r.minutes)}" required></label>
+          <input type="hidden" name="minutes" value="${esc(r.minutes)}">
           <label>참여 아동 수<input type="number" name="children" min="1" max="200" value="${esc(r.children)}" placeholder="예: 12" required></label>
         </div>
         <div class="row3">
@@ -929,7 +933,7 @@
     const F = recordFields(r);
     const nl = s => esc(s).replace(/\n/g, "<br>");
     return crumbs([{ label: "처음", hash: "#home" }, { label: "교육 기록", hash: "#records" }, { label: fmtDate(r.date) }]) + `
-      <div class="lesson-head"><div><h1>📄 프로그램일지</h1><p class="lead" style="margin:0">${a.icon} ${esc(a.shortName)} · ${esc(t.title)} · ${r.minutes}분 저장됨</p></div></div>
+      <div class="lesson-head"><div><h1>📄 프로그램일지</h1><p class="lead" style="margin:0">${a.icon} ${esc(a.shortName)} · ${esc(t.title)} · 수업 1회 저장됨</p></div></div>
       <div class="log-actions" style="--c:${a.color}">
         ${window.NO_FILES ? "" : `<button class="play-btn" style="--c:${a.color}" onclick="downloadHwpx('${r.id}')">⬇️ 한글 파일(.hwpx)로 받기</button>`}
         <button class="big-link ghost" onclick="copyText(this, recordFields(loadRecords().find(x=>x.id==='${r.id}')).content)">📋 진행내용 복사</button>
@@ -974,20 +978,20 @@
   let pendingDelete = null;
   function viewRecords() {
     const list = loadRecords().slice().sort((x, y) => (y.date || "").localeCompare(x.date || ""));
-    const total = thisYear(list).reduce((s, r) => s + (Number(r.minutes) || 0), 0) / 60;
+    const total = thisYear(list).length * SESSION_HOURS;
     const rows = list.map(r => {
       const { a, t } = findTopic(r.areaId, r.topicId);
       const del = pendingDelete === r.id
         ? `<button class="mini-btn danger" onclick="deleteRecord('${r.id}')">정말 지울게요</button><button class="mini-btn" onclick="pendingDelete=null;render()">취소</button>`
         : `<button class="mini-btn" onclick="pendingDelete='${r.id}';render()">지우기</button>`;
-      return `<tr><td>${esc(fmtDate(r.date))}</td><td>${a ? a.icon + " " + esc(a.shortName) : "?"}</td><td>${t ? esc(t.title) : "?"}</td><td>${levelName(r.level)}</td><td>${r.minutes}분</td><td>${r.children}명</td>
+      return `<tr><td>${esc(fmtDate(r.date))}</td><td>${a ? a.icon + " " + esc(a.shortName) : "?"}</td><td>${t ? esc(t.title) : "?"}</td><td>${levelName(r.level)}</td><td>${r.children}명</td>
         <td class="acts"><button class="mini-btn" onclick="go('#log-${r.id}')">일지 보기</button>${del}</td></tr>`;
     }).join("");
     return crumbs([{ label: "처음", hash: "#home" }, { label: "교육 기록" }]) + `
       <h1>📋 교육 기록</h1>
-      <p class="lead">올해 ${fmtHours(total)}시간 · 전체 ${list.length}건</p>
+      <p class="lead">올해 ${fmtHours(total)}회 · 전체 ${list.length}건 <small>(${SESSION_NOTE})</small></p>
       ${backupBox()}
-      ${list.length ? `<div class="table-wrap"><table class="rec-table"><thead><tr><th>날짜</th><th>영역</th><th>주제</th><th>대상</th><th>시간</th><th>인원</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
+      ${list.length ? `<div class="table-wrap"><table class="rec-table"><thead><tr><th>날짜</th><th>영역</th><th>주제</th><th>대상</th><th>인원</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
         : `<div class="placeholder"><strong>아직 기록이 없어요</strong>수업 화면에서 "📝 교육 기록하기"를 누르면 여기에 쌓여요.</div>`}
       <div class="box" style="margin-top:24px"><h3>기록 보관하기</h3>
         <p>기록은 이 컴퓨터의 브라우저에만 저장돼요. 브라우저 기록을 지우거나 다른 컴퓨터로 옮기면 안 보여요. 가끔 파일로 내보내 두세요.</p>
@@ -1022,7 +1026,7 @@
   function planSettings() {
     const P = loadPrefs(), now = new Date();
     return { year: Number(P.planYear) || now.getFullYear(), start: Number(P.planStart) || 1,
-             minutes: Number(P.planMinutes) || 40, level: P.planLevel || "low" };
+             level: P.planLevel || "low" };
   }
   function setPlan(key, val) { savePrefs({ [key]: val }); render(); }
   /* 영역마다 필요한 횟수(연간 시간 ÷ 1회 시간)를 12달에 고르게 나눠요.
@@ -1030,7 +1034,7 @@
   function buildPlan(S) {
     const months = Array.from({ length: 12 }, (_, k) => { const d = new Date(S.year, S.start - 1 + k, 1); return { y: d.getFullYear(), m: d.getMonth() + 1, items: [] }; });
     DATA.areas.forEach((a, ai) => {
-      const n = Math.ceil(a.requiredHours * 60 / S.minutes);
+      const n = Math.ceil(a.requiredHours / SESSION_HOURS);
       const base = a.topics.elementary, extra = base.flatMap(t => lessonTopics(t).slice(1));
       const pool = [...base, ...extra];
       for (let i = 0; i < n; i++) {
@@ -1055,7 +1059,6 @@
     const doneOf = (a, t, it) => match.get(it) || null;
     const B = forCopy ? ' style="border:1px solid #333;padding:6px;vertical-align:top"' : "";
     const rows = months.map(mo => {
-      const mins = mo.items.length * S.minutes;
       const cells = mo.items.map(it => {
         const { a, t } = it, r = doneOf(a, t, it);
         const name = t.extraId ? `${t.subTitle}` : t.title;
@@ -1063,24 +1066,23 @@
           : `<button class="plan-item${r ? " done" : ""}" style="--c:${a.color}" onclick="go('#topic-${a.id}-${t.id}-${S.level}')"><span class="dot"></span><b>${esc(a.shortName)}</b> ${esc(name)}${r ? ` <span class="ok">✔ ${esc(fmtDate(r.date).replace(/^\d+년 /, ""))}</span>` : ""}</button>`;
       });
       return forCopy
-        ? `<tr><td${B}>${mo.y}년 ${mo.m}월</td><td${B}>${cells.join("<br>")}</td><td${B}>${mo.items.length}회 · ${fmtHours(mins / 60)}시간</td></tr>`
-        : `<tr><th>${mo.y !== S.year ? mo.y + "년 " : ""}${mo.m}월</th><td><div class="plan-items">${cells.join("")}</div></td><td class="num">${mo.items.length}회<br><small>${fmtHours(mins / 60)}시간</small></td></tr>`;
+        ? `<tr><td${B}>${mo.y}년 ${mo.m}월</td><td${B}>${cells.join("<br>")}</td><td${B}>${mo.items.length}회</td></tr>`
+        : `<tr><th>${mo.y !== S.year ? mo.y + "년 " : ""}${mo.m}월</th><td><div class="plan-items">${cells.join("")}</div></td><td class="num">${mo.items.length}회</td></tr>`;
     }).join("");
     return forCopy
-      ? `<table style="border-collapse:collapse"><tr><th${B}>월</th><th${B}>교육 (영역 – 주제)</th><th${B}>횟수·시간</th></tr>${rows}</table>`
+      ? `<table style="border-collapse:collapse"><tr><th${B}>월</th><th${B}>교육 (영역 – 주제)</th><th${B}>횟수</th></tr>${rows}</table>`
       : `<table class="plan-table"><thead><tr><th>월</th><th>교육 (누르면 수업 화면)</th><th>횟수</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
   function viewPlan() {
     const S = planSettings(), months = buildPlan(S);
     const yearOpts = [-1, 0, 1].map(d => new Date().getFullYear() + d);
     const sel = (key, opts, cur) => `<select onchange="setPlan('${key}', this.value)">${opts.map(([v, l]) => `<option value="${v}"${String(v) === String(cur) ? " selected" : ""}>${l}</option>`).join("")}</select>`;
-    const per = DATA.areas.map(a => `${a.icon} ${esc(a.shortName)} ${Math.ceil(a.requiredHours * 60 / S.minutes)}회`).join(" · ");
+    const per = DATA.areas.map(a => `${a.icon} ${esc(a.shortName)} ${Math.ceil(a.requiredHours / SESSION_HOURS)}회`).join(" · ");
     return crumbs([{ label: "처음", hash: "#home" }, { label: "연간 계획표" }]) + `
       <h1>📅 연간 계획표</h1>
-      <p class="lead">시작 달과 1회 교육 시간을 고르면, 별표 6의 시간과 주기에 맞춰 12달 계획을 자동으로 짜 줘요. 한 교육을 마치고 기록하면 ✔ 표시가 붙어요.</p>
+      <p class="lead">시작 달을 고르면, 별표 6의 시간(${SESSION_NOTE})과 주기에 맞춰 12달 계획을 자동으로 짜 줘요. 한 교육을 마치고 기록하면 ✔ 표시가 붙어요.</p>
       <div class="box plan-set no-print">
         <label>시작${sel("planYear", yearOpts.map(y => [y, y + "년"]), S.year)}${sel("planStart", Array.from({ length: 12 }, (_, i) => [i + 1, (i + 1) + "월"]), S.start)}</label>
-        <label>1회 교육 시간${sel("planMinutes", [[40, "40분"], [60, "60분"], [80, "80분 (2차시)"]], S.minutes)}</label>
         <label>주로 하는 대상${sel("planLevel", LEVELS.map(l => [l.id, l.title]), S.level)}</label>
       </div>
       <p class="meta">필요한 횟수: ${per} (합계 ${months.reduce((s, m) => s + m.items.length, 0)}회)</p>
@@ -1103,7 +1105,7 @@
     const recs = loadRecords().filter(r => String(r.date || "").startsWith(String(year)));
     return DATA.areas.map(a => {
       const rs = recs.filter(r => r.areaId === a.id).sort((x, y) => x.date.localeCompare(y.date));
-      const hours = rs.reduce((s, r) => s + (Number(r.minutes) || 0), 0) / 60;
+      const hours = rs.length * SESSION_HOURS;
       /* 주기 점검: 1월 1일부터 연말(올해면 오늘)까지 교육 사이 간격이 주기를 넘은 적이 있는지 */
       const end = year === new Date().getFullYear() ? new Date() : new Date(year, 11, 31);
       let gapOk = true, prev = new Date(year, 0, 1);
@@ -1121,24 +1123,24 @@
     const B = forCopy ? ' style="border:1px solid #333;padding:6px;vertical-align:top"' : "";
     const total = rows.reduce((s, x) => s + Math.min(x.hours, x.a.requiredHours), 0);
     const body = rows.map(x => {
-      const status = x.ok ? (x.gapOk ? "충족" : "시간 충족 · 주기 확인") : `${fmtHours(x.a.requiredHours - x.hours)}시간 부족`;
-      const dates = x.list.map(l => `${fmtDate(l.date).replace(/^\d+년 /, "")} ${l.title} (${l.minutes}분, ${l.children}명)`);
+      const status = x.ok ? (x.gapOk ? "충족" : "횟수 충족 · 주기 확인") : `${fmtHours(x.a.requiredHours - x.hours)}회 부족`;
+      const dates = x.list.map(l => `${fmtDate(l.date).replace(/^\d+년 /, "")} ${l.title} (${l.children}명)`);
       return forCopy
-        ? `<tr><td${B}>${x.a.name}</td><td${B}>${x.a.cycleMonths}개월 1회 · ${x.a.requiredHours}시간</td><td${B}>${fmtHours(x.hours)}시간 (${x.rs.length}회)</td><td${B}>${status}</td><td${B}>${dates.join("<br>") || "-"}</td></tr>`
-        : `<tr><th>${x.a.icon} ${esc(x.a.shortName)}</th><td>${x.a.cycleMonths}개월에 1회 이상<br>${x.a.requiredHours}시간 이상</td><td class="num">${fmtHours(x.hours)}시간<br><small>${x.rs.length}회</small></td>
+        ? `<tr><td${B}>${x.a.name}</td><td${B}>${x.a.cycleMonths}개월 1회 · ${x.a.requiredHours}시간(${x.a.requiredHours}회)</td><td${B}>${x.rs.length}회</td><td${B}>${status}</td><td${B}>${dates.join("<br>") || "-"}</td></tr>`
+        : `<tr><th>${x.a.icon} ${esc(x.a.shortName)}</th><td>${x.a.cycleMonths}개월에 1회 이상<br>${x.a.requiredHours}시간(${x.a.requiredHours}회) 이상</td><td class="num">${x.rs.length}회</td>
           <td><span class="pill ${x.ok && x.gapOk ? "ok" : "no"}">${status}</span></td><td class="dates">${dates.map(esc).join("<br>") || `<span class="meta">아직 없어요</span>`}</td></tr>`;
     }).join("");
-    const foot = `${fmtHours(total)} / ${DATA.meta.totalHours}시간`;
+    const foot = `${fmtHours(total)} / ${DATA.meta.totalHours}회`;
     return forCopy
-      ? `<table style="border-collapse:collapse"><tr><th${B}>영역</th><th${B}>기준 (별표 6)</th><th${B}>이수</th><th${B}>상태</th><th${B}>교육 일자 · 주제</th></tr>${body}<tr><td${B}>합계</td><td${B}>44시간</td><td${B} colspan="3">${foot}</td></tr></table>`
+      ? `<table style="border-collapse:collapse"><tr><th${B}>영역</th><th${B}>기준 (별표 6)</th><th${B}>이수</th><th${B}>상태</th><th${B}>교육 일자 · 주제</th></tr>${body}<tr><td${B}>합계</td><td${B}>44시간(44회)</td><td${B} colspan="3">${foot} (${SESSION_NOTE})</td></tr></table>`
       : `<table class="plan-table report"><thead><tr><th>영역</th><th>기준 (별표 6)</th><th>이수</th><th>상태</th><th>교육 일자 · 주제</th></tr></thead><tbody>${body}</tbody>
-          <tfoot><tr><th>합계</th><td>44시간 이상</td><td class="num" colspan="3"><b>${foot}</b></td></tr></tfoot></table>`;
+          <tfoot><tr><th>합계</th><td>44시간(44회) 이상</td><td class="num" colspan="3"><b>${foot}</b></td></tr></tfoot></table>`;
   }
   function viewReport() {
     const y = reportYear;
     return crumbs([{ label: "처음", hash: "#home" }, { label: "이수 현황표" }]) + `
       <h1>📊 ${y}년 안전교육 이수 현황표</h1>
-      <p class="lead">교육 기록으로 영역별 이수 시간과 주기를 자동으로 계산해요. 점검이나 보고 때 인쇄하거나 한글에 붙여 넣어 쓰세요.</p>
+      <p class="lead">교육 기록으로 영역별 이수 횟수와 주기를 자동으로 계산해요(${SESSION_NOTE}). 점검이나 보고 때 인쇄하거나 한글에 붙여 넣어 쓰세요.</p>
       <div class="form-actions no-print" style="margin-bottom:16px">
         <button class="big-link ghost" onclick="reportYear--;render()">◀ ${y - 1}년</button>
         ${y < new Date().getFullYear() ? `<button class="big-link ghost" onclick="reportYear++;render()">${y + 1}년 ▶</button>` : ""}
@@ -1152,7 +1154,7 @@
       </div>`;
   }
   function reportPlain(y) {
-    return reportRows(y).map(x => `${x.a.name}\t${fmtHours(x.hours)}/${x.a.requiredHours}시간\t${x.rs.length}회\t` + x.list.map(l => `${l.date} ${l.title}`).join(", ")).join("\n");
+    return reportRows(y).map(x => `${x.a.name}\t${x.rs.length}/${x.a.requiredHours}회\t` + x.list.map(l => `${l.date} ${l.title}`).join(", ")).join("\n");
   }
   /* 표를 한글에 붙여 넣을 수 있게 HTML로 복사 (안 되면 글자만 복사) */
   function copyHtml(btn, html, text) {

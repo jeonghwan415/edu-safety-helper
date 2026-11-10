@@ -58,7 +58,8 @@ topic: { id: "<영역id>-e-<번호>", no, title(별표 6 원문), content: { low
 extras[] (추가 수업, 별표 6 주제는 그대로 두고 그 아래에 수업만 더함):
   { id(영어 소문자·숫자, 하이픈 금지), title, icon, links[], content: { low, high } }
   → 수업 id는 "<주제id>-<추가id>" (예: disaster-e-06-quake). 그림 img/<수업id>/, 활동지·PPT 파일 이름도 이 id를 써요.
-  → 지금 있는 것: disaster-e-06(자연재난) 아래 quake·snow·storm·heat·dust, health-e-01(개인위생) 아래 epidemic
+  → 지금 있는 것: disaster-e-06(자연재난) 아래 quake·snow·storm·heat·dust, health-e-01(개인위생) 아래 epidemic,
+    sexual-e-02(위험상황) 아래 grooming(사이버 그루밍)·game(게임 속 위험), sexual-e-03(예방법과 대처법) 아래 digital(디지털 성범죄)
 links[]: { org, title, url, checkedAt }
 content.low / content.high (수업 1개):
   status: "검토 필요" | "검토 완료"
@@ -76,6 +77,12 @@ content.low / content.high (수업 1개):
 - 영역 id: `sexual`(성폭력) `abuse`(아동학대) `missing`(실종·유괴) `health`(보건위생) `disaster`(재난) `traffic`(교통)
 - 학년(level): `low`(저학년) `high`(고학년). 화면의 "함께"(`mix`)는 low 자료를 씀.
 - 슬라이드 글의 `\n`은 화면에서 줄바꿈돼요. 한 줄은 짧게(약 15자).
+
+## 진행 계산 규칙 (사용자 결정, 2026-11-10)
+
+- **기록 1건 = 수업 1회 = 1시간(1차시) 인정.** 교육 시간(분)은 계산에 쓰지 않아요(`SESSION_HOURS = 1`, `SESSION_NOTE`).
+- 화면에는 별표 6의 'N시간 이상'을 'N회 이상'으로 보여 줘요. areas.json의 requiredHours(별표 6 원문)는 그대로 둬요.
+- 기록하기 화면에 시간 입력칸은 없어요(수업의 기본 minutes를 숨은 값으로만 저장).
 
 ## index.html 구조 (주요 함수)
 
@@ -119,6 +126,6 @@ content.low / content.high (수업 1개):
 ## 다음 할 일 (PRD 6주차~)
 
 - 현장 선생님 2~3명 사용 테스트 → 고칠 점 반영
-- 72개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 재난·감염병 12개)
-- 2단계: 취학 전(preschool) 31개 항목 수업
+- 78개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 사이버 그루밍·게임·디지털 성범죄 6개, 재난·감염병 12개)
+- 취학 전(preschool) 수업은 만들지 않기로 했어요 (사용자 결정, 2026-11-10). 데이터의 항목 목록만 남겨 둬요.
 - 배포: GitHub Pages. main 브랜치에 올리면 `.github/workflows/pages.yml`이 자동으로 배포해요
