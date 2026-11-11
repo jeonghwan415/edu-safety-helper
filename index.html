@@ -149,6 +149,11 @@
   .box h3 { margin: 0 0 10px; font-size: 1.15rem; }
   .box ul { margin: 0; padding-left: 1.2em; }
   .box.warn { background: #FFF7E0; border-color: #F2D48A; }
+  .box.quiz-key { margin-top: 20px; }
+  .box.quiz-key ol { margin: 0; padding-left: 1.4em; display: grid; gap: 14px; }
+  .box.quiz-key .meta { font-size: 1rem; line-height: 1.6; }
+  .ans { display: inline-block; min-width: 1.8em; text-align: center; border-radius: 999px; font-weight: 700; color: #fff; padding: 0 .4em; margin-left: 4px; }
+  .ans-O { background: #2DB86E; } .ans-X { background: #E5484D; }
   .sheet-preview { display: grid; gap: 20px; grid-template-columns: minmax(220px, 340px) 1fr; align-items: start; }
   .sheet-preview img { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
   .big-link { display: inline-flex; align-items: center; min-height: 56px; padding: 0 24px; border-radius: 14px; background: var(--c); color: #fff; font-weight: 800; text-decoration: none; margin: 6px 8px 6px 0; }
@@ -191,6 +196,11 @@
   .slide.quiz.reveal .ox span.off { opacity: .35; }
   .slide.quiz .why { position: absolute; left: 60px; right: 60px; top: 728px; text-align: center; font-size: 50px; visibility: hidden; }
   .slide.quiz.reveal .why { visibility: visible; }
+  /* 정답 장면: O X를 줄여 올리고, 그 아래 이유(크게) + 해설(작게) */
+  .slide.quiz.reveal.has-ex .ox { top: 395px; transform: scale(.66); transform-origin: top center; }
+  .slide.quiz.reveal.has-ex .why { top: 600px; font-size: 52px; color: var(--okc); }
+  .slide.quiz .ex { display: none; }
+  .slide.quiz.reveal .ex { display: block; position: absolute; left: 110px; right: 110px; top: 690px; padding: 22px 34px; border-radius: 26px; background: #fff; font-size: 38px; line-height: 1.45; text-align: center; color: #3B4450; }
   .slide.wrap { background: var(--c); color: #fff; }
   .slide.wrap .words { position: absolute; left: 0; right: 0; top: 170px; display: flex; justify-content: center; gap: 70px; }
   .slide.wrap .words div { width: 400px; height: 400px; border-radius: 50%; background: #fff; color: var(--c); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 140px; line-height: 1.05; }
@@ -520,8 +530,8 @@
         const it = st.item || sl.items[0], n = (st.k || 0) + 1;
         const on = a => st.reveal ? (it.a === a ? "on" : "off") : "";
         const okc = it.a === "O" ? "#2DB86E" : "#E5484D";
-        return `<div class="slide quiz${st.reveal ? " reveal" : ""}" style="${c};--okc:${okc}"><div class="qbox"><div class="qno">O X 퀴즈 ${n} / ${sl.items.length}</div><div class="q" style="font-size:${it.q.length > 26 ? 70 : 84}px">${esc(it.q)}</div></div>
-          <div class="ox"><span class="${on("O")}">O</span><span class="${on("X")}">X</span></div><div class="why">${esc(it.why)}</div></div>`;
+        return `<div class="slide quiz${st.reveal ? " reveal" : ""}${it.explain ? " has-ex" : ""}" style="${c};--okc:${okc}"><div class="qbox"><div class="qno">O X 퀴즈 ${n} / ${sl.items.length}</div><div class="q" style="font-size:${it.q.length > 26 ? 70 : 84}px">${esc(it.q)}</div></div>
+          <div class="ox"><span class="${on("O")}">O</span><span class="${on("X")}">X</span></div><div class="why">${esc(it.a)} · ${esc(it.why)}</div>${it.explain ? `<div class="ex">${esc(it.explain)}</div>` : ""}</div>`;
       }
       case "video": {
         const thumb = `https://i.ytimg.com/vi/${esc(sl.youtubeId)}/hqdefault.jpg`;
@@ -573,6 +583,7 @@
         <ol class="flow-list">` + L.lessonFlow.map(f => `<li><div class="min">${f.minutes}<small>분</small></div><div><b>${esc(f.step)}</b><br>${esc(f.do)}<br><span class="meta">슬라이드 ${f.slides.join(", ")}</span></div></li>`).join("") + `</ol>
         <div class="two-col"><div class="box"><h3>준비물</h3><ul>${L.materials.map(m => `<li>${esc(m)}</li>`).join("")}</ul></div>
         <div class="box warn"><h3>안전 주의</h3>${esc(L.safetyNote)}</div></div>
+        ${L.slides.filter(s => s.type === "quiz").map(s => `<div class="box quiz-key"><h3>O X 퀴즈 정답과 해설</h3><ol>${s.items.map(q => `<li><b>${esc(q.q)}</b> <span class="ans ans-${q.a}">${q.a}</span><br>${esc(q.why)}${q.explain ? `<br><span class="meta">${esc(q.explain)}</span>` : ""}</li>`).join("")}</ol></div>`).join("")}
         <p class="meta" style="margin-top:16px">전체 ${total}분</p>`;
     } else if (lessonTab === "sheet") {
       const prev = L.worksheet.replace(/\.pdf$/, ".png");
@@ -760,7 +771,8 @@
     const st = show.steps[show.i];
     document.getElementById("frame").innerHTML = slideHTML(st, show.area);
     document.getElementById("count").textContent = `${st.i + 1} / ${show.steps[show.steps.length - 1].i + 1}`;
-    document.getElementById("note").textContent = st.sl.teacher ? "선생님 메모: " + st.sl.teacher : "";
+    const quizNote = st.sl.type === "quiz" && st.item ? `정답 ${st.item.a} — ${st.item.why}${st.item.explain ? " " + st.item.explain : ""}` : "";
+    document.getElementById("note").textContent = quizNote ? "선생님 메모: " + quizNote : st.sl.teacher ? "선생님 메모: " + st.sl.teacher : "";
     fitStage();
   }
   function fitStage() {

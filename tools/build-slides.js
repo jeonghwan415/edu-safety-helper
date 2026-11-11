@@ -73,14 +73,18 @@ function buildDeck(area, topic, level, L) {
         const s = slide("QUIZ", sl);
         s.addText(`O X 퀴즈 ${k + 1} / ${sl.items.length}`, { x: 0.5, y: 0.4, w: 9, h: 0.45, fontSize: 18, color: AC, align: "center", margin: 0, isTextBox: true });
         s.addText(it.q, { x: 0.8, y: 0.9, w: 8.4, h: 1.3, fontSize: it.q.length > 30 ? 26 : 32, bold: true, color: C.text, align: "center", valign: "middle", margin: 0, isTextBox: true });
+        // 정답 장면에 해설이 있으면 O X를 작게 올리고 아래에 해설을 넣어요
+        const small = reveal && it.explain, d = small ? 1.15 : 1.7, oy = small ? 2.25 : 2.35;
         ["O", "X"].forEach((m, j) => {
           const right = reveal && it.a === m, dim = reveal && it.a !== m;
           const col = right ? (m === "O" ? C.ok : C.no) : C.gray;
-          s.addShape(pres.shapes.OVAL, { x: 2.65 + j * 3.0, y: 2.35, w: 1.7, h: 1.7, fill: { color: C.white, transparency: dim ? 50 : 0 }, line: { color: col, width: right ? 8 : 5 } });
-          s.addText(m, { x: 2.65 + j * 3.0, y: 2.35, w: 1.7, h: 1.7, fontSize: 80, bold: true, color: right ? col : C.gray, align: "center", valign: "middle", margin: 0, isTextBox: true });
+          const ox = 2.65 + j * 3.0 + (1.7 - d) / 2;
+          s.addShape(pres.shapes.OVAL, { x: ox, y: oy, w: d, h: d, fill: { color: C.white, transparency: dim ? 50 : 0 }, line: { color: col, width: right ? 8 : 5 } });
+          s.addText(m, { x: ox, y: oy, w: d, h: d, fontSize: small ? 54 : 80, bold: true, color: right ? col : C.gray, align: "center", valign: "middle", margin: 0, isTextBox: true });
         });
-        if (reveal) s.addText(it.why, { x: 0.8, y: 4.3, w: 8.4, h: 0.6, fontSize: 22, color: C.text, align: "center", margin: 0, isTextBox: true });
-        s.addNotes((reveal ? `정답: ${it.a} — ${it.why}` : "아이들이 팔로 O 또는 X를 만들어 답하게 해요. 다음 장에 정답이 나와요.") + (k === 0 && !reveal ? "\n" + notes(sl, no) : ""));
+        if (reveal) s.addText(`${it.a} · ${it.why}`, { x: 0.8, y: small ? 3.5 : 4.3, w: 8.4, h: 0.55, fontSize: 22, bold: !!small, color: small ? (it.a === "O" ? C.ok : C.no) : C.text, align: "center", margin: 0, isTextBox: true });
+        if (small) s.addText(it.explain, { x: 1.0, y: 4.1, w: 8.0, h: 1.15, fontSize: 16, color: C.text, align: "center", valign: "middle", margin: 8, fill: { color: C.white }, rectRadius: 0.15, isTextBox: true });
+        s.addNotes((reveal ? `정답: ${it.a} — ${it.why}${it.explain ? "\n해설: " + it.explain : ""}` : `정답은 ${it.a}예요. 아이들이 팔로 O 또는 X를 만들어 답하게 해요. 다음 장에 정답과 해설이 나와요.`) + (k === 0 && !reveal ? "\n" + notes(sl, no) : ""));
       }));
     } else if (sl.type === "video") {
       const s = slide("COLOR", sl), url = `https://www.youtube.com/watch?v=${sl.youtubeId}`;

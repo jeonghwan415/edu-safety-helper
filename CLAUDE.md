@@ -70,7 +70,8 @@ content.low / content.high (수업 1개):
     question { title, text, image, emoji, teacher? }
     promise  { no, title, text, image, emoji, teacher? }   ← 보통 3개
     video    { title, text, youtubeId, source, teacher }    ← 공식 기관 채널 영상만
-    quiz     { title, items:[{ q, a:"O"|"X", why }] }       ← 보통 4문항, 활동지에는 앞 3문항
+    quiz     { title, items:[{ q, a:"O"|"X", why, explain }] } ← 보통 4문항, 활동지에는 앞 3문항
+             why = 정답 옆 짧은 이유(한 줄), explain = 해설 2문장(정답 화면·선생님 메모·수업 흐름 탭·PPT에 나옴)
     activity { title, text, image, emoji, teacher }
     wrap     { title, words:[[이모지, 짧은 말] ×3] }       ← 2~4글자 권장
 ```

@@ -30,7 +30,7 @@ for (const a of data.areas) for (const t of a.topics.elementary) {
       L.slides.forEach((s, i) => {
         if (!TYPES.includes(s.type)) warn(`${where} 슬라이드 ${i + 1}: 모르는 type "${s.type}"`);
         if (s.type === "video" && !/^[\w-]{11}$/.test(s.youtubeId || "")) warn(`${where} 슬라이드 ${i + 1}: 영상 youtubeId가 이상해요.`);
-        if (s.type === "quiz") (s.items || []).forEach((q, k) => { if (!["O", "X"].includes(q.a)) warn(`${where} 퀴즈 ${k + 1}: 정답(a)은 "O" 또는 "X"여야 해요.`); });
+        if (s.type === "quiz") (s.items || []).forEach((q, k) => { if (!["O", "X"].includes(q.a)) warn(`${where} 퀴즈 ${k + 1}: 정답(a)은 "O" 또는 "X"여야 해요.`); if (!q.explain) warn(`${where} 퀴즈 ${k + 1}: 해설(explain)이 없어요.`); });
         if (s.image && !fs.existsSync(require("path").join(__dirname, "..", s.image))) warn(`${where} 슬라이드 ${i + 1}: 그림 파일이 없어요 → ${s.image} (npm run cards)`);
       });
       (L.lessonFlow || []).forEach(f => f.slides.forEach(n => { if (n < 1 || n > L.slides.length) warn(`${where}: 수업 흐름 "${f.step}"의 슬라이드 번호 ${n}이 없어요.`); }));
