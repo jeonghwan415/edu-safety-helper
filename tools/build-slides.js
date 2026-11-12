@@ -2,7 +2,7 @@
 // 실행: npm run slides                          (모두)
 //       npm run slides -- --only=abuse-e-03-high
 // 그림(SVG)은 브라우저로 찍어서 .cache/slide-img 에 JPG로 저장한 뒤 PPT에 넣어요.
-const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser } = require("./lib/common");
+const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser, ink } = require("./lib/common");
 const pptxgen = require("pptxgenjs");
 
 const CACHE = path.join(ROOT, ".cache", "slide-img");
@@ -12,7 +12,9 @@ const jpgFor = rel => path.join(CACHE, rel.replace(/[\\/]/g, "__").replace(/\.sv
 
 async function renderImages(list) {
   const need = new Set();
-  list.forEach(({ L }) => L.slides.forEach(s => { if (s.image && !fs.existsSync(jpgFor(s.image))) need.add(s.image); }));
+  // 캐시 그림이 없거나, 원본 그림(SVG)이 캐시보다 새로우면(그림을 고쳤으면) 다시 그려요
+  const stale = rel => { const j = jpgFor(rel); return !fs.existsSync(j) || fs.statSync(path.join(ROOT, rel)).mtimeMs > fs.statSync(j).mtimeMs; };
+  list.forEach(({ L }) => L.slides.forEach(s => { if (s.image && stale(s.image)) need.add(s.image); }));
   if (!need.size) return;
   fs.mkdirSync(CACHE, { recursive: true });
   const browser = await launchBrowser();
@@ -26,7 +28,7 @@ async function renderImages(list) {
 }
 
 function buildDeck(area, topic, level, L) {
-  const AC = area.color.replace("#", "");
+  const AC = ink(area.color).replace("#", "");   // 글씨용 진한 색 (흰 바탕·흰 글씨와 대비 4.8:1 이상)
   const lvName = level === "low" ? "저학년" : "고학년";
   const pres = new pptxgen();
   pres.layout = "LAYOUT_16x9"; // 10 x 5.625 inch

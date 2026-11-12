@@ -2,20 +2,62 @@
 // 실행: npm run cards              (없는 그림만 만들기)
 //       npm run cards -- --force   (모두 다시 만들기)
 //       npm run cards -- --only=abuse-e-03-high
-const { fs, path, ROOT, loadData, eachLesson, onlyFilter, tint } = require("./lib/common");
+const { fs, path, ROOT, loadData, eachLesson, onlyFilter, tint, ink } = require("./lib/common");
 
 function seeded(seed) { let h = 2166136261; for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) % 10000) / 10000; }
 
-function cardSvg(emoji, color, seed) {
-  const bg = tint(color, 0.93), mid = tint(color, 0.82), dot = tint(color, 0.70);
+const EMOJI_FONT = "Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif";
+const emo = (e, x, y, size, cls = "") => `<text${cls ? ` class="${cls}"` : ""} x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-size="${size}" font-family="${EMOJI_FONT}">${e}</text>`;
+
+// 둥글둥글한 덩어리 모양 (씨앗값으로 카드마다 조금씩 달라요)
+function blob(cx, cy, r, rnd, fill) {
+  const n = 8, pts = [];
+  for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2, rr = r * (0.86 + rnd() * 0.24); pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); }
+  let d = "";
+  for (let i = 0; i < n; i++) {
+    const p = pts[i], q = pts[(i + 1) % n], m = [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
+    d += (i ? "" : `M${((pts[n - 1][0] + p[0]) / 2).toFixed(1)},${((pts[n - 1][1] + p[1]) / 2).toFixed(1)} `) + `Q${p[0].toFixed(1)},${p[1].toFixed(1)} ${m[0].toFixed(1)},${m[1].toFixed(1)} `;
+  }
+  return `<path d="${d}Z" fill="${fill}"/>`;
+}
+
+// 슬라이드 종류마다 다른 모양의 그림 카드 (글자는 넣지 않아요: 활동지 짝짓기 문제의 답이 보이지 않게)
+//   cover 햇살+영역 배지 · question 말풍선+물음표 · promise 번호 배지 테두리 원 · activity 종이와 연필
+function cardSvg(emoji, color, seed, opt = {}) {
+  const { type = "", no = 0, areaIcon = "" } = opt;
+  const bg = tint(color, 0.95), soft = tint(color, 0.88), mid = tint(color, 0.80), dot = tint(color, 0.70), dark = ink(color);
   const rnd = seeded(seed), R = (a, b) => Math.round(a + rnd() * (b - a));
-  let dots = "";
-  for (let i = 0; i < 9; i++) dots += `<circle cx="${R(40, 760)}" cy="${R(40, 560)}" r="${R(8, 22)}" fill="${dot}" opacity=".45"/>`;
+  let deco = "";
+  for (let i = 0; i < 7; i++) deco += `<circle cx="${R(30, 770)}" cy="${R(30, 570)}" r="${R(6, 16)}" fill="${dot}" opacity=".35"/>`;
+  let body;
+  if (type === "cover") {
+    let rays = "";
+    for (let i = 0; i < 16; i++) { const a = (i / 16) * Math.PI * 2, a2 = a + Math.PI / 16; rays += `<path d="M400,310 L${(400 + Math.cos(a) * 520).toFixed(0)},${(310 + Math.sin(a) * 520).toFixed(0)} L${(400 + Math.cos(a2) * 520).toFixed(0)},${(310 + Math.sin(a2) * 520).toFixed(0)}Z" fill="${soft}"/>`; }
+    body = rays + blob(400, 310, 215, rnd, mid) + `<circle cx="400" cy="310" r="170" fill="#fff" opacity=".55"/>` +
+      `<g class="float">${emo(emoji, 400, 315, 230)}</g>` +
+      (areaIcon ? `<circle cx="112" cy="104" r="66" fill="#fff" stroke="${dark}" stroke-width="8"/>${emo(areaIcon, 112, 108, 74)}` : "");
+  } else if (type === "question") {
+    body = `<path d="M150,90 H650 a60,60 0 0 1 60,60 V400 a60,60 0 0 1 -60,60 H380 L290,545 L305,460 H150 a60,60 0 0 1 -60,-60 V150 a60,60 0 0 1 60,-60Z" fill="#fff" stroke="${mid}" stroke-width="14"/>` +
+      `<g class="float">${emo(emoji, 400, 275, 210)}</g>` +
+      [[735, 150, 96, -14], [745, 330, 64, 12], [70, 480, 70, -8]].map(([x, y, sz, rot]) => `<text x="${x}" y="${y}" font-size="${sz}" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="${dark}" text-anchor="middle" transform="rotate(${rot} ${x} ${y})">?</text>`).join("");
+  } else if (type === "promise") {
+    let spark = "";
+    for (let i = 0; i < 4; i++) spark += `<path transform="translate(${R(80, 720)} ${[R(60, 150), R(450, 540)][i % 2]}) scale(${(0.6 + rnd() * 0.6).toFixed(2)})" d="M0,-22 L6,-6 L22,0 L6,6 L0,22 L-6,6 L-22,0 L-6,-6Z" fill="${dot}"/>`;
+    body = spark + `<circle cx="400" cy="305" r="225" fill="${mid}"/><circle cx="400" cy="305" r="188" fill="#fff" stroke="${dark}" stroke-width="10" stroke-dasharray="2 22" stroke-linecap="round"/>` +
+      `<g class="float">${emo(emoji, 400, 310, 220)}</g>` +
+      (no ? `<circle cx="590" cy="130" r="62" fill="${dark}" stroke="#fff" stroke-width="10"/><text x="590" y="132" text-anchor="middle" dominant-baseline="central" font-size="74" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#fff">${no}</text>` : "");
+  } else if (type === "activity") {
+    let lines = "";
+    for (let i = 0; i < 4; i++) lines += `<rect x="250" y="${400 + i * 34}" width="${300 - (i % 2) * 70}" height="10" rx="5" fill="${soft}"/>`;
+    body = blob(400, 320, 250, rnd, soft) + `<g transform="rotate(-4 400 300)"><rect x="200" y="70" width="400" height="470" rx="26" fill="#fff" stroke="${mid}" stroke-width="10"/>${lines}</g>` +
+      `<g class="float">${emo(emoji, 400, 235, 190)}</g>` + emo("✏️", 640, 470, 120);
+  } else {
+    body = blob(400, 300, 215, rnd, mid) + `<g class="float">${emo(emoji, 400, 300, 250)}</g>`;
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
 <style>.float{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-12px)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
-<rect width="800" height="600" fill="${bg}"/>${dots}
-<circle cx="400" cy="300" r="210" fill="${mid}"/>
-<g class="float"><text x="400" y="300" text-anchor="middle" dominant-baseline="central" font-size="250" font-family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif">${emoji}</text></g>
+<rect width="800" height="600" fill="${bg}"/>${deco}
+${body}
 </svg>`;
 }
 
@@ -32,7 +74,7 @@ for (const { area, topic, level, L } of eachLesson(data, onlyFilter(process.argv
     const file = path.join(ROOT, rel);
     if (fs.existsSync(file) && !force) { skipped++; continue; }
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, cardSvg(s.emoji, area.color, `${topic.id}${level}${n}`), "utf8");
+    fs.writeFileSync(file, cardSvg(s.emoji, area.color, `${topic.id}${level}${n}`, { type: s.type, no: s.no, areaIcon: area.icon }), "utf8");
     made++;
   }
 }

@@ -39,6 +39,7 @@ docs/                   별표 6 이미지, 프로그램일지 빈 양식·예�
 
 | 명령 | 하는 일 | 언제 |
 |---|---|---|
+| `npm run browser` | Edge·Chrome이 없는 컴퓨터(리눅스 서버 등)에 전용 크롬·부품·이모지 글꼴을 사용자 폴더에 받기 (관리자 권한 필요 없음) | **처음 한 번** (worksheets·slides가 "Edge나 Chrome을 찾지 못했어요"라고 할 때) |
 | `npm run data` | areas.json → areas.js, 데이터 검사(44시간, 슬라이드 번호, 그림 파일, OX 정답) | **areas.json을 고친 뒤 항상** |
 | `npm run cards` | slide.emoji로 없는 그림 카드 SVG 생성 (`-- --force`면 모두 다시) | 새 슬라이드·새 수업 추가 후 |
 | `npm run worksheets` | 활동지 HTML/PDF/PNG 생성 | 퀴즈·약속 내용을 바꾼 뒤 |
@@ -59,7 +60,14 @@ extras[] (추가 수업, 별표 6 주제는 그대로 두고 그 아래에 수�
   { id(영어 소문자·숫자, 하이픈 금지), title, icon, links[], content: { low, high } }
   → 수업 id는 "<주제id>-<추가id>" (예: disaster-e-06-quake). 그림 img/<수업id>/, 활동지·PPT 파일 이름도 이 id를 써요.
   → 지금 있는 것: disaster-e-06(자연재난) 아래 quake·snow·storm·heat·dust, health-e-01(개인위생) 아래 epidemic,
-    sexual-e-02(위험상황) 아래 grooming(사이버 그루밍)·game(게임 속 위험), sexual-e-03(예방법과 대처법) 아래 digital(디지털 성범죄)
+    sexual-e-02(위험상황) 아래 grooming(사이버 그루밍)·game(게임 속 위험), sexual-e-03(예방법과 대처법) 아래 digital(디지털 성범죄),
+    health-e-04(중독·오용·남용) 아래 drug(마약·유해약물)·vape(전자담배·니코틴), disaster-e-01(화재 원인) 아래 battery(배터리·충전 화재),
+    missing-e-03(유인전략) 아래 sns(SNS·온라인 유인)  ← 2026-11-12 추가
+extraAreas[] (★ 추가 교육 영역, 별표 6 밖): areas[]와 같은 모양 + { optional: true, badge, recommend, basis }, cycleMonths·requiredHours 없음
+  → 지금은 rights(🌈 아동인권 교육) 1개: rights-e-01~06 (권리란·아동권리헌장·차별·참여권·디지털 권리·놀 권리), 12개 수업
+  → 44회 계산·연간 계획표·이수 현황표 합계에는 넣지 않아요(isRequired). 찾기·기록·발표는 ALL_AREAS. 첫 화면에 "＋ 추가 교육" 점선 카드.
+  → 주제 제목은 별표 6이 아니라서 사람이 정할 수 있어요(근거: 유엔아동권리협약·아동권리헌장 원문).
+meta.lawNotes[] / meta.lawLinks[]: 법령 확인 기록 (첫 화면 아래 "📜 법령 확인 기록"에 나옴). 법을 다시 확인하면 checkedAt과 함께 고쳐요.
 links[]: { org, title, url, checkedAt }
 content.low / content.high (수업 1개):
   status: "검토 필요" | "검토 완료"
@@ -75,7 +83,7 @@ content.low / content.high (수업 1개):
     activity { title, text, image, emoji, teacher }
     wrap     { title, words:[[이모지, 짧은 말] ×3] }       ← 2~4글자 권장
 ```
-- 영역 id: `sexual`(성폭력) `abuse`(아동학대) `missing`(실종·유괴) `health`(보건위생) `disaster`(재난) `traffic`(교통)
+- 영역 id: `sexual`(성폭력) `abuse`(아동학대) `missing`(실종·유괴) `health`(보건위생) `disaster`(재난) `traffic`(교통) + 추가 교육 `rights`(아동인권)
 - 학년(level): `low`(저학년) `high`(고학년). 화면의 "함께"(`mix`)는 low 자료를 씀.
 - 슬라이드 글의 `\n`은 화면에서 줄바꿈돼요. 한 줄은 짧게(약 15자).
 
@@ -104,6 +112,12 @@ content.low / content.high (수업 1개):
 - AI에게 부탁하기: `viewAiHelp` `aiPrompt` `lessonText` — 부탁 글만 만들고 복사. **API 키·서버 호출 없음**(실시간 AI는 넣지 않아요)
 - `window.NO_FILES = true`: 파일 받기 버튼 숨김(claude.ai 미리보기 사이트용 복사본에서만 씀)
 
+## 디자인 규칙 (2026-11-12)
+
+- 영역 색(`color`)은 테두리·막대·점 같은 **장식**에만 써요. 글씨와 흰 글씨가 올라가는 바탕은 **진한 색 `--cd`** = `ink(color)`(흰색과 대비 4.8:1 이상, index.html과 tools/lib/common.js에 같은 함수)를 써요. 새 화면도 `style="${cv(area)}"`로 두 색을 함께 넣어요.
+- 그림 카드(make-cards.js)는 슬라이드 종류마다 모양이 달라요: cover 햇살+영역 배지, question 말풍선+물음표, promise 번호 배지 원, activity 종이+연필. **그림 안에 글자 넣지 않기**(활동지 짝짓기 정답이 보여요).
+- 첫 화면 맨 위 "오늘의 추천 교육"(`urgency` → `todayBox`): 주기 넘김/안 함 → 주기 끝 임박 → 밀린 횟수 순. 영역 카드 순서는 **바꾸지 않아요**(늘 같은 자리가 선생님에게 편해요).
+
 ## 꼭 지킬 규칙
 
 1. **별표 6의 시간·주기·세부 항목(주제 제목)은 AI가 바꾸거나 만들지 않아요.** 지침이 바뀌면 사람이 `docs/`의 원문을 보고 고쳐요.
@@ -127,6 +141,7 @@ content.low / content.high (수업 1개):
 ## 다음 할 일 (PRD 6주차~)
 
 - 현장 선생님 2~3명 사용 테스트 → 고칠 점 반영
-- 78개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 사이버 그루밍·게임·디지털 성범죄 6개, 재난·감염병 12개)
+- 98개 수업 사람 검토 (특히 성폭력·아동학대, 새로 넣은 사이버 그루밍·게임·디지털 성범죄 6개, 재난·감염병 12개, 2026-11-12 추가한 아동인권 12개·마약·전자담배·배터리·SNS 유인 8개)
+- 활동지·PPT는 2026-11-12에 98개 모두 다시 만들었어요(새 그림 카드·진한 글씨 색 반영).
 - 취학 전(preschool) 수업은 만들지 않기로 했어요 (사용자 결정, 2026-11-10). 데이터의 항목 목록만 남겨 둬요.
 - 배포: GitHub Pages. main 브랜치에 올리면 `.github/workflows/pages.yml`이 자동으로 배포해요

@@ -19,10 +19,15 @@ function lessonTopics(topic) {
   }))];
 }
 
-// 모든 수업을 [area, topic, level, lesson] 목록으로
+// 6대 의무교육 영역 + 추가 교육 영역(extraAreas, 예: 아동인권)
+function allAreas(data) {
+  return [...data.areas, ...(data.extraAreas || [])];
+}
+
+// 모든 수업을 [area, topic, level, lesson] 목록으로 (추가 교육 영역도 포함)
 function eachLesson(data, filter) {
   const out = [];
-  for (const area of data.areas) {
+  for (const area of allAreas(data)) {
     for (const topic of area.topics.elementary.flatMap(lessonTopics)) {
       for (const level of ["low", "high"]) {
         const L = topic.content[level];
@@ -43,15 +48,24 @@ function onlyFilter(argv) {
   return (area, topic, level) => want.some(w => w === area.id || w === topic.id || w === topic.baseId || w === `${topic.id}-${level}`);
 }
 
-// 브라우저(playwright-core): 센터·집 컴퓨터의 Edge 또는 Chrome을 그대로 씀
+// 브라우저(playwright-core): 센터·집 컴퓨터의 Edge 또는 Chrome을 그대로 씀.
+// Edge·Chrome이 없는 컴퓨터(예: 리눅스 서버)는 `npm run browser`로 받은 Playwright 전용 크롬을 마지막에 써요.
+// npm run browser가 빠진 리눅스 부품을 풀어 두는 곳 (관리자 권한 없이)
+const LINUX_LIBS = path.join(require("os").homedir(), ".local", "share", "seh-chrome-libs");
 async function launchBrowser() {
   const { chromium } = require("playwright-core");
-  const tries = [{ channel: "msedge" }, { channel: "chrome" }];
+  const libDir = path.join(LINUX_LIBS, "root", "usr", "lib", "x86_64-linux-gnu");
+  const env = fs.existsSync(libDir) ? { ...process.env, LD_LIBRARY_PATH: [libDir, process.env.LD_LIBRARY_PATH].filter(Boolean).join(":") } : undefined;
+  const tries = [{ channel: "msedge" }, { channel: "chrome" }, env ? { env } : {} /* npm run browser 로 받은 것 */];
   if (process.env.BROWSER_PATH) tries.unshift({ executablePath: process.env.BROWSER_PATH });
+  let last;
   for (const opt of tries) {
-    try { return await chromium.launch(opt); } catch (e) { /* 다음 브라우저 시도 */ }
+    try { return await chromium.launch(opt); } catch (e) { last = e; /* 다음 브라우저 시도 */ }
   }
-  throw new Error("Edge나 Chrome을 찾지 못했어요. BROWSER_PATH 환경변수에 브라우저 실행 파일 경로를 넣어 주세요.");
+  throw new Error("Edge나 Chrome을 찾지 못했어요. 다음 중 하나를 해 주세요.\n" +
+    " ① 터미널에서 npm run browser (전용 크롬을 한 번 받아요)\n" +
+    " ② BROWSER_PATH 환경변수에 브라우저 실행 파일 경로를 넣기\n" +
+    "(마지막 오류: " + String(last && last.message).split("\n")[0] + ")");
 }
 
 function tint(hex, l) {
@@ -72,4 +86,17 @@ function tint(hex, l) {
   return "#" + to(f(h + 1 / 3)) + to(f(h)) + to(f(h - 1 / 3));
 }
 
-module.exports = { fs, path, ROOT, DATA_JSON, DATA_JS, loadData, lessonTopics, eachLesson, onlyFilter, launchBrowser, tint };
+// 글씨·버튼용 진한 색: 영역 색에서 밝기만 낮춰 흰 바탕과 대비 4.8:1 이상 (index.html의 ink와 같은 규칙)
+function lum(hex) {
+  return [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16) / 255)
+    .map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)
+    .reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
+}
+function contrast(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
+function ink(hex) {
+  let c = hex, k = 0;
+  while (contrast(c, "#FFFFFF") < 4.8 && k++ < 40) c = "#" + [1, 3, 5].map(i => Math.round(parseInt(c.substr(i, 2), 16) * .95).toString(16).padStart(2, "0")).join("");
+  return c.toUpperCase();
+}
+
+module.exports = { ink, contrast, fs, path, ROOT, LINUX_LIBS, DATA_JSON, DATA_JS, loadData, lessonTopics, allAreas, eachLesson, onlyFilter, launchBrowser, tint };

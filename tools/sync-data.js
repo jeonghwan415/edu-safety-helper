@@ -1,6 +1,6 @@
 // data/areas.json(원본) → data/areas.js(프로그램이 읽는 파일)로 옮기고, 데이터가 맞는지 검사해요.
 // 실행: npm run data
-const { fs, DATA_JSON, DATA_JS, loadData, eachLesson } = require("./lib/common");
+const { fs, DATA_JSON, DATA_JS, loadData, allAreas, eachLesson } = require("./lib/common");
 
 const data = loadData();
 const problems = [];
@@ -11,11 +11,17 @@ const total = data.areas.reduce((s, a) => s + a.requiredHours, 0);
 if (total !== data.meta.totalHours) warn(`영역별 시간 합계 ${total}시간이 meta.totalHours(${data.meta.totalHours})와 달라요.`);
 if (total !== 44) warn(`영역별 시간 합계가 44시간이 아니에요 (${total}시간). 별표 6을 다시 확인해 주세요.`);
 
+// 1-1) 추가 교육 영역(extraAreas)은 별표 6 밖이라 44시간에 넣지 않아요. id가 6대 영역과 겹치면 안 돼요.
+for (const a of data.extraAreas || []) {
+  if (data.areas.some(x => x.id === a.id)) warn(`추가 교육 영역 id "${a.id}"가 6대 영역과 겹쳐요.`);
+  if (!a.optional) warn(`추가 교육 영역 "${a.id}"에 optional: true가 없어요.`);
+}
+
 // 2) 수업 내용 검사
 const TYPES = ["cover", "question", "promise", "video", "quiz", "activity", "wrap"];
 let lessons = 0, reviewed = 0;
 // 추가 수업(extras) id는 주제 안에서 겹치면 안 돼요
-for (const a of data.areas) for (const t of a.topics.elementary) {
+for (const a of allAreas(data)) for (const t of a.topics.elementary) {
   const ids = (t.extras || []).map(x => x.id);
   if (new Set(ids).size !== ids.length) warn(`${t.id}: 추가 수업(extras) id가 겹쳐요.`);
   (t.extras || []).forEach(x => { if (!/^[a-z0-9]+$/.test(x.id)) warn(`${t.id}: 추가 수업 id "${x.id}"는 영어 소문자·숫자만 써요(하이픈 금지).`); });

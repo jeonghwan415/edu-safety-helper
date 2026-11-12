@@ -2,7 +2,7 @@
 // 실행: npm run worksheets                         (모두)
 //       npm run worksheets -- --only=abuse-e-03-high
 // 직접 만든 활동지(수업 데이터에 "customFiles": true)는 건너뛰어요.
-const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser } = require("./lib/common");
+const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser, ink } = require("./lib/common");
 
 const E = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 function svgInline(rel) {
@@ -17,7 +17,7 @@ function shuffled(n, seed) {
 }
 
 function worksheetHtml(area, topic, level, L) {
-  const c = area.color;
+  const c = ink(area.color);   // 글씨용 진한 색 (인쇄해도 또렷하게)
   const pts = L.slides.filter(s => s.type === "promise");
   const quiz = (L.slides.find(s => s.type === "quiz") || { items: [] }).items.slice(0, 3);
   const words = pts.map(p => `${p.title} · ${p.text.replace(/\n/g, " ")}`);
@@ -59,7 +59,7 @@ th { background:#F2F4F6; }
 <h2><b>3</b>${draw}</h2><div class="draw"></div>
 <h2><b>4</b>가족과 함께 약속을 지켰다면 ○ 해요.</h2>
 <table><tr><th>약속</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr><tr><td>${E(wrapTxt)}</td><td></td><td></td><td></td><td></td><td></td></tr></table>
-<div class="foot"><span>보호자 확인 ____________</span><span>지역아동센터 6대 의무교육 · ${E(area.shortName)}</span></div>
+<div class="foot"><span>보호자 확인 ____________</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)}</span></div>
 </body></html>`;
 }
 

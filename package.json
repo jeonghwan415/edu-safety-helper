@@ -4,6 +4,7 @@
   "private": true,
   "description": "지역아동센터 6대 의무교육(연 44시간) 수업 자료·기록 도우미",
   "scripts": {
+    "browser": "node tools/setup-browser.js",
     "data": "node tools/sync-data.js",
     "cards": "node tools/make-cards.js",
     "worksheets": "node tools/build-worksheets.js",
