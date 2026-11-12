@@ -40,13 +40,17 @@ function buildDeck(area, topic, level, L) {
   const pres = new pptxgen();
   pres.layout = "LAYOUT_16x9"; // 10 x 5.625 inch
   pres.title = `${L.slides[0].title} – ${area.shortName} 교육`;
-  pres.author = "6대 의무교육 도우미";
+  pres.author = "jeonghwan0415";
+  pres.company = "6대 의무교육 도우미";
+  pres.subject = "지역아동센터 안전교육 · CC BY-NC-SA 4.0 (출처 표시·비영리)";
   pres.theme = { headFontFace: "Malgun Gothic", bodyFontFace: "Malgun Gothic" };
   const stripe = TEEN ? { rect: { x: 0, y: 5.545, w: 10, h: 0.08, fill: { color: area.color.replace("#", "") } } }
                       : { image: { x: 0, y: 5.285, w: 10, h: 0.34, path: STRIPE } };
-  pres.defineSlideMaster({ title: "PICTURE_TEXT", background: { color: C.bg }, objects: [stripe] });
-  pres.defineSlideMaster({ title: "QUIZ", background: { color: C.quizBg }, objects: [stripe] });
-  pres.defineSlideMaster({ title: "COLOR", background: { color: TEEN ? C.bg : AC }, objects: [stripe] });
+  // 모든 장 오른쪽 아래 작은 출처 (자료를 나눌 때 출처가 남게)
+  const credit = col => ({ text: { text: "6대 의무교육 도우미 · jeonghwan0415 · CC BY-NC-SA", options: { x: 6.2, y: TEEN ? 5.28 : 5.0, w: 3.7, h: 0.25, fontSize: 8, color: col, align: "right", margin: 0 } } });
+  pres.defineSlideMaster({ title: "PICTURE_TEXT", background: { color: C.bg }, objects: [stripe, credit(TEEN ? "6B7280" : "9AA1AD")] });
+  pres.defineSlideMaster({ title: "QUIZ", background: { color: C.quizBg }, objects: [stripe, credit(TEEN ? "6B7280" : "9AA1AD")] });
+  pres.defineSlideMaster({ title: "COLOR", background: { color: TEEN ? C.bg : AC }, objects: [stripe, credit(TEEN ? "6B7280" : "FFFFFF")] });
 
   const flowFor = no => L.lessonFlow.find(f => f.slides.includes(no));
   const notes = (sl, no) => {
@@ -185,7 +189,7 @@ function buildDeck(area, topic, level, L) {
   if (links.length) s.addText(links.map((l, i) => ({ text: `${l.org} – ${l.title}`, options: { bullet: true, paraSpaceAfter: 10, hyperlink: { url: l.url }, breakLine: i < links.length - 1 } })), { x: 5.1, y: 1.55, w: 4.4, h: 2.3, fontSize: 14, color: C.text, margin: 0, valign: "top", isTextBox: true });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 3.95, w: 9, h: 0.9, fill: { color: "FFF7E0" }, line: { color: "F2D48A" }, rectRadius: 0.1 });
   s.addText("안전 주의  " + (L.safetyNote || ""), { x: 0.7, y: 3.95, w: 8.6, h: 0.9, fontSize: 13, color: C0.text, valign: "middle", margin: 0, isTextBox: true });
-  s.addNotes("이 장은 선생님용이에요. 아이들에게 보여 줄 필요는 없어요.");
+  s.addNotes("이 장은 선생님용이에요. 아이들에게 보여 줄 필요는 없어요.\n만든 사람 jeonghwan0415 · 자료는 CC BY-NC-SA 4.0(출처 표시·비영리·같은 조건)으로 자유롭게 고쳐 쓰고 나눌 수 있어요. 영상 저작권은 각 기관에 있어요(링크·퍼가기로만 사용).");
   return pres;
 }
 

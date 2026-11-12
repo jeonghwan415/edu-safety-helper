@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="jeonghwan0415">
 <title>6대 의무교육 도우미</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -400,6 +401,12 @@
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
   .footer-note { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+  .site-foot { max-width: 1120px; margin: 0 auto; padding: 0 28px 40px; color: var(--muted); font-size: .9rem; }
+  .site-foot a { color: var(--accent); font-weight: 700; }
+  .about table { width: 100%; border-collapse: collapse; background: var(--card); margin: 8px 0 22px; }
+  .about th, .about td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+  .about th { background: #EFEBE3; }
+  .about h2 { margin-top: 30px; }
 </style>
 </head>
 <body>
@@ -410,6 +417,7 @@
 </header>
 
 <main id="app"></main>
+<footer class="site-foot no-print">6대 의무교육 도우미 · 만든 사람 <b>jeonghwan0415</b> · 자료 CC BY-NC-SA 4.0 (출처 표시·비영리) · <a href="#about" onclick="go('#about');return false">이용 안내·저작권</a></footer>
 
 <script src="data/areas.js"></script>
 <script src="data/hwpx-template.js"></script>
@@ -490,7 +498,7 @@
     if (!h || h === "home" || h.startsWith("/")) return [];
     const p = h.split("-");
     if (p[0] === "area") return ["area", p[1], p[2]].filter(Boolean);
-    if (h === "records" || h === "plan" || h === "report") return [h];
+    if (h === "records" || h === "plan" || h === "report" || h === "about") return [h];
     if ((p[0] === "log" || p[0] === "edit") && p[1]) return [p[0], p.slice(1).join("-")];
     if (p[0] === "write" && p.length >= 4) return ["write", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "topic" || p[0] === "pick") && p.length >= 4) return [p[0], p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
@@ -603,6 +611,43 @@
       <div class="grid">${cards}</div>
       ${lawBox()}
       <p class="footer-note">기준: ${esc(DATA.meta.basis)} · 확인일 ${esc(DATA.meta.checkedAt)}</p>`;
+  }
+  /* 이용 안내·저작권 (LICENSE.md와 같은 내용을 쉽게) */
+  function viewAbout() {
+    const site = "https://jeonghwan415.github.io/edu-safety-helper/";
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "이용 안내·저작권" }]) + `
+      <div class="about">
+      <h1>ℹ️ 이용 안내와 저작권</h1>
+      <p class="lead">만든 사람: <b>jeonghwan0415</b> (지역아동센터 생활복지사). 지역아동센터·청소년센터 선생님이 <b>무료로 쓰고, 고쳐 쓰고, 나눌 수 있게</b> 만들었어요.</p>
+      <table><tr><th>해도 돼요 ✅</th><th>하지 말아 주세요 ❌</th></tr>
+        <tr><td>센터·학교·기관 교육에 무료로 쓰기</td><td>자료를 돈을 받고 팔기, 유료 강의·교재에 넣기</td></tr>
+        <tr><td>슬라이드·활동지·PPT를 인쇄하고 고쳐 쓰기</td><td>출처를 지우고 "내가 만들었다"고 배포하기</td></tr>
+        <tr><td>다른 선생님·센터와 나누기 (출처 표시)</td><td>유튜브 영상을 내려받아 다시 올리거나 편집하기</td></tr>
+        <tr><td>고친 자료를 같은 조건으로 나누기</td><td>아이 이름·사진 같은 개인정보를 넣어 공유하기</td></tr></table>
+      <div class="box"><b>출처 표시 예</b><br>자료 출처: 6대 의무교육 도우미 (만든 사람 jeonghwan0415) · ${site}
+        <button class="mini-btn" onclick="copyText(this,'자료 출처: 6대 의무교육 도우미 (만든 사람 jeonghwan0415) · ${site}')">복사</button></div>
+      <h2>어떤 조건으로 쓰나요</h2>
+      <table><tr><th>무엇</th><th>조건</th></tr>
+        <tr><td>수업 내용(글·퀴즈·대본·상황 장면), 그림 카드, 활동지, 선생님용 PPT</td><td><b>CC BY-NC-SA 4.0</b> — 저작자 표시 · 비영리 · 같은 조건으로 나누기</td></tr>
+        <tr><td>프로그램 코드</td><td><b>MIT 라이선스</b> — 자유롭게 쓰고 고칠 수 있어요 (저작권 표시 유지)</td></tr></table>
+      <h2>다른 사람 저작물은 이렇게 써요</h2>
+      <table><tr><th>무엇</th><th>쓰는 방법</th></tr>
+        <tr><td>유튜브 영상 (행정안전부·소방청·경찰청·질병관리청·국가아동권리보장원·교육청 등 공식 채널)</td><td>파일을 복사하지 않고 유튜브가 허락한 <b>퍼가기(임베드)·링크</b>로만 보여 줘요. 저작권은 각 기관에 있어요. 내려받기·편집·재업로드는 하지 마세요.</td></tr>
+        <tr><td>법령·지침</td><td>요약·인용 (법령은 저작권 보호 대상이 아니에요, 「저작권법」 제7조)</td></tr>
+        <tr><td>아동권리헌장 · 유엔아동권리협약</td><td>출처와 함께 조항 인용</td></tr>
+        <tr><td>공식 기관 누리집</td><td>링크만 (내용 복사 안 함)</td></tr>
+        <tr><td>선 아이콘 (청소년 그림)</td><td>Tabler Icons — MIT License © Paweł Kuna</td></tr>
+        <tr><td>이모지 · 글꼴 Jua</td><td>컴퓨터 이모지 글꼴 · Google Fonts (SIL Open Font License)</td></tr>
+        <tr><td>그 밖의 그림 카드·디자인</td><td>직접 만든 것 (jeonghwan0415)</td></tr></table>
+      <h2>꼭 알아 두세요</h2>
+      <ul>
+        <li>수업 내용은 <b>"검토 필요"</b> 상태예요. AI의 도움을 받아 초안을 만들었고, 법령·신고 번호는 ${esc(DATA.meta.checkedAt)} 기준으로 공식 출처를 확인했어요. 수업 전에 꼭 읽어 보고 고쳐 써 주세요.</li>
+        <li>법률·의료 자문이 아니에요. 점검·보고 전에는 국가법령정보센터 원문을 확인해 주세요.</li>
+        <li>학대·성폭력이 의심되면 자료보다 <b>신고(112)와 보호가 먼저</b>예요.</li>
+        <li>교육 기록은 이 컴퓨터 브라우저에만 저장돼요. 서버로 보내지 않고, 만든 사람도 볼 수 없어요.</li>
+      </ul>
+      <p class="meta">전체 내용: <a href="https://github.com/jeonghwan415/edu-safety-helper/blob/main/LICENSE.md" target="_blank" rel="noopener">LICENSE.md</a> · 고칠 점 제보: <a href="https://github.com/jeonghwan415/edu-safety-helper/issues" target="_blank" rel="noopener">GitHub Issues</a></p>
+      </div>`;
   }
   /* 첫 화면 아래: 법령 확인 기록 (접어 두고, 누르면 펼쳐져요) */
   function lawBox() {
@@ -1542,6 +1587,7 @@
     else if (parts[0] === "records") html = viewRecords();
     else if (parts[0] === "plan") html = viewPlan();
     else if (parts[0] === "report") html = viewReport();
+    else if (parts[0] === "about") html = viewAbout();
     else if (parts[0] === "log") { const r = loadRecords().find(x => x.id === parts[1]); html = r ? viewLog(r) : notFound(); }
     else if (parts[0] === "edit") { const r = loadRecords().find(x => x.id === parts[1]); const ft = r && findTopic(r.areaId, r.topicId); html = ft && ft.t ? viewWrite(ft.a, ft.t, r.level, r) : notFound(); }
     else if (parts[0] === "write" && findArea(parts[1]) && okLevel(parts[3])) {

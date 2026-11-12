@@ -65,7 +65,7 @@ th { background:#F2F4F6; }
 <h2><b>3</b>${draw}</h2><div class="draw"></div>
 <h2><b>4</b>${level === "teen" ? "이번 주 나의 약속을 지켰다면 ○ 해요." : "가족과 함께 약속을 지켰다면 ○ 해요."}</h2>
 <table><tr><th>${level === "teen" ? "실천 체크" : "약속"}</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr><tr><td>${E(wrapTxt)}</td><td></td><td></td><td></td><td></td><td></td></tr></table>
-<div class="foot"><span>${level === "teen" ? "확인 ____________" : "보호자 확인 ____________"}</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)}</span></div>
+<div class="foot"><span>${level === "teen" ? "확인 ____________" : "보호자 확인 ____________"}</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)} · 만든 사람 jeonghwan0415 (CC BY-NC-SA)</span></div>
 </body></html>`;
 }
 
