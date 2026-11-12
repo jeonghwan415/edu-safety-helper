@@ -98,8 +98,8 @@
   .today-title span:not(.today-icon) { display: block; font-size: 1.6rem; font-weight: 800; line-height: 1.3; }
   .today-why { margin: 0; font-weight: 700; color: #5C4200; background: #FFF3D6; display: inline-block; padding: 6px 14px; border-radius: 12px; }
   .today-go p { margin: 0 0 10px; color: var(--muted); }
-  .today-lvs { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
-  .today-lv { min-height: 96px; border: 0; border-radius: 18px; background: var(--cd); color: #fff; font-size: 1.25rem; font-weight: 800;
+  .today-lvs { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+  .today-lv { min-height: 96px; border: 0; border-radius: 18px; background: var(--cd); color: #fff; font-size: 1.15rem; font-weight: 800;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 10px; box-shadow: 0 5px 0 rgba(0,0,0,.18); }
   .today-lv span { font-size: 1.9rem; line-height: 1; }
   .today-lv small { font-size: .8rem; font-weight: 400; opacity: .92; }
@@ -109,6 +109,19 @@
   .today-next button { min-height: 56px; padding: 6px 16px; border: 2px solid var(--line); border-left: 8px solid var(--c); border-radius: 12px; background: #fff; text-align: left; font-weight: 800; }
   .today-next small { display: block; font-weight: 400; color: var(--muted); font-size: .85rem; }
   .section-title { font-size: 1.3rem; margin: 8px 0 14px; }
+  .more-box { margin-top: 20px; }
+  .more-box summary { cursor: pointer; font-weight: 800; font-size: 1.1rem; min-height: 44px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .more-box h3 .opt, .more-box summary .opt { font-weight: 400; font-size: .9rem; color: var(--muted); }
+  .script-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+  .script-list li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; }
+  .script-list .sno { width: 36px; height: 36px; border-radius: 50%; background: var(--cd, var(--c)); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .script-list p { margin: 2px 0 0; line-height: 1.7; }
+  .scenes { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .scene { border: 2px solid var(--line); border-left: 8px solid var(--c); border-radius: 12px; padding: 14px 16px; background: #fff; }
+  .scene p { margin: 6px 0 0; line-height: 1.65; }
+  .scene .ask { font-weight: 700; color: var(--cd, var(--c)); }
+  .faq dt { font-weight: 800; margin-top: 10px; color: var(--cd, var(--c)); }
+  .faq dd { margin: 4px 0 0; }
   .notice.warn { background: #FFE1D6; color: #8A2B00; }
   @media (max-width: 760px) { .today { grid-template-columns: 1fr; } .today-lvs { grid-template-columns: 1fr; } .today-lv { min-height: 64px; flex-direction: row; gap: 10px; } }
   /* ＋ 추가 교육 카드(아동인권): 의무교육 6개와 구분되게 점선 테두리 + 옅은 영역 색 배경 */
@@ -128,7 +141,7 @@
   .law-box ul { margin: 10px 0 14px; padding-left: 1.2em; display: grid; gap: 6px; }
 
   /* 대상 고르기 */
-  .levels { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .levels { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
   .level { align-items: center; text-align: center; padding: 36px 24px; }
   .level .icon { font-size: 3.4rem; }
   .level .title { font-size: 1.7rem; }
@@ -339,7 +352,7 @@
   .stage:hover .ctrl, .stage .ctrl:focus-within { opacity: 1; }
   .stage .ctrl button { min-height: 52px; min-width: 52px; padding: 0 18px; border: 0; border-radius: 12px; background: #2E333A; color: #fff; font-size: 1rem; font-weight: 700; }
   .stage .count { color: #C9CED4; font-weight: 700; min-width: 80px; text-align: center; }
-  .stage .note { position: fixed; left: 20px; right: 20px; top: 16px; background: #FFF7D6; color: #3A2E00; border-radius: 12px; padding: 12px 18px; font-size: 1.05rem; display: none; }
+  .stage .note { position: fixed; z-index: 5; /* 16:9 TV 전체 화면에서도 슬라이드 위에 보이게 */ left: 20px; right: 20px; top: 16px; box-shadow: 0 6px 18px rgba(0,0,0,.25); line-height: 1.6; background: #FFF7D6; color: #3A2E00; border-radius: 12px; padding: 12px 18px; font-size: 1.05rem; display: none; }
   .stage.show-note .note:not(:empty) { display: block; }
   @media (max-width: 720px) {
     .sheet-preview { grid-template-columns: 1fr; }
@@ -382,7 +395,8 @@
   const cv = a => `--c:${a.color};--cd:${ink(a.color)}`;
   const LEVELS = [
     { id: "low",  icon: "🐣", title: "저학년", desc: "초등 1~3학년" },
-    { id: "high", icon: "🦁", title: "고학년", desc: "초등 4~6학년 (청소년 포함)" },
+    { id: "high", icon: "🦁", title: "고학년", desc: "초등 4~6학년" },
+    { id: "teen", icon: "🎧", title: "청소년", desc: "중·고등학생" },
     { id: "mix",  icon: "🤝", title: "함께",   desc: "저학년과 고학년이 같이 들어요" }
   ];
   const STORE_KEY = "seh-records-v1";
@@ -624,6 +638,7 @@
   function contentFor(topic, level) {
     const c = topic.content || {};
     if (c[level]) return { data: c[level], note: "" };
+    if (level === "teen" && c.high) return { data: c.high, note: "이 수업은 아직 청소년용 자료가 없어서 고학년 자료를 보여 드려요. 예시를 청소년 생활에 맞게 바꿔 말해 주세요." };
     if (level === "mix" && c.low) return { data: c.low, note: "함께 교육할 때는 저학년 자료로 진행하고, 고학년에게 퀴즈의 이유를 설명하는 역할을 맡겨 보세요." };
     return { data: null, note: "" };
   }
@@ -707,6 +722,7 @@
         <div class="two-col"><div class="box"><h3>준비물</h3><ul>${L.materials.map(m => `<li>${esc(m)}</li>`).join("")}</ul></div>
         <div class="box warn"><h3>안전 주의</h3>${esc(L.safetyNote)}</div></div>
         ${L.slides.filter(s => s.type === "quiz").map(s => `<div class="box quiz-key"><h3>O X 퀴즈 정답과 해설</h3><ol>${s.items.map(q => `<li><b>${esc(q.q)}</b> <span class="ans ans-${q.a}">${q.a}</span><br>${esc(q.why)}${q.explain ? `<br><span class="meta">${esc(q.explain)}</span>` : ""}</li>`).join("")}</ol></div>`).join("")}
+        <div style="${cv(area)}">${scriptBox(L)}${scenesBox(L)}${guideBox(topic.baseId ? area.topics.elementary.find(x => x.id === topic.baseId) : topic)}</div>
         <p class="meta" style="margin-top:16px">전체 ${total}분</p>`;
     } else if (lessonTab === "sheet") {
       const prev = L.worksheet.replace(/\.pdf$/, ".png");
@@ -728,6 +744,23 @@
       <div class="tabs" role="tablist" style="${cv(area)}">` + tabs.map(([id, label]) =>
         `<button class="tab" role="tab" aria-selected="${lessonTab === id}" onclick="lessonTab='${id}';render()">${label}</button>`).join("") + `</div>
       ${body}`;
+  }
+
+  /* ---------- 수업 흐름 탭: 선생님 대본 · 상황 장면 · 배경지식 (카톡 피드백 "내용이 알찼으면") ---------- */
+  function scriptBox(L) {
+    const rows = L.slides.map((s, i) => s.script ? `<li><span class="sno">${i + 1}</span><div><b>${esc(s.title)}</b><p>${esc(s.script)}</p></div></li>` : "").join("");
+    return rows ? `<details class="box more-box" open><summary>🗣 선생님 대본 <span class="opt">— 그대로 읽어도 돼요. 발표 화면 '선생님 메모'(N 키)에도 나와요</span></summary><ol class="script-list">${rows}</ol></details>` : "";
+  }
+  function scenesBox(L) {
+    const sc = L.scenes || [];
+    return sc.length ? `<div class="box more-box"><h3>🎬 상황 장면 <span class="opt">— 활동 시간에 토의·역할극으로 써요 (선생님용 PPT에도 있어요)</span></h3><div class="scenes">${sc.map((x, i) =>
+      `<div class="scene"><b>상황 ${i + 1} · ${esc(x.title)}</b><p>${esc(x.story)}</p><p class="ask">🤔 ${esc(x.ask)}</p></div>`).join("")}</div></div>` : "";
+  }
+  function guideBox(t) {
+    const G = t && t.guide; if (!G) return "";
+    return `<details class="box more-box"><summary>📚 알아 두면 좋아요 <span class="opt">— 선생님용 배경지식 · 자주 묻는 질문</span></summary>
+      <ul>${(G.background || []).map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+      ${(G.faq || []).length ? `<dl class="faq">${G.faq.map(f => `<dt>Q. ${esc(f.q)}</dt><dd>${esc(f.a)}</dd>`).join("")}</dl>` : ""}</details>`;
   }
 
   /* ---------- AI에게 부탁하기 (API 키 없이) ----------
@@ -768,7 +801,7 @@
     return [
       `저는 지역아동센터 선생님이에요. 아래 안전교육 수업안을 우리 센터 상황에 맞게 바꾸고 싶어요.`,
       ``,
-      `[교육] ${a.name} – ${t.title} (${levelName(level)})`,
+      `[교육] ${a.name} – ${t.title} (${levelName(level)}${level === "teen" ? ", 중·고등학생" : ""})`,
       `[우리 센터 상황]`, ...(situ.length ? situ : ["- (특별한 상황 없음)"]),
       `[부탁] ${want === "활동" ? "활동 시간(10분)에 할 새 활동 2가지를 준비물과 함께 알려 주세요." : want === "퀴즈" ? "O X 퀴즈 4문항을 새로 만들어 주세요. 정답과 짧은 이유도 함께요." : (picked.includes("time") ? "20분" : "40분") + " 수업 흐름을 우리 상황에 맞게 다시 짜 주세요. 시간별로 선생님이 할 말도 한두 줄씩 넣어 주세요."}`,
       ``,
@@ -896,7 +929,8 @@
     document.getElementById("frame").innerHTML = slideHTML(st, show.area);
     document.getElementById("count").textContent = `${st.i + 1} / ${show.steps[show.steps.length - 1].i + 1}`;
     const quizNote = st.sl.type === "quiz" && st.item ? `정답 ${st.item.a} — ${st.item.why}${st.item.explain ? " " + st.item.explain : ""}` : "";
-    document.getElementById("note").textContent = quizNote ? "선생님 메모: " + quizNote : st.sl.teacher ? "선생님 메모: " + st.sl.teacher : "";
+    const memo = [st.sl.script ? "🗣 대본: " + st.sl.script : "", st.sl.teacher ? "💡 " + st.sl.teacher : ""].filter(Boolean).join("   ");
+    document.getElementById("note").textContent = quizNote ? "선생님 메모: " + quizNote : memo;
     fitStage();
   }
   function fitStage() {

@@ -29,7 +29,7 @@ async function renderImages(list) {
 
 function buildDeck(area, topic, level, L) {
   const AC = ink(area.color).replace("#", "");   // 글씨용 진한 색 (흰 바탕·흰 글씨와 대비 4.8:1 이상)
-  const lvName = level === "low" ? "저학년" : "고학년";
+  const lvName = { low: "저학년", high: "고학년", teen: "청소년" }[level] || level;
   const pres = new pptxgen();
   pres.layout = "LAYOUT_16x9"; // 10 x 5.625 inch
   pres.title = `${L.slides[0].title} – ${area.shortName} 교육`;
@@ -43,7 +43,7 @@ function buildDeck(area, topic, level, L) {
   const flowFor = no => L.lessonFlow.find(f => f.slides.includes(no));
   const notes = (sl, no) => {
     const f = flowFor(no);
-    return [f ? `[${f.step} · ${f.minutes}분] ${f.do}` : "", sl.teacher ? `진행 팁: ${sl.teacher}` : ""].filter(Boolean).join("\n");
+    return [f ? `[${f.step} · ${f.minutes}분] ${f.do}` : "", sl.script ? `🗣 대본: ${sl.script}` : "", sl.teacher ? `진행 팁: ${sl.teacher}` : ""].filter(Boolean).join("\n");
   };
   const titleSize = (t, promise) => promise ? (t.length <= 2 ? 66 : t.length === 3 ? 56 : t.length === 4 ? 46 : t.length <= 6 ? 38 : 30) : (t.length > 9 ? 30 : 38);
 
@@ -109,8 +109,32 @@ function buildDeck(area, topic, level, L) {
     }
   });
 
+  // 상황 장면(토의·역할극용) — 아이들에게 보여 줘도 되는 장
+  if ((L.scenes || []).length) {
+    pres.addSection({ title: "상황 장면" });
+    L.scenes.forEach((sc, k) => {
+      const s = pres.addSlide({ masterName: "PICTURE_TEXT", sectionTitle: "상황 장면" });
+      s.addText(`🎬 상황 ${k + 1} · ${sc.title}`, { x: 0.6, y: 0.45, w: 8.8, h: 0.6, fontSize: 26, bold: true, color: AC, margin: 0, isTextBox: true });
+      s.addText(sc.story, { x: 0.6, y: 1.25, w: 8.8, h: 2.0, fontSize: 22, color: C.text, margin: 0, valign: "top", isTextBox: true });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.6, y: 3.45, w: 8.8, h: 1.3, fill: { color: "F2F8FF" }, line: { color: "D7DEE6" }, rectRadius: 0.12 });
+      s.addText("함께 생각해요  " + sc.ask, { x: 0.8, y: 3.45, w: 8.4, h: 1.3, fontSize: 19, bold: true, color: C.text, valign: "middle", margin: 0, isTextBox: true });
+      s.addNotes("활동 시간에 띄워 놓고 모둠 토의나 역할극에 써요. 정답을 정하기보다 이유를 말하게 해 주세요.");
+    });
+  }
+  // 선생님용 배경지식 (주제마다 같음)
+  const G = topic.guide;
+  if (G && (G.background || []).length) {
+    pres.addSection({ title: "선생님용" });
+    const s = pres.addSlide({ masterName: "PICTURE_TEXT", sectionTitle: "선생님용" });
+    s.addText("📚 알아 두면 좋아요 (선생님용)", { x: 0.5, y: 0.35, w: 9, h: 0.6, fontSize: 26, bold: true, color: C.text, margin: 0, isTextBox: true });
+    s.addText(G.background.map((b, i) => ({ text: b, options: { bullet: true, paraSpaceAfter: 6, breakLine: i < G.background.length - 1 } })), { x: 0.5, y: 1.05, w: 9, h: 2.3, fontSize: 14, color: C.text, margin: 0, valign: "top", isTextBox: true });
+    const fq = G.faq || [];
+    if (fq.length) s.addText(fq.flatMap((q, i) => [{ text: "Q. " + q.q, options: { bold: true, color: AC, breakLine: true } }, { text: "A. " + q.a, options: { breakLine: i < fq.length - 1, paraSpaceAfter: 6 } }]), { x: 0.5, y: 3.4, w: 9, h: 1.8, fontSize: 13, color: C.text, margin: 0, valign: "top", isTextBox: true });
+    s.addNotes("이 장은 선생님용이에요. 아이들에게 보여 줄 필요는 없어요.");
+  }
+
   // 마지막 장: 선생님용 준비 메모
-  pres.addSection({ title: "선생님용" });
+  if (!(G && (G.background || []).length)) pres.addSection({ title: "선생님용" });
   const s = pres.addSlide({ masterName: "PICTURE_TEXT", sectionTitle: "선생님용" });
   s.addText("선생님용 준비 메모", { x: 0.5, y: 0.35, w: 9, h: 0.6, fontSize: 30, bold: true, color: C.text, margin: 0, isTextBox: true });
   s.addText("준비물", { x: 0.5, y: 1.1, w: 4.2, h: 0.4, fontSize: 18, bold: true, color: AC, margin: 0, isTextBox: true });

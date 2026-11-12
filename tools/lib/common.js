@@ -29,7 +29,7 @@ function eachLesson(data, filter) {
   const out = [];
   for (const area of allAreas(data)) {
     for (const topic of area.topics.elementary.flatMap(lessonTopics)) {
-      for (const level of ["low", "high"]) {
+      for (const level of ["low", "high", "teen"]) {   // teen = 청소년(중·고등), 없으면 건너뜀
         const L = topic.content[level];
         if (!L) continue;
         if (filter && !filter(area, topic, level)) continue;

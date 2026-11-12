@@ -29,7 +29,7 @@ function worksheetHtml(area, topic, level, L) {
   const wrap = L.slides.find(s => s.type === "wrap");
   const wrapTxt = (wrap && wrap.words ? wrap.words.map(w => w[1]) : []).join(" · ");
   const title = L.slides.find(s => s.type === "cover").title;
-  const lv = level === "low" ? "저학년" : "고학년";
+  const lv = { low: "저학년", high: "고학년", teen: "청소년" }[level] || level;
   return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><style>
 @page { size: A4; margin: 10mm 14mm; } * { box-sizing: border-box; }
 body { margin:0; font-family:"Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif; color:#22262B; font-size:12.5pt; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -57,7 +57,7 @@ th { background:#F2F4F6; }
 <h2><b>1</b>그림과 알맞은 약속을 선으로 이어요.</h2><div class="match">${rows}</div>
 <h2><b>2</b>맞으면 O, 틀리면 X에 동그라미 해요.</h2><div class="ox"><ul>${ox}</ul></div>
 <h2><b>3</b>${draw}</h2><div class="draw"></div>
-<h2><b>4</b>가족과 함께 약속을 지켰다면 ○ 해요.</h2>
+<h2><b>4</b>${level === "teen" ? "이번 주 나의 약속을 지켰다면 ○ 해요." : "가족과 함께 약속을 지켰다면 ○ 해요."}</h2>
 <table><tr><th>약속</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr><tr><td>${E(wrapTxt)}</td><td></td><td></td><td></td><td></td><td></td></tr></table>
 <div class="foot"><span>보호자 확인 ____________</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)}</span></div>
 </body></html>`;
