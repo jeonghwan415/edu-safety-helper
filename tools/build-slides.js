@@ -2,12 +2,12 @@
 // 실행: npm run slides                          (모두)
 //       npm run slides -- --only=abuse-e-03-high
 // 그림(SVG)은 브라우저로 찍어서 .cache/slide-img 에 JPG로 저장한 뒤 PPT에 넣어요.
-const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser, ink } = require("./lib/common");
+const { fs, path, ROOT, loadData, eachLesson, onlyFilter, launchBrowser, ink, light } = require("./lib/common");
 const pptxgen = require("pptxgenjs");
 
 const CACHE = path.join(ROOT, ".cache", "slide-img");
 const STRIPE = path.join(ROOT, "tools", "assets", "stripe.png");
-const C = { text: "22262B", white: "FFFFFF", quizBg: "F2F8FF", gray: "D7DEE6", ok: "2DB86E", no: "E5484D" };
+const C0 = { text: "22262B", white: "FFFFFF", quizBg: "F2F8FF", gray: "D7DEE6", ok: "2DB86E", no: "E5484D" };
 const jpgFor = rel => path.join(CACHE, rel.replace(/[\\/]/g, "__").replace(/\.svg$/, ".jpg"));
 
 async function renderImages(list) {
@@ -21,24 +21,32 @@ async function renderImages(list) {
   const page = await browser.newPage({ viewport: { width: 1000, height: 750 } });
   for (const rel of need) {
     const svg = fs.readFileSync(path.join(ROOT, rel), "utf8").replace(/class="(float|walker|step|bob|pop|pulse|al|ar)"/g, ""); // 움직임 없는 첫 장면
-    await page.setContent(`<html><body style="margin:0">${svg.replace("<svg ", '<svg width="1000" height="750" ')}</body></html>`);
+    const sq = /viewBox="0 0 800 800"/.test(svg);   // 청소년 그림 카드는 정사각형
+    const [w, h] = sq ? [900, 900] : [1000, 750];
+    await page.setViewportSize({ width: w, height: h });
+    await page.setContent(`<html><body style="margin:0">${svg.replace("<svg ", `<svg width="${w}" height="${h}" `)}</body></html>`);
     await page.screenshot({ path: jpgFor(rel), type: "jpeg", quality: 85 });
   }
   await browser.close();
 }
 
 function buildDeck(area, topic, level, L) {
-  const AC = ink(area.color).replace("#", "");   // 글씨용 진한 색 (흰 바탕·흰 글씨와 대비 4.8:1 이상)
+  // 청소년(teen)은 어두운 배경 테마: 굵은 고딕, 01·02·03, 각진 O/X 카드, 구호 대신 '오늘의 핵심'
+  const TEEN = level === "teen";
+  const AC = (TEEN ? light(area.color) : ink(area.color)).replace("#", "");   // 글씨용 강조색 (배경과 대비 4.5:1 이상)
+  const C = TEEN ? { text: "F3F4F6", sub: "BFC5CE", white: "FFFFFF", quizBg: "121419", gray: "3A3F4A", ok: "3DD68C", no: "FF6369", bg: "121419", card: "1B1E25" }
+                 : { ...C0, sub: C0.text, bg: "FFFFFF", card: "FFFFFF" };
   const lvName = { low: "저학년", high: "고학년", teen: "청소년" }[level] || level;
   const pres = new pptxgen();
   pres.layout = "LAYOUT_16x9"; // 10 x 5.625 inch
   pres.title = `${L.slides[0].title} – ${area.shortName} 교육`;
   pres.author = "6대 의무교육 도우미";
   pres.theme = { headFontFace: "Malgun Gothic", bodyFontFace: "Malgun Gothic" };
-  const stripe = { image: { x: 0, y: 5.285, w: 10, h: 0.34, path: STRIPE } };
-  pres.defineSlideMaster({ title: "PICTURE_TEXT", background: { color: C.white }, objects: [stripe] });
+  const stripe = TEEN ? { rect: { x: 0, y: 5.545, w: 10, h: 0.08, fill: { color: area.color.replace("#", "") } } }
+                      : { image: { x: 0, y: 5.285, w: 10, h: 0.34, path: STRIPE } };
+  pres.defineSlideMaster({ title: "PICTURE_TEXT", background: { color: C.bg }, objects: [stripe] });
   pres.defineSlideMaster({ title: "QUIZ", background: { color: C.quizBg }, objects: [stripe] });
-  pres.defineSlideMaster({ title: "COLOR", background: { color: AC }, objects: [stripe] });
+  pres.defineSlideMaster({ title: "COLOR", background: { color: TEEN ? C.bg : AC }, objects: [stripe] });
 
   const flowFor = no => L.lessonFlow.find(f => f.slides.includes(no));
   const notes = (sl, no) => {
@@ -57,7 +65,18 @@ function buildDeck(area, topic, level, L) {
 
   L.slides.forEach((sl, idx) => {
     const no = idx + 1;
-    if (["cover", "question", "promise", "activity"].includes(sl.type)) {
+    if (TEEN && ["cover", "question", "promise", "activity"].includes(sl.type)) {
+      const s = slide("PICTURE_TEXT", sl);
+      if (sl.image) s.addImage({ path: jpgFor(sl.image), x: 5.75, y: 0.95, w: 3.75, h: 3.75, altText: sl.title, rounding: false });
+      s.addText([{ text: ` ${area.shortName} `, options: { bold: true, color: C.bg, highlight: AC } }, { text: "   청소년", options: { color: "9AA1AD" } }], { x: 0.5, y: 0.35, w: 5, h: 0.4, fontSize: 14, margin: 0, isTextBox: true });
+      let y = 1.25;
+      const kick = sl.type === "question" ? "Q." : sl.type === "promise" ? String(sl.no).padStart(2, "0") : sl.type === "activity" ? "ACTIVITY · 활동" : "";
+      if (kick) { s.addText(kick, { x: 0.5, y, w: 5, h: sl.type === "activity" ? 0.4 : 1.0, fontSize: sl.type === "activity" ? 14 : 54, bold: true, color: AC, fontFace: "Arial Black", margin: 0, isTextBox: true }); y += sl.type === "activity" ? 0.5 : 1.05; }
+      const head = sl.type === "question" ? (sl.text || "").replace(/\n/g, " ") : sl.title;
+      s.addText(head, { x: 0.5, y, w: 5.0, h: 1.3, fontSize: sl.type === "question" ? 26 : (head.length > 10 ? 30 : 38), bold: true, color: C.text, margin: 0, valign: "top", isTextBox: true });
+      if (sl.type !== "question") s.addText((sl.text || "").replace(/\n/g, " "), { x: 0.5, y: y + 1.4, w: 5.0, h: 1.4, fontSize: 18, color: C.sub, margin: 0, valign: "top", isTextBox: true });
+      s.addNotes(notes(sl, no));
+    } else if (["cover", "question", "promise", "activity"].includes(sl.type)) {
       const s = slide("PICTURE_TEXT", sl);
       if (sl.image) s.addImage({ path: jpgFor(sl.image), x: 0.45, y: 0.45, w: 5.2, h: 3.9, altText: sl.title });
       let y = 1.0;
@@ -73,19 +92,30 @@ function buildDeck(area, topic, level, L) {
     } else if (sl.type === "quiz") {
       sl.items.forEach((it, k) => [false, true].forEach(reveal => {
         const s = slide("QUIZ", sl);
-        s.addText(`O X 퀴즈 ${k + 1} / ${sl.items.length}`, { x: 0.5, y: 0.4, w: 9, h: 0.45, fontSize: 18, color: AC, align: "center", margin: 0, isTextBox: true });
-        s.addText(it.q, { x: 0.8, y: 0.9, w: 8.4, h: 1.3, fontSize: it.q.length > 30 ? 26 : 32, bold: true, color: C.text, align: "center", valign: "middle", margin: 0, isTextBox: true });
+        s.addText(TEEN ? `O X 체크 ${k + 1} / ${sl.items.length}` : `O X 퀴즈 ${k + 1} / ${sl.items.length}`, { x: TEEN ? 0.5 : 0.5, y: 0.4, w: 9, h: 0.45, fontSize: 18, bold: TEEN, color: AC, align: TEEN ? "left" : "center", margin: 0, isTextBox: true });
+        s.addText(it.q, { x: TEEN ? 0.5 : 0.8, y: 0.9, w: TEEN ? 9.0 : 8.4, h: 1.3, fontSize: it.q.length > 30 ? 26 : 32, bold: true, color: C.text, align: TEEN ? "left" : "center", valign: "middle", margin: 0, isTextBox: true });
         // 정답 장면에 해설이 있으면 O X를 작게 올리고 아래에 해설을 넣어요
         const small = reveal && it.explain, d = small ? 1.15 : 1.7, oy = small ? 2.25 : 2.35;
         ["O", "X"].forEach((m, j) => {
           const right = reveal && it.a === m, dim = reveal && it.a !== m;
           const col = right ? (m === "O" ? C.ok : C.no) : C.gray;
           const ox = 2.65 + j * 3.0 + (1.7 - d) / 2;
+          if (TEEN) {
+            const bx = 0.5 + j * 2.25, by = small ? 2.3 : 2.45;
+            s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: 2.0, h: 1.45, fill: { color: C.card, transparency: dim ? 60 : 0 }, line: { color: right ? col : C.gray, width: right ? 4 : 2 }, rectRadius: 0.15 });
+            s.addText([{ text: m, options: { fontSize: 54, bold: true, fontFace: "Arial Black", breakLine: true } }, { text: m === "O" ? "맞다" : "아니다", options: { fontSize: 16, bold: true } }], { x: bx, y: by, w: 2.0, h: 1.45, color: right ? col : "6B7280", align: "center", valign: "middle", margin: 0, isTextBox: true });
+            return;
+          }
           s.addShape(pres.shapes.OVAL, { x: ox, y: oy, w: d, h: d, fill: { color: C.white, transparency: dim ? 50 : 0 }, line: { color: col, width: right ? 8 : 5 } });
           s.addText(m, { x: ox, y: oy, w: d, h: d, fontSize: small ? 54 : 80, bold: true, color: right ? col : C.gray, align: "center", valign: "middle", margin: 0, isTextBox: true });
         });
+        if (TEEN) {
+          if (reveal) s.addText(`${it.a} · ${it.why}`, { x: 5.2, y: 2.3, w: 4.3, h: 0.6, fontSize: 20, bold: true, color: it.a === "O" ? C.ok : C.no, margin: 0, isTextBox: true });
+          if (reveal && it.explain) s.addText(it.explain, { x: 5.2, y: 3.0, w: 4.3, h: 1.9, fontSize: 15, color: C.text, valign: "top", margin: 10, fill: { color: C.card }, isTextBox: true });
+        } else {
         if (reveal) s.addText(`${it.a} · ${it.why}`, { x: 0.8, y: small ? 3.5 : 4.3, w: 8.4, h: 0.55, fontSize: 22, bold: !!small, color: small ? (it.a === "O" ? C.ok : C.no) : C.text, align: "center", margin: 0, isTextBox: true });
         if (small) s.addText(it.explain, { x: 1.0, y: 4.1, w: 8.0, h: 1.15, fontSize: 16, color: C.text, align: "center", valign: "middle", margin: 8, fill: { color: C.white }, rectRadius: 0.15, isTextBox: true });
+        }
         s.addNotes((reveal ? `정답: ${it.a} — ${it.why}${it.explain ? "\n해설: " + it.explain : ""}` : `정답은 ${it.a}예요. 아이들이 팔로 O 또는 X를 만들어 답하게 해요. 다음 장에 정답과 해설이 나와요.`) + (k === 0 && !reveal ? "\n" + notes(sl, no) : ""));
       }));
     } else if (sl.type === "video") {
@@ -97,6 +127,17 @@ function buildDeck(area, topic, level, L) {
       s.addText(sl.title, { x: 1.6, y: 4.2, w: 3.4, h: 0.6, fontSize: 28, bold: true, color: C.white, margin: 0, isTextBox: true });
       s.addText(sl.source || "", { x: 5.0, y: 4.25, w: 3.4, h: 0.5, fontSize: 14, color: C.white, align: "right", margin: 0, isTextBox: true });
       s.addNotes(notes(sl, no) + "\n영상이 끝나면 다음 추천 영상이 나오기 전에 유튜브 창을 닫아 주세요.");
+    } else if (sl.type === "wrap" && TEEN) {
+      const s = slide("COLOR", sl);
+      s.addText("오늘의 핵심", { x: 0.5, y: 0.45, w: 9, h: 0.6, fontSize: 26, bold: true, color: AC, margin: 0, isTextBox: true });
+      (sl.words || []).forEach(([ic, w], j) => {
+        const x = 0.5 + j * 3.07;
+        s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.3, w: 2.85, h: 3.4, fill: { color: C.card }, line: { color: "2A2E37", width: 1 }, rectRadius: 0.15 });
+        s.addShape(pres.shapes.RECTANGLE, { x: x + 0.15, y: 1.3, w: 2.55, h: 0.09, fill: { color: area.color.replace("#", "") }, line: { color: area.color.replace("#", "") } });
+        s.addText(String(j + 1).padStart(2, "0"), { x: x + 0.25, y: 1.55, w: 1.2, h: 0.5, fontSize: 22, bold: true, fontFace: "Arial Black", color: AC, margin: 0, isTextBox: true });
+        s.addText(w, { x: x + 0.25, y: 3.3, w: 2.4, h: 1.0, fontSize: w.length <= 3 ? 38 : 30, bold: true, color: C.text, margin: 0, isTextBox: true });
+      });
+      s.addNotes(notes(sl, no));
     } else if (sl.type === "wrap") {
       const s = slide("COLOR", sl);
       (sl.words || []).forEach(([ic, w], j) => {
@@ -115,9 +156,9 @@ function buildDeck(area, topic, level, L) {
     L.scenes.forEach((sc, k) => {
       const s = pres.addSlide({ masterName: "PICTURE_TEXT", sectionTitle: "상황 장면" });
       s.addText(`🎬 상황 ${k + 1} · ${sc.title}`, { x: 0.6, y: 0.45, w: 8.8, h: 0.6, fontSize: 26, bold: true, color: AC, margin: 0, isTextBox: true });
-      s.addText(sc.story, { x: 0.6, y: 1.25, w: 8.8, h: 2.0, fontSize: 22, color: C.text, margin: 0, valign: "top", isTextBox: true });
+      s.addText(sc.story, { x: 0.6, y: 1.25, w: 8.8, h: 2.0, fontSize: 22, color: C.text, margin: 0, valign: "top", isTextBox: true });   // 청소년은 밝은 글씨
       s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.6, y: 3.45, w: 8.8, h: 1.3, fill: { color: "F2F8FF" }, line: { color: "D7DEE6" }, rectRadius: 0.12 });
-      s.addText("함께 생각해요  " + sc.ask, { x: 0.8, y: 3.45, w: 8.4, h: 1.3, fontSize: 19, bold: true, color: C.text, valign: "middle", margin: 0, isTextBox: true });
+      s.addText("함께 생각해요  " + sc.ask, { x: 0.8, y: 3.45, w: 8.4, h: 1.3, fontSize: 19, bold: true, color: C0.text, valign: "middle", margin: 0, isTextBox: true });
       s.addNotes("활동 시간에 띄워 놓고 모둠 토의나 역할극에 써요. 정답을 정하기보다 이유를 말하게 해 주세요.");
     });
   }
@@ -143,7 +184,7 @@ function buildDeck(area, topic, level, L) {
   const links = topic.links || [];
   if (links.length) s.addText(links.map((l, i) => ({ text: `${l.org} – ${l.title}`, options: { bullet: true, paraSpaceAfter: 10, hyperlink: { url: l.url }, breakLine: i < links.length - 1 } })), { x: 5.1, y: 1.55, w: 4.4, h: 2.3, fontSize: 14, color: C.text, margin: 0, valign: "top", isTextBox: true });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 3.95, w: 9, h: 0.9, fill: { color: "FFF7E0" }, line: { color: "F2D48A" }, rectRadius: 0.1 });
-  s.addText("안전 주의  " + (L.safetyNote || ""), { x: 0.7, y: 3.95, w: 8.6, h: 0.9, fontSize: 13, color: C.text, valign: "middle", margin: 0, isTextBox: true });
+  s.addText("안전 주의  " + (L.safetyNote || ""), { x: 0.7, y: 3.95, w: 8.6, h: 0.9, fontSize: 13, color: C0.text, valign: "middle", margin: 0, isTextBox: true });
   s.addNotes("이 장은 선생님용이에요. 아이들에게 보여 줄 필요는 없어요.");
   return pres;
 }

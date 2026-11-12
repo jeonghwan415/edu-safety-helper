@@ -28,7 +28,8 @@ img/traffic-e-02/       보행법(저학년) 직접 그린 그림 (움직임 포
 worksheets/             활동지 <주제id>-<학년>.html / .pdf / .png(미리보기)
 slides/                 선생님용 PPT <주제id>-<학년>.pptx
 tools/                  자동 생성 도구 (Node.js) — 아래 "명령어" 참고
-docs/                   별표 6 이미지, 프로그램일지 빈 양식·예시
+docs/                   별표 6 이미지, 프로그램일지 빈 양식·예시, 작업기록.md
+docs/02~07_*.md         개인과제 양식 문서: 02 벤치마킹 · 03 인터뷰(+정리·녹취록) · 04 아키텍처 · 05 handoff · 06 와이어프레임(화면 캡처 images/06_wireframe/) · 07 프롬프트 모음. 01 PRD는 루트의 PRD.md
 .vscode/                Live Server 설정, 작업(Tasks) 메뉴
 ```
 
@@ -102,7 +103,7 @@ content.low / content.high (수업 1개):
 - 수업 찾기: `lessonTopics(topic)`(기본+추가 수업), `findTopic(영역, 수업id)`, `baseTopicId`(추가 수업 → 별표 6 주제, 진행표·추천에 씀). tools/lib/common.js에도 같은 `lessonTopics`가 있어요.
 - 화면: `viewHome` `viewLevel` `viewTopics` `viewPick` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
 - 발표 모드: `buildSteps`(퀴즈는 문제→정답 2단계) `slideHTML`(1600×900 기준) `fitSlide`(글 넘치면 축소) `startShow/move/endShow`
-- 영상: `playVideo` — youtube-nocookie, rel=0, 자동재생 다음 영상 없음, 끝나면 `showEnd`로 화면 가림. file:// 이나 `window.NO_EMBED`면 유튜브 링크로.
+- 영상: `playVideo` — youtube-nocookie, rel=0, 자동재생 다음 영상 없음, 끝나면 `showEnd`로 화면 가림. file:// 이나 `window.NO_EMBED`면 유튜브 링크로. 영상 장 아래에 늘 "재생이 안 되면 유튜브에서 열기" 링크(`.vlink`). 유튜브가 8초 안에 안 열리거나 재생 오류(퍼가기 차단 등)면 `linkCard`로 큰 링크 버튼(새 창).
 - 기록: localStorage `seh-records-v1`(기록 목록, topicId에는 수업id가 들어가요), `seh-prefs-v1`(장소·진행자·담당자, lastBackupAt)
   주기 알림은 지난해 기록까지 봐요(`areaStats.last`). 기록 3건 이상 + 30일 넘게 내보내기 안 하면 백업 알림(`backupBox`).
   기록하기 화면의 "저장하고 한글 파일 받기" = `submitRecord(..., true)`
@@ -117,6 +118,7 @@ content.low / content.high (수업 1개):
 
 - 영역 색(`color`)은 테두리·막대·점 같은 **장식**에만 써요. 글씨와 흰 글씨가 올라가는 바탕은 **진한 색 `--cd`** = `ink(color)`(흰색과 대비 4.8:1 이상, index.html과 tools/lib/common.js에 같은 함수)를 써요. 새 화면도 `style="${cv(area)}"`로 두 색을 함께 넣어요.
 - 그림 카드(make-cards.js)는 슬라이드 종류마다 모양이 달라요: cover 햇살+영역 배지, question 말풍선+물음표, promise 번호 배지 원, activity 종이+연필. **그림 안에 글자 넣지 않기**(활동지 짝짓기 정답이 보여요).
+- **청소년(teen) 테마** (2026-11-12 "너무 유치하다" 피드백): 발표 화면 `teenSlideHTML`(`.slide.t`), 그림 카드 `teenCardSvg`(정사각형 800×800, 어두운 바탕, 이모지 대신 단색 선 아이콘), PPT `TEEN` 테마, 활동지 `body.teen`. 어두운 배경 강조색은 `--cl` = `light(color)`(#121419와 대비 4.5:1 이상). 저·고학년 디자인은 그대로.
 - 첫 화면 맨 위 "오늘의 추천 교육"(`urgency` → `todayBox`): 주기 넘김/안 함 → 주기 끝 임박 → 밀린 횟수 순. 영역 카드 순서는 **바꾸지 않아요**(늘 같은 자리가 선생님에게 편해요).
 
 ## 꼭 지킬 규칙
@@ -126,7 +128,7 @@ content.low / content.high (수업 1개):
 3. **성폭력·아동학대 수업**: 자극적·구체적 묘사 금지, 피해 아동 탓하는 표현 금지. "말해줘서 고마워, 네 잘못이 아니야", 선생님은 신고의무자(112) 안내 유지.
 4. 신고·상담 번호는 확인된 것만: 112(경찰·아동학대 신고), 129(보건복지상담), 182(실종아동), 117(학교·여성폭력), 1342(마약류 상담), 119, 1388(청소년상담, 24시간 — 2026-11-12 확인), 1336(한국도박문제예방치유원, 운영시간은 누리집 확인 — 2026-11-12 확인). 새 번호는 공식 출처를 확인하고 넣어요.
 5. 외부 자료는 **링크만**(내용 복사 금지, 저작권). 영상은 공식 기관 채널만. 링크를 넣거나 확인하면 `checkedAt` 날짜를 적어요.
-6. 그림은 직접 만든 것(SVG)이나 이모지만. 무섭거나 자극적인 그림 금지. 실존 캐릭터 금지.
+6. 그림은 직접 만든 것(SVG)이나 이모지만. **청소년(teen) 그림 카드는 Tabler Icons 선 아이콘**(MIT, `tools/assets/teen-icons.json` + `TABLER-LICENSE.txt`, 2026-11-12 사용자 승인). 새 이모지를 쓰면 teen-icons.json의 map에 짝을 추가해요. 무섭거나 자극적인 그림 금지. 실존 캐릭터 금지.
 7. 화면은 큰 글씨(본문 18px 이상), 큰 버튼(56px 이상), 쉬운 말. 새 버튼도 이 기준을 따라요.
 8. `index.html`은 외부 라이브러리 없이 한 파일로 유지해요(센터 컴퓨터에서 더블클릭으로도 열려야 함). 폰트(Jua)만 Google Fonts.
 9. 아이들 이름 등 개인정보는 기록에만, 그것도 선택 입력. 기록은 브라우저에만 저장돼요(서버 없음).

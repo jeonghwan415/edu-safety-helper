@@ -50,16 +50,22 @@ h2 b { display:inline-flex; width:7.5mm; height:7.5mm; border-radius:50%; backgr
 .draw { border:2px solid #22262B; border-radius:3mm; height:42mm; }
 table { width:100%; border-collapse:collapse; text-align:center; } td,th { border:1.5px solid #22262B; height:9mm; font-size:11.5pt; }
 th { background:#F2F4F6; }
+/* 청소년(teen): 건널목 줄무늬·동그라미 대신 얇은 선과 각진 번호, 차분한 표 */
+.teen .stripe { height:1.2mm; background:#22262B; border:0; margin:2mm 0 4mm; }
+.teen h1 { color:#16181E; font-size:22pt; letter-spacing:-0.02em; } .teen .top { border-bottom-width:3mm; }
+.teen h2 b { border-radius:1.5mm; background:#16181E; }
+.teen .word, .teen .draw { border-width:1.5px; border-radius:1.5mm; }
+.teen .tag { display:inline-block; background:${c}; color:#fff; font-size:9.5pt; font-weight:700; padding:0.6mm 2.5mm; border-radius:1mm; margin-right:2mm; vertical-align:middle; }
 .foot { margin-top:3mm; font-size:10pt; color:#5B6168; display:flex; justify-content:space-between; }
-</style></head><body>
-<div class="top"><div><h1>${E(title)}</h1><div class="sub">${E(area.shortName)} · ${E(topic.title)} · ${lv}</div></div><div class="name">이름 <span></span></div></div>
+</style></head><body${level === "teen" ? ' class="teen"' : ""}>
+<div class="top"><div>${level === "teen" ? `<span class="tag">${E(area.shortName)}</span>` : ""}<h1${level === "teen" ? ' style="display:inline;vertical-align:middle"' : ""}>${E(title)}</h1><div class="sub">${E(area.shortName)} · ${E(topic.title)} · ${lv}</div></div><div class="name">이름 <span></span></div></div>
 <div class="stripe"></div>
-<h2><b>1</b>그림과 알맞은 약속을 선으로 이어요.</h2><div class="match">${rows}</div>
-<h2><b>2</b>맞으면 O, 틀리면 X에 동그라미 해요.</h2><div class="ox"><ul>${ox}</ul></div>
+<h2><b>1</b>${level === "teen" ? "그림과 알맞은 내용을 선으로 연결하세요." : "그림과 알맞은 약속을 선으로 이어요."}</h2><div class="match">${rows}</div>
+<h2><b>2</b>${level === "teen" ? "O · X로 답하고, 헷갈린 문제는 이유를 적어 보세요." : "맞으면 O, 틀리면 X에 동그라미 해요."}</h2><div class="ox"><ul>${ox}</ul></div>
 <h2><b>3</b>${draw}</h2><div class="draw"></div>
 <h2><b>4</b>${level === "teen" ? "이번 주 나의 약속을 지켰다면 ○ 해요." : "가족과 함께 약속을 지켰다면 ○ 해요."}</h2>
-<table><tr><th>약속</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr><tr><td>${E(wrapTxt)}</td><td></td><td></td><td></td><td></td><td></td></tr></table>
-<div class="foot"><span>보호자 확인 ____________</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)}</span></div>
+<table><tr><th>${level === "teen" ? "실천 체크" : "약속"}</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr><tr><td>${E(wrapTxt)}</td><td></td><td></td><td></td><td></td><td></td></tr></table>
+<div class="foot"><span>${level === "teen" ? "확인 ____________" : "보호자 확인 ____________"}</span><span>${area.optional ? "지역아동센터 추가 교육" : "지역아동센터 6대 의무교육"} · ${E(area.shortName)}</span></div>
 </body></html>`;
 }
 

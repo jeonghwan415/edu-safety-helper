@@ -260,6 +260,41 @@
   .slide.wrap .sub { position: absolute; left: 0; right: 0; top: 650px; text-align: center; font-size: 72px; }
 
 
+  /* ---------- 청소년 슬라이드 (.slide.t) ---------- */
+  .slide.t { background: #121419; color: #F3F4F6; font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+  .slide.t::after { height: 12px; background: var(--c); }
+  .slide.t .t-tag { position: absolute; left: 90px; top: 64px; display: flex; gap: 14px; align-items: center; font-size: 30px; font-weight: 700; letter-spacing: 0; }
+  .slide.t .t-tag b { background: var(--cl); color: #121419; padding: 6px 18px; border-radius: 8px; }
+  .slide.t .t-tag span { color: #9AA1AD; }
+  .slide.t .img { left: auto; right: 90px; top: 160px; width: 600px; height: 600px; border-radius: 28px; box-shadow: none; border: 2px solid #2A2E37; }
+  .slide.t .txt { left: 90px; right: 760px; top: 150px; bottom: 90px; }
+  .slide.t h2 { font-size: 100px; font-weight: 800; line-height: 1.12; margin-bottom: 28px; }
+  .slide.t p { font-size: 44px; font-weight: 500; color: #BFC5CE; line-height: 1.45; }
+  .slide.t .t-q { font-size: 180px; line-height: 1; color: var(--cl); margin-bottom: 20px; }
+  .slide.t.question h2 { font-size: 76px; }
+  .slide.t .t-no { font-size: 200px; line-height: .9; color: transparent; -webkit-text-stroke: 5px var(--cl); margin-bottom: 26px; font-family: "Arial Black", "Malgun Gothic", sans-serif; }
+  .slide.t.promise h2 { color: #fff; font-size: 104px; }
+  .slide.t .t-kick { font-size: 34px; color: var(--cl); letter-spacing: .06em; margin-bottom: 22px; }
+  .slide.t.quiz { background: #121419; }
+  .slide.t.quiz .qk { position: absolute; left: 90px; top: 150px; }
+  .slide.t.quiz .q { position: absolute; left: 90px; right: 90px; top: 210px; font-size: 72px; line-height: 1.25; }
+  .slide.t.quiz .ox { position: absolute; left: 90px; top: 460px; display: flex; gap: 40px; justify-content: flex-start; }
+  .slide.t.quiz .ox span { width: 330px; height: 230px; border-radius: 26px; border: 4px solid #343944; background: #1B1E25; color: #6B7280; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 38px; font-weight: 700; gap: 6px; }
+  .slide.t.quiz .ox span b { font-size: 130px; line-height: 1; font-family: "Arial Black", "Malgun Gothic", sans-serif; }
+  .slide.t.quiz.reveal .ox span.on { border-color: var(--okc); color: var(--okc); background: color-mix(in srgb, var(--okc) 14%, #121419); transform: none; animation: none; }
+  .slide.t.quiz.reveal .ox span.off { opacity: .3; }
+  .slide.t.quiz .ans { display: none; }
+  .slide.t.quiz.reveal .ans { display: block; position: absolute; left: 820px; right: 90px; top: 460px; }
+  .slide.t.quiz .why { position: static; visibility: visible; text-align: left; font-size: 46px; color: var(--okc); margin-bottom: 18px; }
+  .slide.t.quiz .ex { position: static; display: block; text-align: left; background: #1B1E25; color: #D5D9E0; font-size: 34px; font-weight: 500; line-height: 1.5; padding: 22px 28px; border-radius: 20px; border-left: 8px solid var(--okc); }
+  .slide.t.wrap { background: #121419; }
+  .slide.t.wrap .wk { position: absolute; left: 90px; top: 150px; font-size: 44px; }
+  .slide.t.wrap .words { position: absolute; left: 90px; right: 90px; top: 250px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .slide.t.wrap .words div { width: auto; height: 440px; border-radius: 28px; background: #1B1E25; border: 2px solid #2A2E37; border-top: 14px solid var(--c); color: #fff; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 40px 44px; position: relative; }
+  .slide.t.wrap .words small { font-size: 46px; color: var(--cl); font-family: "Arial Black", "Malgun Gothic", sans-serif; }
+  .slide.t.wrap .words span { font-size: 92px; line-height: 1.1; word-break: keep-all; }
+  .slide.t.wrap .words i { position: absolute; right: 40px; top: 36px; font-style: normal; font-size: 64px; opacity: .85; }
+
   /* 영상 슬라이드 */
   .slide.video { background: #22262B; color: #fff; }
   .slide.video .vbox { position: absolute; left: 230px; top: 60px; width: 1140px; height: 641px; border-radius: 28px; overflow: hidden; background: #000; }
@@ -274,6 +309,10 @@
   .slide.video .vcap { position: absolute; left: 230px; right: 230px; top: 725px; display: flex; justify-content: space-between; align-items: baseline; }
   .slide.video .vcap b { font-size: 56px; font-weight: 400; }
   .slide.video .vcap small { font-size: 34px; color: #C9CED4; }
+  .slide.video .vlink { position: absolute; left: 230px; top: 800px; font-size: 32px; color: #C9CED4; text-decoration: underline; z-index: 2; }
+  .slide.video .endcard span { font-size: 60px; }
+  .slide.video .ytlink { font-family: inherit; font-size: 52px; border-radius: 24px; padding: 22px 48px; background: #fff; color: #22262B; text-decoration: none; }
+  .slide.video .ytlink.small { position: absolute; right: 24px; bottom: 24px; font-size: 30px; padding: 12px 24px; z-index: 3; }
   /* 퀴즈 정답이 나올 때 한 번 튀어 오르기 */
   .slide.quiz.reveal .ox span.on { animation: okpop .5s cubic-bezier(.3,1.6,.5,1) both; }
   @keyframes okpop { from { transform: scale(.6); } to { transform: scale(1.08); } }
@@ -392,7 +431,15 @@
     while (contrast(c, "#FFFFFF") < 4.8 && k++ < 40) c = "#" + [1, 3, 5].map(i => Math.round(parseInt(c.substr(i, 2), 16) * .95).toString(16).padStart(2, "0")).join("");
     return (INK[hex] = c.toUpperCase());
   }
-  const cv = a => `--c:${a.color};--cd:${ink(a.color)}`;
+  /* 청소년 화면(어두운 배경)용 밝은 강조색: 흰색 쪽으로 섞어 #121419 배경과 대비 4.5:1 이상 */
+  const LIGHT = {};
+  function light(hex) {
+    if (LIGHT[hex]) return LIGHT[hex];
+    let c = hex, k = 0;
+    while (contrast(c, "#121419") < 4.5 && k++ < 40) c = "#" + [1, 3, 5].map(i => Math.round(parseInt(c.substr(i, 2), 16) + (255 - parseInt(c.substr(i, 2), 16)) * .08).toString(16).padStart(2, "0")).join("");
+    return (LIGHT[hex] = c.toUpperCase());
+  }
+  const cv = a => `--c:${a.color};--cd:${ink(a.color)};--cl:${light(a.color)}`;
   const LEVELS = [
     { id: "low",  icon: "🐣", title: "저학년", desc: "초등 1~3학년" },
     { id: "high", icon: "🦁", title: "고학년", desc: "초등 4~6학년" },
@@ -654,7 +701,8 @@
     });
     return steps;
   }
-  function slideHTML(st, area) {
+  function slideHTML(st, area, level) {
+    if (level === "teen") return teenSlideHTML(st, area);
     const sl = st.sl, c = `${cv(area)}`;
     const img = sl.image ? `<div class="img"><img src="${esc(sl.image)}" alt=""></div>` : "";
     switch (sl.type) {
@@ -675,7 +723,8 @@
         return `<div class="slide video" style="${c}"><div class="vbox" data-yt="${esc(sl.youtubeId)}"><img src="${thumb}" alt="" onerror="this.remove()">
           ${EMBED_OK ? `<button class="playbig" onclick="event.stopPropagation();playVideo(this)"><span>▶</span>영상 보기</button>`
                      : `<a class="playbig" href="https://www.youtube.com/watch?v=${esc(sl.youtubeId)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="text-decoration:none"><span>▶</span>유튜브에서 보기</a>`}</div>
-          <div class="vcap"><b>${esc(sl.title)}</b><small>${esc(sl.source)}</small></div></div>`;
+          <div class="vcap"><b>${esc(sl.title)}</b><small>${esc(sl.source)}</small></div>
+          <a class="vlink" href="${ytUrl(sl.youtubeId)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 재생이 안 되면 유튜브에서 열기</a></div>`;
       }
       case "wrap":
         const words = sl.words || [["✋", "서다"], ["👀", "보다"], ["🚶", "걷다"]];
@@ -683,6 +732,37 @@
         return `<div class="slide wrap" style="${c}"><div class="words">${words.map(([e, w]) => `<div><small>${e}</small><span style="font-size:${fs(w)}px">${esc(w)}</span></div>`).join("")}</div><div class="sub">다 같이 외쳐요!</div></div>`;
       default:
         return `<div class="slide ${esc(sl.type)}" style="${c}">${img}<div class="txt"><h2>${esc(sl.title)}</h2><p>${esc(sl.text || "")}</p></div></div>`;
+    }
+  }
+  /* 청소년(중·고등)용 슬라이드: 유치하지 않게 — 어두운 배경, 굵은 고딕, 큰 번호, 움직임·구호 없음 (2026-11-12 사용자 피드백) */
+  function teenSlideHTML(st, area) {
+    const sl = st.sl, c = `${cv(area)}`;
+    const img = sl.image ? `<div class="img"><img src="${esc(sl.image)}" alt=""></div>` : "";
+    const tag = `<div class="t-tag"><b>${esc(area.shortName)}</b><span>청소년</span></div>`;
+    switch (sl.type) {
+      case "cover":
+        return `<div class="slide t cover" style="${c}">${tag}${img}<div class="txt"><h2>${esc(sl.title)}</h2><p>${esc(sl.text)}</p></div></div>`;
+      case "question":
+        return `<div class="slide t question" style="${c}">${tag}${img}<div class="txt"><div class="t-q">Q.</div><h2>${esc(sl.text).replace(/\n/g, " ")}</h2></div></div>`;
+      case "promise":
+        return `<div class="slide t promise" style="${c}">${tag}${img}<div class="txt"><div class="t-no">${String(sl.no).padStart(2, "0")}</div><h2>${esc(sl.title)}</h2><p>${esc(sl.text)}</p></div></div>`;
+      case "activity":
+        return `<div class="slide t activity" style="${c}">${tag}${img}<div class="txt"><div class="t-kick">ACTIVITY · 활동</div><h2>${esc(sl.title)}</h2><p>${esc(sl.text)}</p></div></div>`;
+      case "quiz": {
+        const it = st.item || sl.items[0], n = (st.k || 0) + 1;
+        const on = a => st.reveal ? (it.a === a ? "on" : "off") : "";
+        const okc = it.a === "O" ? "#3DD68C" : "#FF6369";
+        return `<div class="slide t quiz${st.reveal ? " reveal" : ""}" style="${c};--okc:${okc}">${tag}<div class="t-kick qk">O X 체크 ${n} / ${sl.items.length}</div>
+          <div class="q">${esc(it.q)}</div>
+          <div class="ox"><span class="${on("O")}"><b>O</b>맞다</span><span class="${on("X")}"><b>X</b>아니다</span></div>
+          <div class="ans"><div class="why">${esc(it.a)} · ${esc(it.why)}</div>${it.explain ? `<div class="ex">${esc(it.explain)}</div>` : ""}</div></div>`;
+      }
+      case "wrap": {
+        const words = sl.words || [];
+        return `<div class="slide t wrap" style="${c}">${tag}<div class="t-kick wk">오늘의 핵심</div><div class="words">${words.map(([e, w], i) => `<div><small>${String(i + 1).padStart(2, "0")}</small><span>${esc(w)}</span></div>`).join("")}</div></div>`;
+      }
+      default:
+        return slideHTML(st, area).replace('class="slide ', 'class="slide t ');
     }
   }
   function viewLesson(area, topic, level) {
@@ -711,7 +791,7 @@
       body = `<div class="thumbs">` + L.slides.map((sl, i) => {
         const si = steps.findIndex(s => s.i === i);
         /* 작은 그림 안에는 버튼을 넣을 수 없어서(버튼 안의 버튼) 영상 재생 버튼을 글자로 바꿔요 */
-        const mini = slideHTML(steps[si], area).replace(/<(button|a) class="playbig"[^>]*>([\s\S]*?)<\/\1>/, '<span class="playbig">$2</span>');
+        const mini = slideHTML(steps[si], area, level).replace(/<(button|a) class="playbig"[^>]*>([\s\S]*?)<\/\1>/, '<span class="playbig">$2</span>').replace(/<a class="vlink"[^>]*>([\s\S]*?)<\/a>/, '<span class="vlink">$1</span>');
         return `<button class="thumb" style="${cv(area)}" onclick="startShow(${si})"><div class="mini" data-mini>${mini}</div><span class="cap">${i + 1}. ${esc(sl.title)}</span></button>`;
       }).join("") + `</div>`;
     } else if (lessonTab === "flow") {
@@ -854,6 +934,11 @@
   /* ---------- 유튜브 재생: 선생님이 고른 영상만, 끝나면 가리기 ---------- */
   /* 파일로 열었거나(file:) 미리보기 사이트처럼 영상 넣기가 막힌 곳에서는 유튜브 링크로 대신 열어요 */
   const EMBED_OK = location.protocol.startsWith("http") && !window.NO_EMBED;
+  const ytUrl = id => `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+  /* 센터에서 유튜브 퍼가기가 막혔거나 연결이 안 되면: 오류 문구 대신 '유튜브에서 열기' 큰 버튼 (새 창으로 봐요) */
+  function linkCard(box, id, msg) {
+    box.innerHTML = `<div class="endcard"><span>${msg}</span><a class="ytlink" href="${ytUrl(id)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 유튜브에서 열기</a></div>`;
+  }
   let ytReady = null;
   function loadYT() {
     if (ytReady) return ytReady;
@@ -862,19 +947,26 @@
       window.onYouTubeIframeAPIReady = res;
       const sc = document.createElement("script"); sc.src = "https://www.youtube.com/iframe_api";
       sc.onerror = () => res("fail"); document.head.appendChild(sc);
+      setTimeout(() => res("fail"), 8000);   /* 8초 안에 유튜브가 안 열리면 막힌 것으로 봐요 */
     });
+    ytReady.then(r => { if (r === "fail") ytReady = null; });   /* 다음에 다시 시도할 수 있게 */
     return ytReady;
   }
   async function playVideo(btn) {
     const box = btn.closest(".vbox"), id = box.dataset.yt;
     const r = await loadYT();
-    if (r === "fail" || !window.YT) { box.innerHTML = `<div class="endcard">인터넷 연결을 확인해 주세요</div>`; return; }
+    if (r === "fail" || !window.YT || !window.YT.Player) { linkCard(box, id, "여기서는 유튜브가 열리지 않아요"); return; }
     box.innerHTML = `<div id="ytp"></div>`;
+    let started = false;
     new YT.Player("ytp", {
       width: "100%", height: "100%", videoId: id, host: "https://www.youtube-nocookie.com",
       playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1, fs: 0, iv_load_policy: 3 },
-      events: { onStateChange: e => { if (e.data === YT.PlayerState.ENDED) showEnd(box, id); } }
+      events: {
+        onStateChange: e => { if (e.data === YT.PlayerState.PLAYING) started = true; if (e.data === YT.PlayerState.ENDED) showEnd(box, id); },
+        onError: () => linkCard(box, id, "이 영상은 여기서 재생할 수 없어요")   /* 퍼가기 차단·삭제·네트워크 차단 */
+      }
     });
+    setTimeout(() => { if (!started && box.querySelector("iframe") && !document.hidden) box.insertAdjacentHTML("beforeend", `<a class="ytlink small" href="${ytUrl(id)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">안 나오면 → 🔗 유튜브에서 열기</a>`); }, 12000);
   }
   function showEnd(box, id) {
     box.innerHTML = `<div class="endcard">영상 끝! 잘 봤어요<button onclick="event.stopPropagation();this.closest('.vbox').innerHTML='<button class=&quot;playbig&quot; onclick=&quot;event.stopPropagation();playVideo(this)&quot;><span>▶</span>다시 보기</button>'">🔁 다시 보기</button></div>`;
@@ -909,11 +1001,11 @@
     const a = ALL_AREAS.find(x => x.id === p[1]);
     const t = a && findTopic(a.id, p[2]).t;
     const L = t && contentFor(t, p[3]).data;
-    return L ? { area: a, L } : null;
+    return L ? { area: a, L, level: p[3] } : null;
   }
   function startShow(i) {
     const cur = currentLesson(); if (!cur) return;
-    show = { area: cur.area, steps: buildSteps(cur.L.slides), i: i || 0 };
+    show = { area: cur.area, level: cur.level, steps: buildSteps(cur.L.slides), i: i || 0 };
     const el = document.createElement("div");
     el.className = "stage"; el.id = "stage";
     el.innerHTML = `<div class="note" id="note"></div><div class="frame" id="frame"></div>
@@ -926,7 +1018,7 @@
   }
   function drawShow() {
     const st = show.steps[show.i];
-    document.getElementById("frame").innerHTML = slideHTML(st, show.area);
+    document.getElementById("frame").innerHTML = slideHTML(st, show.area, show.level);
     document.getElementById("count").textContent = `${st.i + 1} / ${show.steps[show.steps.length - 1].i + 1}`;
     const quizNote = st.sl.type === "quiz" && st.item ? `정답 ${st.item.a} — ${st.item.why}${st.item.explain ? " " + st.item.explain : ""}` : "";
     const memo = [st.sl.script ? "🗣 대본: " + st.sl.script : "", st.sl.teacher ? "💡 " + st.sl.teacher : ""].filter(Boolean).join("   ");

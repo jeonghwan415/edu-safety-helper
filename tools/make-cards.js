@@ -2,7 +2,7 @@
 // 실행: npm run cards              (없는 그림만 만들기)
 //       npm run cards -- --force   (모두 다시 만들기)
 //       npm run cards -- --only=abuse-e-03-high
-const { fs, path, ROOT, loadData, eachLesson, onlyFilter, tint, ink } = require("./lib/common");
+const { fs, path, ROOT, loadData, eachLesson, onlyFilter, tint, ink, light } = require("./lib/common");
 
 function seeded(seed) { let h = 2166136261; for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) % 10000) / 10000; }
 
@@ -61,6 +61,32 @@ ${body}
 </svg>`;
 }
 
+// 청소년(teen)용 그림 카드: 정사각형, 어두운 바탕 + 각진 타일 안에 단색 선 아이콘 (이모지 대신)
+// 아이콘: Tabler Icons(MIT, tools/assets/TABLER-LICENSE.txt). 짝이 없는 이모지는 이모지로 그려요.
+const TEEN_ICONS = JSON.parse(fs.readFileSync(path.join(ROOT, "tools", "assets", "teen-icons.json"), "utf8"));
+const attr = o => Object.entries(o).filter(([k]) => k !== "key").map(([k, v]) => `${k}="${v}"`).join(" ");
+function iconSvg(emoji, x, y, size, color) {
+  const name = TEEN_ICONS.map[emoji], nodes = name && TEEN_ICONS.icons[name];
+  if (!nodes) return `<text x="${x + size / 2}" y="${y + size / 2 + 8}" text-anchor="middle" dominant-baseline="central" font-size="${size}" font-family="${EMOJI_FONT}">${emoji}</text>`;
+  return `<g transform="translate(${x} ${y}) scale(${size / 24})" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${nodes.map(([tag, a]) => `<${tag} ${attr(a)}/>`).join("")}</g>`;
+}
+function teenCardSvg(emoji, color, seed, opt = {}) {
+  const { type = "" } = opt;
+  const dark = "#16181E", line = "#23272F", tile = "#1D2128", accent = light(color);
+  let grid = "";
+  for (let i = 1; i < 8; i++) grid += `<path d="M${i * 100},0V800M0,${i * 100}H800" stroke="${line}" stroke-width="2"/>`;
+  let deco = "";
+  if (type === "cover") deco = `<rect x="-120" y="590" width="1100" height="70" fill="${color}" opacity=".85" transform="rotate(-12 400 600)"/>`;
+  else if (type === "question") deco = `<circle cx="640" cy="160" r="70" fill="none" stroke="${color}" stroke-width="8"/><circle cx="640" cy="160" r="18" fill="${color}"/>`;
+  else if (type === "promise") deco = `<rect x="90" y="90" width="620" height="620" rx="56" fill="none" stroke="${color}" stroke-width="4" stroke-dasharray="36 22" opacity=".9"/>`;
+  else if (type === "activity") deco = `<rect x="480" y="480" width="200" height="200" rx="36" fill="${color}" opacity=".8" transform="rotate(8 580 580)"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+<rect width="800" height="800" fill="${dark}"/>${grid}${deco}
+<rect x="210" y="210" width="380" height="380" rx="84" fill="${tile}" stroke="${color}" stroke-width="8"/>
+${iconSvg(emoji, 280, 280, 240, accent)}
+</svg>`;
+}
+
 const force = process.argv.includes("--force");
 const data = loadData();
 let made = 0, skipped = 0, changed = false;
@@ -74,7 +100,7 @@ for (const { area, topic, level, L } of eachLesson(data, onlyFilter(process.argv
     const file = path.join(ROOT, rel);
     if (fs.existsSync(file) && !force) { skipped++; continue; }
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, cardSvg(s.emoji, area.color, `${topic.id}${level}${n}`, { type: s.type, no: s.no, areaIcon: area.icon }), "utf8");
+    fs.writeFileSync(file, (level === "teen" ? teenCardSvg : cardSvg)(s.emoji, area.color, `${topic.id}${level}${n}`, { type: s.type, no: s.no, areaIcon: area.icon }), "utf8");
     made++;
   }
 }

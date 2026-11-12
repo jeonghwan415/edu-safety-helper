@@ -99,4 +99,11 @@ function ink(hex) {
   return c.toUpperCase();
 }
 
-module.exports = { ink, contrast, fs, path, ROOT, LINUX_LIBS, DATA_JSON, DATA_JS, loadData, lessonTopics, allAreas, eachLesson, onlyFilter, launchBrowser, tint };
+// 어두운 배경(#121419)용 밝은 강조색: 흰색 쪽으로 섞어 대비 4.5:1 이상 (index.html의 light와 같은 규칙)
+function light(hex) {
+  let c = hex, k = 0;
+  while (contrast(c, "#121419") < 4.5 && k++ < 40) c = "#" + [1, 3, 5].map(i => { const v = parseInt(c.substr(i, 2), 16); return Math.round(v + (255 - v) * .08).toString(16).padStart(2, "0"); }).join("");
+  return c.toUpperCase();
+}
+
+module.exports = { ink, light, contrast, fs, path, ROOT, LINUX_LIBS, DATA_JSON, DATA_JS, loadData, lessonTopics, allAreas, eachLesson, onlyFilter, launchBrowser, tint };
