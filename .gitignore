@@ -5,3 +5,8 @@ node_modules/
 # 참고용 외부 자료(저작권·용량): 내 컴퓨터에만 두고 공개 저장소에는 올리지 않아요
 docs/*.ppt
 docs/*.pptx
+
+# AI 도구 (내 컴퓨터에만)
+.claude/
+.agents/
+skills-lock.json

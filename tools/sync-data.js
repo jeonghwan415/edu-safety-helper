@@ -18,7 +18,9 @@ for (const a of data.extraAreas || []) {
 }
 
 // 2) 수업 내용 검사
-const TYPES = ["cover", "question", "promise", "video", "quiz", "activity", "wrap"];
+const TYPES = ["cover", "question", "promise", "video", "quiz", "activity", "wrap", "scene", "law", "help"];
+// 신고·상담 번호는 확인된 것만 (CLAUDE.md 규칙 4). 도움받는 곳(help) 장에 다른 번호가 들어가면 알려 줘요.
+const OK_NUMBERS = ["112", "119", "129", "182", "117", "1342", "1388", "1336", "1366", "1339", "1544-9030", "02-735-8994", "안전Dream"];
 let lessons = 0, reviewed = 0;
 // 추가 수업(extras) id는 주제 안에서 겹치면 안 돼요
 for (const a of allAreas(data)) for (const t of a.topics.elementary) {
@@ -37,6 +39,10 @@ for (const a of allAreas(data)) for (const t of a.topics.elementary) {
         if (!TYPES.includes(s.type)) warn(`${where} 슬라이드 ${i + 1}: 모르는 type "${s.type}"`);
         if (s.type === "video" && !/^[\w-]{11}$/.test(s.youtubeId || "")) warn(`${where} 슬라이드 ${i + 1}: 영상 youtubeId가 이상해요.`);
         if (s.type === "quiz") (s.items || []).forEach((q, k) => { if (!["O", "X"].includes(q.a)) warn(`${where} 퀴즈 ${k + 1}: 정답(a)은 "O" 또는 "X"여야 해요.`); if (!q.explain) warn(`${where} 퀴즈 ${k + 1}: 해설(explain)이 없어요.`); });
+        if (s.type === "scene" && (!s.title || !s.story || !s.ask)) warn(`${where} 슬라이드 ${i + 1}: 상황 장면에 title·story·ask가 다 있어야 해요.`);
+        if (s.type === "scene" && !s.image) warn(`${where} 슬라이드 ${i + 1}: 상황 장면 그림이 없어요 (npm run scenes)`);
+        if (s.type === "law" && !(s.points || []).length) warn(`${where} 슬라이드 ${i + 1}: 법 장에 points가 없어요.`);
+        if (s.type === "help") (s.items || []).forEach(h => { if (!OK_NUMBERS.includes(String(h.no))) warn(`${where} 슬라이드 ${i + 1}: 확인되지 않은 번호 "${h.no}" — 공식 출처를 확인하고 OK_NUMBERS와 CLAUDE.md에 넣어요.`); });
         if (s.image && !fs.existsSync(require("path").join(__dirname, "..", s.image))) warn(`${where} 슬라이드 ${i + 1}: 그림 파일이 없어요 → ${s.image} (npm run cards)`);
       });
       (L.lessonFlow || []).forEach(f => f.slides.forEach(n => { if (n < 1 || n > L.slides.length) warn(`${where}: 수업 흐름 "${f.step}"의 슬라이드 번호 ${n}이 없어요.`); }));

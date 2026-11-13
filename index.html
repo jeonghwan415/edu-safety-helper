@@ -296,6 +296,49 @@
   .slide.t.wrap .words span { font-size: 92px; line-height: 1.1; word-break: keep-all; }
   .slide.t.wrap .words i { position: absolute; right: 40px; top: 36px; font-style: normal; font-size: 64px; opacity: .85; }
 
+  /* ---------- 상황 장면 · 법 · 도움받는 곳 슬라이드 (2026-11-13 "내용이 풍부했으면") ---------- */
+  .slide.scene .txt { justify-content: flex-start; top: 80px; }
+  .slide.scene .kicker { display: inline-block; align-self: flex-start; background: var(--cd); color: #fff; padding: 6px 22px; border-radius: 99px; font-size: 40px; }
+  .slide.scene h2 { font-size: 76px; margin: 14px 0 18px; }
+  .slide.scene p { font-size: 44px; line-height: 1.45; }
+  .slide.scene p.ask { margin-top: 26px; padding: 22px 28px; border-radius: 26px; background: color-mix(in srgb, var(--c) 14%, #fff); color: var(--cd); font-size: 42px; }
+  .slide.law, .slide.help { background: #FFFBF2; }
+  .slide.law .lhead, .slide.help .lhead { position: absolute; left: 90px; right: 90px; top: 64px; display: flex; align-items: center; gap: 24px; }
+  .slide.law .lhead span, .slide.help .lhead span { font-size: 96px; line-height: 1; }
+  .slide.law .lhead h2, .slide.help .lhead h2 { font-size: 82px; margin: 0; }
+  .slide.law .pts { position: absolute; left: 90px; right: 90px; top: 220px; bottom: 150px; display: grid; gap: 22px; align-content: start; }
+  .slide.law .pts div { display: grid; grid-template-columns: 70px 1fr; gap: 22px; align-items: start; background: #fff; border: 4px solid color-mix(in srgb, var(--c) 35%, #fff); border-radius: 26px; padding: 22px 30px; font-size: 42px; line-height: 1.35; }
+  .slide.law .pts b { width: 70px; height: 70px; border-radius: 50%; background: var(--cd); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+  .slide.law .src, .slide.help .src { position: absolute; left: 90px; right: 90px; bottom: 76px; font-size: 28px; color: #6B7280; }
+  .slide.help .tiles { position: absolute; left: 90px; right: 90px; top: 230px; display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; }
+  .slide.help .tiles div { background: #fff; border: 4px solid color-mix(in srgb, var(--c) 35%, #fff); border-top: 18px solid var(--c); border-radius: 30px; padding: 30px 30px 34px; min-height: 420px; display: flex; flex-direction: column; gap: 18px; }
+  .slide.help .tiles b { font-size: 104px; line-height: 1; color: var(--cd); font-family: "Arial Black", "Jua", sans-serif; letter-spacing: -0.03em; }
+  .slide.help .tiles b.long { font-size: 62px; }
+  .slide.help .tiles span { font-size: 40px; line-height: 1.35; }
+  .slide.help .tiles small { font-size: 30px; color: #5B6168; line-height: 1.4; }
+  .slide.help .say { position: absolute; left: 90px; right: 90px; bottom: 122px; font-size: 36px; line-height: 1.35; color: var(--cd); }
+  .slide.help .tiles div { min-height: 340px; }
+  /* 청소년 */
+  .slide.t.scene .txt { right: 760px; top: 150px; }
+  .slide.t.scene .kicker { background: none; color: var(--cl); padding: 0; font-size: 34px; letter-spacing: .06em; }
+  .slide.t.scene h2 { font-size: 72px; margin: 10px 0 20px; }
+  .slide.t.scene p { font-size: 38px; }
+  .slide.t.scene p.ask { background: #1B1E25; color: #F3F4F6; border-left: 8px solid var(--cl); border-radius: 18px; font-size: 36px; font-weight: 700; }
+  .slide.t.law, .slide.t.help { background: #121419; }
+  .slide.t.law .lhead, .slide.t.help .lhead { top: 140px; }
+  .slide.t.law .lhead span, .slide.t.help .lhead span { font-size: 34px; color: var(--cl); letter-spacing: .06em; font-weight: 800; }
+  .slide.t.law .lhead h2, .slide.t.help .lhead h2 { font-size: 72px; color: #fff; }
+  .slide.t.law .pts { top: 270px; }
+  .slide.t.law .pts div { background: #1B1E25; border: 2px solid #2A2E37; border-left: 10px solid var(--c); color: #E6E8EC; font-size: 38px; font-weight: 600; }
+  .slide.t.law .pts b { background: none; color: var(--cl); font-family: "Arial Black", sans-serif; font-size: 40px; }
+  .slide.t.help .tiles { top: 280px; }
+  .slide.t.help .tiles div { background: #1B1E25; border: 2px solid #2A2E37; border-top: 12px solid var(--c); min-height: 300px; }
+  .slide.t.help .tiles b { color: var(--cl); }
+  .slide.t.help .tiles span { color: #F3F4F6; font-weight: 700; }
+  .slide.t.help .tiles small { color: #9AA1AD; font-weight: 500; }
+  .slide.t.help .say { color: #BFC5CE; font-size: 32px; font-weight: 600; }
+  .slide.t .src { color: #8A919E; }   /* 어두운 바탕 대비 4.5:1 이상 */
+
   /* 영상 슬라이드 */
   .slide.video { background: #22262B; color: #fff; }
   .slide.video .vbox { position: absolute; left: 230px; top: 60px; width: 1140px; height: 641px; border-radius: 28px; overflow: hidden; background: #000; }
@@ -775,9 +818,29 @@
         const words = sl.words || [["✋", "서다"], ["👀", "보다"], ["🚶", "걷다"]];
         const fs = w => w.length <= 2 ? 140 : w.length === 3 ? 112 : w.length === 4 ? 88 : 72;
         return `<div class="slide wrap" style="${c}"><div class="words">${words.map(([e, w]) => `<div><small>${e}</small><span style="font-size:${fs(w)}px">${esc(w)}</span></div>`).join("")}</div><div class="sub">다 같이 외쳐요!</div></div>`;
+      case "scene": case "law": case "help":
+        return moreSlideHTML(sl, area, false);
       default:
         return `<div class="slide ${esc(sl.type)}" style="${c}">${img}<div class="txt"><h2>${esc(sl.title)}</h2><p>${esc(sl.text || "")}</p></div></div>`;
     }
+  }
+  /* 상황 장면(scene) · 알아 두면 힘이 되는 법(law) · 도움받는 곳(help) — 저·고학년과 청소년이 같이 써요 */
+  function moreSlideHTML(sl, area, teen) {
+    const c = `${cv(area)}`, t = teen ? " t" : "";
+    const tag = teen ? `<div class="t-tag"><b>${esc(area.shortName)}</b><span>청소년</span></div>` : "";
+    const img = sl.image ? `<div class="img"><img src="${esc(sl.image)}" alt=""></div>` : "";
+    if (sl.type === "scene")
+      return `<div class="slide${t} scene" style="${c}">${tag}${img}<div class="txt"><div class="kicker">${teen ? "SCENE " + String(sl.no).padStart(2, "0") : "🎬 상황 " + sl.no}</div><h2>${esc(sl.title)}</h2><p>${esc(sl.story)}</p><p class="ask">${teen ? "" : "🤔 "}${esc(sl.ask)}</p></div></div>`;
+    if (sl.type === "law")
+      return `<div class="slide${t} law" style="${c}">${tag}<div class="lhead"><span>${teen ? "LAW · 법" : "⚖️"}</span><h2>${esc(sl.title)}</h2></div>
+        <div class="pts">${(sl.points || []).map((p, i) => `<div><b>${teen ? String(i + 1).padStart(2, "0") : i + 1}</b><span>${esc(p)}</span></div>`).join("")}</div>${sl.source ? `<div class="src">근거: ${esc(sl.source)}</div>` : ""}</div>`;
+    if (sl.type === "help") {
+      const items = sl.items || [];
+      return `<div class="slide${t} help" style="${c};--n:${Math.min(items.length, 4)}">${tag}<div class="lhead"><span>${teen ? "HELP · 도움" : "📞"}</span><h2>${esc(sl.title)}</h2></div>
+        <div class="tiles">${items.map(it => `<div><b class="${String(it.no).length > 4 ? "long" : ""}">${esc(it.no)}</b><span>${esc(it.who)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ""}</div>`).join("")}</div>
+        ${sl.say ? `<div class="say">${esc(sl.say)}</div>` : ""}<div class="src">번호 확인 ${esc(sl.checkedAt || "")} · 상황이 급하면 112 · 119</div></div>`;
+    }
+    return "";
   }
   /* 청소년(중·고등)용 슬라이드: 유치하지 않게 — 어두운 배경, 굵은 고딕, 큰 번호, 움직임·구호 없음 (2026-11-12 사용자 피드백) */
   function teenSlideHTML(st, area) {
@@ -806,6 +869,8 @@
         const words = sl.words || [];
         return `<div class="slide t wrap" style="${c}">${tag}<div class="t-kick wk">오늘의 핵심</div><div class="words">${words.map(([e, w], i) => `<div><small>${String(i + 1).padStart(2, "0")}</small><span>${esc(w)}</span></div>`).join("")}</div></div>`;
       }
+      case "scene": case "law": case "help":
+        return moreSlideHTML(sl, area, true);
       default:
         return slideHTML(st, area).replace('class="slide ', 'class="slide t ');
     }
@@ -877,8 +942,8 @@
     return rows ? `<details class="box more-box" open><summary>🗣 선생님 대본 <span class="opt">— 그대로 읽어도 돼요. 발표 화면 '선생님 메모'(N 키)에도 나와요</span></summary><ol class="script-list">${rows}</ol></details>` : "";
   }
   function scenesBox(L) {
-    const sc = L.scenes || [];
-    return sc.length ? `<div class="box more-box"><h3>🎬 상황 장면 <span class="opt">— 활동 시간에 토의·역할극으로 써요 (선생님용 PPT에도 있어요)</span></h3><div class="scenes">${sc.map((x, i) =>
+    const sc = L.slides.filter(s => s.type === "scene").length ? L.slides.filter(s => s.type === "scene") : (L.scenes || []);
+    return sc.length ? `<div class="box more-box"><h3>🎬 상황 장면 <span class="opt">— 발표 화면에 그림과 함께 나와요. 토의·역할극으로 써요</span></h3><div class="scenes">${sc.map((x, i) =>
       `<div class="scene"><b>상황 ${i + 1} · ${esc(x.title)}</b><p>${esc(x.story)}</p><p class="ask">🤔 ${esc(x.ask)}</p></div>`).join("")}</div></div>` : "";
   }
   function guideBox(t) {
@@ -905,6 +970,9 @@
     const sl = L.slides.map((s, i) => {
       if (s.type === "quiz") return `${i + 1}. [O X 퀴즈] ` + s.items.map(q => `${q.q} → ${q.a} (${q.why})`).join(" / ");
       if (s.type === "wrap") return `${i + 1}. [마무리 구호] ` + s.words.map(w => w[1]).join("·");
+      if (s.type === "scene") return `${i + 1}. [상황 장면: ${s.title}] ${s.story} → 질문: ${s.ask}`;
+      if (s.type === "law") return `${i + 1}. [${s.title}] ` + (s.points || []).join(" / ");
+      if (s.type === "help") return `${i + 1}. [${s.title}] ` + (s.items || []).map(h => `${h.no} ${h.who}`).join(", ");
       return `${i + 1}. [${s.title}] ${String(s.text || "").replace(/\n/g, " ")}`;
     });
     return [
@@ -934,7 +1002,7 @@
       a.optional ? `- 주제("${t.title}")는 바꾸지 말고, 유엔아동권리협약·아동권리헌장 내용에 맞게 써 주세요. 조항 번호는 확실한 것만 써 주세요.`
                  : `- 「아동복지법」 시행령 별표 6의 주제("${t.title}")는 바꾸지 말아 주세요.`,
       `- 아이들 눈높이의 쉬운 말로, 한 문장은 짧게 써 주세요.`,
-      `- 신고·상담 번호는 112(경찰·아동학대 신고), 129, 182, 117, 1342, 119 중 맞는 것만 쓰고, 새 번호를 만들지 말아 주세요.`,
+      `- 신고·상담 번호는 112(경찰·아동학대 신고), 129, 182, 117, 1366, 1388, 1339, 1342, 119, 02-735-8994(디지털성범죄피해자지원센터) 중 맞는 것만 쓰고, 새 번호를 만들지 말아 주세요.`,
       ...(sensitive ? [`- 자극적이거나 구체적인 피해 묘사는 넣지 말고, 피해 아동을 탓하는 말은 쓰지 말아 주세요. "말해 줘서 고마워, 네 잘못이 아니야"라는 메시지를 지켜 주세요.`] : []),
       `- 무섭게 겁주는 방식이 아니라, 할 수 있는 행동을 알려 주는 방식으로 써 주세요.`,
       ``,

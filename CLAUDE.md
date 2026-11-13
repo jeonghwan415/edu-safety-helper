@@ -13,6 +13,7 @@
 ## 작업자(사용자) 정보
 
 - 개발 비전공자. 지역아동센터 생활복지사 8년 9개월 경력. VS Code + GitHub로 개인과제 진행 중.
+- **모든 답변·보고·요약·점검 결과·판결문은 항상 한국어로 써 주세요.** 스킬(.claude/skills)의 설명서가 영어로 되어 있어도, 결과물은 한국어로 바꿔서 보여 줘요. 명령어·파일 이름·코드만 원래대로 둬요.
 - 설명은 **쉬운 한국어**로, 바꾼 내용은 "무엇을 왜 바꿨는지" 짧게 알려 주세요.
 - 큰 변경(파일 구조, 데이터 형식) 전에는 먼저 계획을 말하고 확인받아 주세요.
 
@@ -43,6 +44,7 @@ docs/02~07_*.md         개인과제 양식 문서: 02 벤치마킹 · 03 인터
 | `npm run browser` | Edge·Chrome이 없는 컴퓨터(리눅스 서버 등)에 전용 크롬·부품·이모지 글꼴을 사용자 폴더에 받기 (관리자 권한 필요 없음) | **처음 한 번** (worksheets·slides가 "Edge나 Chrome을 찾지 못했어요"라고 할 때) |
 | `npm run data` | areas.json → areas.js, 데이터 검사(44시간, 슬라이드 번호, 그림 파일, OX 정답) | **areas.json을 고친 뒤 항상** |
 | `npm run cards` | slide.emoji로 없는 그림 카드 SVG 생성 (`-- --force`면 모두 다시) | 새 슬라이드·새 수업 추가 후 |
+| `npm run scenes` | 상황 장면(scene) 그림 SVG 생성 (`-- --force`면 모두 다시) | 상황 장면의 장소·인물을 바꾼 뒤 |
 | `npm run worksheets` | 활동지 HTML/PDF/PNG 생성 | 퀴즈·약속 내용을 바꾼 뒤 |
 | `npm run slides` | 선생님용 PPT 생성 | 슬라이드 내용을 바꾼 뒤 |
 | `npm run build` | 위 4개를 순서대로 | 크게 바꾼 뒤 |
@@ -83,10 +85,20 @@ content.low / content.high (수업 1개):
              why = 정답 옆 짧은 이유(한 줄), explain = 해설 2문장(정답 화면·선생님 메모·수업 흐름 탭·PPT에 나옴)
     activity { title, text, image, emoji, teacher }
     wrap     { title, words:[[이모지, 짧은 말] ×3] }       ← 2~4글자 권장
+    scene    { no(1|2), title, story, ask, setting, cast:[{role, mood, bubble?, phone?, wave?}], weather?, light?, alert?, car?, image, teacher }
+             ← 상황 장면 (2026-11-13). 그림은 npm run scenes가 tools/lib/scene-art.js로 그려요(img/<수업id>/<학년>_scene<no>.svg).
+               setting: home mart street school center park online bus kitchen outdoor clinic game bike stairs
+               role: child friend friend2 parent teacher stranger staff police elder teen doctor · mood: happy worried think surprised neutral sad
+               bubble: "?" "!" "…" (글자는 넣지 않아요) · weather(outdoor/park): sun rain snow heat dust storm quake
+               저·고학년은 둥근 얼굴(표정), 청소년은 얼굴 없는 실루엣(유치하지 않게).
+    law      { title, points:[2~3개], source, teacher }      ← 고학년·청소년만. 알아 두면 힘이 되는 법(아동인권은 '약속')
+    help     { title, items:[{no, who, note?}], say, checkedAt, teacher } ← 도움받는 곳. no는 규칙 4의 확인된 번호만(npm run data가 검사)
+  수업 순서 (2026-11-13): 표지 → 질문 → 상황1 → 약속 3개(→영상) → 상황2 → 퀴즈 → 법(고학년·청소년) → 활동 → 도움받는 곳 → 마무리
+  → 저학년 11~12장, 고학년·청소년 12~13장. 상황1은 '도입', 상황2·법은 '퀴즈' 단계, 도움받는 곳은 '정리' 단계에 들어가요(시간 합계 40분 그대로).
 ```
 - 영역 id: `sexual`(성폭력) `abuse`(아동학대) `missing`(실종·유괴) `health`(보건위생) `disaster`(재난) `traffic`(교통) + 추가 교육 `rights`(아동인권)
 - 학년(level): `low`(저학년, 초등 1~3) `high`(고학년, 초등 4~6) `teen`(청소년, 중·고등 — 2026-11-12 카톡 피드백 "주제는 같게, 내용만 청소년에 맞게"). 화면의 "함께"(`mix`)는 low 자료를 씀. teen이 없는 수업(추가 수업·아동인권)은 high 자료를 보여 줌(`contentFor`).
-- 내용 보강 칸 (2026-11-12): `slide.script`(선생님 대본, 발표 메모·수업 흐름 탭·PPT 메모), `lesson.scenes[]`({title, story, ask} 상황 장면 2개, 수업 흐름 탭·PPT), `topic.guide`({background[], faq[{q,a}]} 선생님용 배경지식, 주제의 모든 학년에 나옴). 지금은 teen 30개 수업에 대본·상황이 있고, guide는 별표 6 주제 30개 모두에 있어요.
+- 내용 보강 칸 (2026-11-12): `slide.script`(선생님 대본, 발표 메모·수업 흐름 탭·PPT 메모), 상황 장면은 2026-11-13부터 `lesson.scenes[]` 대신 발표 장(`scene` 슬라이드)으로 들어가요(128개 수업 모두 2개씩, 수업 흐름 탭·PPT에도 나옴), `topic.guide`({background[], faq[{q,a}]} 선생님용 배경지식, 주제의 모든 학년에 나옴). 지금은 teen 30개 수업에 대본·상황이 있고, guide는 별표 6 주제 30개 모두에 있어요.
 - 슬라이드 글의 `\n`은 화면에서 줄바꿈돼요. 한 줄은 짧게(약 15자).
 
 ## 진행 계산 규칙 (사용자 결정, 2026-11-10)
@@ -131,7 +143,7 @@ content.low / content.high (수업 1개):
 1. **별표 6의 시간·주기·세부 항목(주제 제목)은 AI가 바꾸거나 만들지 않아요.** 지침이 바뀌면 사람이 `docs/`의 원문을 보고 고쳐요.
 2. AI가 쓴 수업 내용은 `status: "검토 필요"`로 넣어요. "검토 완료"는 사람이 바꿔요.
 3. **성폭력·아동학대 수업**: 자극적·구체적 묘사 금지, 피해 아동 탓하는 표현 금지. "말해줘서 고마워, 네 잘못이 아니야", 선생님은 신고의무자(112) 안내 유지.
-4. 신고·상담 번호는 확인된 것만: 112(경찰·아동학대 신고), 129(보건복지상담), 182(실종아동), 117(학교·여성폭력), 1342(마약류 상담), 119, 1388(청소년상담, 24시간 — 2026-11-12 확인), 1336(한국도박문제예방치유원, 운영시간은 누리집 확인 — 2026-11-12 확인). 새 번호는 공식 출처를 확인하고 넣어요.
+4. 신고·상담 번호는 확인된 것만: 112(경찰·아동학대 신고), 129(보건복지상담), 182(실종아동), 117(학교·여성폭력), 1342(마약류 상담), 119, 1388(청소년상담, 24시간 — 2026-11-12 확인), 1336(한국도박문제예방치유원, 운영시간은 누리집 확인 — 2026-11-12 확인), 1366(여성긴급전화, 365일 24시간, 피해자 누구나), 02-735-8994(중앙 디지털성범죄피해자지원센터), 1339(질병관리청 콜센터, 365일 24시간), 1544-9030(금연상담전화), 안전Dream(경찰청, 지문 사전등록) — 2026-11-13 공식 누리집에서 확인. 새 번호를 넣으면 tools/sync-data.js의 OK_NUMBERS에도 넣어요. 새 번호는 공식 출처를 확인하고 넣어요.
 5. 외부 자료는 **링크만**(내용 복사 금지, 저작권). 영상은 공식 기관 채널만. 링크를 넣거나 확인하면 `checkedAt` 날짜를 적어요.
 6. 그림은 직접 만든 것(SVG)이나 이모지만. **청소년(teen) 그림 카드는 Tabler Icons 선 아이콘**(MIT, `tools/assets/teen-icons.json` + `TABLER-LICENSE.txt`, 2026-11-12 사용자 승인). 새 이모지를 쓰면 teen-icons.json의 map에 짝을 추가해요. 무섭거나 자극적인 그림 금지. 실존 캐릭터 금지.
 7. 화면은 큰 글씨(본문 18px 이상), 큰 버튼(56px 이상), 쉬운 말. 새 버튼도 이 기준을 따라요.

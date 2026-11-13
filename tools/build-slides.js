@@ -60,7 +60,7 @@ function buildDeck(area, topic, level, L) {
   const titleSize = (t, promise) => promise ? (t.length <= 2 ? 66 : t.length === 3 ? 56 : t.length === 4 ? 46 : t.length <= 6 ? 38 : 30) : (t.length > 9 ? 30 : 38);
 
   let section = null;
-  const SECTION = { cover: "도입", question: "도입", promise: "핵심 약속", video: "핵심 약속", quiz: "OX 퀴즈", activity: "활동", wrap: "정리" };
+  const SECTION = { cover: "도입", question: "도입", promise: "핵심 약속", video: "핵심 약속", scene: "상황 장면", quiz: "OX 퀴즈", law: "알아 두면 힘이 되는 법", activity: "활동", help: "도움받는 곳", wrap: "정리" };
   const slide = (master, sl) => {
     const sec = SECTION[sl.type];
     if (sec !== section) { pres.addSection({ title: sec }); section = sec; }
@@ -69,6 +69,52 @@ function buildDeck(area, topic, level, L) {
 
   L.slides.forEach((sl, idx) => {
     const no = idx + 1;
+    if (sl.type === "scene") {
+      // 상황 장면: 그림 + 이야기 + 함께 생각할 질문
+      const s = slide("PICTURE_TEXT", sl);
+      if (TEEN) {
+        if (sl.image) s.addImage({ path: jpgFor(sl.image), x: 5.75, y: 0.95, w: 3.75, h: 3.75, altText: sl.title });
+        s.addText(`SCENE ${String(sl.no).padStart(2, "0")}`, { x: 0.5, y: 0.45, w: 5, h: 0.4, fontSize: 14, bold: true, color: AC, margin: 0, isTextBox: true });
+        s.addText(sl.title, { x: 0.5, y: 0.95, w: 5.0, h: 0.8, fontSize: 30, bold: true, color: C.text, margin: 0, valign: "top", isTextBox: true });
+        s.addText(sl.story, { x: 0.5, y: 1.8, w: 5.0, h: 1.6, fontSize: 17, color: C.sub, margin: 0, valign: "top", isTextBox: true });
+        s.addText(sl.ask, { x: 0.5, y: 3.55, w: 5.0, h: 1.2, fontSize: 16, bold: true, color: C.text, margin: 10, valign: "middle", fill: { color: C.card }, isTextBox: true });
+      } else {
+        if (sl.image) s.addImage({ path: jpgFor(sl.image), x: 0.45, y: 0.45, w: 5.2, h: 3.9, altText: sl.title });
+        s.addText(`🎬 상황 ${sl.no}`, { x: 6.0, y: 0.55, w: 3.6, h: 0.45, fontSize: 18, bold: true, color: AC, margin: 0, isTextBox: true });
+        s.addText(sl.title, { x: 6.0, y: 1.05, w: 3.6, h: 0.8, fontSize: 26, bold: true, color: C.text, margin: 0, valign: "top", isTextBox: true });
+        s.addText(sl.story, { x: 6.0, y: 1.9, w: 3.6, h: 1.55, fontSize: 16, color: C.text, margin: 0, valign: "top", isTextBox: true });
+        s.addText("🤔 " + sl.ask, { x: 6.0, y: 3.5, w: 3.6, h: 1.2, fontSize: 15, bold: true, color: AC, margin: 8, valign: "middle", fill: { color: "F2F8FF" }, isTextBox: true });
+      }
+      s.addNotes(notes(sl, no) || "정답을 정하기보다 이유를 말하게 해 주세요. 모둠 토의나 역할극으로 이어 가도 좋아요.");
+      return;
+    }
+    if (sl.type === "law" || sl.type === "help") {
+      const s = slide("PICTURE_TEXT", sl);
+      const head = sl.type === "law" ? (TEEN ? "LAW · 법" : "⚖️") : (TEEN ? "HELP · 도움" : "📞");
+      s.addText(head, { x: 0.5, y: 0.35, w: 2.5, h: 0.5, fontSize: TEEN ? 14 : 28, bold: true, color: AC, margin: 0, isTextBox: true });
+      s.addText(sl.title, { x: 0.5, y: 0.8, w: 9, h: 0.7, fontSize: 30, bold: true, color: C.text, margin: 0, isTextBox: true });
+      if (sl.type === "law") {
+        (sl.points || []).forEach((p, j) => {
+          const y = 1.65 + j * 1.05;
+          s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y, w: 9, h: 0.9, fill: { color: C.card }, line: { color: TEEN ? "2A2E37" : "E3DFD6", width: 1 }, rectRadius: 0.12 });
+          s.addText(String(j + 1), { x: 0.65, y: y + 0.15, w: 0.6, h: 0.6, fontSize: 20, bold: true, color: TEEN ? AC : C.white, align: "center", valign: "middle", margin: 0, fill: TEEN ? undefined : { color: AC }, isTextBox: true });
+          s.addText(p, { x: 1.45, y, w: 7.9, h: 0.9, fontSize: 16, color: C.text, valign: "middle", margin: 0, isTextBox: true });
+        });
+        if (sl.source) s.addText("근거: " + sl.source, { x: 0.5, y: 4.85, w: 9, h: 0.3, fontSize: 10, color: "6B7280", margin: 0, isTextBox: true });
+      } else {
+        const items = sl.items || [], n = Math.max(items.length, 1), w = (9 - (n - 1) * 0.25) / n;
+        items.forEach((it, j) => {
+          const x = 0.5 + j * (w + 0.25);
+          s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.7, w, h: 2.6, fill: { color: C.card }, line: { color: area.color.replace("#", ""), width: 2 }, rectRadius: 0.12 });
+          s.addText(String(it.no), { x: x + 0.15, y: 1.85, w: w - 0.3, h: 0.8, fontSize: String(it.no).length > 4 ? 22 : 36, bold: true, color: AC, margin: 0, isTextBox: true });
+          s.addText(it.who, { x: x + 0.15, y: 2.7, w: w - 0.3, h: 0.7, fontSize: 15, bold: true, color: C.text, valign: "top", margin: 0, isTextBox: true });
+          if (it.note) s.addText(it.note, { x: x + 0.15, y: 3.4, w: w - 0.3, h: 0.8, fontSize: 11, color: TEEN ? "9AA1AD" : "5B6168", valign: "top", margin: 0, isTextBox: true });
+        });
+        if (sl.say) s.addText(sl.say, { x: 0.5, y: 4.45, w: 9, h: 0.45, fontSize: 15, bold: true, color: AC, margin: 0, isTextBox: true });
+      }
+      s.addNotes(notes(sl, no));
+      return;
+    }
     if (TEEN && ["cover", "question", "promise", "activity"].includes(sl.type)) {
       const s = slide("PICTURE_TEXT", sl);
       if (sl.image) s.addImage({ path: jpgFor(sl.image), x: 5.75, y: 0.95, w: 3.75, h: 3.75, altText: sl.title, rounding: false });
@@ -155,7 +201,7 @@ function buildDeck(area, topic, level, L) {
   });
 
   // 상황 장면(토의·역할극용) — 아이들에게 보여 줘도 되는 장
-  if ((L.scenes || []).length) {
+  if ((L.scenes || []).length && !L.slides.some(x => x.type === "scene")) {   // 장면이 발표 장에 들어갔으면 다시 넣지 않아요
     pres.addSection({ title: "상황 장면" });
     L.scenes.forEach((sc, k) => {
       const s = pres.addSlide({ masterName: "PICTURE_TEXT", sectionTitle: "상황 장면" });

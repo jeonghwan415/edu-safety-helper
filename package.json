@@ -7,9 +7,10 @@
     "browser": "node tools/setup-browser.js",
     "data": "node tools/sync-data.js",
     "cards": "node tools/make-cards.js",
+    "scenes": "node tools/make-scenes.js",
     "worksheets": "node tools/build-worksheets.js",
     "slides": "node tools/build-slides.js",
-    "build": "npm run cards && npm run data && npm run worksheets && npm run slides"
+    "build": "npm run cards && npm run scenes && npm run data && npm run worksheets && npm run slides"
   },
   "dependencies": {
     "playwright-core": "^1.65.0",
