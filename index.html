@@ -713,10 +713,12 @@
     "182": ["경찰청 안전Dream", "https://www.safe182.go.kr"], "117": ["경찰청 안전Dream", "https://www.safe182.go.kr"]
   };
   function viewCheck() {
-    const laws = new Map(), nums = new Map();
+    const laws = new Map(), nums = new Map(), scenes = new Map();
     for (const a of ALL_AREAS) for (const base of a.topics.elementary) for (const t of lessonTopics(base)) for (const lv of ["low", "high", "teen"]) {
       const L = (t.content || {})[lv]; if (!L) continue;
       const link = `<a href="#topic-${a.id}-${t.id}-${lv}">${esc(t.subTitle || t.title)} · ${levelName(lv)}</a>`;
+      const sc = L.slides.filter(s => s.type === "scene");
+      if (sc.length) { if (!scenes.has(a.id)) scenes.set(a.id, { area: a, rows: [] }); scenes.get(a.id).rows.push({ link, sc }); }
       L.slides.forEach(s => {
         if (s.type === "law") { const k = s.points.join("|"); if (!laws.has(k)) laws.set(k, { s, area: a, links: [] }); laws.get(k).links.push(link); }
         if (s.type === "help") s.items.forEach(it => { if (!nums.has(it.no)) nums.set(it.no, { it, n: 0 }); nums.get(it.no).n++; });
@@ -731,9 +733,19 @@
         return `<tr><th>${esc(it.no)}</th><td>${esc(it.who)}${it.note ? `<br><span class="meta">${esc(it.note)}</span>` : ""}</td><td class="num">${n}</td><td>${src ? `<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0])}</a>` : "기존 확인 번호 (CLAUDE.md 규칙 4)"}</td></tr>`; }).join("") + `</tbody></table>`;
     return crumbs([{ label: "처음", hash: "#home" }, { label: "검토용 점검표" }]) + `
       <h1>✅ 검토용 점검표</h1>
-      <p class="lead">2026-11-13에 모든 수업에 넣은 <b>알아 두면 힘이 되는 법</b>(고학년·청소년)과 <b>도움받는 곳</b> 번호예요. 한 번씩 읽어 보고, 고칠 곳이 있으면 알려 주세요. 수업 이름을 누르면 그 수업으로 가요.</p>
+      <p class="lead">2026-11-13에 모든 수업에 넣은 <b>도움받는 곳</b> 번호, <b>알아 두면 힘이 되는 법</b>(고학년·청소년), <b>상황 장면</b>을 한 페이지에 모았어요. 한 번씩 읽어 보고, 고칠 곳이 있으면 알려 주세요. 수업 이름을 누르면 그 수업으로 가요.</p>
       <h2>📞 도움받는 곳 번호 (${nums.size}개)</h2>${numHTML}
       <h2 style="margin-top:32px">⚖️ 알아 두면 힘이 되는 법 (${laws.size}종류)</h2>${lawHTML}
+      <h2 style="margin-top:32px">🎬 상황 장면 (${[...scenes.values()].reduce((n, g) => n + g.rows.length * 2, 0)}개)</h2>
+      <p class="lead" style="margin-bottom:14px">영역을 누르면 펼쳐져요. <b>성폭력·아동학대는 아이들에게 가장 민감해서 먼저 펼쳐 두었어요.</b> 나머지는 수업에 쓰기 전에 그 영역만 봐도 돼요.
+        확인할 것: ① 아이에게 무섭거나 자극적이지 않은지 ② 피해 아동을 탓하는 말이 없는지 ③ 우리 센터 아이들 생활과 맞는지 ④ 그림이 이야기와 어울리는지</p>
+      ${[...scenes.values()].map(({ area: a, rows }) => `<details class="box check-sc" style="${cv(a)};border-left:8px solid var(--c);margin-bottom:14px"${["sexual", "abuse"].includes(a.id) ? " open" : ""}>
+        <summary style="font-size:1.2rem;font-weight:800;cursor:pointer;min-height:44px">${a.icon} ${esc(a.shortName)} — 수업 ${rows.length}개 · 장면 ${rows.length * 2}개${["sexual", "abuse"].includes(a.id) ? " ⭐ 먼저 보기" : ""}</summary>
+        ${rows.map(r => `<div style="border-top:1px solid var(--line);padding:14px 0"><b>${r.link}</b>
+          <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:8px">${r.sc.map(s => `
+            <div style="display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start">${s.image ? `<img src="${esc(s.image)}" alt="" loading="lazy" style="width:120px;border-radius:10px;border:1px solid var(--line)">` : "<span></span>"}
+            <div><b>상황 ${s.no} · ${esc(s.title)}</b><br>${esc(s.story)}<br><span style="color:var(--cd);font-weight:700">🤔 ${esc(s.ask)}</span></div></div>`).join("")}</div></div>`).join("")}
+      </details>`).join("")}
       <p class="meta">법령은 바뀔 수 있어요. 아이들에게 쓰기 전에 국가법령정보센터(law.go.kr) 원문도 한 번 확인해 주세요.</p>`;
   }
 
