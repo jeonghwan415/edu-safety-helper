@@ -541,7 +541,7 @@
     if (!h || h === "home" || h.startsWith("/")) return [];
     const p = h.split("-");
     if (p[0] === "area") return ["area", p[1], p[2]].filter(Boolean);
-    if (h === "records" || h === "plan" || h === "report" || h === "about") return [h];
+    if (h === "records" || h === "plan" || h === "report" || h === "about" || h === "check") return [h];
     if ((p[0] === "log" || p[0] === "edit") && p[1]) return [p[0], p.slice(1).join("-")];
     if (p[0] === "write" && p.length >= 4) return ["write", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "topic" || p[0] === "pick") && p.length >= 4) return [p[0], p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
@@ -699,7 +699,42 @@
     return `<details class="box law-box"><summary>📜 법령 확인 기록 (${esc(DATA.meta.checkedAt)} 기준) — 눌러서 보기</summary>
       <ul>${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
       ${links.map(l => `<a class="big-link ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.org)} · ${esc(l.title)}</a>`).join("")}
-      <p class="meta">법령은 바뀔 수 있어요. 점검·보고 전에는 국가법령정보센터 원문을 한 번 더 확인해 주세요.</p></details>`;
+      <p class="meta">법령은 바뀔 수 있어요. 점검·보고 전에는 국가법령정보센터 원문을 한 번 더 확인해 주세요.</p>
+      <a class="big-link" style="background:var(--accent)" href="#check" onclick="go('#check');return false">✅ 검토용 점검표 — 수업에 넣은 법 문장·도움 번호 한눈에 보기</a></details>`;
+  }
+
+  /* 검토용 점검표 (#check): 수업에 넣은 '알아 두면 힘이 되는 법'과 '도움받는 곳' 번호를 모아 사람이 확인해요 (2026-11-13) */
+  const NUMBER_SOURCES = {
+    "1366": ["성평등가족부 여성긴급전화1366", "https://www.mogef.go.kr/cc/wcc/cc_wcc_f001.do"],
+    "02-735-8994": ["성평등가족부 디지털성범죄피해자지원센터 기관정보", "https://www.mogef.go.kr/sp/hrp/sp_hrp_f014.do"],
+    "1339": ["질병관리청 1339 콜센터", "https://kdca.go.kr/KDCAtemp/5289/subview.do"],
+    "1544-9030": ["복지로 금연지원센터 안내", "https://www.bokjiro.go.kr/ssis-tbu/cms/pc/news/promotion/1188952_1118.html"],
+    "안전Dream": ["복지로 지문 등 사전등록 안내", "https://www.bokjiro.go.kr/ssis-tbu/cms/pc/news/promotion/1189139_1118.html"],
+    "182": ["경찰청 안전Dream", "https://www.safe182.go.kr"], "117": ["경찰청 안전Dream", "https://www.safe182.go.kr"]
+  };
+  function viewCheck() {
+    const laws = new Map(), nums = new Map();
+    for (const a of ALL_AREAS) for (const base of a.topics.elementary) for (const t of lessonTopics(base)) for (const lv of ["low", "high", "teen"]) {
+      const L = (t.content || {})[lv]; if (!L) continue;
+      const link = `<a href="#topic-${a.id}-${t.id}-${lv}">${esc(t.subTitle || t.title)} · ${levelName(lv)}</a>`;
+      L.slides.forEach(s => {
+        if (s.type === "law") { const k = s.points.join("|"); if (!laws.has(k)) laws.set(k, { s, area: a, links: [] }); laws.get(k).links.push(link); }
+        if (s.type === "help") s.items.forEach(it => { if (!nums.has(it.no)) nums.set(it.no, { it, n: 0 }); nums.get(it.no).n++; });
+      });
+    }
+    const lawHTML = [...laws.values()].map((x, i) => `<div class="box" style="${cv(x.area)};border-left:8px solid var(--c);margin-bottom:16px">
+      <h3 style="margin-top:0">${i + 1}. ${x.area.icon} ${esc(x.area.shortName)} <span class="meta">— 근거: ${esc(x.s.source || "")}</span></h3>
+      <ol>${x.s.points.map(p => `<li style="margin-bottom:6px">${esc(p)}</li>`).join("")}</ol>
+      <details><summary class="meta">이 문장이 들어간 수업 ${x.links.length}개</summary><p class="meta" style="line-height:1.9">${x.links.join(" · ")}</p></details></div>`).join("");
+    const numHTML = `<table class="plan-table"><thead><tr><th>번호</th><th>화면에 적은 설명</th><th>쓰인 수업 수</th><th>확인한 곳</th></tr></thead><tbody>` +
+      [...nums.values()].map(({ it, n }) => { const src = NUMBER_SOURCES[it.no];
+        return `<tr><th>${esc(it.no)}</th><td>${esc(it.who)}${it.note ? `<br><span class="meta">${esc(it.note)}</span>` : ""}</td><td class="num">${n}</td><td>${src ? `<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0])}</a>` : "기존 확인 번호 (CLAUDE.md 규칙 4)"}</td></tr>`; }).join("") + `</tbody></table>`;
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "검토용 점검표" }]) + `
+      <h1>✅ 검토용 점검표</h1>
+      <p class="lead">2026-11-13에 모든 수업에 넣은 <b>알아 두면 힘이 되는 법</b>(고학년·청소년)과 <b>도움받는 곳</b> 번호예요. 한 번씩 읽어 보고, 고칠 곳이 있으면 알려 주세요. 수업 이름을 누르면 그 수업으로 가요.</p>
+      <h2>📞 도움받는 곳 번호 (${nums.size}개)</h2>${numHTML}
+      <h2 style="margin-top:32px">⚖️ 알아 두면 힘이 되는 법 (${laws.size}종류)</h2>${lawHTML}
+      <p class="meta">법령은 바뀔 수 있어요. 아이들에게 쓰기 전에 국가법령정보센터(law.go.kr) 원문도 한 번 확인해 주세요.</p>`;
   }
 
   /* 2) 대상 고르기 */
@@ -1656,6 +1691,7 @@
     else if (parts[0] === "plan") html = viewPlan();
     else if (parts[0] === "report") html = viewReport();
     else if (parts[0] === "about") html = viewAbout();
+    else if (parts[0] === "check") html = viewCheck();
     else if (parts[0] === "log") { const r = loadRecords().find(x => x.id === parts[1]); html = r ? viewLog(r) : notFound(); }
     else if (parts[0] === "edit") { const r = loadRecords().find(x => x.id === parts[1]); const ft = r && findTopic(r.areaId, r.topicId); html = ft && ft.t ? viewWrite(ft.a, ft.t, r.level, r) : notFound(); }
     else if (parts[0] === "write" && findArea(parts[1]) && okLevel(parts[3])) {

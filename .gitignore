@@ -10,3 +10,6 @@ docs/*.pptx
 .claude/
 .agents/
 skills-lock.json
+
+# 가리지 않은 카톡 원본 캡처 (가린 사본은 docs/images/03_interview/)
+docs/피드백*.jpg
