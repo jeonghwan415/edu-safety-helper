@@ -87,7 +87,12 @@ content.low / content.high (수업 1개):
     wrap     { title, words:[[이모지, 짧은 말] ×3] }       ← 2~4글자 권장
     scene    { no(1|2), title, story, ask, setting, cast:[{role, mood, bubble?, phone?, wave?}], weather?, light?, alert?, car?, image, teacher }
              ← 상황 장면 (2026-11-13). 그림은 npm run scenes가 tools/lib/scene-art.js로 그려요(img/<수업id>/<학년>_scene<no>.svg).
-               setting: home mart street school center park online bus kitchen outdoor clinic game bike stairs
+               setting: home kitchen bathroom center office meeting library school cafeteria pool locker elevator stairs mart store
+                        street alley parking station bus subway van car park playground field festival outdoor valley mountain camp ski
+                        karaoke clinic online game bike  (이야기 속 장소와 꼭 맞추기: 수영장 탈의실=locker, 편의점=store, 지하철=subway …)
+               props?: smoke campfire dog lighter cake snack extinguisher kickboard wheelchair sign cones bicycle multitap device gift pills bottles umbrella ball
+               time?: day|evening|night · weather?: sun rain storm snow heat dust quake · zone?: true(어린이보호구역)
+               같은 장소·인물이라도 장면마다 벽색·가구·옷·머리 모양·자리·좌우가 자동으로 달라져요(겹치지 않게)
                role: child friend friend2 parent teacher stranger staff police elder teen doctor · mood: happy worried think surprised neutral sad
                bubble: "?" "!" "…" (글자는 넣지 않아요) · weather(outdoor/park): sun rain snow heat dust storm quake
                저·고학년은 둥근 얼굴(표정), 청소년은 얼굴 없는 실루엣(유치하지 않게).

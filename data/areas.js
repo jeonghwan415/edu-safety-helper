@@ -90,7 +90,7 @@ window.SAFETY_DATA = {
                     "title": "수영장 탈의실",
                     "story": "하늘이는 수영장에서 옷을 갈아입어요. 모르는 아저씨가 자꾸 쳐다봐요.",
                     "ask": "하늘이는 어떻게 하면 좋을까요?",
-                    "setting": "center",
+                    "setting": "locker",
                     "cast": [
                       {
                         "role": "child",
@@ -368,7 +368,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-01/high_scene2.svg"
+                    "image": "img/sexual-e-01/high_scene2.svg",
+                    "props": [
+                      "cake"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -598,7 +601,7 @@ window.SAFETY_DATA = {
                     "title": "장난이라는 터치",
                     "story": "체육 시간에 한 친구가 다른 친구의 엉덩이를 치고 '장난이야'라고 했다. 맞은 친구는 웃었지만 표정이 굳어 있다.",
                     "ask": "웃었으니 괜찮은 걸까? 판단 기준은 무엇일까?",
-                    "setting": "school",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "teen",
@@ -874,7 +877,7 @@ window.SAFETY_DATA = {
                     "title": "간식 줄게",
                     "story": "놀이터에서 모르는 어른이 '과자 줄 테니 저쪽으로 가자'고 해요.",
                     "ask": "어떻게 거절하면 좋을까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -887,7 +890,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-02/low_scene2.svg"
+                    "image": "img/sexual-e-02/low_scene2.svg",
+                    "props": [
+                      "snack"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -1348,14 +1354,11 @@ window.SAFETY_DATA = {
                         "role": "teen",
                         "mood": "think",
                         "phone": true
-                      },
-                      {
-                        "role": "teacher",
-                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-02/teen_scene2.svg"
+                    "image": "img/sexual-e-02/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -2541,7 +2544,7 @@ window.SAFETY_DATA = {
                     "title": "엘리베이터에서",
                     "story": "모르는 사람이 엘리베이터에서 내 몸을 만지려고 해요.",
                     "ask": "'싫어요–피해요–말해요'를 어떻게 할까요?",
-                    "setting": "stairs",
+                    "setting": "elevator",
                     "cast": [
                       {
                         "role": "child",
@@ -3062,14 +3065,11 @@ window.SAFETY_DATA = {
                         "role": "teen",
                         "mood": "think",
                         "phone": true
-                      },
-                      {
-                        "role": "teacher",
-                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-03/teen_scene2.svg"
+                    "image": "img/sexual-e-03/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -3612,7 +3612,7 @@ window.SAFETY_DATA = {
                         "title": "몰래 찍힌 영상",
                         "story": "탈의실에서 누가 휴대폰을 들고 있었다는 소문이 돌아요.",
                         "ask": "누구에게, 어떻게 알려야 할까요?",
-                        "setting": "school",
+                        "setting": "locker",
                         "cast": [
                           {
                             "role": "child",
@@ -3789,7 +3789,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-04/low_scene1.svg"
+                    "image": "img/sexual-e-04/low_scene1.svg",
+                    "props": [
+                      "cake"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -3824,7 +3827,7 @@ window.SAFETY_DATA = {
                     "title": "싫다는 친구",
                     "story": "술래잡기에서 친구 옷을 잡았더니 '싫어!' 해요.",
                     "ask": "친구가 싫다고 하면 어떻게 할까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -4231,7 +4234,7 @@ window.SAFETY_DATA = {
                     "title": "조르는 친구",
                     "story": "고2 서윤이는 연인이 계속 '다들 하는데 왜 안 돼?'라며 조른다. 서윤이는 아직 원하지 않는다.",
                     "ask": "서윤이는 어떻게 말할 수 있을까? 연인은 어떻게 반응해야 할까?",
-                    "setting": "center",
+                    "setting": "park",
                     "cast": [
                       {
                         "role": "teen",
@@ -4243,7 +4246,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/sexual-e-04/teen_scene1.svg"
+                    "image": "img/sexual-e-04/teen_scene1.svg",
+                    "time": "evening"
                   },
                   {
                     "type": "promise",
@@ -4640,7 +4644,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-01/low_scene2.svg"
+                    "image": "img/abuse-e-01/low_scene2.svg",
+                    "props": [
+                      "snack"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -4848,7 +4855,7 @@ window.SAFETY_DATA = {
                     "title": "쉬는 시간 없는 하루",
                     "story": "준호는 학원이 끝나면 밤 11시예요. 놀 시간도, 쉴 시간도 없어요.",
                     "ask": "준호에게 필요한 권리는 무엇일까요?",
-                    "setting": "school",
+                    "setting": "library",
                     "cast": [
                       {
                         "role": "child",
@@ -4856,7 +4863,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-01/high_scene2.svg"
+                    "image": "img/abuse-e-01/high_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -5084,7 +5092,7 @@ window.SAFETY_DATA = {
                     "title": "진로 결정",
                     "story": "고1 예린이는 하고 싶은 진로가 있지만 보호자는 의견을 듣지 않고 학원을 바꿔 버렸다.",
                     "ask": "예린이가 의견을 말할 수 있는 방법은 무엇일까? 도움을 받을 곳은?",
-                    "setting": "home",
+                    "setting": "meeting",
                     "cast": [
                       {
                         "role": "teen",
@@ -5353,7 +5361,7 @@ window.SAFETY_DATA = {
                     "title": "혼자 있는 밤",
                     "story": "지아는 밤마다 동생과 둘이서만 집에 있어요. 냉장고에 먹을 게 없어요.",
                     "ask": "이것도 학대일까요?",
-                    "setting": "home",
+                    "setting": "kitchen",
                     "cast": [
                       {
                         "role": "child",
@@ -5365,7 +5373,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-02/low_scene2.svg"
+                    "image": "img/abuse-e-02/low_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -5587,7 +5596,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-02/high_scene2.svg"
+                    "image": "img/abuse-e-02/high_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -5767,7 +5777,7 @@ window.SAFETY_DATA = {
                     "title": "벌로 밥 굶기기",
                     "story": "중2 하준이는 성적이 떨어질 때마다 저녁을 못 먹게 하는 벌을 받는다.",
                     "ask": "이것은 어떤 유형의 학대일까? 훈육이라고 할 수 있을까?",
-                    "setting": "center",
+                    "setting": "kitchen",
                     "cast": [
                       {
                         "role": "teen",
@@ -6094,7 +6104,7 @@ window.SAFETY_DATA = {
                     "title": "도와주세요",
                     "story": "놀이터에서 친구가 어른에게 맞고 있어요.",
                     "ask": "누구에게 어떻게 알릴까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -6267,7 +6277,7 @@ window.SAFETY_DATA = {
                     "title": "굶는 친구",
                     "story": "같은 반 유나는 급식을 두 번씩 먹고, 몸에 상처가 자주 보여요.",
                     "ask": "어떤 신호들이 보이나요?",
-                    "setting": "school",
+                    "setting": "cafeteria",
                     "cast": [
                       {
                         "role": "child",
@@ -6323,7 +6333,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-03/high_scene2.svg"
+                    "image": "img/abuse-e-03/high_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -6502,7 +6513,7 @@ window.SAFETY_DATA = {
                     "title": "집에 가기 싫은 친구",
                     "story": "센터에서 같이 지내는 친구가 '집에 가면 또 맞을 거야'라며 늦게까지 남아 있으려 한다.",
                     "ask": "지금 내가 할 수 있는 가장 좋은 행동은? 누구에게 먼저 알릴까?",
-                    "setting": "home",
+                    "setting": "center",
                     "cast": [
                       {
                         "role": "teen",
@@ -6514,7 +6525,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-03/teen_scene1.svg"
+                    "image": "img/abuse-e-03/teen_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -7055,7 +7067,7 @@ window.SAFETY_DATA = {
                     "title": "상담실에서",
                     "story": "아동보호전문기관 선생님이 '네 잘못이 아니야'라며 이야기를 들어 줘요.",
                     "ask": "도움을 받는 것은 왜 당연한 권리일까요?",
-                    "setting": "clinic",
+                    "setting": "meeting",
                     "cast": [
                       {
                         "role": "child",
@@ -7246,7 +7258,7 @@ window.SAFETY_DATA = {
                     "title": "신고 다음 날",
                     "story": "어제 신고한 고1 유나는 학교에서 '우리 집에 경찰이 오면 어떡하지' 하며 불안해한다.",
                     "ask": "유나에게 어떤 정보가 도움이 될까? 누가 유나 곁에 있어 줄 수 있을까?",
-                    "setting": "home",
+                    "setting": "school",
                     "cast": [
                       {
                         "role": "teen",
@@ -7748,7 +7760,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/abuse-e-05/high_scene1.svg"
+                    "image": "img/abuse-e-05/high_scene1.svg",
+                    "time": "evening"
                   },
                   {
                     "type": "promise",
@@ -7980,7 +7993,7 @@ window.SAFETY_DATA = {
                     "title": "긴소매의 여름",
                     "story": "한여름에도 긴소매만 입는 중2 민재는 체육 시간에 옷을 갈아입지 않으려 하고, 최근 결석이 잦다.",
                     "ask": "어떤 신호가 보이나? 친구로서, 선생님으로서 할 일은?",
-                    "setting": "school",
+                    "setting": "locker",
                     "cast": [
                       {
                         "role": "teen",
@@ -8521,7 +8534,7 @@ window.SAFETY_DATA = {
                     "title": "축제에서 헤어졌어요",
                     "story": "불꽃놀이 축제에서 사람들에게 밀려 가족과 헤어졌어요.",
                     "ask": "미리 정해 두었으면 좋았을 약속은?",
-                    "setting": "outdoor",
+                    "setting": "festival",
                     "cast": [
                       {
                         "role": "child",
@@ -8537,7 +8550,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-01/high_scene1.svg"
+                    "image": "img/missing-e-01/high_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -8764,11 +8778,12 @@ window.SAFETY_DATA = {
                     "title": "공연이 끝난 밤",
                     "story": "고1 현우는 친구들과 다른 도시 공연을 보고 밤 11시에 역에 도착했는데, 막차를 놓치고 휴대폰 배터리가 3%다.",
                     "ask": "지금 가장 먼저 해야 할 일은? 배터리가 꺼지기 전에 무엇을 할까?",
-                    "setting": "street",
+                    "setting": "station",
                     "cast": [
                       {
                         "role": "teen",
-                        "mood": "think"
+                        "mood": "think",
+                        "phone": true
                       },
                       {
                         "role": "friend",
@@ -8776,7 +8791,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-01/teen_scene1.svg"
+                    "image": "img/missing-e-01/teen_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -9085,7 +9101,7 @@ window.SAFETY_DATA = {
                     "title": "아는 이웃",
                     "story": "자주 보던 이웃 아줌마가 '집까지 차로 태워 줄게'라고 해요.",
                     "ask": "아는 사람이어도 어떻게 해야 할까요?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "child",
@@ -9306,7 +9322,7 @@ window.SAFETY_DATA = {
                     "title": "허락·장소·비밀",
                     "story": "학원 선생님이라는 사람이 '부모님께는 비밀로 하고 따로 보자'고 해요.",
                     "ask": "판단 기준 세 가지 중 무엇이 걸릴까요?",
-                    "setting": "school",
+                    "setting": "alley",
                     "cast": [
                       {
                         "role": "child",
@@ -9497,19 +9513,20 @@ window.SAFETY_DATA = {
                     "title": "동네 아저씨",
                     "story": "중2 준호는 자주 가는 편의점 근처에서 얼굴만 아는 사람이 '집에 데려다줄게, 차 타'라고 했다.",
                     "ask": "얼굴을 아는 사람이니 괜찮을까? 어떻게 거절하면 좋을까?",
-                    "setting": "street",
+                    "setting": "store",
                     "cast": [
                       {
                         "role": "teen",
                         "mood": "think"
                       },
                       {
-                        "role": "teacher",
+                        "role": "stranger",
                         "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-02/teen_scene1.svg"
+                    "image": "img/missing-e-02/teen_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -9552,14 +9569,11 @@ window.SAFETY_DATA = {
                         "role": "teen",
                         "mood": "think",
                         "phone": true
-                      },
-                      {
-                        "role": "parent",
-                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-02/teen_scene2.svg"
+                    "image": "img/missing-e-02/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -9782,7 +9796,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-03/low_scene1.svg"
+                    "image": "img/missing-e-03/low_scene1.svg",
+                    "props": [
+                      "dog"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -9990,7 +10007,7 @@ window.SAFETY_DATA = {
                     "title": "짐 좀 들어 줄래?",
                     "story": "어른이 무거운 짐을 들어 달라며 주차장 쪽으로 같이 가자고 해요.",
                     "ask": "도움 요청을 안전하게 거절하는 말은?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "child",
@@ -10037,7 +10054,7 @@ window.SAFETY_DATA = {
                     "title": "경찰이라는 사람",
                     "story": "제복을 입지 않은 사람이 '경찰이야, 조사할 게 있어'라며 따라오래요.",
                     "ask": "어떻게 확인할 수 있을까요?",
-                    "setting": "street",
+                    "setting": "alley",
                     "cast": [
                       {
                         "role": "child",
@@ -10275,7 +10292,7 @@ window.SAFETY_DATA = {
                     "title": "갚을 날",
                     "story": "중3 은지는 대리입금으로 5만 원을 빌렸는데 일주일 뒤 8만 원을 갚으라며 '안 갚으면 학교에 알린다'는 협박을 받는다.",
                     "ask": "은지는 누구에게, 어떻게 도움을 요청할 수 있을까?",
-                    "setting": "school",
+                    "setting": "online",
                     "cast": [
                       {
                         "role": "teen",
@@ -11001,7 +11018,7 @@ window.SAFETY_DATA = {
                     "title": "아동안전지킴이집",
                     "story": "집에 가는 길, 누가 자꾸 따라와요. 앞에 편의점이 보여요.",
                     "ask": "어디로 들어가면 좋을까요?",
-                    "setting": "street",
+                    "setting": "store",
                     "cast": [
                       {
                         "role": "child",
@@ -11174,7 +11191,7 @@ window.SAFETY_DATA = {
                     "title": "따라오는 발소리",
                     "story": "어두운 골목에서 누가 계속 따라와요. 이어폰을 끼고 있었어요.",
                     "ask": "지금 할 수 있는 행동 세 가지는?",
-                    "setting": "street",
+                    "setting": "alley",
                     "cast": [
                       {
                         "role": "child",
@@ -11187,7 +11204,8 @@ window.SAFETY_DATA = {
                     ],
                     "car": false,
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-04/high_scene1.svg"
+                    "image": "img/missing-e-04/high_scene1.svg",
+                    "time": "evening"
                   },
                   {
                     "type": "promise",
@@ -11228,7 +11246,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-04/high_scene2.svg"
+                    "image": "img/missing-e-04/high_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -11407,19 +11426,21 @@ window.SAFETY_DATA = {
                     "title": "따라오는 사람",
                     "story": "학원 끝나고 밤 10시, 고1 서진이는 같은 사람이 두 정거장째 따라오는 것 같아 불안하다.",
                     "ask": "지금 서진이가 할 수 있는 행동 순서를 정해 보자.",
-                    "setting": "center",
+                    "setting": "street",
                     "cast": [
                       {
                         "role": "teen",
                         "mood": "think"
                       },
                       {
-                        "role": "teacher",
+                        "role": "stranger",
                         "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/missing-e-04/teen_scene1.svg"
+                    "image": "img/missing-e-04/teen_scene1.svg",
+                    "time": "night",
+                    "car": false
                   },
                   {
                     "type": "promise",
@@ -11461,6 +11482,10 @@ window.SAFETY_DATA = {
                       {
                         "role": "teen",
                         "mood": "think"
+                      },
+                      {
+                        "role": "stranger",
+                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
@@ -11894,12 +11919,16 @@ window.SAFETY_DATA = {
                     "title": "112일까, 182일까",
                     "story": "놀이터에서 울면서 혼자 헤매는 어린아이를 발견했어요.",
                     "ask": "어디에 신고하면 좋을까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
                         "mood": "think",
                         "phone": true
+                      },
+                      {
+                        "role": "elder",
+                        "mood": "neutral"
                       },
                       {
                         "role": "friend2",
@@ -12129,14 +12158,18 @@ window.SAFETY_DATA = {
                     "title": "공원 주차장",
                     "story": "고1 민우는 공원 주차장에서 어른이 울며 싫다는 아이를 억지로 차에 태우는 것을 봤다. 차가 막 출발하려 한다.",
                     "ask": "민우가 기억해야 할 정보는 무엇이고, 어디에 신고할까?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "teen",
                         "mood": "think"
                       },
                       {
-                        "role": "teacher",
+                        "role": "stranger",
+                        "mood": "neutral"
+                      },
+                      {
+                        "role": "friend2",
                         "mood": "neutral"
                       }
                     ],
@@ -12177,11 +12210,15 @@ window.SAFETY_DATA = {
                     "title": "길 잃은 아이",
                     "story": "중2 지수는 마트에서 혼자 울고 있는 유치원생을 발견했다.",
                     "ask": "지수가 아이를 직접 데리고 나가도 될까? 가장 좋은 방법은?",
-                    "setting": "street",
+                    "setting": "mart",
                     "cast": [
                       {
                         "role": "teen",
                         "mood": "think"
+                      },
+                      {
+                        "role": "friend2",
+                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
@@ -12464,7 +12501,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-01/low_scene1.svg"
+                    "image": "img/health-e-01/low_scene1.svg",
+                    "props": [
+                      "snack"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -12672,7 +12712,7 @@ window.SAFETY_DATA = {
                     "title": "같은 컵, 같은 수저",
                     "story": "친구들이 음료 한 병을 돌려 마시고 있어요. 한 명은 감기에 걸렸대요.",
                     "ask": "감염병은 어떤 길로 옮을까요?",
-                    "setting": "school",
+                    "setting": "park",
                     "cast": [
                       {
                         "role": "child",
@@ -12688,7 +12728,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-01/high_scene1.svg"
+                    "image": "img/health-e-01/high_scene1.svg",
+                    "props": [
+                      "bottles"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -12913,7 +12956,7 @@ window.SAFETY_DATA = {
                     "title": "시험 기간 감기",
                     "story": "중3 지민이는 열이 나는데 시험 기간이라 학원과 독서실에 계속 간다.",
                     "ask": "지민이와 주변 친구들에게 어떤 일이 생길 수 있을까? 어떻게 하는 게 좋을까?",
-                    "setting": "center",
+                    "setting": "library",
                     "cast": [
                       {
                         "role": "teen",
@@ -12921,7 +12964,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-01/teen_scene1.svg"
+                    "image": "img/health-e-01/teen_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -12967,7 +13011,7 @@ window.SAFETY_DATA = {
                     "title": "립밤 돌려쓰기",
                     "story": "친구들끼리 새로 산 립밤을 돌려 가며 바른다.",
                     "ask": "왜 위험할까? 기분 상하지 않게 거절하는 말은?",
-                    "setting": "outdoor",
+                    "setting": "school",
                     "cast": [
                       {
                         "role": "teen",
@@ -13520,7 +13564,7 @@ window.SAFETY_DATA = {
                         "title": "유행 중 소풍",
                         "story": "감염병이 유행하는데 센터 나들이가 있어요. 사람이 많은 곳이에요.",
                         "ask": "지켜야 할 생활 수칙은?",
-                        "setting": "outdoor",
+                        "setting": "park",
                         "cast": [
                           {
                             "role": "child",
@@ -14414,7 +14458,7 @@ window.SAFETY_DATA = {
                     "title": "사탕 같은 약",
                     "story": "식탁 위에 알록달록한 약이 있어요. 사탕처럼 보여요.",
                     "ask": "먹어도 될까요? 누구에게 물어볼까요?",
-                    "setting": "home",
+                    "setting": "kitchen",
                     "cast": [
                       {
                         "role": "child",
@@ -14423,7 +14467,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-03/low_scene1.svg"
+                    "image": "img/health-e-03/low_scene1.svg",
+                    "props": [
+                      "pills"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -14455,7 +14502,7 @@ window.SAFETY_DATA = {
                     "title": "세제 냄새",
                     "story": "화장실 청소 세제에서 강한 냄새가 나요. 동생이 냄새를 맡으려 해요.",
                     "ask": "동생에게 뭐라고 말할까요?",
-                    "setting": "home",
+                    "setting": "bathroom",
                     "cast": [
                       {
                         "role": "child",
@@ -14686,7 +14733,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-03/high_scene2.svg"
+                    "image": "img/health-e-03/high_scene2.svg",
+                    "props": [
+                      "pills"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -14910,7 +14960,7 @@ window.SAFETY_DATA = {
                     "title": "화장실 청소",
                     "story": "중3 우진이는 화장실 곰팡이를 없애려고 락스와 다른 세제를 섞어 쓰려 한다.",
                     "ask": "어떤 위험이 있을까? 안전하게 청소하는 방법은?",
-                    "setting": "center",
+                    "setting": "bathroom",
                     "cast": [
                       {
                         "role": "teen",
@@ -15359,7 +15409,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-04/high_scene1.svg"
+                    "image": "img/health-e-04/high_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -15406,7 +15457,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-04/high_scene2.svg"
+                    "image": "img/health-e-04/high_scene2.svg",
+                    "time": "evening",
+                    "props": [
+                      "bottles"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -15652,7 +15707,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-04/teen_scene2.svg"
+                    "image": "img/health-e-04/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -15872,7 +15928,10 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/health-e-04-drug/low_scene1.svg"
+                        "image": "img/health-e-04-drug/low_scene1.svg",
+                        "props": [
+                          "snack"
+                        ]
                       },
                       {
                         "type": "promise",
@@ -16134,7 +16193,7 @@ window.SAFETY_DATA = {
                         "title": "다이어트약",
                         "story": "친구가 인터넷에서 산 다이어트약을 먹고 가슴이 두근거린대요.",
                         "ask": "어디에 도움을 청할 수 있을까요?",
-                        "setting": "school",
+                        "setting": "bathroom",
                         "cast": [
                           {
                             "role": "child",
@@ -16146,7 +16205,10 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/health-e-04-drug/high_scene2.svg"
+                        "image": "img/health-e-04-drug/high_scene2.svg",
+                        "props": [
+                          "pills"
+                        ]
                       },
                       {
                         "type": "quiz",
@@ -16348,7 +16410,11 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/health-e-04-vape/low_scene1.svg"
+                        "image": "img/health-e-04-vape/low_scene1.svg",
+                        "props": [
+                          "device"
+                        ],
+                        "car": false
                       },
                       {
                         "type": "promise",
@@ -16554,7 +16620,7 @@ window.SAFETY_DATA = {
                         "title": "향만 나는 거야",
                         "story": "친구가 '이건 니코틴 없는 향 전자담배야, 해 봐'라고 권해요.",
                         "ask": "정말 괜찮을까요? 어떻게 거절할까요?",
-                        "setting": "park",
+                        "setting": "alley",
                         "cast": [
                           {
                             "role": "child",
@@ -16809,7 +16875,7 @@ window.SAFETY_DATA = {
                     "title": "동생이 세제를 먹었어요",
                     "story": "동생이 세제 통을 들고 있어요. 입가에 거품이 묻어 있어요.",
                     "ask": "가장 먼저 무엇을 할까요?",
-                    "setting": "home",
+                    "setting": "bathroom",
                     "cast": [
                       {
                         "role": "child",
@@ -16865,7 +16931,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-05/low_scene2.svg"
+                    "image": "img/health-e-05/low_scene2.svg",
+                    "props": [
+                      "pills"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -17261,7 +17330,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-05/teen_scene1.svg"
+                    "image": "img/health-e-05/teen_scene1.svg",
+                    "time": "night",
+                    "props": [
+                      "bottles"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -17299,7 +17372,7 @@ window.SAFETY_DATA = {
                     "title": "겨울 캠핑",
                     "story": "중3 소윤이네 가족이 텐트 안에서 난로를 켜고 잤는데, 아침에 모두 머리가 아프다.",
                     "ask": "어떤 사고를 의심해야 할까? 바로 할 일은?",
-                    "setting": "home",
+                    "setting": "camp",
                     "cast": [
                       {
                         "role": "teen",
@@ -17307,7 +17380,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/health-e-05/teen_scene2.svg"
+                    "image": "img/health-e-05/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -17601,7 +17675,7 @@ window.SAFETY_DATA = {
                     "title": "라이터 발견",
                     "story": "놀이터 벤치에 라이터가 떨어져 있어요. 친구가 켜 보자고 해요.",
                     "ask": "어떻게 말하고 어떻게 할까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -17614,7 +17688,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-01/low_scene1.svg"
+                    "image": "img/disaster-e-01/low_scene1.svg",
+                    "props": [
+                      "lighter"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -17655,7 +17732,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-01/low_scene2.svg"
+                    "image": "img/disaster-e-01/low_scene2.svg",
+                    "props": [
+                      "multitap"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -17827,7 +17907,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-01/high_scene1.svg"
+                    "image": "img/disaster-e-01/high_scene1.svg",
+                    "props": [
+                      "multitap"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -18042,7 +18125,7 @@ window.SAFETY_DATA = {
                     "title": "라면 끓이다",
                     "story": "중2 민혁이는 라면을 올려 두고 방에서 게임을 하다가 타는 냄새를 맡았다.",
                     "ask": "지금 민혁이가 해야 할 일은? 처음부터 어떻게 막을 수 있었을까?",
-                    "setting": "game",
+                    "setting": "kitchen",
                     "cast": [
                       {
                         "role": "teen",
@@ -18051,7 +18134,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-01/teen_scene1.svg"
+                    "image": "img/disaster-e-01/teen_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -18096,7 +18182,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-01/teen_scene2.svg"
+                    "image": "img/disaster-e-01/teen_scene2.svg",
+                    "time": "night",
+                    "props": [
+                      "multitap"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -18300,7 +18390,11 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-01-battery/low_scene1.svg"
+                        "image": "img/disaster-e-01-battery/low_scene1.svg",
+                        "time": "night",
+                        "props": [
+                          "device"
+                        ]
                       },
                       {
                         "type": "promise",
@@ -18346,7 +18440,10 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-01-battery/low_scene2.svg"
+                        "image": "img/disaster-e-01-battery/low_scene2.svg",
+                        "props": [
+                          "device"
+                        ]
                       },
                       {
                         "type": "quiz",
@@ -18562,7 +18659,11 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-01-battery/high_scene2.svg"
+                        "image": "img/disaster-e-01-battery/high_scene2.svg",
+                        "time": "night",
+                        "props": [
+                          "kickboard"
+                        ]
                       },
                       {
                         "type": "quiz",
@@ -18772,7 +18873,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-02/low_scene1.svg"
+                    "image": "img/disaster-e-02/low_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -18818,7 +18922,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-02/low_scene2.svg"
+                    "image": "img/disaster-e-02/low_scene2.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -18986,7 +19093,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-02/high_scene1.svg"
+                    "image": "img/disaster-e-02/high_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -19020,7 +19130,7 @@ window.SAFETY_DATA = {
                     "title": "모이는 곳",
                     "story": "대피해서 밖으로 나왔는데 한 친구가 보이지 않아요.",
                     "ask": "어떻게 확인하고 누구에게 알릴까요?",
-                    "setting": "outdoor",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "child",
@@ -19217,7 +19327,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-02/teen_scene1.svg"
+                    "image": "img/disaster-e-02/teen_scene1.svg",
+                    "time": "night",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -19264,7 +19378,7 @@ window.SAFETY_DATA = {
                     "title": "노래방 연기",
                     "story": "친구들과 노래방에 있는데 복도에서 타는 냄새가 나고 경보가 울린다. 친구들은 '오작동이겠지'라며 노래를 계속한다.",
                     "ask": "어떻게 판단하고 행동해야 할까?",
-                    "setting": "home",
+                    "setting": "karaoke",
                     "cast": [
                       {
                         "role": "teen",
@@ -19276,7 +19390,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-02/teen_scene2.svg"
+                    "image": "img/disaster-e-02/teen_scene2.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -19499,7 +19616,10 @@ window.SAFETY_DATA = {
                     ],
                     "car": false,
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-03/low_scene1.svg"
+                    "image": "img/disaster-e-03/low_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -19543,7 +19663,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-03/low_scene2.svg"
+                    "image": "img/disaster-e-03/low_scene2.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -19712,7 +19835,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-03/high_scene1.svg"
+                    "image": "img/disaster-e-03/high_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ],
+                    "car": false
                   },
                   {
                     "type": "promise",
@@ -19929,7 +20056,7 @@ window.SAFETY_DATA = {
                     "title": "산책길 연기",
                     "story": "고1 은호는 친구들과 산책하다 산 쪽에서 연기가 나는 것을 봤다. 친구들은 사진만 찍고 있다.",
                     "ask": "은호가 119에 말해야 할 정보는? 위치를 어떻게 설명할까?",
-                    "setting": "online",
+                    "setting": "mountain",
                     "cast": [
                       {
                         "role": "teen",
@@ -19942,7 +20069,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-03/teen_scene1.svg"
+                    "image": "img/disaster-e-03/teen_scene1.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -19996,7 +20126,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-03/teen_scene2.svg"
+                    "image": "img/disaster-e-03/teen_scene2.svg",
+                    "props": [
+                      "smoke"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -20422,7 +20555,7 @@ window.SAFETY_DATA = {
                     "title": "옷에 불이 붙었어요",
                     "story": "캠핑장 모닥불 옆에서 친구 옷자락에 불이 붙었어요. 친구가 뛰려고 해요.",
                     "ask": "뭐라고 외쳐 줄까요?",
-                    "setting": "outdoor",
+                    "setting": "camp",
                     "cast": [
                       {
                         "role": "child",
@@ -20435,7 +20568,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-04/high_scene1.svg"
+                    "image": "img/disaster-e-04/high_scene1.svg",
+                    "time": "evening",
+                    "props": [
+                      "campfire"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -20705,7 +20842,7 @@ window.SAFETY_DATA = {
                     "title": "캠프파이어",
                     "story": "캠프파이어 중 고1 준서의 소매에 불이 붙었다.",
                     "ask": "준서와 주변 사람은 어떻게 행동해야 할까?",
-                    "setting": "center",
+                    "setting": "camp",
                     "cast": [
                       {
                         "role": "teen",
@@ -20713,7 +20850,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-04/teen_scene2.svg"
+                    "image": "img/disaster-e-04/teen_scene2.svg",
+                    "time": "night",
+                    "props": [
+                      "campfire"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -20938,7 +21079,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-05/low_scene1.svg"
+                    "image": "img/disaster-e-05/low_scene1.svg",
+                    "props": [
+                      "extinguisher"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -20983,7 +21127,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-05/low_scene2.svg"
+                    "image": "img/disaster-e-05/low_scene2.svg",
+                    "props": [
+                      "smoke",
+                      "extinguisher"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -21143,7 +21291,7 @@ window.SAFETY_DATA = {
                     "title": "불꽃을 향해?",
                     "story": "소화기 연습에서 친구가 불꽃 위쪽을 향해 쏘려고 해요.",
                     "ask": "어디를 향해야 할까요?",
-                    "setting": "outdoor",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "child",
@@ -21155,7 +21303,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-05/high_scene1.svg"
+                    "image": "img/disaster-e-05/high_scene1.svg",
+                    "props": [
+                      "extinguisher"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -21188,7 +21339,7 @@ window.SAFETY_DATA = {
                     "title": "핀이 안 빠져요",
                     "story": "친구가 소화기 손잡이를 쥔 채 핀을 뽑으려 해서 핀이 안 빠져요.",
                     "ask": "순서를 어떻게 알려 줄까요?",
-                    "setting": "outdoor",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "child",
@@ -21200,7 +21351,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-05/high_scene2.svg"
+                    "image": "img/disaster-e-05/high_scene2.svg",
+                    "props": [
+                      "extinguisher"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -21436,7 +21590,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-05/teen_scene2.svg"
+                    "image": "img/disaster-e-05/teen_scene2.svg",
+                    "props": [
+                      "smoke",
+                      "extinguisher"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -21660,7 +21818,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-06/low_scene1.svg"
+                    "image": "img/disaster-e-06/low_scene1.svg",
+                    "weather": "quake"
                   },
                   {
                     "type": "promise",
@@ -21693,7 +21852,7 @@ window.SAFETY_DATA = {
                     "title": "물이 불어난 개울",
                     "story": "비가 많이 온 다음 날, 친구가 개울에 물놀이를 가자고 해요.",
                     "ask": "가도 될까요?",
-                    "setting": "outdoor",
+                    "setting": "valley",
                     "cast": [
                       {
                         "role": "child",
@@ -21928,7 +22087,8 @@ window.SAFETY_DATA = {
                     ],
                     "car": false,
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-06/high_scene2.svg"
+                    "image": "img/disaster-e-06/high_scene2.svg",
+                    "weather": "rain"
                   },
                   {
                     "type": "quiz",
@@ -22101,7 +22261,7 @@ window.SAFETY_DATA = {
                     "title": "퇴근길 폭우",
                     "story": "고2 연우는 학원에서 나오는데 호우경보 재난문자가 왔다. 집으로 가는 가장 빠른 길은 지하차도를 지난다.",
                     "ask": "연우는 어떤 길을 선택해야 할까? 누구에게 연락할까?",
-                    "setting": "online",
+                    "setting": "street",
                     "cast": [
                       {
                         "role": "teen",
@@ -22110,7 +22270,9 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-06/teen_scene1.svg"
+                    "image": "img/disaster-e-06/teen_scene1.svg",
+                    "weather": "rain",
+                    "time": "evening"
                   },
                   {
                     "type": "promise",
@@ -22156,7 +22318,7 @@ window.SAFETY_DATA = {
                     "title": "한낮 축구",
                     "story": "35도가 넘는 날, 중3 친구들이 운동장에서 축구를 하다 한 명이 어지럽다며 주저앉았다.",
                     "ask": "친구에게 바로 해 줄 일은? (온열질환 응급처치)",
-                    "setting": "outdoor",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "teen",
@@ -22168,7 +22330,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/disaster-e-06/teen_scene2.svg"
+                    "image": "img/disaster-e-06/teen_scene2.svg",
+                    "weather": "heat",
+                    "props": [
+                      "ball"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -22434,7 +22600,8 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-quake/low_scene1.svg"
+                        "image": "img/disaster-e-06-quake/low_scene1.svg",
+                        "weather": "quake"
                       },
                       {
                         "type": "promise",
@@ -22663,7 +22830,8 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-quake/high_scene1.svg"
+                        "image": "img/disaster-e-06-quake/high_scene1.svg",
+                        "weather": "quake"
                       },
                       {
                         "type": "promise",
@@ -22706,7 +22874,7 @@ window.SAFETY_DATA = {
                         "title": "길에서 지진",
                         "story": "길을 걷는데 땅이 흔들려요. 옆에 유리창이 많은 건물이 있어요.",
                         "ask": "어떻게 움직여야 안전할까요?",
-                        "setting": "outdoor",
+                        "setting": "street",
                         "cast": [
                           {
                             "role": "child",
@@ -22715,7 +22883,8 @@ window.SAFETY_DATA = {
                         ],
                         "weather": "quake",
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-quake/high_scene2.svg"
+                        "image": "img/disaster-e-06-quake/high_scene2.svg",
+                        "car": false
                       },
                       {
                         "type": "quiz",
@@ -22902,7 +23071,7 @@ window.SAFETY_DATA = {
                         "title": "빙판길",
                         "story": "눈 온 다음 날 길이 꽁꽁 얼었어요. 주머니에 손을 넣고 걸어요.",
                         "ask": "어떻게 걸어야 넘어지지 않을까요?",
-                        "setting": "outdoor",
+                        "setting": "street",
                         "cast": [
                           {
                             "role": "child",
@@ -22911,7 +23080,8 @@ window.SAFETY_DATA = {
                         ],
                         "weather": "snow",
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-snow/low_scene1.svg"
+                        "image": "img/disaster-e-06-snow/low_scene1.svg",
+                        "car": false
                       },
                       {
                         "type": "promise",
@@ -22954,7 +23124,7 @@ window.SAFETY_DATA = {
                         "title": "빨개진 손",
                         "story": "눈싸움을 오래 했더니 손이 빨갛고 아파요.",
                         "ask": "누구에게 알리고 어떻게 할까요?",
-                        "setting": "outdoor",
+                        "setting": "park",
                         "cast": [
                           {
                             "role": "child",
@@ -23142,7 +23312,8 @@ window.SAFETY_DATA = {
                           }
                         ],
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-snow/high_scene1.svg"
+                        "image": "img/disaster-e-06-snow/high_scene1.svg",
+                        "time": "night"
                       },
                       {
                         "type": "promise",
@@ -23185,7 +23356,7 @@ window.SAFETY_DATA = {
                         "title": "감각이 없어요",
                         "story": "스키장에서 친구 손가락이 하얗고 감각이 없대요.",
                         "ask": "어떤 신호이고, 어떻게 도울까요?",
-                        "setting": "outdoor",
+                        "setting": "ski",
                         "cast": [
                           {
                             "role": "child",
@@ -23440,7 +23611,7 @@ window.SAFETY_DATA = {
                         "title": "물이 찬 계곡",
                         "story": "비가 그친 뒤 계곡물이 많이 불어났어요. 물놀이를 하고 싶어요.",
                         "ask": "가도 될까요?",
-                        "setting": "outdoor",
+                        "setting": "valley",
                         "cast": [
                           {
                             "role": "child",
@@ -23624,7 +23795,8 @@ window.SAFETY_DATA = {
                         ],
                         "car": false,
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-storm/high_scene1.svg"
+                        "image": "img/disaster-e-06-storm/high_scene1.svg",
+                        "weather": "rain"
                       },
                       {
                         "type": "promise",
@@ -23667,7 +23839,7 @@ window.SAFETY_DATA = {
                         "title": "흔들리는 간판",
                         "story": "강풍에 상가 간판이 흔들려요. 그 아래로 지나가야 해요.",
                         "ask": "어떻게 하면 안전할까요?",
-                        "setting": "street",
+                        "setting": "alley",
                         "cast": [
                           {
                             "role": "child",
@@ -23676,7 +23848,8 @@ window.SAFETY_DATA = {
                         ],
                         "car": false,
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-storm/high_scene2.svg"
+                        "image": "img/disaster-e-06-storm/high_scene2.svg",
+                        "weather": "storm"
                       },
                       {
                         "type": "quiz",
@@ -23863,7 +24036,7 @@ window.SAFETY_DATA = {
                         "title": "한낮 운동장",
                         "story": "아주 더운 날 점심 후 운동장에서 술래잡기를 하고 싶어요.",
                         "ask": "언제, 어디서 노는 게 좋을까요?",
-                        "setting": "outdoor",
+                        "setting": "playground",
                         "cast": [
                           {
                             "role": "child",
@@ -23919,7 +24092,7 @@ window.SAFETY_DATA = {
                         "title": "어지러워요",
                         "story": "친구가 땀을 많이 흘리고 어지럽다고 해요.",
                         "ask": "어떻게 도와줄까요?",
-                        "setting": "outdoor",
+                        "setting": "park",
                         "cast": [
                           {
                             "role": "child",
@@ -24094,7 +24267,7 @@ window.SAFETY_DATA = {
                         "title": "폭염 특보 축구",
                         "story": "폭염 특보가 내렸는데 오후 2시에 축구 시합이 잡혀 있어요.",
                         "ask": "어떻게 하자고 제안할까요?",
-                        "setting": "outdoor",
+                        "setting": "field",
                         "cast": [
                           {
                             "role": "child",
@@ -24107,7 +24280,10 @@ window.SAFETY_DATA = {
                         ],
                         "weather": "heat",
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-heat/high_scene1.svg"
+                        "image": "img/disaster-e-06-heat/high_scene1.svg",
+                        "props": [
+                          "ball"
+                        ]
                       },
                       {
                         "type": "promise",
@@ -24150,7 +24326,7 @@ window.SAFETY_DATA = {
                         "title": "두통과 메스꺼움",
                         "story": "친구가 운동 후 머리가 아프고 속이 메스껍대요.",
                         "ask": "온열질환일까요? 무엇부터 할까요?",
-                        "setting": "outdoor",
+                        "setting": "field",
                         "cast": [
                           {
                             "role": "child",
@@ -24360,7 +24536,7 @@ window.SAFETY_DATA = {
                         "title": "뿌연 하늘",
                         "story": "하늘이 뿌옇고 목이 칼칼해요. 밖에서 놀고 싶어요.",
                         "ask": "먼저 무엇을 확인할까요?",
-                        "setting": "outdoor",
+                        "setting": "park",
                         "cast": [
                           {
                             "role": "child",
@@ -24646,7 +24822,7 @@ window.SAFETY_DATA = {
                         "title": "마스크 쓰기 싫어",
                         "story": "친구가 '답답해, 마스크 안 써도 돼'라며 벗어요.",
                         "ask": "어떤 마스크를 어떻게 쓰면 좋을지 말해 줄까요?",
-                        "setting": "outdoor",
+                        "setting": "street",
                         "cast": [
                           {
                             "role": "child",
@@ -24659,7 +24835,8 @@ window.SAFETY_DATA = {
                         ],
                         "weather": "dust",
                         "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                        "image": "img/disaster-e-06-dust/high_scene2.svg"
+                        "image": "img/disaster-e-06-dust/high_scene2.svg",
+                        "car": false
                       },
                       {
                         "type": "quiz",
@@ -24872,7 +25049,7 @@ window.SAFETY_DATA = {
                     "title": "지름길 골목",
                     "story": "센터 가는 길, 친구가 차가 다니는 좁은 골목이 더 빠르다고 해요.",
                     "ask": "어떤 길로 가야 할까요?",
-                    "setting": "street",
+                    "setting": "alley",
                     "cast": [
                       {
                         "role": "child",
@@ -24920,7 +25097,7 @@ window.SAFETY_DATA = {
                     "title": "주차장 앞",
                     "story": "인도 옆 주차장에서 차가 천천히 나오고 있어요.",
                     "ask": "어떻게 지나가면 좋을까요?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "child",
@@ -25101,7 +25278,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-01/high_scene1.svg"
+                    "image": "img/traffic-e-01/high_scene1.svg",
+                    "props": [
+                      "cones"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -25145,7 +25325,8 @@ window.SAFETY_DATA = {
                     ],
                     "light": "green",
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-01/high_scene2.svg"
+                    "image": "img/traffic-e-01/high_scene2.svg",
+                    "zone": true
                   },
                   {
                     "type": "quiz",
@@ -25327,7 +25508,11 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-01/teen_scene1.svg"
+                    "image": "img/traffic-e-01/teen_scene1.svg",
+                    "time": "night",
+                    "props": [
+                      "cones"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -25629,7 +25814,7 @@ window.SAFETY_DATA = {
                     "title": "주차된 차 사이",
                     "story": "공이 주차된 차 사이로 굴러갔어요.",
                     "ask": "바로 뛰어가도 될까요?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "child",
@@ -25637,7 +25822,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-02/low_scene2.svg"
+                    "image": "img/traffic-e-02/low_scene2.svg",
+                    "props": [
+                      "ball"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -25850,7 +26038,7 @@ window.SAFETY_DATA = {
                     "title": "비 오는 저녁",
                     "story": "비 오는 저녁, 어두운 옷에 검은 우산을 쓰고 걸어요.",
                     "ask": "운전자 눈에 잘 보이려면?",
-                    "setting": "outdoor",
+                    "setting": "street",
                     "cast": [
                       {
                         "role": "child",
@@ -25859,7 +26047,11 @@ window.SAFETY_DATA = {
                     ],
                     "weather": "rain",
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-02/high_scene2.svg"
+                    "image": "img/traffic-e-02/high_scene2.svg",
+                    "time": "night",
+                    "props": [
+                      "umbrella"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -26032,7 +26224,7 @@ window.SAFETY_DATA = {
                     "title": "단톡방 알림",
                     "story": "고1 재윤이는 횡단보도 앞에서 단톡방 알림이 계속 울려 답장을 하며 건너려 한다.",
                     "ask": "재윤이가 할 수 있는 다른 선택은?",
-                    "setting": "online",
+                    "setting": "street",
                     "cast": [
                       {
                         "role": "teen",
@@ -26320,7 +26512,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/low_scene1.svg"
+                    "image": "img/traffic-e-03/low_scene1.svg",
+                    "props": [
+                      "bicycle"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -26367,7 +26562,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/low_scene2.svg"
+                    "image": "img/traffic-e-03/low_scene2.svg",
+                    "props": [
+                      "bicycle"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -26540,7 +26738,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/high_scene1.svg"
+                    "image": "img/traffic-e-03/high_scene1.svg",
+                    "props": [
+                      "kickboard"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -26575,7 +26776,7 @@ window.SAFETY_DATA = {
                     "title": "인도 위 자전거",
                     "story": "자전거를 타고 사람이 많은 인도를 빠르게 지나가요.",
                     "ask": "어떻게 타야 모두가 안전할까요?",
-                    "setting": "bike",
+                    "setting": "park",
                     "cast": [
                       {
                         "role": "child",
@@ -26587,7 +26788,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/high_scene2.svg"
+                    "image": "img/traffic-e-03/high_scene2.svg",
+                    "props": [
+                      "bicycle"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -26760,7 +26964,7 @@ window.SAFETY_DATA = {
                     "title": "공유 킥보드",
                     "story": "중3 민호는 형의 아이디로 공유 킥보드를 빌려 친구를 뒤에 태우고 학원에 가려 한다.",
                     "ask": "이 상황에서 법을 어긴 부분은 몇 가지일까? 사고가 나면 어떤 일이 생길까?",
-                    "setting": "bike",
+                    "setting": "street",
                     "cast": [
                       {
                         "role": "teen",
@@ -26769,14 +26973,13 @@ window.SAFETY_DATA = {
                       {
                         "role": "friend",
                         "mood": "neutral"
-                      },
-                      {
-                        "role": "teacher",
-                        "mood": "neutral"
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/teen_scene1.svg"
+                    "image": "img/traffic-e-03/teen_scene1.svg",
+                    "props": [
+                      "kickboard"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -26831,7 +27034,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-03/teen_scene2.svg"
+                    "image": "img/traffic-e-03/teen_scene2.svg",
+                    "props": [
+                      "kickboard"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -27037,7 +27243,7 @@ window.SAFETY_DATA = {
                     "title": "센터 차 타기",
                     "story": "센터 차가 아직 멈추지 않았는데 친구들이 문 앞으로 몰려가요.",
                     "ask": "어떻게 타야 할까요?",
-                    "setting": "bus",
+                    "setting": "van",
                     "cast": [
                       {
                         "role": "child",
@@ -27088,7 +27294,7 @@ window.SAFETY_DATA = {
                     "title": "내릴 때",
                     "story": "차에서 내리려고 문을 여는데 뒤에서 오토바이 소리가 나요.",
                     "ask": "내리기 전에 무엇을 확인할까요?",
-                    "setting": "bus",
+                    "setting": "van",
                     "cast": [
                       {
                         "role": "child",
@@ -27256,7 +27462,7 @@ window.SAFETY_DATA = {
                     "title": "닫히는 지하철 문",
                     "story": "지하철 문이 닫히려는데 친구가 뛰어 들어가자고 해요.",
                     "ask": "어떻게 하는 게 좋을까요?",
-                    "setting": "bus",
+                    "setting": "subway",
                     "cast": [
                       {
                         "role": "child",
@@ -27490,7 +27696,7 @@ window.SAFETY_DATA = {
                     "title": "만원 지하철",
                     "story": "등교 시간 만원 지하철에서 중2 유진이는 문이 닫히는 순간 가방을 밀어 넣고 타려 한다.",
                     "ask": "어떤 위험이 있을까? 늦을까 봐 걱정된다면 어떻게 할까?",
-                    "setting": "bus",
+                    "setting": "subway",
                     "cast": [
                       {
                         "role": "teen",
@@ -27535,7 +27741,7 @@ window.SAFETY_DATA = {
                     "title": "친구 부모님 차",
                     "story": "고1 태호는 친구 부모님 차 뒷좌석에 탔는데 친구들이 '뒤에선 안 매도 돼'라며 안전띠를 안 맨다.",
                     "ask": "태호는 어떻게 할까? 분위기를 깨지 않고 말하는 방법은?",
-                    "setting": "street",
+                    "setting": "car",
                     "cast": [
                       {
                         "role": "teen",
@@ -27543,10 +27749,6 @@ window.SAFETY_DATA = {
                       },
                       {
                         "role": "friend",
-                        "mood": "neutral"
-                      },
-                      {
-                        "role": "parent",
                         "mood": "neutral"
                       }
                     ],
@@ -27984,7 +28186,8 @@ window.SAFETY_DATA = {
                     ],
                     "car": false,
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-05/high_scene1.svg"
+                    "image": "img/traffic-e-05/high_scene1.svg",
+                    "time": "night"
                   },
                   {
                     "type": "promise",
@@ -28031,7 +28234,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-05/high_scene2.svg"
+                    "image": "img/traffic-e-05/high_scene2.svg",
+                    "props": [
+                      "bicycle"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -28204,7 +28410,7 @@ window.SAFETY_DATA = {
                     "title": "렌터카 제안",
                     "story": "고2 선배가 '내가 운전 잘해, 렌터카 빌려서 바다 가자'며 친구 이름으로 차를 빌리자고 한다.",
                     "ask": "이 제안의 문제는 무엇일까? 어떻게 거절할까?",
-                    "setting": "street",
+                    "setting": "parking",
                     "cast": [
                       {
                         "role": "teen",
@@ -28270,7 +28476,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/traffic-e-05/teen_scene2.svg"
+                    "image": "img/traffic-e-05/teen_scene2.svg",
+                    "time": "night"
                   },
                   {
                     "type": "quiz",
@@ -28567,7 +28774,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/rights-e-01/low_scene1.svg"
+                    "image": "img/rights-e-01/low_scene1.svg",
+                    "props": [
+                      "snack"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -29093,7 +29303,7 @@ window.SAFETY_DATA = {
                     "title": "빼지 마",
                     "story": "새로 온 친구를 '너는 안 돼' 하며 놀이에서 빼요.",
                     "ask": "어떤 권리가 지켜지지 않았을까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -29328,7 +29538,7 @@ window.SAFETY_DATA = {
                     "title": "우리 센터 점검",
                     "story": "센터에서 잘 지켜지는 권리와 더 필요한 권리를 찾아보기로 했어요.",
                     "ask": "하나씩 골라 이유를 말해 볼까요?",
-                    "setting": "center",
+                    "setting": "meeting",
                     "cast": [
                       {
                         "role": "child",
@@ -29590,7 +29800,7 @@ window.SAFETY_DATA = {
                     "title": "휠체어 친구",
                     "story": "휠체어를 타는 친구가 술래잡기에 끼고 싶어 해요.",
                     "ask": "모두 함께 놀 방법은?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -29602,7 +29812,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/rights-e-03/low_scene2.svg"
+                    "image": "img/rights-e-03/low_scene2.svg",
+                    "props": [
+                      "wheelchair"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -29807,7 +30020,7 @@ window.SAFETY_DATA = {
                     "title": "남자는 울면 안 돼",
                     "story": "축구에서 진 친구가 울자 '남자가 왜 울어'라는 말이 나와요.",
                     "ask": "어떤 고정관념이고, 어떻게 바꿔 말할까요?",
-                    "setting": "park",
+                    "setting": "field",
                     "cast": [
                       {
                         "role": "child",
@@ -29820,7 +30033,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/rights-e-03/high_scene2.svg"
+                    "image": "img/rights-e-03/high_scene2.svg",
+                    "props": [
+                      "ball"
+                    ]
                   },
                   {
                     "type": "quiz",
@@ -30018,7 +30234,7 @@ window.SAFETY_DATA = {
                     "title": "간식 정하기",
                     "story": "다음 주 간식을 무엇으로 할지 모두 함께 정하기로 했어요.",
                     "ask": "내 생각을 말하고, 친구 말도 들어 볼까요?",
-                    "setting": "center",
+                    "setting": "meeting",
                     "cast": [
                       {
                         "role": "child",
@@ -30035,7 +30251,10 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/rights-e-04/low_scene1.svg"
+                    "image": "img/rights-e-04/low_scene1.svg",
+                    "props": [
+                      "snack"
+                    ]
                   },
                   {
                     "type": "promise",
@@ -30290,7 +30509,7 @@ window.SAFETY_DATA = {
                     "title": "자치회의",
                     "story": "아동자치회의에서 놀이 시간을 늘리자는 안건이 나왔어요.",
                     "ask": "찬성과 반대 의견을 어떻게 존중하며 정할까요?",
-                    "setting": "center",
+                    "setting": "meeting",
                     "cast": [
                       {
                         "role": "child",
@@ -30975,7 +31194,7 @@ window.SAFETY_DATA = {
                     "title": "같이 놀자",
                     "story": "혼자 앉아 있는 친구가 보여요.",
                     "ask": "어떻게 같이 놀자고 말할까요?",
-                    "setting": "park",
+                    "setting": "playground",
                     "cast": [
                       {
                         "role": "child",
@@ -31021,7 +31240,7 @@ window.SAFETY_DATA = {
                     "title": "너무 피곤해요",
                     "story": "오늘은 너무 피곤한데 계속 공부해야 한대요.",
                     "ask": "쉴 권리는 어떻게 말할 수 있을까요?",
-                    "setting": "center",
+                    "setting": "library",
                     "cast": [
                       {
                         "role": "child",
@@ -31246,7 +31465,8 @@ window.SAFETY_DATA = {
                       }
                     ],
                     "teacher": "모둠별로 1분 동안 이야기하고 2~3명이 발표해요. 정답을 정하기보다 '왜 그렇게 생각했는지' 이유를 말하게 해 주세요.",
-                    "image": "img/rights-e-06/high_scene2.svg"
+                    "image": "img/rights-e-06/high_scene2.svg",
+                    "time": "evening"
                   },
                   {
                     "type": "quiz",
