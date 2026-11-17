@@ -13,3 +13,6 @@ skills-lock.json
 
 # 가리지 않은 카톡 원본 캡처 (가린 사본은 docs/images/03_interview/)
 docs/피드백*.jpg
+
+# 체험판 (npm run trial) — 공개용 저장소에 따로 올려요
+dist-trial/

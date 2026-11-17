@@ -450,6 +450,45 @@
   .about th, .about td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
   .about th { background: #EFEBE3; }
   .about h2 { margin-top: 30px; }
+  /* 수업 검토 (#review) */
+  .rv-pill { display: inline-block; font-size: .85rem; font-weight: 700; padding: 2px 10px; border-radius: 99px; margin-left: 8px; vertical-align: middle; }
+  .rv-pill.done { background: #DDF3E6; color: #135E36; }
+  .rv-pill.pass { background: #E8F6EE; color: #1B7F47; border: 1px dashed #1B7F47; }
+  .rv-pill.fix { background: #FDE7E4; color: #A12A1B; }
+  .rv-ai { background: #EEF6FF; border-color: #B9D6F5; margin-bottom: 18px; line-height: 1.7; }
+  .rv-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0; }
+  .rv-tools label:first-child { font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .rv-tools input:not([type=file]) { font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; width: 10em; }
+  .rv-group { margin-bottom: 14px; }
+  .rv-group summary { font-size: 1.2rem; font-weight: 800; cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .rv-sens { font-size: .85rem; background: #A12A1B; color: #fff; padding: 2px 10px; border-radius: 99px; }
+  .rv-list { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+  .rv-list button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; text-align: left; min-height: 48px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font: inherit; cursor: pointer; }
+  .rv-list button:hover { border-color: var(--cd); }
+  .rv-head h1 small { font-size: .6em; color: var(--muted, #666); }
+  .rv-open { margin-left: 10px; font-weight: 700; color: var(--cd); }
+  .rv-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 22px; align-items: start; margin-top: 16px; }
+  .rv-side { position: sticky; top: 12px; }
+  .rv-q { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 600; line-height: 1.5; cursor: pointer; }
+  .rv-q input { width: 24px; height: 24px; flex: none; margin-top: 1px; accent-color: var(--accent); }
+  .rv-memo { display: block; margin-top: 14px; font-weight: 700; }
+  .rv-memo textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; font: inherit; padding: 10px; border: 2px solid var(--line); border-radius: 10px; }
+  .rv-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .rv-btns .big-link { margin: 0; }
+  .rv-pass { background: var(--accent); border: 0; }
+  .rv-pass[disabled] { opacity: .4; cursor: not-allowed; }
+  .rv-nav { display: flex; justify-content: space-between; margin-top: 12px; }
+  .rv-nav .big-link { margin: 0; min-height: 46px; }
+  .linkish { background: none; border: 0; color: var(--muted, #666); text-decoration: underline; cursor: pointer; font: inherit; padding: 4px 0; }
+  .rv-slides { padding-left: 0; list-style: none; display: grid; gap: 10px; }
+  .rv-slide { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; line-height: 1.7; overflow: hidden; }
+  .rv-slide img { float: right; width: 120px; margin: 0 0 8px 12px; border-radius: 8px; border: 1px solid var(--line); }
+  .rv-slide ul { margin: 2px 0; padding-left: 1.2em; }
+  .rv-k { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--cd); background: #F1F3F5; border-radius: 6px; padding: 0 6px; }
+  .rv-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #1F2A36; color: #fff; padding: 12px 20px; border-radius: 12px; font-weight: 700; opacity: 0; transition: .2s; pointer-events: none; z-index: 99; }
+  .rv-toast.on { opacity: 1; transform: translateX(-50%); }
+  @media (max-width: 900px) { .rv-wrap { grid-template-columns: 1fr; } .rv-side { position: static; order: -1; } }
+  @media print { .rv-side, .rv-tools { display: none; } }
 </style>
 </head>
 <body>
@@ -541,7 +580,8 @@
     if (!h || h === "home" || h.startsWith("/")) return [];
     const p = h.split("-");
     if (p[0] === "area") return ["area", p[1], p[2]].filter(Boolean);
-    if (h === "records" || h === "plan" || h === "report" || h === "about" || h === "check") return [h];
+    if (h === "records" || h === "plan" || h === "report" || h === "about" || h === "check" || h === "review") return [h];
+    if (p[0] === "review" && p.length >= 4) return ["review", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "log" || p[0] === "edit") && p[1]) return [p[0], p.slice(1).join("-")];
     if (p[0] === "write" && p.length >= 4) return ["write", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "topic" || p[0] === "pick") && p.length >= 4) return [p[0], p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
@@ -601,6 +641,10 @@
         ${next.length ? `<div class="today-next">그다음: ${next.map(u => `<button onclick="go('#area-${u.a.id}')" style="${cv(u.a)}">${u.a.icon} ${esc(u.a.shortName)}<small>${esc(u.why)}</small></button>`).join("")}</div>` : ""}
       </section>`;
   }
+  function reviewHomeBtn() {
+    const R = loadReview(), list = allLessons(), ok = list.filter(x => ["done", "pass"].includes(reviewState(x, R).st)).length;
+    return `<button class="big-link ghost" onclick="go('#review')">✅ 수업 검토하기 <span class="meta" style="margin-left:6px">${ok} / ${list.length}</span></button>`;
+  }
   function viewHome() {
     const records = loadRecords();
     const total = DATA.meta.totalHours;
@@ -649,6 +693,7 @@
       <div class="home-tools">
         <button class="big-link ghost" onclick="go('#plan')">📅 연간 계획표</button>
         <button class="big-link ghost" onclick="go('#report')">📊 이수 현황표</button>
+        ${reviewHomeBtn()}
       </div>
       <h2 class="section-title">다른 영역 고르기</h2>
       <div class="grid">${cards}</div>
@@ -684,7 +729,7 @@
         <tr><td>그 밖의 그림 카드·디자인</td><td>직접 만든 것 (jeonghwan0415)</td></tr></table>
       <h2>꼭 알아 두세요</h2>
       <ul>
-        <li>수업 내용은 <b>"검토 필요"</b> 상태예요. AI의 도움을 받아 초안을 만들었고, 법령·신고 번호는 ${esc(DATA.meta.checkedAt)} 기준으로 공식 출처를 확인했어요. 수업 전에 꼭 읽어 보고 고쳐 써 주세요.</li>
+        <li>수업 내용은 AI의 도움을 받아 초안을 만들었어요. 수업마다 <b>"검토 완료"</b>(사람이 확인함) 또는 <b>"AI 1차 점검 · 사람 검토 전"</b> 표시가 붙어 있어요. 법령·신고 번호는 ${esc(DATA.meta.checkedAt)} 기준으로 공식 출처를 확인했어요. 수업 전에 꼭 읽어 보고 고쳐 써 주세요.</li>
         <li>법률·의료 자문이 아니에요. 점검·보고 전에는 국가법령정보센터 원문을 확인해 주세요.</li>
         <li>학대·성폭력이 의심되면 자료보다 <b>신고(112)와 보호가 먼저</b>예요.</li>
         <li>교육 기록은 이 컴퓨터 브라우저에만 저장돼요. 서버로 보내지 않고, 만든 사람도 볼 수 없어요.</li>
@@ -700,7 +745,7 @@
       <ul>${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
       ${links.map(l => `<a class="big-link ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.org)} · ${esc(l.title)}</a>`).join("")}
       <p class="meta">법령은 바뀔 수 있어요. 점검·보고 전에는 국가법령정보센터 원문을 한 번 더 확인해 주세요.</p>
-      <a class="big-link" style="background:var(--accent)" href="#check" onclick="go('#check');return false">✅ 검토용 점검표 — 수업에 넣은 법 문장·도움 번호 한눈에 보기</a></details>`;
+      <a class="big-link" style="background:var(--accent)" href="#check" onclick="go('#check');return false">✅ 검토용 점검표 — 수업에 넣은 법 문장·도움 번호 한눈에 보기</a> <a class="big-link ghost" href="#review" onclick="go('#review');return false">✏️ 수업 하나씩 검토하기</a></details>`;
   }
 
   /* 검토용 점검표 (#check): 수업에 넣은 '알아 두면 힘이 되는 법'과 '도움받는 곳' 번호를 모아 사람이 확인해요 (2026-11-13) */
@@ -974,7 +1019,7 @@
       body = linksHTML;
     }
     return head + `
-      <div class="lesson-head"><div><h1>${area.icon} ${esc(topic.title)}</h1><p class="lead" style="margin:0">${esc(area.shortName)} · ${lv.title} · ${L.minutes}분 <span class="status-pill">${esc(L.status)}</span>${area.optional ? ` <span class="plus-badge inline" style="${cv(area)}">＋ ${esc(area.badge || "추가 교육")}</span>` : ""}</p></div>
+      <div class="lesson-head"><div><h1>${area.icon} ${esc(topic.title)}</h1><p class="lead" style="margin:0">${esc(area.shortName)} · ${lv.title} · ${L.minutes}분 ${reviewPill({ key: reviewKey(area, topic, level), a: area, t: topic, lv: level, L })} <a class="rv-open" href="#review-${area.id}-${topic.id}-${level}" style="font-size:.9rem">검토하기</a>${area.optional ? ` <span class="plus-badge inline" style="${cv(area)}">＋ ${esc(area.badge || "추가 교육")}</span>` : ""}</p></div>
         <div class="head-btns"><button class="big-link ghost rec-btn" onclick="go('#write-${area.id}-${topic.id}-${level}')">📝 교육 기록하기</button>
         <button class="play-btn" style="${cv(area)}" onclick="startShow(0)">▶ 발표 시작</button></div></div>
       <div class="goal" style="${cv(area)}"><b>오늘의 목표</b> ${esc(L.goal)}${note ? `<br><span class="meta">${esc(note)}</span>` : ""}</div>
@@ -1678,6 +1723,178 @@
   }
 
   /* ---------------- 그리기 ---------------- */
+  /* ---------- 수업 검토 (#review) : 사람이 수업마다 확인 질문 5개를 보고 [통과]·[고칠 곳 있음]을 남겨요 (2026-11-17)
+     검토 결과는 이 브라우저에 저장되고, [검토 결과 파일 저장]으로 만든 파일을 tools/apply-reviews.js로 areas.json에 넣어요. ---------- */
+  const REVIEW_KEY = "seh-review-v1";
+  const REVIEW_QS = [
+    "아이에게 무섭거나 자극적인 내용이 없어요",
+    "피해 아이를 탓하는 말이 없어요 (\"왜 따라갔어?\" 같은 말)",
+    "법 문장과 도움 번호가 맞아요 (아래 출처 링크로 확인)",
+    "아이 나이에 맞는 말이에요",
+    "우리 센터 아이들 생활과 맞아요"
+  ];
+  /* 민감한 영역부터 검토해요 */
+  const REVIEW_ORDER = ["sexual", "abuse", "health", "missing", "traffic", "disaster", "rights"];
+  const SENSITIVE = ["sexual", "abuse"];
+  function loadReview() { try { const r = JSON.parse(localStorage.getItem(REVIEW_KEY)); return r && r.items ? r : { reviewer: "", items: {} }; } catch (e) { return { reviewer: "", items: {} }; } }
+  function saveReview(r) { try { localStorage.setItem(REVIEW_KEY, JSON.stringify(r)); return true; } catch (e) { alert("이 브라우저에 저장하지 못했어요. [검토 결과 파일 저장]으로 파일을 받아 두세요."); return false; } }
+  const reviewKey = (a, t, lv) => `${a.id}|${t.id}|${lv}`;
+  function allLessons() {
+    const rank = id => { const i = REVIEW_ORDER.indexOf(id); return i < 0 ? 99 : i; };
+    const out = [];
+    for (const a of ALL_AREAS.slice().sort((x, y) => rank(x.id) - rank(y.id)))
+      for (const base of a.topics.elementary) for (const t of lessonTopics(base)) for (const lv of ["low", "high", "teen"]) {
+        const L = (t.content || {})[lv]; if (L) out.push({ key: reviewKey(a, t, lv), a, t, lv, L });
+      }
+    return out;
+  }
+  /* 상태: done(파일로 반영된 검토 완료) · pass(이 기기에서 통과) · fix(고칠 곳 있음) · todo(아직) */
+  function reviewState(x, R) {
+    if (x.L.status === "검토 완료" || x.L.review) return { st: "done", by: (x.L.review || {}).by, date: (x.L.review || {}).date };
+    const r = (R || loadReview()).items[x.key];
+    if (r && r.result === "pass") return { st: "pass", by: r.by, date: r.date };
+    if (r && r.result === "fix") return { st: "fix", memo: r.memo, date: r.date };
+    return { st: "todo" };
+  }
+  function reviewPill(x, R) {
+    const s = reviewState(x, R);
+    if (s.st === "done") return `<span class="rv-pill done">✔ 검토 완료${s.by ? " · " + esc(s.by) : ""}${s.date ? " · " + esc(s.date) : ""}</span>`;
+    if (s.st === "pass") return `<span class="rv-pill pass" title="이 기기에서 통과로 표시했어요. 결과 파일을 저장해 반영하면 '검토 완료'가 돼요">✔ 통과 (이 기기)</span>`;
+    if (s.st === "fix") return `<span class="rv-pill fix">✏️ 고칠 곳 있음</span>`;
+    return `<span class="status-pill">${esc(x.L.status)}</span>`;
+  }
+  const levelLabel = lv => (LEVELS.find(l => l.id === lv) || {}).title || lv;
+  function reviewHash(x) { return `#review-${x.a.id}-${x.t.id}-${x.lv}`; }
+
+  function viewReview() {
+    const R = loadReview(), list = allLessons();
+    const st = list.map(x => reviewState(x, R).st);
+    const ok = st.filter(s => s === "done" || s === "pass").length, fix = st.filter(s => s === "fix").length;
+    const first = list.find((x, i) => st[i] === "todo");
+    const groups = [];
+    list.forEach((x, i) => { let g = groups.find(g => g.a.id === x.a.id); if (!g) groups.push(g = { a: x.a, rows: [] }); g.rows.push({ x, s: st[i] }); });
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "수업 검토" }]) + `
+      <h1>✅ 수업 검토하기</h1>
+      <p class="lead">수업 하나에 5~10분이면 돼요. 확인 질문 5개를 보고 <b>[통과]</b> 또는 <b>[고칠 곳 있음]</b>을 눌러 주세요.
+        <b>성폭력·아동학대 수업부터</b> 해 주세요.</p>
+      <div class="box rv-ai"><b>🤖 AI 1차 점검은 끝났어요 (2026-11-17)</b><br>
+        무섭거나 자극적인 표현, 피해 아이를 탓하는 말, "비밀로 하자"를 잘못 가르치는 곳, 확인되지 않은 도움 번호를 기계로 찾아봤고 걸린 곳은 없었어요.
+        하지만 이 수업은 AI가 초안을 만들었기 때문에, <b>아이들에게 맞는지는 사람이 꼭 확인해야 해요.</b></div>
+      <div class="progress-box rv-prog">
+        <div class="progress-num">${ok} <span>/ ${list.length}개 통과</span></div>
+        <div class="bar" aria-label="검토 진행률"><div style="width:${list.length ? ok / list.length * 100 : 0}%"></div></div>
+        <div class="meta">${fix ? `✏️ 고칠 곳 있음 ${fix}개<br>` : ""}<small>통과·메모는 이 브라우저에 저장돼요</small></div>
+        ${first ? `<button class="big-link" style="background:var(--accent)" onclick="go('${reviewHash(first)}')">▶ 이어서 검토하기</button>` : `<span class="rv-pill done">🎉 모두 봤어요</span>`}
+      </div>
+      <div class="box rv-tools">
+        <label>검토한 사람 이름 <input id="rvName" value="${esc(R.reviewer || "")}" placeholder="예: 박정환" onchange="rvSetName(this.value)"></label>
+        <button class="big-link" style="background:var(--accent)" onclick="rvExport()">💾 검토 결과 파일 저장</button>
+        <label class="big-link ghost" style="cursor:pointer">📂 결과 파일 불러오기<input type="file" accept=".json,application/json" hidden onchange="rvImport(this)"></label>
+        <p class="meta" style="margin:6px 0 0">다 보셨으면 결과 파일을 저장해 만든 사람에게 보내 주세요. 프로그램에 반영되면 모든 화면에서 '검토 완료'로 바뀌어요.
+          여러 선생님이 나눠서 했다면 결과 파일을 불러와서 한 번에 합칠 수 있어요.</p>
+      </div>
+      ${groups.map(g => {
+        const n = g.rows.filter(r => r.s === "done" || r.s === "pass").length, sens = SENSITIVE.includes(g.a.id);
+        return `<details class="box rv-group" style="${cv(g.a)};border-left:8px solid var(--c)"${sens || n < g.rows.length && g === groups.find(G => G.rows.some(r => r.s === "todo" || r.s === "fix")) ? " open" : ""}>
+          <summary>${g.a.icon} ${esc(g.a.shortName)} — ${n} / ${g.rows.length}개 ${sens ? `<span class="rv-sens">먼저 봐 주세요</span>` : ""}</summary>
+          <ul class="rv-list">${g.rows.map(({ x }) => `<li><button onclick="go('${reviewHash(x)}')"><span>${esc(x.t.subTitle ? x.t.title : x.t.title)} · ${levelLabel(x.lv)}</span>${reviewPill(x, R)}</button></li>`).join("")}</ul></details>`;
+      }).join("")}`;
+  }
+
+  /* 슬라이드 글을 사람이 읽기 좋게 펼쳐요 */
+  const RV_SKIP = new Set(["type", "image", "emoji", "img", "src", "icon", "color", "youtubeId", "layout", "id", "anim", "art", "pos", "bg"]);
+  const RV_LABEL = { title: "", say: "아이에게 하는 말", teacher: "선생님 말", script: "선생님 대본", story: "이야기", ask: "질문", q: "문제", a: "정답", why: "이유", explain: "해설", e: "해설", ex: "예시", t: "", points: "", who: "", no: "번호", note: "", source: "근거", items: "", text: "" };
+  function rvText(v, depth) {
+    if (v == null || v === "") return "";
+    if (typeof v === "string" || typeof v === "number") return esc(v);
+    if (Array.isArray(v)) return `<ul>${v.map(it => `<li>${rvText(it, depth + 1)}</li>`).join("")}</ul>`;
+    if (typeof v === "object") {
+      if (v.q && v.a) return `${esc(v.q)} <b class="ans ans-${esc(v.a)}">${esc(v.a)}</b>${v.why ? `<br><span class="meta">${esc(v.why)}</span>` : ""}${v.explain ? `<br><span class="meta">${esc(v.explain)}</span>` : ""}`;
+      if (v.no && v.who) return `<b>${esc(v.no)}</b> ${esc(v.who)}${v.note ? ` <span class="meta">${esc(v.note)}</span>` : ""}`;
+      return Object.keys(v).filter(k => !RV_SKIP.has(k) && k !== "title").map(k => { const lab = RV_LABEL[k] !== undefined ? RV_LABEL[k] : ""; const body = rvText(v[k], depth + 1); return body ? `<div>${lab ? `<span class="rv-k">${lab}</span> ` : ""}${body}</div>` : ""; }).join("");
+    }
+    return "";
+  }
+  function viewReviewOne(a, t, lv) {
+    const list = allLessons(), key = reviewKey(a, t, lv), i = list.findIndex(x => x.key === key), x = list[i];
+    if (!x) return notFound();
+    const R = loadReview(), r = R.items[key] || {}, s = reviewState(x, R), L = x.L, checks = r.checks || [];
+    const prev = list[i - 1], next = list[i + 1];
+    const slides = L.slides.map((sl, k) => `<li class="rv-slide"><b>${k + 1}. ${esc(sl.title || "")}</b> <span class="meta">(${esc(sl.type)})</span>${sl.image ? `<img src="${esc(sl.image)}" alt="" loading="lazy">` : ""}<div>${rvText(sl, 0)}</div></li>`).join("");
+    const links = (t.links || []).map(l => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.org)} · ${esc(l.title)}</a> <span class="meta">확인 ${esc(l.checkedAt)}</span></li>`).join("");
+    return crumbs([{ label: "처음", hash: "#home" }, { label: "수업 검토", hash: "#review" }, { label: `${t.title} · ${levelLabel(lv)}` }]) + `
+      <div class="rv-head" style="${cv(a)}"><h1>${a.icon} ${esc(t.title)} <small>${levelLabel(lv)}</small></h1>
+        <p class="lead" style="margin:0">${esc(a.shortName)} · ${i + 1} / ${list.length}번째 ${reviewPill(x, R)}
+        <a class="rv-open" href="#topic-${a.id}-${t.id}-${lv}">수업 화면으로 보기 ↗</a></p></div>
+      <div class="rv-wrap">
+        <div class="rv-body">
+          <div class="goal" style="${cv(a)}"><b>오늘의 목표</b> ${esc(L.goal)}</div>
+          <div class="box warn"><h3>안전 주의 (선생님용)</h3>${esc(L.safetyNote || "")}</div>
+          <h2>시각자료 ${L.slides.length}장</h2><ol class="rv-slides">${slides}</ol>
+          <h2>수업 흐름 (${L.minutes}분)</h2><ol>${(L.lessonFlow || []).map(f => `<li><b>${esc(f.step)}</b> ${f.minutes}분 — ${esc(f.do)}</li>`).join("")}</ol>
+          ${links ? `<h2>출처 링크</h2><ul>${links}</ul>` : ""}
+        </div>
+        <aside class="rv-side box" style="${cv(a)}">
+          <h2 style="margin-top:0">확인 질문</h2>
+          ${s.st === "done" ? `<p class="rv-pill done">이미 반영된 검토 완료 수업이에요. 다시 보고 고칠 곳이 있으면 메모를 남겨 주세요.</p>` : ""}
+          ${REVIEW_QS.map((q, k) => `<label class="rv-q"><input type="checkbox" data-rvq="${k}"${checks[k] ? " checked" : ""} onchange="rvCheck()"> ${esc(q)}</label>`).join("")}
+          <label class="rv-memo">고칠 곳 메모 <span class="meta">(몇 번째 장, 어떤 말을 어떻게)</span><textarea id="rvMemo" rows="4" placeholder="예: 5번 장 '혼자 다니면 위험해요'를 '어른과 같이 다녀요'로">${esc(r.memo || "")}</textarea></label>
+          <div class="rv-btns">
+            <button class="big-link rv-pass" id="rvPass" onclick="rvSave('${key}','pass')"${checks.filter(Boolean).length === REVIEW_QS.length ? "" : " disabled"}>✔ 통과</button>
+            <button class="big-link ghost" onclick="rvSave('${key}','fix')">✏️ 고칠 곳 있음</button>
+          </div>
+          <p class="meta" id="rvHint">${checks.filter(Boolean).length === REVIEW_QS.length ? "" : "5개를 모두 확인하면 [통과]를 누를 수 있어요."}</p>
+          ${r.result ? `<button class="linkish" onclick="rvClear('${key}')">이 수업 검토 지우기</button>` : ""}
+          <div class="rv-nav">${prev ? `<button class="big-link ghost" onclick="go('${reviewHash(prev)}')">◀ 이전</button>` : ""}${next ? `<button class="big-link ghost" onclick="go('${reviewHash(next)}')">다음 ▶</button>` : ""}</div>
+        </aside>
+      </div>`;
+  }
+  window.rvCheck = function () {
+    const n = [...document.querySelectorAll("[data-rvq]")].filter(c => c.checked).length;
+    document.getElementById("rvPass").disabled = n !== REVIEW_QS.length;
+    document.getElementById("rvHint").textContent = n === REVIEW_QS.length ? "" : "5개를 모두 확인하면 [통과]를 누를 수 있어요.";
+  };
+  window.rvSave = function (key, result) {
+    const R = loadReview(), memo = document.getElementById("rvMemo").value.trim();
+    const checks = [...document.querySelectorAll("[data-rvq]")].map(c => c.checked);
+    if (result === "fix" && !memo) { alert("어디를 어떻게 고치면 좋을지 메모에 적어 주세요."); document.getElementById("rvMemo").focus(); return; }
+    if (!R.reviewer) { const n = prompt("검토한 사람 이름을 적어 주세요. (처음 한 번만 물어요)", ""); if (n === null) return; R.reviewer = n.trim(); }
+    const d = new Date(), date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    R.items[key] = { result, checks, memo, by: R.reviewer, date };
+    if (!saveReview(R)) return;
+    const list = allLessons(), i = list.findIndex(x => x.key === key);
+    const nx = list.slice(i + 1).concat(list.slice(0, i)).find(x => reviewState(x, R).st === "todo");
+    toastMsg(result === "pass" ? "통과로 표시했어요 👍" : "메모를 남겼어요 ✏️");
+    go(nx ? reviewHash(nx) : "#review");
+  };
+  window.rvClear = function (key) { const R = loadReview(); delete R.items[key]; saveReview(R); render(); };
+  window.rvSetName = function (v) { const R = loadReview(); R.reviewer = v.trim(); saveReview(R); };
+  window.rvExport = function () {
+    const R = loadReview(), n = Object.keys(R.items).length;
+    if (!n) { alert("아직 검토한 수업이 없어요."); return; }
+    const d = new Date(), stamp = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
+    const blob = new Blob([JSON.stringify({ app: "edu-safety-helper", kind: "review", version: 1, reviewer: R.reviewer, savedAt: d.toISOString(), questions: REVIEW_QS, items: R.items }, null, 2)], { type: "application/json" });
+    const el = document.createElement("a"); el.href = URL.createObjectURL(blob); el.download = `수업검토결과_${(R.reviewer || "이름없음").replace(/[\\/:*?"<>|\s]/g, "")}_${stamp}.json`;
+    document.body.appendChild(el); el.click(); el.remove();
+    toastMsg(`${n}개 수업의 검토 결과를 저장했어요`);
+  };
+  window.rvImport = function (input) {
+    const f = input.files[0]; if (!f) return;
+    f.text().then(txt => {
+      let j; try { j = JSON.parse(txt); } catch (e) { alert("검토 결과 파일이 아니에요."); return; }
+      if (!j || j.kind !== "review" || !j.items) { alert("검토 결과 파일이 아니에요."); return; }
+      const R = loadReview(); let add = 0;
+      for (const [k, v] of Object.entries(j.items)) { const cur = R.items[k]; if (!cur || String(v.date) >= String(cur.date)) { R.items[k] = v; add++; } }
+      saveReview(R); toastMsg(`${add}개를 합쳤어요`); render();
+    });
+    input.value = "";
+  };
+  function toastMsg(m) {
+    let t = document.getElementById("rvToast");
+    if (!t) { t = document.createElement("div"); t.id = "rvToast"; t.className = "rv-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = m; t.classList.add("on"); clearTimeout(toastMsg._t); toastMsg._t = setTimeout(() => t.classList.remove("on"), 2200);
+  }
+
   function render() {
     if (!DATA) {
       $app.innerHTML = `<div class="placeholder"><strong>데이터를 불러오지 못했어요</strong>data/areas.js 파일이 있는지 확인해 주세요.</div>`;
@@ -1704,6 +1921,8 @@
     else if (parts[0] === "report") html = viewReport();
     else if (parts[0] === "about") html = viewAbout();
     else if (parts[0] === "check") html = viewCheck();
+    else if (parts[0] === "review" && parts.length === 1) html = viewReview();
+    else if (parts[0] === "review" && findArea(parts[1]) && okLevel(parts[3])) { const { a, t } = findTopic(parts[1], parts[2]); html = t ? viewReviewOne(a, t, parts[3]) : notFound(); }
     else if (parts[0] === "log") { const r = loadRecords().find(x => x.id === parts[1]); html = r ? viewLog(r) : notFound(); }
     else if (parts[0] === "edit") { const r = loadRecords().find(x => x.id === parts[1]); const ft = r && findTopic(r.areaId, r.topicId); html = ft && ft.t ? viewWrite(ft.a, ft.t, r.level, r) : notFound(); }
     else if (parts[0] === "write" && findArea(parts[1]) && okLevel(parts[3])) {

@@ -16,7 +16,8 @@ window.SAFETY_DATA = {
       "content는 사람이 검토한 수업안·시각자료만 채운다.",
       "preschool(취학 전)은 2단계 기능(F8)용으로 미리 넣어둔 것이다.",
       "extraAreas(추가 교육: 아동인권)는 별표 6 밖의 교육이라 44시간 계산·연간 계획표에 들어가지 않는다.",
-      "teen(청소년, 중·고등)은 별표 6 초등 주제를 그대로 쓰고 내용만 청소년 눈높이로 만든다(카톡 피드백 2026-11-11). 추가 수업·아동인권에 teen이 없으면 high 자료를 보여 준다."
+      "teen(청소년, 중·고등)은 별표 6 초등 주제를 그대로 쓰고 내용만 청소년 눈높이로 만든다(카톡 피드백 2026-11-11). 추가 수업·아동인권에 teen이 없으면 high 자료를 보여 준다.",
+      "수업 status: 'AI 1차 점검 · 사람 검토 전'(2026-11-17 기계 점검: 자극적 표현·피해자 탓·비밀 강요·미확인 번호 없음) → 사람이 #review에서 통과하고 tools/apply-reviews.js로 반영하면 '검토 완료'와 review {by, date}가 붙어요."
     ],
     "lawNotes": [
       "「아동복지법」 제31조(아동의 안전에 대한 교육)가 2025.4.1 개정(2025.10.2 시행)되어 성폭력 예방과 아동학대 예방 교육을 나누어 하고, 감염병 예방·관리 교육이 법에 명시됐어요.",
@@ -60,7 +61,7 @@ window.SAFETY_DATA = {
             "title": "성폭력의 개념",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "내 몸은 소중하고, 다른 사람이 내 몸을 함부로 만지거나 보려고 하면 안 된다는 것을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -281,7 +282,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성폭력이 무엇인지 알고, 몸과 마음을 지키는 경계를 이해한다.",
                 "minutes": 40,
                 "materials": [
@@ -517,7 +518,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성폭력이 신체·언어·디지털 모든 형태를 포함한다는 것을 알고, 법이 정한 기준(동의·나이)을 설명할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -798,7 +799,7 @@ window.SAFETY_DATA = {
             "title": "성폭력의 위험상황",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성폭력이 일어날 수 있는 위험한 상황을 알아차릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -1022,7 +1023,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "온라인과 오프라인에서 성폭력으로 이어질 수 있는 위험 신호를 알아차릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -1256,7 +1257,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "교제·온라인·술자리 등 청소년에게 흔한 위험상황과 통제·그루밍 신호를 알아차리고 거리를 둘 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -1541,7 +1542,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "인터넷에서 만난 사람은 모르는 사람임을 알고, 내 정보를 지키며 이상하면 어른에게 말할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -1764,7 +1765,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/sexual-e-02-grooming-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "온라인 그루밍(길들이기)의 단계와 위험 신호를 알고, 차단·증거·신고로 대처할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -2025,7 +2026,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "게임에서 공짜 아이템과 낯선 사람의 채팅을 조심하고, 이상하면 어른에게 말할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -2248,7 +2249,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/sexual-e-02-game-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "게임에서 선물·도움으로 시작하는 접근과 협박의 위험 신호를 알고, 거절·차단·신고할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -2514,7 +2515,7 @@ window.SAFETY_DATA = {
             "title": "성폭력 예방법과 대처법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "위험한 상황에서 '싫어요–피해요–말해요'를 할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -2734,7 +2735,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성폭력 피해 상황에서 대처하는 방법과 도움 받을 수 있는 곳을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -2967,7 +2968,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성폭력 피해 시 증거 보존·신고·지원 기관 이용 방법을 알고, 친구가 털어놓을 때 도움이 되는 반응을 할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -3252,7 +3253,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "사진과 영상도 내 몸처럼 소중함을 알고, 허락받기·보내지 않기·어른에게 말하기를 할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -3478,7 +3479,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/sexual-e-03-digital-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "몰래 촬영·합성(딥페이크)·유포·협박이 디지털 성범죄임을 알고, 퍼뜨리지 않고 알리고 돕는 방어자가 될 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -3746,7 +3747,7 @@ window.SAFETY_DATA = {
             "title": "성적 자기결정권 개념 및 타인의 권리 존중하기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "다른 사람의 몸을 만지기 전에 물어보고, 싫다고 하면 멈출 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -3969,7 +3970,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "자기 몸에 대한 결정은 스스로 하고, 다른 사람의 결정도 존중해야 함을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -4202,7 +4203,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 피해를 털어놓으면 놀라거나 캐묻지 말고 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말해 주세요. 선생님은 아동학대·성범죄 신고의무자예요(112)."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "성적 자기결정권과 적극적 동의의 의미를 알고, 관계 속에서 나와 상대의 경계를 존중하는 말과 행동을 할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -4552,7 +4553,7 @@ window.SAFETY_DATA = {
             "title": "나의 권리 찾기(소중한 나)",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "모든 어린이는 보호받고 존중받을 권리가 있다는 것을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -4777,7 +4778,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유엔아동권리협약의 4대 권리를 알고, 내 생활과 연결해 말할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -5011,7 +5012,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "18세 미만인 청소년도 아동으로서 보호받을 권리가 있음을 알고, 일상 속 권리 침해를 알아차릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -5284,7 +5285,7 @@ window.SAFETY_DATA = {
             "title": "아동학대 및 아동학대행위자 개념",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아동학대가 무엇인지 알고, 내 잘못이 아님을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -5504,7 +5505,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아동학대의 네 가지 유형과 학대행위자가 누구일 수 있는지 안다.",
                 "minutes": 40,
                 "materials": [
@@ -5744,7 +5745,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아동학대의 네 가지 유형과 학대행위자의 범위를 알고, 체벌이 법적으로 허용되지 않는다는 것을 설명할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -6025,7 +6026,7 @@ window.SAFETY_DATA = {
             "title": "학대 위험상황에 따른 대처법 및 아동학대 신고 요령",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "무섭거나 위험할 때 피하고, 도움을 요청하는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -6246,7 +6247,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "학대 위험 상황에서 나와 친구를 지키는 방법과 신고 요령을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -6481,7 +6482,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "학대 위험 상황에서 스스로를 지키는 방법과 112 신고 요령을 알고, 친구를 도울 때 신고자 보호 제도를 설명할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -6766,7 +6767,7 @@ window.SAFETY_DATA = {
             "title": "신고 이후 도움 받는 방법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "도움을 요청하면 나를 도와주는 사람들이 있다는 것을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -6989,7 +6990,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "신고 이후 어떤 기관이 어떻게 도와주는지 알고, 도움을 받는 것이 당연한 권리임을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -7226,7 +7227,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "신고 이후 아동보호 절차와 지원 기관을 알고, 신고에 대한 두려움을 줄여 도움을 요청할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -7496,7 +7497,7 @@ window.SAFETY_DATA = {
             "title": "사례로 배우는 아동학대",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "짧은 이야기를 듣고 도움이 필요한 상황인지 알아차릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -7717,7 +7718,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "사례를 통해 학대의 신호를 알아차리고, 할 수 있는 도움 행동을 고를 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -7960,7 +7961,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 의심만 되어도 112에 신고해요(상담 129). 선생님은 신고의무자예요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "가상 사례를 통해 학대 징후를 알아차리고, 상황에 맞는 도움 요청 방법을 판단할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -8283,7 +8284,7 @@ window.SAFETY_DATA = {
             "title": "길을 잃을 수 있는 상황 이해하기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "길을 잃기 쉬운 상황을 알고, 길을 잃었을 때 그 자리에서 기다릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -8503,7 +8504,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "길을 잃기 쉬운 장소와 상황을 알고, 미리 약속을 정해 실종을 예방할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -8746,7 +8747,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "청소년이 연락이 끊기거나 길을 잃기 쉬운 상황을 알고, 행선지 공유·위치 공유·비상 연락 습관을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -9022,7 +9023,7 @@ window.SAFETY_DATA = {
             "title": "유괴범에 대한 이해",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴는 아는 사람도 할 수 있음을 알고, 보호자 허락 없이 따라가지 않는다.",
                 "minutes": 40,
                 "materials": [
@@ -9243,7 +9244,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴범이 어떤 사람인지에 대한 잘못된 생각을 바로잡고, 안전한 판단 기준을 세울 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -9481,7 +9482,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴·유인 가해자에 대한 고정관념을 깨고, 아는 사람·온라인 지인·도움을 주는 척하는 사람의 접근 방식을 알 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -9753,7 +9754,7 @@ window.SAFETY_DATA = {
             "title": "유인전략 및 위험상황 알기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "강아지, 선물, 도움 요청 등 유인하는 말을 알아차리고 거절할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -9976,7 +9977,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유인 전략의 종류를 알고, 상황별로 안전하게 거절하는 방법을 말할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -10213,7 +10214,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "고액 알바·대리입금·무료 숙소·만남 제안 등 청소년 대상 유인 전략을 알고 상황별로 거절할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -10471,7 +10472,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "온라인에서 만난 사람이 만나자고 하거나 선물을 준다고 하면 혼자 가지 않고 보호자에게 먼저 말한다.",
                     "minutes": 40,
                     "materials": [
@@ -10684,7 +10685,7 @@ window.SAFETY_DATA = {
                     "safetyNote": "온라인에서 만난 사람과 만나기로 했다는 말을 들으면 혼내지 말고 먼저 들어 주세요. 위험하면 112, 실종·가출이 걱정되면 182에 알려요. 대화 내용은 지우지 말고 캡처해 두어요."
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "SNS·오픈채팅에서 쓰이는 유인 패턴(고액 알바, 무료 숙소, 만남 제안, 장소 이동 요구)을 알고 기록하고 알리는 방법을 실천할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -10941,7 +10942,7 @@ window.SAFETY_DATA = {
             "title": "유괴사고 발생 시 대처방법 및 예방법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "누군가 억지로 데려가려 할 때 소리치고 도망치는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -11160,7 +11161,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴 위험 상황에서의 대처 방법과 예방 습관을 알고 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -11394,7 +11395,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴·납치 위험 상황에서 즉시 쓸 수 있는 대처(소리·도주·112 문자·SOS)와 생활 속 예방 습관을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -11669,7 +11670,7 @@ window.SAFETY_DATA = {
             "title": "유괴·유인 상황 목격 시 신고 요령",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "친구가 낯선 사람에게 끌려가는 것을 보면 어른에게 바로 알릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -11888,7 +11889,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴·유인 상황을 목격했을 때 112와 182에 정확하게 신고하는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -12126,7 +12127,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "역할극에서 선생님이나 친구가 '낯선 사람' 역할을 할 때, 실제로 아이를 데려가는 동작은 하지 않아요. 무섭게 연기하지 않아요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "유괴·유인 상황을 목격했을 때 내 안전을 지키며 112·182에 정확하게 신고하는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -12458,7 +12459,7 @@ window.SAFETY_DATA = {
             "title": "감염병 예방을 위한 개인위생 실천 습관",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "손 씻기와 기침 예절로 감염병을 예방할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -12681,7 +12682,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "감염병이 퍼지는 경로를 알고, 생활 속 예방 수칙을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -12924,7 +12925,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "감염병이 퍼지는 경로를 알고, 손 씻기·기침 예절·물건 공유하지 않기·아플 때 쉬기를 생활 속에서 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -13201,7 +13202,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "감염병이 유행할 때 손 씻기, 기침 예절, 아프면 쉬기로 나와 친구를 지키는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -13430,7 +13431,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/health-e-01-epidemic-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "감염병이 퍼지는 길을 알고, 유행할 때 지켜야 할 생활 수칙을 실천할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -13703,7 +13704,7 @@ window.SAFETY_DATA = {
             "title": "예방접종의 이해",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "예방접종이 몸을 지켜 준다는 것을 알고 주사를 덜 무서워할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -13920,7 +13921,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "예방접종의 원리와 필요성을 이해하고, 접종 후 주의사항을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -14156,7 +14157,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "예방접종의 원리와 집단면역을 이해하고, 청소년기 예방접종을 확인하는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -14427,7 +14428,7 @@ window.SAFETY_DATA = {
             "title": "약물·화학제품의 필요성과 위험성 이해하기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "약과 생활 속 화학제품은 어른과 함께 바르게 써야 함을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -14645,7 +14646,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "약과 화학제품의 필요성과 위험성을 알고, 표시 사항을 읽고 안전하게 쓸 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -14883,7 +14884,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "일반의약품·생활화학제품의 올바른 사용법과 위험성을 알고, 성분 중복·섞어 쓰기 같은 실수를 피할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -15154,7 +15155,7 @@ window.SAFETY_DATA = {
             "title": "중독·오용·남용의 개념 알기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "스마트폰·게임 등 무엇이든 지나치면 몸과 마음에 해롭다는 것을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -15369,7 +15370,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "중독·오용·남용의 뜻을 구분하고, 담배·술·마약류가 몸에 미치는 영향을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -15607,7 +15608,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "중독·오용·남용의 뜻을 구분하고, 청소년에게 늘어나는 사이버 도박·니코틴·스마트폰 과의존의 위험과 도움받는 곳을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -15885,7 +15886,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "약은 어른과 함께 정해진 만큼만 먹고, 모르는 사람이 주는 음식·음료는 받지 않는다.",
                     "minutes": 40,
                     "materials": [
@@ -16110,7 +16111,7 @@ window.SAFETY_DATA = {
                     "safetyNote": "약이나 이상한 물질을 먹었거나 몸이 이상하면 바로 어른에게 알리고, 위급하면 119에 신고해요. 마약류 상담은 1342예요. 아이가 경험을 말해도 혼내지 말고 먼저 들어 주세요."
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "약과 약물을 구분하고 오용·남용과 청소년 유해약물을 알며, 마약류 권유를 거절할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -16370,7 +16371,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "담배 연기를 피하고, 문구처럼 생긴 전자담배도 담배라는 것을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -16589,7 +16590,7 @@ window.SAFETY_DATA = {
                     "safetyNote": "아이가 가족의 흡연을 이야기해도 가족을 탓하지 않게 해 주세요. 전자담배 액상을 삼켰거나 피부에 닿았으면 씻고 119에 알려요."
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "전자담배·니코틴의 위험과 바뀐 법을 알고, 청소년을 노리는 마케팅을 비판적으로 보고 거절할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -16844,7 +16845,7 @@ window.SAFETY_DATA = {
             "title": "중독사고의 대처법과 예방법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "잘못 삼키거나 위험한 것을 만졌을 때 바로 어른에게 알리는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -17059,7 +17060,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "중독 사고가 일어났을 때의 대처법과 생활 속 예방 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -17286,7 +17287,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 약이나 세제는 수업에 쓰지 않아요. 빈 통, 사진, 그림 카드로만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "약물 과다복용·급성 알코올 중독·일산화탄소·화학물질 노출 같은 중독 사고에 대처하고 예방할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -17644,7 +17645,7 @@ window.SAFETY_DATA = {
             "title": "화재의 원인과 예방법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "불이 나는 원인을 알고, 불장난을 하지 않는다.",
                 "minutes": 40,
                 "materials": [
@@ -17864,7 +17865,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "생활 속 화재 원인을 분석하고, 예방 방법을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -18093,7 +18094,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "청소년 생활 속 화재 원인(전기·배터리·조리·담배·문어발)을 분석하고 예방 습관을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -18350,7 +18351,7 @@ window.SAFETY_DATA = {
                 "links": [],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "충전기와 배터리를 안전하게 쓰고, 배터리가 뜨겁거나 부풀면 어른에게 알린다.",
                     "minutes": 40,
                     "materials": [
@@ -18572,7 +18573,7 @@ window.SAFETY_DATA = {
                     "safetyNote": "배터리 실험(일부러 뜨겁게 하기, 찌그러뜨리기)은 절대 하지 않아요. 실물 배터리 대신 사진이나 그림을 써 주세요. 불이 나면 끄려고 하지 말고 대피한 뒤 119에 신고해요."
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "리튬 배터리 화재의 원인과 이상 신호를 알고, 휴대폰·보조배터리·전동 탈것을 안전하게 충전하는 습관을 실천할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -18830,7 +18831,7 @@ window.SAFETY_DATA = {
             "title": "화재 시 대처법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "불이 났을 때 '불이야!' 외치고, 낮은 자세로 대피할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -19054,7 +19055,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "건물 화재 시 상황에 맞는 대피 방법을 판단할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -19287,7 +19288,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아파트·학원·다중이용시설 등 장소별 화재 대피 방법(경량칸막이·대피공간·완강기 포함)을 판단할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -19574,7 +19575,7 @@ window.SAFETY_DATA = {
             "title": "화재 신고 요령",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "불이 났을 때 119에 전화해 주소를 말할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -19795,7 +19796,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "화재 신고에 필요한 내용을 알고, 침착하게 신고할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -20024,7 +20025,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "119 신고(전화·문자·앱) 방법을 알고, 위치·상황을 정확하게 전달하며 다른 사람에게 미루지 않고 신고할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -20310,7 +20311,7 @@ window.SAFETY_DATA = {
             "title": "화상 대처법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "화상을 입었을 때 찬물로 식히고 어른에게 알릴 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -20524,7 +20525,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "화상의 정도에 따른 응급처치와 옷에 불이 붙었을 때의 대처를 안다.",
                 "minutes": 40,
                 "materials": [
@@ -20760,7 +20761,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "화상 정도를 구분하고, 흐르는 물로 식히기 등 올바른 응급처치와 잘못된 민간요법을 구별할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -21034,7 +21035,7 @@ window.SAFETY_DATA = {
             "title": "소화기 사용법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "소화기가 어디 있는지 알고, 사용 순서를 말할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -21260,7 +21261,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "소화기 사용법 4단계를 알고 바른 자세로 연습할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -21495,7 +21496,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "소화기 사용 4단계와 사용 판단 기준(초기 화재만, 대피로 확보)을 알고, 소화기·투척용 소화기·옥내소화전의 차이를 안다.",
                 "minutes": 40,
                 "materials": [
@@ -21775,7 +21776,7 @@ window.SAFETY_DATA = {
             "title": "자연재난의 개념과 안전한 행동 알기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "지진, 태풍, 폭염 같은 자연재난 때 안전하게 행동하는 법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -21995,7 +21996,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "자연재난의 종류와 재난문자의 뜻을 알고 상황에 맞게 행동할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -22229,7 +22230,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 불은 쓰지 않아요. 소화기는 안전핀을 뽑지 않은 채로, 또는 연습용 소화기로만 연습해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "기후위기로 잦아진 극한호우·폭염·지진 등 자연재난의 특징을 알고, 재난문자·안전디딤돌로 정보를 확인해 상황별로 행동할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -22506,7 +22507,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "땅이 흔들릴 때 머리를 보호하고, 흔들림이 멈추면 안전하게 대피하는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -22736,7 +22737,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/disaster-e-06-quake-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "지진이 났을 때 장소별로 몸을 지키는 방법과 대피 순서를 알고 설명할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -22990,7 +22991,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "눈이 많이 오거나 아주 추운 날 미끄러지지 않고 따뜻하게 지내는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -23217,7 +23218,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/disaster-e-06-snow-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "폭설·한파 때의 위험(미끄럼, 동상, 저체온)을 알고 예방과 대처를 할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -23475,7 +23476,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "태풍이나 큰비가 올 때 실내에 머물고 물가·위험한 곳에 가지 않는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -23700,7 +23701,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/disaster-e-06-storm-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "태풍·호우 특보의 뜻을 알고, 침수·강풍 위험을 피해 안전하게 행동할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -23955,7 +23956,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "아주 더운 날 물을 자주 마시고 그늘에서 쉬며 몸을 지키는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -24185,7 +24186,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/disaster-e-06-heat-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "폭염 특보의 뜻과 온열질환 신호를 알고, 예방과 친구 돕기를 할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -24455,7 +24456,7 @@ window.SAFETY_DATA = {
                 ],
                 "content": {
                   "low": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "미세먼지가 나쁜 날을 알아보고 마스크 쓰기, 손 씻기로 몸을 지키는 법을 안다.",
                     "minutes": 40,
                     "materials": [
@@ -24684,7 +24685,7 @@ window.SAFETY_DATA = {
                     "slidesFile": "slides/disaster-e-06-dust-low.pptx"
                   },
                   "high": {
-                    "status": "검토 필요",
+                    "status": "AI 1차 점검 · 사람 검토 전",
                     "goal": "미세먼지·황사 예보를 스스로 확인하고 단계에 맞게 행동할 수 있다.",
                     "minutes": 40,
                     "materials": [
@@ -25017,7 +25018,7 @@ window.SAFETY_DATA = {
             "title": "안전한 통학로 알기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "센터에 오는 길에서 안전한 길과 조심할 곳을 알고 말할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -25234,7 +25235,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "우리 동네 통학로의 위험 요소를 찾고, 더 안전한 길을 스스로 고를 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -25467,7 +25468,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "통학·학원길의 위험 구간(우회전 차량, 골목, 공사장, 어두운 길)을 분석하고 더 안전한 경로를 선택할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -25730,7 +25731,7 @@ window.SAFETY_DATA = {
             "title": "상황에 따른 안전한 보행법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "횡단보도를 건너는 3가지 약속(서다·보다·걷다)을 알고 몸으로 따라 할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -25957,7 +25958,7 @@ window.SAFETY_DATA = {
                 "customFiles": true
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "여러 상황(신호 없는 길, 골목, 비 오는 날, 휴대폰)에서 안전하게 걷는 방법을 고를 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -26192,7 +26193,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "스마트폰·이어폰 사용, 무단횡단, 야간 보행 등 청소년 보행 위험 행동을 알고 상황에 맞는 안전 보행을 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -26469,7 +26470,7 @@ window.SAFETY_DATA = {
             "title": "바퀴 달린 탈것의 안전한 이용법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "자전거, 킥보드, 인라인을 탈 때 보호장비와 안전한 장소를 알 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -26694,7 +26695,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "자전거·킥보드 관련 규칙(헬멧 의무, 전동킥보드 나이 제한 등)을 알고 지킬 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -26932,7 +26933,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "전동킥보드(PM)·자전거·오토바이 이용 규칙(면허·안전모·1인 탑승·음주 금지)을 알고, 무면허·공유 계정 이용의 위험을 판단할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -27212,7 +27213,7 @@ window.SAFETY_DATA = {
             "title": "교통수단의 안전한 이용법",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "버스와 차량(통학차량)을 타고 내릴 때 지켜야 할 약속을 알 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -27431,7 +27432,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "버스·지하철 등 대중교통을 안전하게 이용하고, 다른 사람을 배려할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -27664,7 +27665,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "버스·지하철·택시·자동차 이용 시 안전 수칙(뒷좌석 안전띠, 스크린도어, 하차 시 확인)을 알고 실천할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -27927,7 +27928,7 @@ window.SAFETY_DATA = {
             "title": "교통법규 이해하기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "신호등과 교통 표지판의 뜻을 알고 지킬 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -28145,7 +28146,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "보행자와 자전거 이용자가 지켜야 할 교통법규와 그 이유를 설명할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -28378,7 +28379,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "실제 도로에서 연습하지 않아요. 교실이나 안전한 실내 공간에서만 해요."
               },
               "teen": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "보행자·자전거·PM·운전자 입장에서 교통법규의 이유를 이해하고, 무면허 운전 등 청소년 교통 범죄의 책임을 설명할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -28730,7 +28731,7 @@ window.SAFETY_DATA = {
             "title": "권리가 뭘까요? (인권과 아동권리)",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "모든 사람에게 권리가 있고, 어린이에게도 아동권리가 있다는 것을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -28958,7 +28959,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "권리는 '갖고 싶은 것'이 아니라 '꼭 필요한 것'임을 구분하고, 18세 미만 모두가 아동권리의 주인공임을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -29216,7 +29217,7 @@ window.SAFETY_DATA = {
             "title": "아동권리헌장 알기",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아동권리헌장에 어린이의 권리가 적혀 있다는 것을 알고, 친구의 권리를 지키는 약속을 할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -29450,7 +29451,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "아동권리헌장 9개 조항의 뜻을 알고, 센터 생활 속에서 지켜지는 권리와 더 필요한 권리를 찾을 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -29722,7 +29723,7 @@ window.SAFETY_DATA = {
             "title": "차별 없는 우리 (다양성 존중)",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "사람마다 다른 점이 있다는 것을 알고, 다르다는 이유로 놀리거나 빼지 않는다.",
                 "minutes": 40,
                 "materials": [
@@ -29945,7 +29946,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "고정관념·편견·차별·혐오 표현을 구분하고, 차별하는 말을 존중하는 말로 바꿀 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -30203,7 +30204,7 @@ window.SAFETY_DATA = {
             "title": "내 의견을 말해요 (참여권)",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "내 생각을 말하고 친구 말을 끝까지 들으며, 모두의 일을 함께 정하는 경험을 한다.",
                 "minutes": 40,
                 "materials": [
@@ -30430,7 +30431,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "의견을 말하고 존중받을 권리(참여권)를 알고, 근거를 들어 의견을 말하며 모의 자치회의로 센터에 제안할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -30692,7 +30693,7 @@ window.SAFETY_DATA = {
             "title": "디지털 세상 속 내 권리 (사생활·초상권)",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "사진과 개인정보도 나의 소중한 것임을 알고, 찍거나 올리기 전에 물어보는 습관을 기른다.",
                 "minutes": 40,
                 "materials": [
@@ -30911,7 +30912,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "디지털 공간의 사생활·초상권·잊힐 권리를 알고, 다른 사람의 정보를 존중하며 내 디지털 발자국을 관리할 수 있다.",
                 "minutes": 40,
                 "materials": [
@@ -31162,7 +31163,7 @@ window.SAFETY_DATA = {
             "title": "놀 권리, 쉴 권리",
             "content": {
               "low": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "놀고 쉬는 것도 어린이의 권리임을 알고, 친구와 함께 즐겁게 노는 방법을 안다.",
                 "minutes": 40,
                 "materials": [
@@ -31382,7 +31383,7 @@ window.SAFETY_DATA = {
                 "safetyNote": "아이가 학대·차별·괴롭힘 같은 권리 침해를 털어놓으면 \"말해줘서 고마워, 네 잘못이 아니야\"라고 말하고 자세히 캐묻지 마세요. 학대가 의심되면 112에 신고해요(상담 129). 선생님은 신고의무자예요. 가족 모습·형편을 예로 들 때 특정 아이가 드러나지 않게 해 주세요."
               },
               "high": {
-                "status": "검토 필요",
+                "status": "AI 1차 점검 · 사람 검토 전",
                 "goal": "놀이·휴식·여가가 아동의 권리임을 알고, 화면 시간과 '진짜 쉼'을 구분해 나의 시간을 스스로 계획할 수 있다.",
                 "minutes": 40,
                 "materials": [

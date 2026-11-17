@@ -48,6 +48,8 @@ docs/02~07_*.md         개인과제 양식 문서: 02 벤치마킹 · 03 인터
 | `npm run worksheets` | 활동지 HTML/PDF/PNG 생성 | 퀴즈·약속 내용을 바꾼 뒤 |
 | `npm run slides` | 선생님용 PPT 생성 | 슬라이드 내용을 바꾼 뒤 |
 | `npm run build` | 위 4개를 순서대로 | 크게 바꾼 뒤 |
+| `npm run review:apply -- <검토결과.json>` | 선생님이 #review 화면에서 저장한 검토 결과를 areas.json에 넣기 ([통과] → status "검토 완료" + review {by, date}, [고칠 곳 있음] → 메모만 보여 줌) | 검토 결과 파일을 받았을 때 (다음에 `npm run data`) |
+| `npm run trial` | 체험판을 `dist-trial/`에 만들기 (체험판 띠·사용 기한·인쇄 표시·이용 조건). 기한·이름은 `tools/build-trial.js`의 TRIAL에서 고쳐요 | 공개용 저장소(edu-safety-helper-demo)를 새로 올릴 때 |
 
 일부만: `npm run worksheets -- --only=abuse-e-03-high` (영역id, 주제id, 주제id-학년 모두 가능, 쉼표로 여러 개)
 실행 확인: VS Code 오른쪽 아래 **Go Live** → `http://127.0.0.1:5500`
