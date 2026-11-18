@@ -68,9 +68,9 @@ extras[] (추가 수업, 별표 6 주제는 그대로 두고 그 아래에 수�
     missing-e-03(유인전략) 아래 sns(SNS·온라인 유인)  ← 2026-11-12 추가
 extraAreas[] (★ 추가 교육 영역, 별표 6 밖): areas[]와 같은 모양 + { optional: true, badge, recommend, basis }, cycleMonths·requiredHours 없음
   → 지금은 rights(🌈 아동인권 교육) 1개: rights-e-01~06 (권리란·아동권리헌장·차별·참여권·디지털 권리·놀 권리), 12개 수업
-  → 44회 계산·연간 계획표·이수 현황표 합계에는 넣지 않아요(isRequired). 찾기·기록·발표는 ALL_AREAS. 첫 화면에 "＋ 추가 교육" 점선 카드.
+  → 44회 계산·연간 계획표·이수 현황표 합계에는 넣지 않아요(isRequired). 찾기·기록·발표는 ALL_AREAS. 의무교육 화면(#edu)에 "＋ 추가 교육" 점선 카드, 첫 화면(#home)에는 "추가 교육" 카테고리 카드.
   → 주제 제목은 별표 6이 아니라서 사람이 정할 수 있어요(근거: 유엔아동권리협약·아동권리헌장 원문).
-meta.lawNotes[] / meta.lawLinks[]: 법령 확인 기록 (첫 화면 아래 "📜 법령 확인 기록"에 나옴). 법을 다시 확인하면 checkedAt과 함께 고쳐요.
+meta.lawNotes[] / meta.lawLinks[]: 법령 확인 기록 (의무교육 화면 #edu 아래 "📜 법령 확인 기록"에 나옴). 법을 다시 확인하면 checkedAt과 함께 고쳐요.
 links[]: { org, title, url, checkedAt }
 content.low / content.high (수업 1개):
   status: "검토 필요" | "검토 완료"
@@ -114,11 +114,11 @@ content.low / content.high (수업 1개):
 
 ## index.html 구조 (주요 함수)
 
-- 주소(#해시)로 화면 이동: `#home`, `#area-<영역>`, `#area-<영역>-<학년>`, `#pick-<영역>-<주제id>-<학년>`(추가 수업 고르기), `#topic-<영역>-<수업id>-<학년>`,
+- 주소(#해시)로 화면 이동: `#home`(카테고리 첫 화면), `#edu`(6대 의무교육), `#docs`(기록·서류), `#extra`(추가 교육 목록, 2개 이상일 때), `#area-<영역>`, `#area-<영역>-<학년>`, `#pick-<영역>-<주제id>-<학년>`(추가 수업 고르기), `#topic-<영역>-<수업id>-<학년>`,
   `#write-<영역>-<주제id>-<학년>`(기록하기), `#log-<기록id>`(일지), `#edit-<기록id>`, `#records`(목록), `#plan`(연간 계획표), `#report`(이수 현황표)
   → `parseHash()`, `render()`. 해시는 하이픈만 써요(`#/` 형식 금지: 미리보기 사이트에서 안 됨).
 - 수업 찾기: `lessonTopics(topic)`(기본+추가 수업), `findTopic(영역, 수업id)`, `baseTopicId`(추가 수업 → 별표 6 주제, 진행표·추천에 씀). tools/lib/common.js에도 같은 `lessonTopics`가 있어요.
-- 화면: `viewHome` `viewLevel` `viewTopics` `viewPick` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
+- 화면: `viewHome`(카테고리, `homeCategories`·`todayStrip`·`catCard`) `viewEdu`(전의 첫 화면) `viewDocs` `viewExtra` `viewLevel` `viewTopics` `viewPick` `viewLesson`(탭 5개: 시각자료·수업 흐름·활동지·자료 링크·AI에게 부탁하기) `viewWrite` `viewLog` `viewRecords`
 - 발표 모드: `buildSteps`(퀴즈는 문제→정답 2단계) `slideHTML`(1600×900 기준) `fitSlide`(글 넘치면 축소) `startShow/move/endShow`
 - 영상: `playVideo` — youtube-nocookie, rel=0, 자동재생 다음 영상 없음, 끝나면 `showEnd`로 화면 가림. file:// 이나 `window.NO_EMBED`면 유튜브 링크로. 영상 장 아래에 늘 "재생이 안 되면 유튜브에서 열기" 링크(`.vlink`). 유튜브가 8초 안에 안 열리거나 재생 오류(퍼가기 차단 등)면 `linkCard`로 큰 링크 버튼(새 창).
 - 기록: localStorage `seh-records-v1`(기록 목록, topicId에는 수업id가 들어가요), `seh-prefs-v1`(장소·진행자·담당자, lastBackupAt)
@@ -136,7 +136,10 @@ content.low / content.high (수업 1개):
 - 영역 색(`color`)은 테두리·막대·점 같은 **장식**에만 써요. 글씨와 흰 글씨가 올라가는 바탕은 **진한 색 `--cd`** = `ink(color)`(흰색과 대비 4.8:1 이상, index.html과 tools/lib/common.js에 같은 함수)를 써요. 새 화면도 `style="${cv(area)}"`로 두 색을 함께 넣어요.
 - 그림 카드(make-cards.js)는 슬라이드 종류마다 모양이 달라요: cover 햇살+영역 배지, question 말풍선+물음표, promise 번호 배지 원, activity 종이+연필. **그림 안에 글자 넣지 않기**(활동지 짝짓기 정답이 보여요).
 - **청소년(teen) 테마** (2026-11-12 "너무 유치하다" 피드백): 발표 화면 `teenSlideHTML`(`.slide.t`), 그림 카드 `teenCardSvg`(정사각형 800×800, 어두운 바탕, 이모지 대신 단색 선 아이콘), PPT `TEEN` 테마, 활동지 `body.teen`. 어두운 배경 강조색은 `--cl` = `light(color)`(#121419와 대비 4.5:1 이상). 저·고학년 디자인은 그대로.
-- 첫 화면 맨 위 "오늘의 추천 교육"(`urgency` → `todayBox`): 주기 넘김/안 함 → 주기 끝 임박 → 밀린 횟수 순. 영역 카드 순서는 **바꾸지 않아요**(늘 같은 자리가 선생님에게 편해요).
+- 의무교육 화면(#edu) 맨 위 "오늘의 추천 교육"(`urgency` → `todayBox`): 주기 넘김/안 함 → 주기 끝 임박 → 밀린 횟수 순. 영역 카드 순서는 **바꾸지 않아요**(늘 같은 자리가 선생님에게 편해요).
+- **카테고리 첫 화면** (2026-11-18 멘토 피드백 "들어가면 바로 콘텐츠가 나오는데, 카테고리 고르는 home 화면이 있으면 좋겠다. 향후 확장성을 위해"):
+  `#home` = 카테고리 카드 3개(📚 6대 의무교육 → `#edu` · 🌈 추가 교육 → 1개면 바로 `#area-rights`, 2개 이상이면 `#extra` · 🗂️ 기록·서류 → `#docs`) + 맨 위 "오늘의 추천" 한 줄(`todayStrip`, 지난번 대상이 있으면 바로 수업, 없으면 `#edu`).
+  **새 카테고리는 `homeCategories()` 목록에 한 줄만 더하면 돼요.** 경로 표시는 `areaCrumbs(area)`(처음 › 6대 의무교육 › 영역)와 `DOCS_CRUMBS`(처음 › 기록·서류 › …)를 써요.
 
 ## 저작권·출처 (2026-11-12)
 

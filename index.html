@@ -399,6 +399,24 @@
   /* 연간 계획표 · 이수 현황표 */
   .home-tools { display: flex; flex-wrap: wrap; gap: 12px; margin: -12px 0 28px; }
   .home-tools .big-link { margin: 0; }
+  /* 카테고리 첫 화면 (2026-11-18 멘토 피드백: 들어오자마자 내용 대신 카테고리부터 고르기, 나중에 카테고리를 늘리기 쉽게) */
+  .today-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; width: 100%; min-height: 76px; text-align: left;
+    background: var(--card); border: 2px solid var(--line); border-left: 10px solid var(--c); border-radius: 16px; padding: 14px 22px; margin: 0 0 28px;
+    transition: border-color .12s, box-shadow .12s; }
+  .today-strip:hover { border-color: var(--c); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+  .today-strip:active { transform: translateY(2px); }
+  .ts-kicker { font-weight: 800; color: #fff; background: var(--cd); padding: 4px 12px; border-radius: 99px; font-size: .9rem; white-space: nowrap; }
+  .ts-icon { font-size: 2.2rem; line-height: 1; }
+  .ts-text { flex: 1; min-width: 220px; }
+  .ts-text b { display: block; font-size: 1.15rem; line-height: 1.4; }
+  .ts-text small { display: block; color: var(--muted); font-size: .95rem; }
+  .ts-go { font-weight: 800; color: var(--cd); white-space: nowrap; }
+  .cat-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .card.cat { min-height: 230px; padding: 26px 26px 24px; }
+  .card.cat .icon { font-size: 3.2rem; }
+  .card.cat .title { font-size: 1.6rem; }
+  .card.cat .go { margin-top: auto; font-weight: 800; color: var(--cd, var(--accent)); }
+  .card.cat .status { font-weight: 800; }
   .plan-set { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; margin-bottom: 12px; }
   .plan-set label { display: flex; align-items: center; gap: 10px; font-weight: 700; }
   .plan-set select { font: inherit; min-height: 56px; padding: 0 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; }
@@ -541,7 +559,7 @@
     if (!h || h === "home" || h.startsWith("/")) return [];
     const p = h.split("-");
     if (p[0] === "area") return ["area", p[1], p[2]].filter(Boolean);
-    if (h === "records" || h === "plan" || h === "report" || h === "about" || h === "check") return [h];
+    if (h === "records" || h === "plan" || h === "report" || h === "about" || h === "check" || h === "edu" || h === "docs" || h === "extra") return [h];
     if ((p[0] === "log" || p[0] === "edit") && p[1]) return [p[0], p.slice(1).join("-")];
     if (p[0] === "write" && p.length >= 4) return ["write", p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
     if ((p[0] === "topic" || p[0] === "pick") && p.length >= 4) return [p[0], p[1], p.slice(2, -1).join("-"), p[p.length - 1]];
@@ -552,13 +570,20 @@
   const $app = document.getElementById("app");
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  /* 경로 표시의 앞부분: 처음 › 카테고리 (2026-11-18 카테고리 첫 화면) */
+  const HOME_CRUMB = { label: "처음", hash: "#home" };
+  const DOCS_CRUMBS = [HOME_CRUMB, { label: "기록·서류", hash: "#docs" }];
+  function areaCrumbs(area) {
+    if (isRequired(area.id)) return [HOME_CRUMB, { label: "6대 의무교육", hash: "#edu" }];
+    return EXTRA_AREAS.length > 1 ? [HOME_CRUMB, { label: "추가 교육", hash: "#extra" }] : [HOME_CRUMB];
+  }
   function crumbs(items) {
     return `<nav class="crumbs">` + items.map((it, i) =>
       (i ? " › " : "") + (it.hash ? `<button onclick="go('${it.hash}')">${esc(it.label)}</button>` : `<span>${esc(it.label)}</span>`)
     ).join("") + `</nav>`;
   }
 
-  /* 1) 첫 화면: 오늘의 추천 교육 + 영역 고르기 */
+  /* 6대 의무교육 화면(#edu): 오늘의 추천 교육 + 영역 고르기 */
   /* 영역마다 얼마나 급한지 계산해요. 카드 순서는 바꾸지 않고(늘 같은 자리), 맨 위 추천과 🔔 배지에만 써요.
      순서: ① 주기를 넘겼거나 한 번도 안 함 ② 주기 끝이 가까움(남은 달이 적음) ③ 올해 해야 할 횟수에 비해 많이 밀림 */
   function urgency(a, records) {
@@ -601,7 +626,8 @@
         ${next.length ? `<div class="today-next">그다음: ${next.map(u => `<button onclick="go('#area-${u.a.id}')" style="${cv(u.a)}">${u.a.icon} ${esc(u.a.shortName)}<small>${esc(u.why)}</small></button>`).join("")}</div>` : ""}
       </section>`;
   }
-  function viewHome() {
+  /* 6대 의무교육 화면 (#edu). 2026-11-18 전까지 첫 화면이었어요. */
+  function viewEdu() {
     const records = loadRecords();
     const total = DATA.meta.totalHours;
     let doneHours = 0;
@@ -636,7 +662,7 @@
         </button>`;
     }).join("");
     const pct = Math.min(100, doneHours / total * 100);
-    return `
+    return crumbs([HOME_CRUMB, { label: "6대 의무교육" }]) + `
       <h1>오늘은 어떤 교육을 할까요?</h1>
       ${backupBox()}
       ${todayBox(records)}
@@ -654,6 +680,89 @@
       <div class="grid">${cards}</div>
       ${lawBox()}
       <p class="footer-note">기준: ${esc(DATA.meta.basis)} · 확인일 ${esc(DATA.meta.checkedAt)}</p>`;
+  }
+  /* 1) 첫 화면: 카테고리 고르기 (2026-11-18 멘토 피드백)
+     새 카테고리를 만들 때는 homeCategories()의 목록에 한 줄만 더하면 첫 화면 카드가 생겨요.
+     { id, icon, title, desc, hash(누르면 갈 주소), color(장식 색, 글씨는 ink()로 진하게), status(지금 상태 한 줄), pct?(막대) } */
+  function homeCategories(records) {
+    const total = DATA.meta.totalHours;
+    const done = DATA.areas.reduce((s, a) => s + Math.min(areaStats(a, records).hours, a.requiredHours), 0);
+    const list = [
+      { id: "edu", icon: "📚", title: "6대 의무교육", desc: `법으로 정한 6개 영역 · 해마다 ${total}회`, hash: "#edu", color: "#1F6F5C",
+        status: `올해 ${fmtHours(done)} / ${total}회`, pct: Math.min(100, done / total * 100) }
+    ];
+    if (EXTRA_AREAS.length) {
+      const extraDone = EXTRA_AREAS.reduce((s, a) => s + areaStats(a, records).hours, 0);
+      const one = EXTRA_AREAS.length === 1;
+      list.push({ id: "extra", icon: one ? EXTRA_AREAS[0].icon : "＋", title: "추가 교육",
+        desc: EXTRA_AREAS.map(a => a.shortName).join(" · ") + " · 의무 44회와 따로 세요",
+        hash: one ? `#area-${EXTRA_AREAS[0].id}` : "#extra", color: EXTRA_AREAS[0].color,
+        status: extraDone ? `올해 ${fmtHours(extraDone)}회 했어요` : "하고 싶을 때 골라서 해요" });
+    }
+    list.push({ id: "docs", icon: "🗂️", title: "기록·서류", desc: "교육 기록 · 연간 계획표 · 이수 현황표", hash: "#docs", color: "#3D5A80",
+      status: `교육 기록 ${records.length}건` });
+    return list;
+  }
+  /* 첫 화면 맨 위 한 줄 추천: 지난번에 고른 대상이 있으면 바로 수업, 없으면 의무교육 화면(대상 고르기)으로 */
+  function todayStrip(records) {
+    const ranked = DATA.areas.map(a => urgency(a, records)).sort((x, y) => y.score - x.score);
+    if (ranked.every(u => u.done)) {
+      if (!EXTRA_AREAS.length) return "";
+      const a = EXTRA_AREAS[0];
+      return `<button class="today-strip" style="${cv(a)}" onclick="go('#area-${a.id}')"><span class="ts-kicker">⭐ 오늘의 추천</span><span class="ts-icon">${a.icon}</span>
+        <span class="ts-text"><b>올해 의무교육 44회를 모두 채웠어요 🎉</b><small>이번에는 ${esc(a.shortName)}을 해 보는 건 어때요?</small></span><span class="ts-go">고르러 가기 →</span></button>`;
+    }
+    const top = ranked[0], t = nextTopic(top.a, records);
+    const lv = LEVELS.find(l => l.id === loadPrefs().lastLevel);
+    const hash = lv ? `#topic-${top.a.id}-${t.id}-${lv.id}` : "#edu";
+    return `<button class="today-strip" style="${cv(top.a)}" onclick="go('${hash}')" aria-label="오늘의 추천 교육">
+        <span class="ts-kicker">⭐ 오늘의 추천</span><span class="ts-icon">${top.a.icon}</span>
+        <span class="ts-text"><b>${esc(top.a.shortName)} · ${esc(t.title)}</b><small>🔔 ${esc(top.why)}</small></span>
+        <span class="ts-go">${lv ? `${lv.icon} ${lv.title} 수업 열기 →` : "대상 고르러 가기 →"}</span></button>`;
+  }
+  function catCard(c) {
+    return `
+        <button class="card cat" style="${cv(c)}" onclick="go('${c.hash}')">
+          <span class="icon">${c.icon}</span>
+          <span class="title">${esc(c.title)}</span>
+          <span class="meta">${esc(c.desc)}</span>
+          ${c.pct !== undefined ? `<span class="mini-bar"><div style="width:${c.pct}%"></div></span>` : ""}
+          <span class="status">${esc(c.status)}</span>
+          <span class="go">들어가기 →</span>
+        </button>`;
+  }
+  function viewHome() {
+    const records = loadRecords();
+    return `
+      <h1>오늘은 무엇을 할까요?</h1>
+      <p class="lead">하고 싶은 일을 고르세요.</p>
+      ${backupBox()}
+      ${todayStrip(records)}
+      <div class="cat-grid">${homeCategories(records).map(catCard).join("")}</div>`;
+  }
+  /* 기록·서류 (#docs): 교육 기록·연간 계획표·이수 현황표를 한곳에 */
+  function viewDocs() {
+    const n = loadRecords().length;
+    const items = [
+      { icon: "📋", title: "교육 기록", desc: "교육한 날짜별 기록과 한글 프로그램일지", hash: "#records", color: "#3D5A80", status: `${n}건` },
+      { icon: "📅", title: "연간 계획표", desc: "영역별 횟수를 12달에 고르게 나눠요", hash: "#plan", color: "#3D5A80", status: "한글에 붙여 넣기·인쇄" },
+      { icon: "📊", title: "이수 현황표", desc: "영역별 횟수와 주기를 점검해요", hash: "#report", color: "#3D5A80", status: "한글에 붙여 넣기·인쇄" }
+    ];
+    return crumbs([HOME_CRUMB, { label: "기록·서류" }]) + `
+      <h1>기록·서류</h1>
+      <p class="lead">교육한 기록을 보고, 계획표·현황표를 만들어요.</p>
+      ${backupBox()}
+      <div class="cat-grid">${items.map(catCard).join("")}</div>`;
+  }
+  /* 추가 교육이 2개 이상이 되면 쓰는 목록 화면 (#extra). 지금은 아동인권 1개라 첫 화면에서 바로 그 영역으로 가요. */
+  function viewExtra() {
+    const records = loadRecords();
+    return crumbs([HOME_CRUMB, { label: "추가 교육" }]) + `
+      <h1>추가 교육</h1>
+      <p class="lead">법정 의무교육 외에 더 하면 좋은 교육이에요. 44회에는 들어가지 않아요.</p>
+      <div class="cat-grid">${EXTRA_AREAS.map(a => { const st = areaStats(a, records);
+        return catCard({ icon: a.icon, title: a.shortName, desc: a.recommend || "법정 의무교육 외", hash: `#area-${a.id}`, color: a.color,
+          status: st.hours ? `올해 ${fmtHours(st.hours)}회 했어요` : "아직 안 했어요" }); }).join("")}</div>`;
   }
   /* 이용 안내·저작권 (LICENSE.md와 같은 내용을 쉽게) */
   function viewAbout() {
@@ -757,7 +866,7 @@
         <span class="title">${l.title}</span>
         <span class="meta">${l.desc}</span>
       </button>`).join("");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName }]) + `
+    return crumbs([...areaCrumbs(area), { label: area.shortName }]) + `
       <h1>${area.icon} ${esc(area.shortName)}${area.optional ? ` <span class="plus-badge inline" style="${cv(area)}">＋ ${esc(area.badge || "추가 교육")}</span>` : ""}</h1>
       <p class="lead">누구와 함께 교육하나요?</p>
       ${area.optional ? `<div class="box extra-note" style="${cv(area)}"><b>${area.icon} 이 교육은 6대 의무교육에 더해서 하는 교육이에요.</b><br>
@@ -785,7 +894,7 @@
           ${ex.length ? `<span class="meta">수업 ${ex.length + 1}개 · ${ex.map(x => x.icon + " " + esc(x.title)).join(" ")}</span>` : ""}
         </button>`;
     }).join("");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName, hash: `#area-${area.id}` }, { label: lv.title }]) + `
+    return crumbs([...areaCrumbs(area), { label: area.shortName, hash: `#area-${area.id}` }, { label: lv.title }]) + `
       <h1>어떤 주제로 할까요?</h1>
       <p class="lead">${esc(area.shortName)} · ${lv.title} — ${area.optional ? `유엔아동권리협약과 아동권리헌장을 바탕으로 만든 주제예요` : `운영지침(별표 6)에 나온 주제예요`}. ⭐ 추천은 올해 아직 안 한 주제 중 첫 번째예요.</p>
       <div class="grid">${cards}</div>`;
@@ -808,7 +917,7 @@
           <span class="meta">${esc(sub)}</span>
         </button>`;
     }).join("");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName, hash: `#area-${area.id}` },
+    return crumbs([...areaCrumbs(area), { label: area.shortName, hash: `#area-${area.id}` },
                    { label: lv.title, hash: `#area-${area.id}-${level}` }, { label: topic.title }]) + `
       <h1>${area.icon} ${esc(topic.title)}</h1>
       <p class="lead">어떤 수업을 할까요? 모두 운영지침(별표 6)의 이 주제로 기록되고, 이수 횟수도 ${esc(area.shortName)}에 쌓여요.</p>
@@ -928,7 +1037,7 @@
     const { data: L, note } = contentFor(topic, level);
     const base = topic.baseId ? area.topics.elementary.find(x => x.id === topic.baseId) : topic;
     const siblings = base.extras && base.extras.length ? lessonTopics(base) : [];
-    const head = crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName, hash: `#area-${area.id}` },
+    const head = crumbs([...areaCrumbs(area), { label: area.shortName, hash: `#area-${area.id}` },
                    { label: lv.title, hash: `#area-${area.id}-${level}` },
                    ...(siblings.length ? [{ label: base.title, hash: `#pick-${area.id}-${base.id}-${level}` }, { label: topic.subTitle || "기본 수업" }] : [{ label: topic.title }])])
       + (siblings.length ? `<div class="chips lesson-switch" style="${cv(area)}">` + siblings.map(s =>
@@ -1293,7 +1402,7 @@
       content: draftContent(area, topic, level, L ? L.minutes : 40), opinion: draftOpinion(area, topic, level)
     };
     const back = rec ? `#log-${rec.id}` : `#topic-${area.id}-${topic.id}-${level}`;
-    return crumbs([{ label: "처음", hash: "#home" }, { label: area.shortName, hash: `#area-${area.id}` },
+    return crumbs([...areaCrumbs(area), { label: area.shortName, hash: `#area-${area.id}` },
                    { label: topic.title, hash: `#topic-${area.id}-${topic.id}-${level}` }, { label: rec ? "기록 고치기" : "기록하기" }]) + `
       <h1>📝 ${rec ? "교육 기록 고치기" : "교육 기록하기"}</h1>
       <p class="lead">${area.icon} ${esc(area.shortName)} · ${esc(topic.title)} · ${levelName(level)}<br>빈칸만 채우면 돼요. 진행내용과 담당자 의견은 미리 써 두었으니 고칠 곳만 고쳐 주세요.</p>
@@ -1356,7 +1465,7 @@
     if (!a || !t) return notFound();
     const F = recordFields(r);
     const nl = s => esc(s).replace(/\n/g, "<br>");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: "교육 기록", hash: "#records" }, { label: fmtDate(r.date) }]) + `
+    return crumbs([...DOCS_CRUMBS, { label: "교육 기록", hash: "#records" }, { label: fmtDate(r.date) }]) + `
       <div class="lesson-head"><div><h1>📄 프로그램일지</h1><p class="lead" style="margin:0">${a.icon} ${esc(a.shortName)} · ${esc(t.title)} · 수업 1회 저장됨</p></div></div>
       <div class="log-actions" style="${cv(a)}">
         ${window.NO_FILES ? "" : `<button class="play-btn" style="${cv(a)}" onclick="downloadHwpx('${r.id}')">⬇️ 한글 파일(.hwpx)로 받기</button>`}
@@ -1412,7 +1521,7 @@
       return `<tr><td>${esc(fmtDate(r.date))}</td><td>${a ? a.icon + " " + esc(a.shortName) : "?"}</td><td>${t ? esc(t.title) : "?"}</td><td>${levelName(r.level)}</td><td>${r.children}명</td>
         <td class="acts"><button class="mini-btn" onclick="go('#log-${r.id}')">일지 보기</button>${del}</td></tr>`;
     }).join("");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: "교육 기록" }]) + `
+    return crumbs([...DOCS_CRUMBS, { label: "교육 기록" }]) + `
       <h1>📋 교육 기록</h1>
       <p class="lead">올해 의무교육 ${fmtHours(total)}회${extraNote} · 전체 ${list.length}건 <small>(${SESSION_NOTE})</small></p>
       ${backupBox()}
@@ -1503,7 +1612,7 @@
     const yearOpts = [-1, 0, 1].map(d => new Date().getFullYear() + d);
     const sel = (key, opts, cur) => `<select onchange="setPlan('${key}', this.value)">${opts.map(([v, l]) => `<option value="${v}"${String(v) === String(cur) ? " selected" : ""}>${l}</option>`).join("")}</select>`;
     const per = DATA.areas.map(a => `${a.icon} ${esc(a.shortName)} ${Math.ceil(a.requiredHours / SESSION_HOURS)}회`).join(" · ");
-    return crumbs([{ label: "처음", hash: "#home" }, { label: "연간 계획표" }]) + `
+    return crumbs([...DOCS_CRUMBS, { label: "연간 계획표" }]) + `
       <h1>📅 연간 계획표</h1>
       <p class="lead">시작 달을 고르면, 별표 6의 시간(${SESSION_NOTE})과 주기에 맞춰 12달 계획을 자동으로 짜 줘요. 한 교육을 마치고 기록하면 ✔ 표시가 붙어요.</p>
       <div class="box plan-set no-print">
@@ -1563,7 +1672,7 @@
   }
   function viewReport() {
     const y = reportYear;
-    return crumbs([{ label: "처음", hash: "#home" }, { label: "이수 현황표" }]) + `
+    return crumbs([...DOCS_CRUMBS, { label: "이수 현황표" }]) + `
       <h1>📊 ${y}년 안전교육 이수 현황표</h1>
       <p class="lead">교육 기록으로 영역별 이수 횟수와 주기를 자동으로 계산해요(${SESSION_NOTE}). 점검이나 보고 때 인쇄하거나 한글에 붙여 넣어 쓰세요.</p>
       <div class="form-actions no-print" style="margin-bottom:16px">
@@ -1688,6 +1797,9 @@
     const okLevel = id => LEVELS.some(l => l.id === id);
     let html;
     if (parts.length === 0) html = viewHome();
+    else if (parts[0] === "edu") html = viewEdu();
+    else if (parts[0] === "docs") html = viewDocs();
+    else if (parts[0] === "extra") html = viewExtra();
     else if (parts[0] === "area" && findArea(parts[1]) && parts.length === 2) html = viewLevel(findArea(parts[1]));
     else if (parts[0] === "area" && findArea(parts[1]) && okLevel(parts[2])) html = viewTopics(findArea(parts[1]), parts[2]);
     else if (parts[0] === "topic" && findArea(parts[1]) && okLevel(parts[3])) {
