@@ -39,7 +39,7 @@
     border-bottom: 1px solid var(--line);
   }
   .brand { font-size: 1.25rem; font-weight: 700; }
-  .brand small { display: block; font-size: .8rem; font-weight: 400; color: var(--muted); }
+  .brand small { display: block; font-size: .95rem; font-weight: 400; color: var(--muted); }
   .home-btn {
     min-height: 56px; padding: 0 26px;
     border: 2px solid var(--accent); border-radius: 14px;
@@ -51,8 +51,10 @@
   main { max-width: 1120px; margin: 0 auto; padding: 32px 28px 64px; }
 
   /* 경로 표시 */
-  .crumbs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; color: var(--muted); font-size: .95rem; }
-  .crumbs button { border: 0; background: none; padding: 4px 2px; color: var(--accent); text-decoration: underline; font-weight: 700; }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; margin-bottom: 14px; color: var(--muted); font-size: 1rem; }
+  /* v1.3 누르기 쉬운 크기(44px 이상) — 손가락·마우스 모두 */
+  .crumbs button { border: 0; background: none; min-height: 44px; padding: 8px 6px; border-radius: 10px; color: var(--accent); text-decoration: underline; font-weight: 700; }
+  .crumbs button:hover { background: rgba(0,0,0,.05); }
 
   h1 { font-size: 2rem; margin: 0 0 6px; line-height: 1.3; }
   .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 28px; }
@@ -456,12 +458,21 @@
   .stage .note { position: fixed; z-index: 5; /* 16:9 TV 전체 화면에서도 슬라이드 위에 보이게 */ left: 20px; right: 20px; top: 16px; box-shadow: 0 6px 18px rgba(0,0,0,.25); line-height: 1.6; background: #FFF7D6; color: #3A2E00; border-radius: 12px; padding: 12px 18px; font-size: 1.05rem; display: none; }
   .stage.show-note .note:not(:empty) { display: block; }
   @media (max-width: 720px) {
+    /* v1.3 휴대폰: 머리말을 한 줄로 줄이고, 수업 탭은 옆으로 밀어서 보기 */
+    .topbar { padding: 10px 16px; gap: 10px; }
+    .brand { font-size: 1.1rem; }
+    .brand small { display: none; }
+    .home-btn { min-height: 48px; padding: 0 14px; font-size: 1rem; white-space: nowrap; }
+    main { padding: 20px 16px 56px; }
+    .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { flex: none; padding: 0 16px; }
     .sheet-preview { grid-template-columns: 1fr; }
     .flow-list li { grid-template-columns: 70px 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
-  .footer-note { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+  .footer-note { margin-top: 40px; color: var(--muted); font-size: .95rem; }
   .site-foot { max-width: 1120px; margin: 0 auto; padding: 0 28px 40px; color: var(--muted); font-size: .9rem; }
   .site-foot a { color: var(--accent); font-weight: 700; }
   .about table { width: 100%; border-collapse: collapse; background: var(--card); margin: 8px 0 22px; }
@@ -1447,8 +1458,11 @@
     if (withHwpx) { downloadHwpx(rec.id, rec); setTimeout(() => alertBox("한글 파일을 받았어요. 브라우저의 '다운로드' 폴더를 열어 보세요."), 300); }
     else setTimeout(backupReminder, 400);
   }
+  // v1.3 참여 인원이 비어 있는 기록(예전 기록·불러온 파일)도 'undefined명' 없이 보이게
+  const kidsN = r => Number(r && r.children) > 0 ? Number(r.children) : 0;
+  const kidsPar = r => kidsN(r) ? ` (${kidsN(r)}명)` : "";
   function participantsText(r) {
-    return `${levelName(r.level)} 아동 ${r.children}명` + (r.names ? ` (${r.names})` : "");
+    return `${levelName(r.level)} 아동` + (kidsN(r) ? ` ${kidsN(r)}명` : "") + (r.names ? ` (${r.names})` : "");
   }
   function recordFields(r) {
     const { a, t } = findTopic(r.areaId, r.topicId);
@@ -1518,7 +1532,7 @@
       const del = pendingDelete === r.id
         ? `<button class="mini-btn danger" onclick="deleteRecord('${r.id}')">정말 지울게요</button><button class="mini-btn" onclick="pendingDelete=null;render()">취소</button>`
         : `<button class="mini-btn" onclick="pendingDelete='${r.id}';render()">지우기</button>`;
-      return `<tr><td>${esc(fmtDate(r.date))}</td><td>${a ? a.icon + " " + esc(a.shortName) : "?"}</td><td>${t ? esc(t.title) : "?"}</td><td>${levelName(r.level)}</td><td>${r.children}명</td>
+      return `<tr><td>${esc(fmtDate(r.date))}</td><td>${a ? a.icon + " " + esc(a.shortName) : "?"}</td><td>${t ? esc(t.title) : "?"}</td><td>${levelName(r.level)}</td><td>${kidsN(r) ? kidsN(r) + "명" : "-"}</td>
         <td class="acts"><button class="mini-btn" onclick="go('#log-${r.id}')">일지 보기</button>${del}</td></tr>`;
     }).join("");
     return crumbs([...DOCS_CRUMBS, { label: "교육 기록" }]) + `
@@ -1658,7 +1672,7 @@
     const total = rows.reduce((s, x) => s + Math.min(x.hours, x.a.requiredHours), 0);
     const body = rows.map(x => {
       const status = x.ok ? (x.gapOk ? "충족" : "횟수 충족 · 주기 확인") : `${fmtHours(x.a.requiredHours - x.hours)}회 부족`;
-      const dates = x.list.map(l => `${fmtDate(l.date).replace(/^\d+년 /, "")} ${l.title} (${l.children}명)`);
+      const dates = x.list.map(l => `${fmtDate(l.date).replace(/^\d+년 /, "")} ${l.title}${kidsPar(l)}`);
       return forCopy
         ? `<tr><td${B}>${x.a.name}</td><td${B}>${x.a.cycleMonths}개월 1회 · ${x.a.requiredHours}시간(${x.a.requiredHours}회)</td><td${B}>${x.rs.length}회</td><td${B}>${status}</td><td${B}>${dates.join("<br>") || "-"}</td></tr>`
         : `<tr><th>${x.a.icon} ${esc(x.a.shortName)}</th><td>${x.a.cycleMonths}개월에 1회 이상<br>${x.a.requiredHours}시간(${x.a.requiredHours}회) 이상</td><td class="num">${x.rs.length}회</td>
@@ -1683,7 +1697,7 @@
       ${EXTRA_AREAS.map(a => {
         const rs = loadRecords().filter(r => r.areaId === a.id && String(r.date || "").startsWith(String(y))).sort((p, q) => p.date.localeCompare(q.date));
         return `<div class="box extra-note" style="${cv(a)};margin-top:16px"><b>＋ ${a.icon} ${esc(a.name)} (추가 교육 · 44회 합계 밖)</b> — ${rs.length}회
-          ${rs.length ? `<br><span class="meta">${rs.map(r => { const { t } = findTopic(r.areaId, r.topicId); return `${esc(fmtDate(r.date).replace(/^\d+년 /, ""))} ${esc(t ? t.title : "?")} (${r.children}명)`; }).join(" · ")}</span>` : ""}</div>`;
+          ${rs.length ? `<br><span class="meta">${rs.map(r => { const { t } = findTopic(r.areaId, r.topicId); return `${esc(fmtDate(r.date).replace(/^\d+년 /, ""))} ${esc(t ? t.title : "?")}${kidsPar(r)}`; }).join(" · ")}</span>` : ""}</div>`;
       }).join("")}
       <p class="meta">기준: ${esc(DATA.meta.basis)} · "주기 확인"은 교육 사이 간격이 주기(2·3·6개월)를 넘은 적이 있다는 뜻이에요.</p>
       <div class="form-actions no-print" style="margin-top:16px">

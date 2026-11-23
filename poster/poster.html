@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>6대 의무교육 도우미 — A2 포스터</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<style>
+@page { size: 420mm 594mm; margin: 0; }
+:root {
+  --green: #1F6F5C; --green-deep: #154F42; --green-soft: #E3F1EC; --yellow: #F2B705; --yellow-soft: #FFF4CC;
+  --ink: #1F2328; --muted: #5C6670; --line: #E2DED5; --bg: #F7F5F0;
+  --display: "Jua", "NanumSquareRound", "Malgun Gothic", sans-serif;
+  --body: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 420mm; height: 594mm; }
+body { font-family: var(--body); color: var(--ink); background: var(--bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; overflow: hidden; word-break: keep-all; }
+.poster { width: 420mm; height: 594mm; display: flex; flex-direction: column; }
+
+header { background: var(--green); color: #fff; position: relative; padding: 20mm 20mm 10mm; }
+header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4mm; background: var(--yellow); }
+.course { font-size: 18pt; font-weight: 500; opacity: .9; }
+.course b { color: var(--yellow); }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 8mm; margin-top: 4mm; }
+h1 { font-family: var(--display); font-weight: 400; font-size: 92pt; line-height: 1; white-space: nowrap; }
+.hero { width: 70mm; flex: none; border-radius: 6mm; overflow: hidden; border: 1.2mm solid #fff; box-shadow: 0 2mm 6mm rgba(0,0,0,.25); }
+.hero img { display: block; width: 100%; }
+.tagline { font-size: 38pt; font-weight: 700; margin-top: 5mm; line-height: 1.2; }
+.tagline em { font-style: normal; color: var(--yellow); }
+
+main { flex: 1; min-height: 0; padding: 8mm 20mm 0; display: flex; flex-direction: column; gap: 7mm; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 36pt; color: var(--green); display: flex; align-items: center; gap: 4mm; line-height: 1; margin-bottom: 4mm; }
+h2 .no { display: inline-grid; place-items: center; width: 13mm; height: 13mm; border-radius: 4mm; background: var(--yellow); color: var(--green-deep); font-size: 28pt; }
+
+.problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+.card { background: #fff; border: .5mm solid var(--line); border-radius: 6mm; padding: 5mm 6mm; }
+.problems .card { border-top: 2.5mm solid var(--green); }
+.problems .k { font-size: 16pt; font-weight: 700; color: var(--muted); }
+.problems .q { font-size: 23pt; font-weight: 700; line-height: 1.35; margin-top: 2mm; }
+.problems .q mark { background: linear-gradient(transparent 55%, var(--yellow-soft) 55%); color: inherit; }
+
+.flow { display: grid; grid-template-columns: 1fr 12mm 1fr 12mm 1fr; }
+.step { background: #fff; border: .5mm solid var(--line); border-radius: 6mm; padding: 5mm 6mm; }
+.step .h { font-family: var(--display); font-size: 27pt; color: var(--green); line-height: 1.1; }
+.step .d { font-size: 18pt; color: var(--muted); margin-top: 2mm; line-height: 1.4; }
+.step.mid { background: var(--green); border-color: var(--green); }
+.step.mid .h { color: var(--yellow); } .step.mid .d { color: #fff; opacity: .92; }
+.arrow { display: grid; place-items: center; color: var(--yellow); font-size: 30pt; font-weight: 900; }
+.rule-note { font-size: 17pt; color: var(--muted); margin-top: 3.5mm; }
+.rule-note b { color: var(--green); }
+
+.feat-sec { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.features { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0,1fr) minmax(0,1fr); gap: 6mm; flex: 1; min-height: 0; }
+.feat { background: #fff; border: .5mm solid var(--line); border-radius: 6mm; padding: 5mm; display: flex; flex-direction: column; min-height: 0; }
+.shot { flex: 1; min-height: 0; border-radius: 3.5mm; overflow: hidden; border: .4mm solid var(--line); box-shadow: 0 1.2mm 3mm rgba(31,35,40,.12); background: #fff; position: relative; }
+.shot img { position: absolute; display: block; height: auto; width: var(--w, 100%); left: var(--l, 0); top: var(--t, 0); max-width: none; }
+.feat .t { font-family: var(--display); font-size: 27pt; color: var(--green); margin-top: 4mm; line-height: 1.1; }
+.feat .t .n { color: var(--yellow); margin-right: 2mm; -webkit-text-stroke: .2mm #B88A00; }
+.feat .d { font-size: 18pt; margin-top: 1.5mm; line-height: 1.35; }
+
+.effects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+.fx { background: var(--green-soft); border-radius: 6mm; padding: 3mm 6mm 4mm; text-align: center; }
+.fx .big { font-family: var(--display); font-size: 62pt; color: var(--green-deep); line-height: 1.05; }
+.fx .big small { font-size: 30pt; }
+.fx .d { font-size: 18pt; font-weight: 700; margin-top: 1mm; }
+
+footer { margin-top: 8mm; background: #fff; border-top: .5mm solid var(--line); padding: 6mm 20mm 20mm; display: flex; align-items: center; justify-content: space-between; gap: 10mm; }
+.maker { font-size: 18pt; line-height: 1.6; color: var(--muted); }
+.maker b { color: var(--ink); font-size: 22pt; }
+.qrbox { display: flex; align-items: center; gap: 6mm; }
+.qrtext { text-align: right; }
+.qrtext .h { font-family: var(--display); font-size: 30pt; color: var(--green); }
+.qrtext .s { font-size: 16pt; margin-top: 1.5mm; }
+.qrtext .u { font-size: 15pt; color: var(--muted); margin-top: 1mm; }
+.qr { width: 38mm; height: 38mm; padding: 2.5mm; border: .6mm solid var(--green); border-radius: 3mm; background: #fff; }
+.qr img { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <header>
+    <div class="course">지역아동센터 선생님을 위한 <b>안전교육 수업·기록 도우미</b></div>
+    <div class="title-row">
+      <h1>6대 의무교육 도우미</h1>
+      <div class="hero"><img src="assets/hero.svg" alt="횡단보도 앞에서 멈춘 아이 그림 (수업 슬라이드)"></div>
+    </div>
+    <p class="tagline">영역과 학년만 고르면 <em>오늘 수업 자료</em>가 한 화면에</p>
+  </header>
+
+  <main>
+    <section>
+      <h2><span class="no">1</span>이런 문제가 있었어요</h2>
+      <div class="problems">
+        <div class="card"><div class="k">장면 1 · 주제 찾기</div><p class="q">해마다 같은 영역, <mark>"올해는 뭘 하지?"</mark></p></div>
+        <div class="card"><div class="k">장면 2 · 자료 준비</div><p class="q">자료가 기관마다 <mark>흩어져 있어요</mark></p></div>
+        <div class="card"><div class="k">장면 3 · 주기·기록</div><p class="q">주기를 놓치고, <mark>일지는 따로</mark> 써요</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="no">2</span>이렇게 해결해요</h2>
+      <div class="flow">
+        <div class="step"><div class="h">영역·대상 고르기</div><div class="d">6대 영역 + 아동인권 · 저·고학년·청소년</div></div>
+        <div class="arrow">▶</div>
+        <div class="step mid"><div class="h">40분 수업 그대로</div><div class="d">TV 슬라이드 · 수업 흐름 · 활동지 · PPT · 공식 영상</div></div>
+        <div class="arrow">▶</div>
+        <div class="step"><div class="h">기록하면 서류까지</div><div class="d">한글 일지 · 연간 계획표 · 이수 현황표</div></div>
+      </div>
+      <p class="rule-note"><b>근거: 아동복지법 시행령 별표 6</b> (6개 영역, 연 44시간) — 주기를 계산해 '오늘의 추천 교육'을 알려 줘요.</p>
+    </section>
+
+    <section class="feat-sec">
+      <h2><span class="no">3</span>주요 기능</h2>
+      <div class="features">
+        <div class="feat">
+          <div class="shot"><img src="assets/s_today.png" alt="오늘의 추천 교육과 대상 고르기" style="--w:100%; --l:0; --t:0"></div>
+          <div class="t"><span class="n">01</span>오늘의 추천 교육</div>
+          <div class="d">주기가 지난 영역부터 — 대상만 누르면 수업 화면</div>
+        </div>
+        <div class="feat">
+          <div class="shot"><img src="assets/s_show.png" alt="TV 발표 모드 슬라이드" style="--w:100%; --l:0; --t:-30mm"></div>
+          <div class="t"><span class="n">02</span>TV로 띄우는 발표 모드</div>
+          <div class="d">상황 장면 · 약속 · 퀴즈 · 영상, 선생님 대본 메모</div>
+        </div>
+        <div class="feat">
+          <div class="shot"><img src="assets/s_lesson.png" alt="수업 화면 시각자료 탭" style="--w:118%; --l:-12mm; --t:-52mm"></div>
+          <div class="t"><span class="n">03</span>수업 자료가 한 화면에</div>
+          <div class="d">시각자료 · 수업 흐름 · 활동지 · 자료 링크 · AI 부탁 글</div>
+        </div>
+        <div class="feat">
+          <div class="shot"><img src="assets/s_report.png" alt="안전교육 이수 현황표" style="--w:118%; --l:-10mm; --t:-58mm"></div>
+          <div class="t"><span class="n">04</span>이수 현황 자동 계산</div>
+          <div class="d">영역별 횟수·주기 점검 → 인쇄·한글에 붙여 넣기</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="no">4</span>한눈에 보는 숫자</h2>
+      <div class="effects">
+        <div class="fx"><div class="big">128<small>개</small></div><div class="d">40분 수업 (저·고학년·청소년)</div></div>
+        <div class="fx"><div class="big">44<small>회</small></div><div class="d">연간 진행·주기 자동 관리</div></div>
+        <div class="fx"><div class="big">0<small>원</small></div><div class="d">설치·회원가입·AI 비용 없이</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="maker">
+      <b>만든 사람 · GitHub jeonghwan415</b> (지역아동센터 생활복지사)<br>
+      2026 천안형 글로벌 인재육성사업 · AX 액션러닝 개인과제<br>
+      무료로 쓰고 고쳐 쓰기 · 수업 자료 CC BY-NC-SA 4.0 · 코드 MIT
+    </div>
+    <div class="qrbox">
+      <div class="qrtext">
+        <div class="h">바로 써 보기</div>
+        <div class="s">설치 없이 · 센터 TV에서 바로</div>
+        <div class="u">jeonghwan415.github.io/edu-safety-helper</div>
+      </div>
+      <div class="qr"><img src="assets/qr.svg" alt="사이트 QR 코드"></div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
