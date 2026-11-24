@@ -507,7 +507,7 @@
 </header>
 
 <main id="app"></main>
-<footer class="site-foot no-print">6대 의무교육 도우미 · 만든 사람 <b>jeonghwan0415</b> · 자료 CC BY-NC-SA 4.0 (출처 표시·비영리) · <a href="#about" onclick="go('#about');return false">이용 안내·저작권</a></footer>
+<footer class="site-foot no-print">6대 의무교육 도우미 <span id="appVer">v1.4 (2026-11-24)</span> · 만든 사람 <b>jeonghwan0415</b> · 자료 CC BY-NC-SA 4.0 (출처 표시·비영리) · <a href="#about" onclick="go('#about');return false">이용 안내·저작권</a></footer>
 
 <script>
 /* 센터 계정(B) 서버 정보 — 관리자가 Supabase 프로젝트를 만든 뒤 여기에 넣고 GitHub에 올리면, 선생님들은 따로 넣지 않아도 돼요.
@@ -516,7 +516,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
 </script>
 <script>
 /* =====================================================================
-   센터 계정(B) 공통 모듈 — center-cloud v1.0 (2026-11-24)
+   센터 계정(B) 공통 모듈 — center-cloud v1.1 (2026-11-24)
    프로그램 서포터 · 6대 의무교육 도우미 · 차량 지킴이가 똑같은 코드를 씁니다. 고칠 때는 세 곳을 같이 고쳐요.
    - 서버: Supabase (주소·공개 키는 CENTER_CLOUD_CONFIG 또는 [센터 계정 → 서버 연결]에서 넣음)
    - 서버 정보가 없거나 로그인하지 않으면 지금처럼 '이 컴퓨터에만 저장'(A)으로 동작
@@ -524,6 +524,8 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
    - 같은 기록을 두 곳에서 동시에 고치면 이 컴퓨터에서 고친 내용이 남고, 서버에 변경 기록이 남음
    - 아동 사진(IndexedDB)·AI 키·화면 설정은 서버에 보내지 않음
    - 라이브러리 없이 fetch만 씀 (외부 파일을 불러오지 않음)
+   - v1.1: 서버 연결 전에는 [내 기록은 어디에?] 안내 창(개인정보 안내·백업·이 컴퓨터 기록 모두 지우기)이 먼저 나옴
+     CC.init에 wipe:{prefixes:[…], idb:[…]}, backup:함수, privacyNote:'문장' 을 넘겨요
    ===================================================================== */
 (function () {
   "use strict";
@@ -894,7 +896,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
 
   // 첫 화면: 지금 상태에 맞는 창
   CC.open = function () {
-    if (!CC.configured()) return showSetup();
+    if (!CC.configured()) return showLocal();
     if (!CC.user()) return showLogin();
     if (!CC.center()) return showCenters();
     return showCenter();
@@ -902,6 +904,55 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   function aboutAB() {
     return '<div class="cc-ab"><div><b>지금: 이 컴퓨터에만 저장</b><span>무료 · 아동 정보가 밖으로 나가지 않음 · 다른 컴퓨터와 이어지지 않음</span></div>' +
       '<div class="on"><b>센터 계정으로 바꾸면</b><span>어느 컴퓨터·휴대폰에서든 로그인하면 우리 센터 기록이 보이고, 선생님 여러 명이 함께 써요</span></div></div>';
+  }
+  /* ---------- 내 기록은 어디에? (이 컴퓨터에만 저장할 때: 개인정보 안내·백업·모두 지우기) ---------- */
+  var KEEP_CC = { "cc.config": 1, "cc.zoom": 1, "cc.theme": 1 };   // 화면 설정·서버 주소는 개인정보가 아니라 남김
+  function wipeKeys() {
+    var pre = ((spec && spec.wipe && spec.wipe.prefixes) || []).concat(["cc."]), out = [];
+    if (spec && spec.keys) spec.keys.forEach(function (k) { pre.push(k.k); });
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (!KEEP_CC[k] && k.indexOf("cc.tour") !== 0 && pre.some(function (p) { return k === p || k.indexOf(p) === 0; })) out.push(k); } } catch (e) {}
+    return out;
+  }
+  CC.wipeKeys = wipeKeys;
+  CC.wipeLocal = function () {
+    wipeKeys().forEach(function (k) { try { CC._quiet++; localStorage.removeItem(k); } catch (e) {} finally { CC._quiet--; } });
+    var dbs = (spec && spec.wipe && spec.wipe.idb) || [];
+    return Promise.all(dbs.map(function (n) { return new Promise(function (res) { try { var r = indexedDB.deleteDatabase(n); r.onsuccess = r.onerror = r.onblocked = function () { res(); }; } catch (e) { res(); } }); }));
+  };
+  function showLocal() {
+    var n = wipeKeys().filter(function (k) { return k.indexOf("cc.") !== 0; }).length, label = n ? "있음" : "없음";
+    try { if (spec.localText) label = spec.localText(); else if (!spec.custom && spec.countText) label = spec.countText(Object.keys(localRows()).length); } catch (e) {}
+    openDlg("내 기록은 어디에 있나요?", aboutAB() +
+      '<div class="cc-warn"><b>개인정보 안내</b><ul class="cc-list">' +
+      "<li>적은 기록은 <b>이 컴퓨터의 이 브라우저</b>에만 저장돼요. 인터넷으로 보내지 않아요.</li>" +
+      (spec && spec.privacyNote ? "<li>" + spec.privacyNote + "</li>" : "") +
+      "<li>브라우저의 <b>'인터넷 사용 기록 삭제'</b>를 하면 기록도 지워질 수 있어요. <b>한 달에 한 번 백업 파일</b>을 받아 두세요.</li>" +
+      "<li>아동 이름 대신 <b>'○○ 아동'</b>처럼 적으면 더 안전해요.</li>" +
+      "<li>여러 사람이 쓰는 컴퓨터이거나, 컴퓨터를 바꾸거나, 담당자가 바뀔 때는 <b>[이 컴퓨터 기록 모두 지우기]</b>를 눌러 주세요.</li></ul></div>" +
+      '<p class="cc-small">지금 이 컴퓨터에 저장된 기록: <b id="ccLocalN">' + esc(label) + "</b></p>" +
+      '<p class="cc-small">센터 계정(선생님 여러 명이 함께 쓰기)은 관리자가 서버를 한 번 연결해야 해요. ' +
+      '<button type="button" class="cc-link" data-a="setup">' + (CC.configured() ? "센터 계정 로그인" : "센터 계정 연결 (관리자)") + "</button></p>",
+      '<button type="button" class="cc-btn cc-danger-text" data-a="wipe">이 컴퓨터 기록 모두 지우기</button>' +
+      (spec && spec.backup ? '<button type="button" class="cc-btn" data-a="backup">백업 파일 받기</button>' : "") +
+      '<button type="button" class="cc-btn cc-main" data-a="close">닫기</button>');
+    dlg.querySelector('[data-a="close"]').onclick = closeDlg;
+    dlg.querySelector('[data-a="setup"]').onclick = function () { CC.configured() ? showLogin() : showSetup(); };
+    var bk = dlg.querySelector('[data-a="backup"]'); if (bk) bk.onclick = function () { spec.backup(); };
+    dlg.querySelector('[data-a="wipe"]').onclick = confirmWipe;
+  }
+  CC.showLocal = showLocal;
+  function confirmWipe() {
+    ask("이 컴퓨터 기록을 모두 지울까요?",
+      "<p>이 컴퓨터에 저장된 <b>" + esc((spec && spec.appName) || "이 프로그램") + "</b>의 기록·사진·센터 정보가 모두 지워져요. <b>지운 기록은 되살릴 수 없어요.</b></p>" +
+      "<p>필요한 기록이 있으면 먼저 <b>[백업 파일 받기]</b>를 눌러 파일로 받아 두세요. (글자 크기·화면 밝기 설정은 남아요)</p>",
+      (spec && spec.backup ? [{ t: "백업 파일 먼저 받기", v: "backup" }] : []).concat([{ t: "취소", v: "" }, { t: "모두 지우기", v: "wipe", danger: true }])).then(function (v) {
+      if (v === "backup") { spec.backup(); setTimeout(confirmWipe, 400); return; }
+      if (v !== "wipe") return showLocal();
+      CC.wipeLocal().then(function () {
+        try { sessionStorage.setItem("cc.wiped", "1"); } catch (e) {}
+        location.reload();
+      });
+    });
   }
   function showSetup() {
     var c = CC.config();
@@ -931,12 +982,13 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
       field("ccPw", "비밀번호", "password", 'autocomplete="' + (tab === "in" ? "current-password" : "new-password") + '"', tab === "up" ? "8자 이상, 숫자와 글자를 섞어 주세요." : "") +
       (tab === "up" ? field("ccPw2", "비밀번호 한 번 더", "password", 'autocomplete="new-password"') : "") +
       '<div id="ccErr"></div>' +
-      (tab === "in" ? '<p class="cc-small"><button type="button" class="cc-link" data-a="forgot">비밀번호를 잊었어요</button></p>' : '<p class="cc-small">한 사람이 계정 하나를 만들어요. 같은 센터 선생님끼리 계정을 나눠 쓰지 마세요.</p>'),
+      (tab === "in" ? '<p class="cc-small"><button type="button" class="cc-link" data-a="forgot">비밀번호를 잊었어요</button> · <button type="button" class="cc-link" data-a="where">이 컴퓨터 기록·개인정보 안내</button></p>' : '<p class="cc-small">한 사람이 계정 하나를 만들어요. 같은 센터 선생님끼리 계정을 나눠 쓰지 마세요.</p>'),
       '<button type="button" class="cc-btn" data-a="local">이 컴퓨터에만 저장</button><button type="button" class="cc-btn cc-main" data-a="go">' + (tab === "in" ? "로그인" : "가입하기") + "</button>");
     wireEyes();
     dlg.querySelectorAll("[data-tab]").forEach(function (b) { b.onclick = function () { showLogin(b.dataset.tab); }; });
     dlg.querySelector('[data-a="local"]').onclick = closeDlg;
     var f = dlg.querySelector('[data-a="forgot"]'); if (f) f.onclick = showForgot;
+    var wh = dlg.querySelector('[data-a="where"]'); if (wh) wh.onclick = showLocal;
     var go = function () {
       var email = $("ccEmail").value.trim(), pw = $("ccPw").value, b = dlg.querySelector('[data-a="go"]');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errBox("ccErr", "이메일 주소를 다시 확인해 주세요.");
@@ -1086,6 +1138,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
         else setTimeout(function () { CC.toast("서버로 보내지 못한 기록이 있어요. [센터 계정]에서 다시 로그인해 주세요."); }, 800);
       }
     }
+    try { if (sessionStorage.getItem("cc.wiped")) { sessionStorage.removeItem("cc.wiped"); setTimeout(function () { CC.toast("이 컴퓨터에 저장된 기록을 모두 지웠어요."); }, 300); } } catch (e) {}
     if (linkError) setTimeout(function () { CC.toast("메일 링크가 만료됐거나 맞지 않아요. 다시 시도해 주세요."); }, 300);
     if (linkType === "recovery") setTimeout(showNewPassword, 300);
     else if (linkType) setTimeout(function () { CC.toast("가입을 확인했어요. 이제 센터를 고르거나 만들어 주세요."); CC.open(); }, 300);
@@ -2565,6 +2618,9 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   CC.init({
     app: "edu-safety-helper", appName: "6대의무교육도우미", chip: document.getElementById("ccChip"),
     keys: [{ k: STORE_KEY, map: "array", id: "id" }],   // 교육 기록만 함께 씀. 화면 설정(seh-prefs-v1)은 이 컴퓨터에만
+    wipe: { prefixes: ["seh-"] },                        // [이 컴퓨터 기록 모두 지우기]: 교육 기록·담당자 설정
+    backup: () => exportRecords(),
+    privacyNote: "참여 아동 이름은 기록할 때 <b>선택 입력</b>이에요. 비워 두어도 한글 일지를 만들 수 있어요.",
     clean: (k, v) => CC.stripDataUrls(v),
     countText: n => n + "건의 교육 기록",
     keyLabel: rk => { const r = loadRecords().find(x => STORE_KEY + "/" + x.id === rk); if (!r) return "교육 기록 (지금은 없음)"; const ft = findTopic(r.areaId, r.topicId); return "교육 기록 " + fmtDate(r.date) + " " + (ft && ft.t ? ft.t.title : ""); },
