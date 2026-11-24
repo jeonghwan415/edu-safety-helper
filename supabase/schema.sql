@@ -77,7 +77,7 @@ language sql stable security definer set search_path = public as $$
 $$;
 
 create or replace function public.new_invite_code() returns text
-language plpgsql volatile set search_path = public as $$
+language plpgsql volatile set search_path = public, extensions as $$   -- Supabase는 pgcrypto(gen_random_bytes)를 extensions 스키마에 둠
 declare
   abc constant text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';  -- 헷갈리는 0·O·1·I는 뺌
   code text;
