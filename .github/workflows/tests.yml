@@ -1,0 +1,38 @@
+# 자동 검사 — main에 올리거나 PR을 열면 돌아요. 하나라도 실패하면 빨간 X로 표시돼요.
+# 1) 데이터 검사(44시간·슬라이드 번호·그림 파일·OX 정답·신고 번호) 2) areas.js가 areas.json과 같은지 3) 브라우저 테스트
+name: tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: 데이터 검사
+        run: |
+          node tools/sync-data.js
+          git diff --exit-code data/areas.js || (echo "::error::data/areas.js가 areas.json과 달라요. npm run data를 돌리고 올려 주세요." && exit 1)
+      - name: Playwright 설치
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: 브라우저 테스트
+        run: |
+          mkdir -p .cache/shots
+          for t in tools/tests/test_*.js; do echo "::group::$t"; node "$t" .cache/shots; echo "::endgroup::"; done
+      - name: 화면 캡처 올리기
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: .cache/shots
+          retention-days: 7

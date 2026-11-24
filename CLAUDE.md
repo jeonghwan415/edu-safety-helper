@@ -173,3 +173,12 @@ content.low / content.high (수업 1개):
 - 활동지·PPT는 2026-11-12에 98개 모두 다시 만들었어요(새 그림 카드·진한 글씨 색 반영).
 - 취학 전(preschool) 수업은 만들지 않기로 했어요 (사용자 결정, 2026-11-10). 데이터의 항목 목록만 남겨 둬요.
 - 배포: GitHub Pages. main 브랜치에 올리면 `.github/workflows/pages.yml`이 자동으로 배포해요
+
+## v1.4 센터 계정(B) (2026-11-24)
+
+- `index.html` 맨 앞 별도 `<script>` 두 개: `CENTER_CLOUD_CONFIG`(Supabase 주소·공개 키), `center-cloud v1.1` 공통 블록(v1.1: 서버 연결 전 [내 기록은 어디에?] `showLocal()` — 개인정보 안내·백업(`exportRecords`)·모두 지우기(`seh-*`))(프로그램 서포터·차량 지킴이와 똑같은 코드 — 고칠 때 세 곳 같이)
+- 맨 끝 `CC.init({ keys: [{ k: STORE_KEY, map: "array", id: "id" }] })`: 교육 기록(`seh-records-v1`)만 서버와 맞춤. `seh-prefs-v1`은 이 컴퓨터에만
+- 센터 계정이면 `backupDue()`는 알림을 띄우지 않음. 다른 선생님이 고치면 `render()` + 알림(입력 중이면 알림만)
+- 머리말 `.top-tools`: `#tourBtn`(사용 안내 `TOUR`) · `#zoomBtn`(글자 크기) · `#ccChip`(저장 상태 = 센터 계정 창)
+- 서버 설정: `supabase/schema.sql`, `supabase/센터계정_설정안내.md`
+- 화면 아래 버전 `#appVer` (고칠 때 올려요). 브라우저 테스트 `node tools/tests/test_site.js` (playwright, 없으면 `CHROME_PATH`), GitHub 자동 검사 `.github/workflows/tests.yml`(데이터 검사 + areas.js 최신인지 + 브라우저 테스트)
