@@ -12,20 +12,28 @@ concurrency:
   group: pages
   cancel-in-progress: true
 jobs:
+  # 1) 올릴 파일 묶기 (파일이 커서 배포와 단계를 나눠요: 묶음이 등록될 시간을 줘요)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: 올릴 파일 고르기 (개발용 파일 빼기)
+        run: |
+          mkdir _site
+          cp -r index.html .nojekyll data img worksheets slides docs _site/
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+  # 2) 배포
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - name: 올릴 파일 고르기 (개발용 파일 빼기)
-        run: |
-          mkdir _site
-          cp -r index.html .nojekyll data img worksheets slides docs _site/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+      - name: 묶음 등록 기다리기
+        run: sleep 30
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
