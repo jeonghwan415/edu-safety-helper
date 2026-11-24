@@ -516,7 +516,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
 </script>
 <script>
 /* =====================================================================
-   센터 계정(B) 공통 모듈 — center-cloud v1.1 (2026-11-24)
+   센터 계정(B) 공통 모듈 — center-cloud v1.2 (2026-11-24)
    프로그램 서포터 · 6대 의무교육 도우미 · 차량 지킴이가 똑같은 코드를 씁니다. 고칠 때는 세 곳을 같이 고쳐요.
    - 서버: Supabase (주소·공개 키는 CENTER_CLOUD_CONFIG 또는 [센터 계정 → 서버 연결]에서 넣음)
    - 서버 정보가 없거나 로그인하지 않으면 지금처럼 '이 컴퓨터에만 저장'(A)으로 동작
@@ -526,6 +526,8 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
    - 라이브러리 없이 fetch만 씀 (외부 파일을 불러오지 않음)
    - v1.1: 서버 연결 전에는 [내 기록은 어디에?] 안내 창(개인정보 안내·백업·이 컴퓨터 기록 모두 지우기)이 먼저 나옴
      CC.init에 wipe:{prefixes:[…], idb:[…]}, backup:함수, privacyNote:'문장' 을 넘겨요
+   - v1.2: 아이디·비밀번호로 가입·로그인 (이메일도 됨). 아이디는 서버에 '아이디@example.com'(메일이 가지 않는 예약 주소)으로 저장하고 화면에는 아이디만 보여요
+     → Supabase에서 'Confirm email'을 꺼야 해요 (supabase/센터계정_설정안내.md). 아이디 계정은 메일로 비밀번호를 찾을 수 없어요
    ===================================================================== */
 (function () {
   "use strict";
@@ -547,6 +549,16 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   };
   var URL_OK = /^(https:\/\/[^\s/]+|http:\/\/(localhost|127\.0\.0\.1)(:\d+)?)$/;
   CC.configured = function () { var c = CC.config(); return URL_OK.test(c.url) && c.key.length > 20; };
+  /* 아이디 ↔ 서버 이메일. 아이디는 영어 소문자·숫자·._- 3~30자 */
+  var ID_DOMAIN = "example.com", ID_OK = /^[a-z0-9][a-z0-9._-]{2,29}$/, MAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  CC.toEmail = function (s) { s = String(s || "").trim(); return s.indexOf("@") >= 0 ? s : s.toLowerCase() + "@" + ID_DOMAIN; };
+  CC.isIdLogin = function (s) { return String(s || "").indexOf("@") < 0; };
+  CC.showId = function (email) { email = String(email || ""); var t = "@" + ID_DOMAIN; return email.slice(-t.length).toLowerCase() === t ? email.slice(0, -t.length) : email; };
+  function idError(s) {
+    s = String(s || "").trim(); if (!s) return "아이디를 적어 주세요.";
+    if (s.indexOf("@") >= 0) return MAIL_OK.test(s) ? "" : "이메일 주소를 다시 확인해 주세요.";
+    return ID_OK.test(s.toLowerCase()) ? "" : "아이디는 영어 소문자·숫자로 3~30자예요. (가운데에 . _ - 도 쓸 수 있어요)";
+  }
 
   /* ---------- 2) 메일 링크로 돌아왔을 때 (#access_token=…) — 프로그램이 주소를 읽기 전에 처리 ---------- */
   var linkType = null, linkError = null;
@@ -566,12 +578,12 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
 
   /* ---------- 3) 서버와 주고받기 ---------- */
   var KO = [
-    [/invalid login credentials/i, "이메일이나 비밀번호가 맞지 않아요."],
+    [/invalid login credentials/i, "아이디나 비밀번호가 맞지 않아요."],
     [/email not confirmed/i, "메일함에서 가입 확인 링크를 먼저 눌러 주세요."],
-    [/already registered|already been registered|user already exists/i, "이미 가입한 이메일이에요. [로그인]에서 들어와 주세요."],
+    [/already registered|already been registered|user already exists/i, "이미 있는 아이디예요. 다른 아이디를 쓰거나 [로그인]에서 들어와 주세요."],
     [/password should be at least|weak password/i, "비밀번호는 8자 이상으로, 숫자와 글자를 섞어 주세요."],
     [/rate limit|too many|security purposes/i, "잠깐 사이에 여러 번 시도했어요. 1~2분 뒤에 다시 해 주세요."],
-    [/unable to validate email|invalid format|email address.*invalid/i, "이메일 주소를 다시 확인해 주세요."],
+    [/unable to validate email|invalid format|email address.*invalid/i, "아이디(이메일)를 다시 확인해 주세요."],
     [/signups not allowed|signup is disabled/i, "지금은 새로 가입할 수 없게 설정돼 있어요. 관리자에게 물어보세요."],
     [/jwt expired|invalid jwt|not authorized|permission denied/i, "로그인이 풀렸어요. 다시 로그인해 주세요."],
     [/check constraint|violates/i, "적은 내용이 너무 길거나 맞지 않아요."],
@@ -629,13 +641,13 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   /* ---------- 4) 로그인 ---------- */
   var fails = LS.get("cc.fails", { n: 0, at: 0 });
   CC.user = function () { var s = session(); return s && s.user; };
-  CC.signIn = function (email, pw) {
+  CC.signIn = function (email, pw) { email = CC.toEmail(email);
     if (fails.n >= 5 && Date.now() - fails.at < 5 * 60000) return Promise.reject({ msg: "여러 번 틀려서 5분 동안 잠겼어요. 잠시 뒤에 다시 해 주세요." });
     return http("/auth/v1/token?grant_type=password", { method: "POST", body: { email: email, password: pw }, auth: false })
       .then(function (j) { fails = { n: 0, at: 0 }; LS.set("cc.fails", fails); saveSession(j); emit(); return j; },
         function (e) { if (e.status === 400) { fails = { n: (Date.now() - fails.at > 5 * 60000 ? 0 : fails.n) + 1, at: Date.now() }; LS.set("cc.fails", fails); } throw e; });
   };
-  CC.signUp = function (email, pw) {
+  CC.signUp = function (email, pw) { email = CC.toEmail(email);
     return http("/auth/v1/signup" + redirectTo(), { method: "POST", body: { email: email, password: pw }, auth: false })
       .then(function (j) { if (j && j.access_token) { saveSession(j); emit(); return { session: true }; } return { needConfirm: true }; });
   };
@@ -852,7 +864,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     chips.forEach(function (el) {
       el.dataset.cc = cls;
       el.innerHTML = '<span class="cc-dot" aria-hidden="true"></span><span class="cc-t">' + esc(t) + "</span>";
-      el.title = CC.isCenter() ? "센터 계정: " + c.name + " (" + (CC.user() || {}).email + ")" : "지금은 이 컴퓨터에만 저장돼요. 눌러서 센터 계정으로 바꿀 수 있어요.";
+      el.title = CC.isCenter() ? "센터 계정: " + c.name + " (" + CC.showId((CC.user() || {}).email) + ")" : "지금은 이 컴퓨터에만 저장돼요. 눌러서 센터 계정으로 바꿀 수 있어요.";
       el.setAttribute("aria-label", "센터 계정 — " + t);
     });
   }
@@ -978,7 +990,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     openDlg(tab === "in" ? "센터 계정 로그인" : "센터 계정 만들기",
       (msg ? '<p class="cc-ok">' + esc(msg) + "</p>" : "") +
       '<div class="cc-tabs" role="tablist"><button type="button" role="tab" aria-selected="' + (tab === "in") + '" data-tab="in">로그인</button><button type="button" role="tab" aria-selected="' + (tab === "up") + '" data-tab="up">처음이에요 (가입)</button></div>' +
-      field("ccEmail", "이메일", "email", 'autocomplete="email" inputmode="email" value="' + esc(LS.get("cc.lastEmail", "")) + '"') +
+      field("ccEmail", "아이디", "text", 'autocomplete="username" autocapitalize="none" spellcheck="false" value="' + esc(LS.get("cc.lastEmail", "")) + '"', tab === "up" ? "영어 소문자·숫자 3~30자 (예: haesol01). 이메일로 만들어도 돼요." : "아이디 또는 가입한 이메일") +
       field("ccPw", "비밀번호", "password", 'autocomplete="' + (tab === "in" ? "current-password" : "new-password") + '"', tab === "up" ? "8자 이상, 숫자와 글자를 섞어 주세요." : "") +
       (tab === "up" ? field("ccPw2", "비밀번호 한 번 더", "password", 'autocomplete="new-password"') : "") +
       '<div id="ccErr"></div>' +
@@ -991,7 +1003,8 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     var wh = dlg.querySelector('[data-a="where"]'); if (wh) wh.onclick = showLocal;
     var go = function () {
       var email = $("ccEmail").value.trim(), pw = $("ccPw").value, b = dlg.querySelector('[data-a="go"]');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errBox("ccErr", "이메일 주소를 다시 확인해 주세요.");
+      var ie = idError(email); if (ie) return errBox("ccErr", ie);
+      if (CC.isIdLogin(email)) email = email.toLowerCase();
       if (tab === "up") {
         if (pw.length < 8 || !/\d/.test(pw) || !/[A-Za-z가-힣]/.test(pw)) return errBox("ccErr", "비밀번호는 8자 이상으로, 숫자와 글자를 섞어 주세요.");
         if (pw !== $("ccPw2").value) return errBox("ccErr", "두 비밀번호가 달라요.");
@@ -999,6 +1012,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
       LS.set("cc.lastEmail", email); busyBtn(b, true);
       (tab === "in" ? CC.signIn(email, pw) : CC.signUp(email, pw)).then(function (r) {
         busyBtn(b, false);
+        if (r && r.needConfirm && CC.isIdLogin(email)) return errBox("ccErr", "서버에서 '메일 확인'이 켜져 있어서 아이디로는 가입할 수 없어요. 관리자에게 Supabase → Authentication → Email의 'Confirm email'을 꺼 달라고 해 주세요. (supabase/센터계정_설정안내.md)");
         if (r && r.needConfirm) return showLogin("in", email + " 메일함에서 [가입 확인] 링크를 누른 뒤 여기서 로그인해 주세요. 메일이 안 보이면 스팸함도 확인해 주세요.");
         showCenters();
       }, function (e) { busyBtn(b, false); errBox("ccErr", e); });
@@ -1007,10 +1021,11 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   }
   function showForgot() {
     openDlg("비밀번호 다시 정하기", "<p>가입한 이메일로 <b>비밀번호 다시 정하기</b> 링크를 보내 드려요. 링크를 누르면 이 프로그램이 열리고 새 비밀번호를 정할 수 있어요.</p>" +
+      "<p class='cc-small'><b>아이디로 만든 계정</b>은 메일로 찾을 수 없어요. 센터장에게 말하면 [선생님 관리]에서 내보낸 뒤, 새 아이디로 다시 초대 코드를 넣어 들어오면 돼요. 로그인되어 있을 때는 [센터 계정] 창에서 비밀번호를 바꿀 수 있어요.</p>" +
       field("ccEmail", "이메일", "email", 'autocomplete="email" value="' + esc(LS.get("cc.lastEmail", "")) + '"') + '<div id="ccErr"></div>',
       '<button type="button" class="cc-btn" data-a="back">돌아가기</button><button type="button" class="cc-btn cc-main" data-a="go">링크 보내기</button>');
     dlg.querySelector('[data-a="back"]').onclick = function () { showLogin("in"); };
-    var go = function () { var b = dlg.querySelector('[data-a="go"]'); busyBtn(b, true); CC.recover($("ccEmail").value.trim()).then(function () { showLogin("in", "메일을 보냈어요. 메일함의 링크를 눌러 주세요."); }, function (e) { busyBtn(b, false); errBox("ccErr", e); }); };
+    var go = function () { var b = dlg.querySelector('[data-a="go"]'), v = $("ccEmail").value.trim(); if (CC.isIdLogin(v)) return errBox("ccErr", "아이디로 만든 계정은 메일로 찾을 수 없어요. 위 안내대로 센터장에게 말해 주세요."); busyBtn(b, true); CC.recover(v).then(function () { showLogin("in", "메일을 보냈어요. 메일함의 링크를 눌러 주세요."); }, function (e) { busyBtn(b, false); errBox("ccErr", e); }); };
     dlg.querySelector('[data-a="go"]').onclick = go; onEnter(go);
   }
   function showNewPassword() {
@@ -1026,7 +1041,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     dlg.querySelector('[data-a="go"]').onclick = go; onEnter(go);
   }
   function showCenters(msg) {
-    openDlg("우리 센터 고르기", '<p class="cc-muted">로그인: ' + esc((CC.user() || {}).email) + "</p><div id='ccList'><p class='cc-muted'>센터 목록을 불러오는 중…</p></div>",
+    openDlg("우리 센터 고르기", '<p class="cc-muted">로그인: ' + esc(CC.showId((CC.user() || {}).email)) + "</p><div id='ccList'><p class='cc-muted'>센터 목록을 불러오는 중…</p></div>",
       '<button type="button" class="cc-btn cc-danger-text" data-a="out">로그아웃</button>');
     dlg.querySelector('[data-a="out"]').onclick = function () { CC.signOut(); };
     CC.myCenters().then(function (list) {
@@ -1073,15 +1088,16 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     var c = CC.center(), owner = c.role === "owner", s = status;
     var sline = s.state === "ok" ? "모두 맞췄어요 · " + (s.last ? when(s.last) : "") : s.state === "pending" ? "보내는 중 (" + s.pending + "건)" : s.state === "offline" ? "인터넷이 끊겼어요. 이 컴퓨터에 보관했다가 연결되면 보내요." : s.state === "error" ? (s.msg || "확인이 필요해요") : "";
     openDlg(c.name,
-      '<div class="cc-row"><span class="cc-pill on">센터 계정</span><span>' + esc((CC.user() || {}).email) + " · " + (owner ? "센터장" : "선생님") + "</span></div>" +
+      '<div class="cc-row"><span class="cc-pill on">센터 계정</span><span>' + esc(CC.showId((CC.user() || {}).email)) + " · " + (owner ? "센터장" : "선생님") + "</span></div>" +
       (spec && !spec.custom ? '<div class="cc-row"><span>' + esc(sline) + '</span><button type="button" class="cc-btn cc-sm" data-a="sync">지금 맞추기</button></div>' : "") +
       '<section><h3>초대 코드</h3><div class="cc-row"><code class="cc-code" id="ccCodeV">' + esc(c.invite_code) + '</code><button type="button" class="cc-btn cc-sm" data-a="copy">복사</button>' +
       (owner ? '<button type="button" class="cc-btn cc-sm" data-a="rotate">새 코드 만들기</button>' : "") + '</div><p class="cc-small">새 선생님께 이 코드와 프로그램 주소를 알려 주세요. 가입 → [초대 코드로 들어가기]에 넣으면 돼요.</p></section>' +
       '<section><h3>선생님</h3><div id="ccPeople" class="cc-muted">불러오는 중…</div></section>' +
       (spec ? '<section><h3>최근에 고친 기록</h3><div id="ccRecent" class="cc-muted">불러오는 중…</div></section>' : "") +
-      '<section><h3>내 이름</h3><div class="cc-row"><input id="ccMe" value="' + esc(c.display_name || "") + '" maxlength="30" aria-label="내 이름"><button type="button" class="cc-btn cc-sm" data-a="name">바꾸기</button></div></section><div id="ccErr"></div>',
+      '<section><h3>내 이름</h3><div class="cc-row"><input id="ccMe" value="' + esc(c.display_name || "") + '" maxlength="30" aria-label="내 이름"><button type="button" class="cc-btn cc-sm" data-a="name">바꾸기</button></div><p class="cc-small"><button type="button" class="cc-link" data-a="pw">비밀번호 바꾸기</button></p></section><div id="ccErr"></div>',
       '<button type="button" class="cc-btn" data-a="switch">다른 센터</button><button type="button" class="cc-btn cc-main" data-a="close">닫기</button><button type="button" class="cc-btn cc-danger-text" data-a="out">로그아웃</button>');
     var on = function (a, fn) { var b = dlg.querySelector('[data-a="' + a + '"]'); if (b) b.onclick = fn; };
+    on("pw", function () { showNewPassword(); });
     dlg.querySelector('[data-a="close"]').focus();   // 정보 창이라 입력 칸 대신 [닫기]에 초점
     on("close", closeDlg); on("out", function () { CC.signOut(); });
     on("switch", function () { showCenters(); });
