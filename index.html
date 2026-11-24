@@ -178,6 +178,7 @@
   .play-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,.18); }
   .goal { background: var(--card); border-left: 8px solid var(--c); border-radius: 12px; padding: 14px 20px; margin: 18px 0 24px; font-size: 1.1rem; }
   .status-pill { display: inline-block; font-size: .85rem; font-weight: 700; padding: 2px 10px; border-radius: 99px; background: #FFF3D6; color: #7A5300; margin-left: 8px; vertical-align: middle; }
+  .status-pill.done { background: #E3F1EC; color: #155B47; } /* v1.4 검토 완료는 초록 */
   .tabs { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--line); margin-bottom: 24px; }
   .tab {
     min-height: 56px; padding: 0 22px; border: 0; background: none;
@@ -804,7 +805,7 @@
         <tr><td>그 밖의 그림 카드·디자인</td><td>직접 만든 것 (jeonghwan0415)</td></tr></table>
       <h2>꼭 알아 두세요</h2>
       <ul>
-        <li>수업 내용은 <b>"검토 필요"</b> 상태예요. AI의 도움을 받아 초안을 만들었고, 법령·신고 번호는 ${esc(DATA.meta.checkedAt)} 기준으로 공식 출처를 확인했어요. 수업 전에 꼭 읽어 보고 고쳐 써 주세요.</li>
+        <li>수업 내용은 AI의 도움을 받아 초안을 만든 뒤, <b>현장 경력 생활복지사(만든 사람)가 128개 수업을 모두 검토했어요</b>(2026-11-24, "검토 완료"). 법령·신고 번호는 ${esc(DATA.meta.checkedAt)} 기준으로 공식 출처를 확인했어요. 우리 센터 아이들에 맞게 고쳐 써도 좋아요.</li>
         <li>법률·의료 자문이 아니에요. 점검·보고 전에는 국가법령정보센터 원문을 확인해 주세요.</li>
         <li>학대·성폭력이 의심되면 자료보다 <b>신고(112)와 보호가 먼저</b>예요.</li>
         <li>교육 기록은 이 컴퓨터 브라우저에만 저장돼요. 서버로 보내지 않고, 만든 사람도 볼 수 없어요.</li>
@@ -1094,7 +1095,7 @@
       body = linksHTML;
     }
     return head + `
-      <div class="lesson-head"><div><h1>${area.icon} ${esc(topic.title)}</h1><p class="lead" style="margin:0">${esc(area.shortName)} · ${lv.title} · ${L.minutes}분 <span class="status-pill">${esc(L.status)}</span>${area.optional ? ` <span class="plus-badge inline" style="${cv(area)}">＋ ${esc(area.badge || "추가 교육")}</span>` : ""}</p></div>
+      <div class="lesson-head"><div><h1>${area.icon} ${esc(topic.title)}</h1><p class="lead" style="margin:0">${esc(area.shortName)} · ${lv.title} · ${L.minutes}분 <span class="status-pill${L.status === "검토 완료" ? " done" : ""}">${L.status === "검토 완료" ? "✓ " : ""}${esc(L.status)}</span>${area.optional ? ` <span class="plus-badge inline" style="${cv(area)}">＋ ${esc(area.badge || "추가 교육")}</span>` : ""}</p></div>
         <div class="head-btns"><button class="big-link ghost rec-btn" onclick="go('#write-${area.id}-${topic.id}-${level}')">📝 교육 기록하기</button>
         <button class="play-btn" style="${cv(area)}" onclick="startShow(0)">▶ 발표 시작</button></div></div>
       <div class="goal" style="${cv(area)}"><b>오늘의 목표</b> ${esc(L.goal)}${note ? `<br><span class="meta">${esc(note)}</span>` : ""}</div>
