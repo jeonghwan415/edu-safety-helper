@@ -512,11 +512,11 @@
 <script>
 /* 센터 계정(B) 서버 정보 — 관리자가 Supabase 프로젝트를 만든 뒤 여기에 넣고 GitHub에 올리면, 선생님들은 따로 넣지 않아도 돼요.
    anonKey는 공개용 키(anon public)라서 올려도 괜찮아요. service_role 키는 절대 넣지 마세요. (supabase/센터계정_설정안내.md) */
-window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
+window.CENTER_CLOUD_CONFIG = { url: "https://tbiqlwybebkfuxogkgek.supabase.co", anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRiaXFsd3liZWJrZnV4b2drZ2VrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU1NDQ0MTcsImV4cCI6MjExMTEyMDQxN30.s0rhPVyoTia7jij0x6d81qjcbyNy2jQb-TdP9JmI6JE" };   // 센터 계정 서버 (Supabase children welfare, 공개 anon 키 — 보안은 서버 RLS가 맡음. service_role 키는 넣지 않음)
 </script>
 <script>
 /* =====================================================================
-   센터 계정(B) 공통 모듈 — center-cloud v1.2 (2026-11-24)
+   센터 계정(B) 공통 모듈 — center-cloud v1.3 (2026-11-27)
    프로그램 서포터 · 6대 의무교육 도우미 · 차량 지킴이가 똑같은 코드를 씁니다. 고칠 때는 세 곳을 같이 고쳐요.
    - 서버: Supabase (주소·공개 키는 CENTER_CLOUD_CONFIG 또는 [센터 계정 → 서버 연결]에서 넣음)
    - 서버 정보가 없거나 로그인하지 않으면 지금처럼 '이 컴퓨터에만 저장'(A)으로 동작
@@ -528,6 +528,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
      CC.init에 wipe:{prefixes:[…], idb:[…]}, backup:함수, privacyNote:'문장' 을 넘겨요
    - v1.2: 아이디·비밀번호로 가입·로그인 (이메일도 됨). 아이디는 서버에 '아이디@example.com'(메일이 가지 않는 예약 주소)으로 저장하고 화면에는 아이디만 보여요
      → Supabase에서 'Confirm email'을 꺼야 해요 (supabase/센터계정_설정안내.md). 아이디 계정은 메일로 비밀번호를 찾을 수 없어요
+   - v1.3: 센터를 새로 만들려면 관리자가 준 '센터 개설 코드'(OPEN-XXXXXX)가 있어야 해요. 서버가 확인해요(schema.sql create_center)
    ===================================================================== */
 (function () {
   "use strict";
@@ -658,7 +659,7 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
   CC.center = function () { var c = LS.get("cc.center", null), u = CC.user(); return c && u && c.uid === u.id ? c : null; };
   function setCenter(c) { var u = CC.user(); if (c) { c.uid = u && u.id; LS.set("cc.center", c); } else LS.del("cc.center"); emit(); }
   CC.myCenters = function () { return CC.rpc("my_centers"); };
-  CC.createCenter = function (name, me, ack) { return CC.rpc("create_center", { p_name: name, p_display_name: me, p_privacy_ack: !!ack }).then(function (r) { setCenter(r[0]); return r[0]; }); };
+  CC.createCenter = function (name, me, ack, openCode) { return CC.rpc("create_center", { p_name: name, p_display_name: me, p_privacy_ack: !!ack, p_open_code: String(openCode || "").trim().toUpperCase() }).then(function (r) { setCenter(r[0]); return r[0]; }); };
   CC.joinCenter = function (code, me) { return CC.rpc("join_center", { p_code: code, p_display_name: me }).then(function (r) { setCenter(r[0]); return r[0]; }); };
   CC.isCenter = function () { return CC.configured() && !!CC.user() && !!CC.center(); };
 
@@ -1069,17 +1070,18 @@ window.CENTER_CLOUD_CONFIG = { url: "", anonKey: "" };
     dlg.querySelector('[data-a="go"]').onclick = go; onEnter(go);
   }
   function showCreate() {
-    openDlg("우리 센터 새로 만들기", field("ccName", "센터 이름", "text", 'maxlength="60" placeholder="예: 해솔지역아동센터"') + field("ccMe", "내 이름", "text", 'autocomplete="name" maxlength="30" placeholder="예: 박정환"') +
+    openDlg("우리 센터 새로 만들기", field("ccOpen", "센터 개설 코드", "text", 'maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="예: OPEN-7K2M9Q"', "프로그램을 만든 분께 받은 코드예요. 코드 하나로 센터 하나를 만들 수 있어요. 이미 있는 센터에 들어가려면 [돌아가기] → 초대 코드로 들어가기") + field("ccName", "센터 이름", "text", 'maxlength="60" placeholder="예: 해솔지역아동센터"') + field("ccMe", "내 이름", "text", 'autocomplete="name" maxlength="30" placeholder="예: 박정환"') +
       '<div class="cc-warn"><b>꼭 확인해 주세요 — 아동 정보가 서버에 저장돼요</b><ul class="cc-list"><li>계획서·일지·교육 기록에 적은 <b>아동 이름·학년·의견</b>이 Supabase 서버에 저장돼요.</li><li>센터 <b>개인정보 처리방침</b>에 이 내용을 적고, 필요하면 <b>보호자 동의</b>를 받아 주세요.</li><li><b>아동 사진은 서버에 올라가지 않고</b> 찍은 컴퓨터에만 남아요.</li><li>그만둔 선생님은 [선생님 목록]에서 내보내고 초대 코드를 새로 만들어 주세요.</li></ul>' +
       '<label class="cc-check"><input type="checkbox" id="ccAck"> 위 내용을 확인했고, 센터에서 개인정보 관리를 책임지겠습니다.</label></div><div id="ccErr"></div>',
       '<button type="button" class="cc-btn" data-a="back">돌아가기</button><button type="button" class="cc-btn cc-main" data-a="go">센터 만들기</button>');
     dlg.querySelector('[data-a="back"]').onclick = function () { showCenters(); };
     var go = function () {
-      var name = $("ccName").value.trim(), me = $("ccMe").value.trim(), b = dlg.querySelector('[data-a="go"]');
+      var name = $("ccName").value.trim(), me = $("ccMe").value.trim(), oc = $("ccOpen").value.trim(), b = dlg.querySelector('[data-a="go"]');
+      if (!oc) return errBox("ccErr", "센터 개설 코드를 적어 주세요. 프로그램을 만든 분께 받을 수 있어요.");
       if (!name) return errBox("ccErr", "센터 이름을 적어 주세요.");
       if (!me) return errBox("ccErr", "내 이름을 적어 주세요.");
       if (!$("ccAck").checked) return errBox("ccErr", "개인정보 안내를 읽고 확인란에 표시해 주세요.");
-      busyBtn(b, true); CC.createCenter(name, me, true).then(function () { closeDlg(); enter(); }, function (e) { busyBtn(b, false); errBox("ccErr", e); });
+      busyBtn(b, true); CC.createCenter(name, me, true, oc).then(function () { closeDlg(); enter(); }, function (e) { busyBtn(b, false); errBox("ccErr", e); });
     };
     dlg.querySelector('[data-a="go"]').onclick = go;
   }

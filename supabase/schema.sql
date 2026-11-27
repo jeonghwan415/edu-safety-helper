@@ -10,6 +10,12 @@
 --   3) 기록은 지우지 않고 '지운 표시(value = null)'로 남겨 다른 컴퓨터에도 지운 것이 전달됨
 --   4) 누가 언제 무엇을 고쳤는지 center_history에 자동으로 남음
 --   5) 아동 사진은 서버에 올리지 않음 (프로그램이 사진을 보내지 않도록 만들어져 있음)
+--   6) 센터는 관리자가 준 '센터 개설 코드'가 있어야 만들 수 있음 (코드 하나 = 센터 하나). 관리자는 센터를 멈출 수도 있음
+--
+--   관리자가 쓰는 명령 (SQL Editor에서 한 줄씩)
+--     select public.new_open_code('한빛지역아동센터');        -- 센터 개설 코드 만들기 → OPEN-XXXXXX
+--     select * from public.center_open_codes order by created_at desc;   -- 만든 코드·쓴 센터 보기
+--     update public.centers set blocked = true  where name = '한빛지역아동센터';   -- 센터 멈추기 (false면 다시 쓰기)
 -- =====================================================================
 
 create extension if not exists pgcrypto;
@@ -65,16 +71,46 @@ create table if not exists public.join_attempts (
 );
 create index if not exists join_attempts_idx on public.join_attempts (user_id, at);
 
+-- 센터 개설 코드 (관리자가 SQL Editor에서 new_open_code로 만듦. 프로그램에서는 읽을 수 없음)
+create table if not exists public.center_open_codes (
+  code        text primary key,
+  note        text not null default '',               -- 어느 센터에 준 코드인지 메모
+  created_at  timestamptz not null default now(),
+  used_at     timestamptz,
+  used_by     uuid references auth.users(id) on delete set null,
+  center_id   uuid references public.centers(id) on delete set null
+);
+-- 관리자가 멈춘 센터 (true면 그 센터 기록을 아무도 읽고 쓸 수 없음)
+alter table public.centers add column if not exists blocked boolean not null default false;
+
 -- ---------- 도우미 함수 (security definer: RLS 안에서 자기 자신을 다시 부르지 않게) ----------
 create or replace function public.is_member(c uuid) returns boolean
 language sql stable security definer set search_path = public as $$
-  select exists (select 1 from public.center_members m where m.center_id = c and m.user_id = auth.uid());
+  select exists (select 1 from public.center_members m join public.centers ce on ce.id = m.center_id
+                  where m.center_id = c and m.user_id = auth.uid() and not ce.blocked);
 $$;
 
 create or replace function public.is_owner(c uuid) returns boolean
 language sql stable security definer set search_path = public as $$
-  select exists (select 1 from public.center_members m where m.center_id = c and m.user_id = auth.uid() and m.role = 'owner');
+  select exists (select 1 from public.center_members m join public.centers ce on ce.id = m.center_id
+                  where m.center_id = c and m.user_id = auth.uid() and m.role = 'owner' and not ce.blocked);
 $$;
+
+-- 센터 개설 코드 만들기 (관리자: SQL Editor에서만. 프로그램 사용자는 실행할 수 없음)
+create or replace function public.new_open_code(p_note text default '') returns text
+language plpgsql volatile security definer set search_path = public, extensions as $$
+declare
+  abc constant text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  v_code text; b bytea;
+begin
+  loop
+    b := gen_random_bytes(6); v_code := 'OPEN-';
+    for i in 0..5 loop v_code := v_code || substr(abc, (get_byte(b, i) % 32) + 1, 1); end loop;
+    exit when not exists (select 1 from public.center_open_codes o where o.code = v_code);
+  end loop;
+  insert into public.center_open_codes (code, note) values (v_code, left(coalesce(p_note, ''), 100));
+  return v_code;
+end $$;
 
 create or replace function public.new_invite_code() returns text
 language plpgsql volatile set search_path = public, extensions as $$   -- Supabase는 pgcrypto(gen_random_bytes)를 extensions 스키마에 둠
@@ -135,11 +171,12 @@ alter table public.center_members enable row level security;
 alter table public.center_data    enable row level security;
 alter table public.center_history enable row level security;
 alter table public.join_attempts  enable row level security;   -- 정책 없음 = 함수로만 씀
+alter table public.center_open_codes enable row level security; -- 정책 없음 = 함수로만 씀
 
 -- 로그인하지 않은 사람(anon)은 아무것도 못 함
-revoke all on public.centers, public.center_members, public.center_data, public.center_history, public.join_attempts from anon;
+revoke all on public.centers, public.center_members, public.center_data, public.center_history, public.join_attempts, public.center_open_codes from anon;
 -- 로그인한 사람도 표는 정해진 만큼만 (센터 만들기·들어가기는 아래 함수로만)
-revoke all on public.centers, public.center_members, public.center_history, public.join_attempts from authenticated;
+revoke all on public.centers, public.center_members, public.center_history, public.join_attempts, public.center_open_codes from authenticated;
 revoke all on public.center_data from authenticated;
 grant select on public.centers, public.center_members, public.center_history to authenticated;
 grant select, insert, update on public.center_data to authenticated;   -- delete 없음 (지운 표시로만)
@@ -168,18 +205,28 @@ returns table (id uuid, name text, invite_code text, role text, display_name tex
 language sql stable security definer set search_path = public as $$
   select c.id, c.name, c.invite_code, m.role, m.display_name
     from public.center_members m join public.centers c on c.id = m.center_id
-   where m.user_id = auth.uid()
+   where m.user_id = auth.uid() and not c.blocked
    order by m.joined_at;
 $$;
 
--- 센터 만들기 (만든 사람 = 센터장)
-create or replace function public.create_center(p_name text, p_display_name text, p_privacy_ack boolean)
+-- 센터 만들기 (만든 사람 = 센터장). 관리자가 준 센터 개설 코드가 있어야 함 (틀린 코드는 15분에 10번까지)
+drop function if exists public.create_center(text, text, boolean);   -- 예전(코드 없는) 판은 지움
+create or replace function public.create_center(p_name text, p_display_name text, p_privacy_ack boolean, p_open_code text)
 returns table (id uuid, name text, invite_code text, role text, display_name text)
 language plpgsql security definer set search_path = public as $$
 #variable_conflict use_column
-declare c public.centers;
+declare c public.centers; oc public.center_open_codes; tries int;
 begin
   if auth.uid() is null then raise exception '로그인이 필요해요' using errcode = '28000'; end if;
+  delete from public.join_attempts where at < now() - interval '1 day';
+  select count(*) into tries from public.join_attempts where user_id = auth.uid() and at > now() - interval '15 minutes';
+  if tries >= 10 then raise exception '여러 번 틀려서 15분 동안 잠겼어요' using errcode = '22023'; end if;
+  select * into oc from public.center_open_codes o where o.code = upper(btrim(coalesce(p_open_code, ''))) for update;
+  if not found then
+    insert into public.join_attempts (user_id) values (auth.uid());
+    raise exception '센터 개설 코드가 맞지 않아요. 프로그램을 만든 분께 받은 코드를 넣어 주세요' using errcode = '22023';
+  end if;
+  if oc.used_at is not null then raise exception '이미 쓴 센터 개설 코드예요. 새 코드를 받아 주세요' using errcode = '22023'; end if;
   if coalesce(p_privacy_ack, false) is false then
     raise exception '개인정보 안내를 확인해 주세요' using errcode = '22023';
   end if;
@@ -191,6 +238,7 @@ begin
   returning * into c;
   insert into public.center_members (center_id, user_id, role, display_name)
   values (c.id, auth.uid(), 'owner', left(btrim(coalesce(p_display_name, '')), 30));
+  update public.center_open_codes set used_at = now(), used_by = auth.uid(), center_id = c.id where code = oc.code;
   return query select c.id, c.name, c.invite_code, 'owner'::text, left(btrim(coalesce(p_display_name, '')), 30);
 end $$;
 
@@ -208,7 +256,7 @@ begin
   if tries >= 10 then
     raise exception '여러 번 틀려서 15분 동안 잠겼어요' using errcode = '22023';
   end if;
-  select * into c from public.centers where invite_code = upper(btrim(p_code));
+  select * into c from public.centers where invite_code = upper(btrim(p_code)) and not blocked;
   if not found then
     insert into public.join_attempts (user_id) values (auth.uid());
     raise exception '초대 코드가 맞지 않아요' using errcode = '22023';
@@ -277,11 +325,12 @@ begin
 end $$;
 
 -- 함수 실행 권한: 로그인한 사람만
-revoke execute on function public.my_centers(), public.create_center(text, text, boolean), public.join_center(text, text),
+revoke execute on function public.my_centers(), public.create_center(text, text, boolean, text), public.join_center(text, text),
   public.center_people(uuid), public.center_recent(uuid, text, int), public.set_my_name(uuid, text),
   public.rotate_invite(uuid), public.remove_member(uuid, uuid), public.leave_center(uuid),
-  public.is_member(uuid), public.is_owner(uuid), public.new_invite_code() from public, anon;
-grant execute on function public.my_centers(), public.create_center(text, text, boolean), public.join_center(text, text),
+  public.is_member(uuid), public.is_owner(uuid), public.new_invite_code(), public.new_open_code(text) from public, anon;
+revoke execute on function public.new_open_code(text) from authenticated;   -- 관리자(SQL Editor)만
+grant execute on function public.my_centers(), public.create_center(text, text, boolean, text), public.join_center(text, text),
   public.center_people(uuid), public.center_recent(uuid, text, int), public.set_my_name(uuid, text),
   public.rotate_invite(uuid), public.remove_member(uuid, uuid), public.leave_center(uuid),
   public.is_member(uuid), public.is_owner(uuid) to authenticated;

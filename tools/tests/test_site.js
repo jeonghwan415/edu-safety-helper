@@ -11,7 +11,9 @@ const url = 'file://' + path.resolve(__dirname, '../../index.html');
   const errs = [];
   const ok = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (!c) errs.push('실패: ' + m); };
   const open = async (vp, hash = '') => {
-    const ctx = await b.newContext({ viewport: vp, acceptDownloads: true }); const p = await ctx.newPage();
+    const ctx = await b.newContext({ viewport: vp, acceptDownloads: true });
+    await ctx.addInitScript(() => { Object.defineProperty(window, 'CENTER_CLOUD_CONFIG', { configurable: true, get() { return { url: '', anonKey: '' }; }, set() {} }); });   // '서버 연결 전' 화면 시험
+    const p = await ctx.newPage();
     p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/youtube|fonts\.g|net::ERR/.test(m.text())) errs.push(m.text()); });
     p.on('dialog', d => { errs.push('브라우저 기본 창: ' + d.message()); d.dismiss(); });
     await p.goto(url + hash); await p.waitForTimeout(400); return p;
